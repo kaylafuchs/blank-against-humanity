@@ -1,0 +1,23 @@
+{
+  "name": "blank-against-humanity",
+  "version": "1.0.0",
+  "description": "slack integrated cards against humanity with user generated content",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kaylafuchs/blank-against-humanity.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/kaylafuchs/blank-against-humanity/issues"
+  },
+  "homepage": "https://github.com/kaylafuchs/blank-against-humanity#readme",
+  "dependencies": {
+    "botkit": "^0.2.2",
+    "path": "^0.12.7"
+  }
+}
