@@ -9,9 +9,12 @@ app.use(express.static(path.join(__dirname, '/public')))
 
 app.post('/', function(req, res, next){
 	console.log(req);
-	var err = new Error('something\'s busted');
+	const err = new Error('something\'s busted');
+	const cardType = req.body.command.replace('/','');
+	const cardText = req.body.text
 	if (!req) next(err);
-	res.send("it worked").status(200);
+
+	res.send('New' + cardType + 'created: ' + cardText).status(200);
 
 })
 
