@@ -14,7 +14,7 @@ app.post('/', function(req, res, next){
 	const cardText = req.body.text
 	if (!req) next(err);
 
-	res.send('New' + cardType + 'created: ' + cardText).status(200);
+	res.send('New ' + cardType + ' created: ' + '\"'cardText + '\"').status(200);
 
 })
 
