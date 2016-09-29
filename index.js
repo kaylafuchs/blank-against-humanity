@@ -17,7 +17,7 @@ app.post('/', function(req, res, next){
 
 	res.send({
 		"text": "New " + cardType + " created by " + user + ": " + "\"" + cardText + "\"", 
-		"response-type": "in_channel"
+		"response_type": "in_channel"
 	}).status(200);
 
 })
