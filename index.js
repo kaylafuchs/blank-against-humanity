@@ -1,22 +1,25 @@
-var Botkit = require('botkit');
-var env = require('../env/development')
+var express = require('express');
+var path = require('path');
+var bodyParser = require('body-parser');
+var app = express();
 
-var controller = Botkit.slackbot({
-	debug: false
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: false }));
+
+app.post('/', function(req, res, next){
+	console.log(req);
+	var err = new Error('something\'s busted');
+	if (!req) next(err);
+	res.send("it worked").status(200);
+
 })
 
-controller.spawn({
-	token: env.SLACKBOT_TOKEN,
-}).startRTM()
-
-controller.hears('hello', ['direct_message', 'direct_mention', 'mention'], function(bot, message){
-	bot.reply(message, 'I\'m alive!');
+app.use(function(err, req, res, next){
+	if (err) res.send(err).status(404);
 })
 
-controller.hears('#BLACKCARD', ['direct_mention', 'direct_message', 'mention'], function(bot, message){
-	bot.reply(message, "New black card created: " + message.text.replace(message.match[0],"").trim());
-})
 
-controller.hears('#WHITECARD', ['direct_mention', 'direct_message', 'mention'], function(bot, message){
-	bot.reply(message, "New white card created: " + message.text.replace(message.match[0],"").trim());
-})
+
+
+app.listen(8080);
+console.log("Server is listening. blargh.")
