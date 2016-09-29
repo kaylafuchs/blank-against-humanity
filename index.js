@@ -12,7 +12,7 @@ app.post('/', function(req, res, next){
 	const err = new Error('something\'s busted');
 	const cardType = req.body.command.replace('/','');
 	const cardText = req.body.text
-	const user = req.body.user
+	const user = req.body.user_name
 	if (!req) next(err);
 
 	res.send({
