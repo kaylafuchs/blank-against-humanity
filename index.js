@@ -5,6 +5,7 @@ var app = express();
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
+app.use(express.static(path.join(__dirname + 'index.html')))
 
 app.post('/', function(req, res, next){
 	console.log(req);
