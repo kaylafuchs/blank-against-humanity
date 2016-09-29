@@ -14,7 +14,10 @@ app.post('/', function(req, res, next){
 	const cardText = req.body.text
 	if (!req) next(err);
 
-	res.send('New ' + cardType + ' created: ' + '\"' + cardText + '\"').status(200);
+	res.send({
+		"text": "New " + cardType + " created: " + "\"" + cardText + "\"", 
+		"response-type": "in_channel"
+	}).status(200);
 
 })
 
