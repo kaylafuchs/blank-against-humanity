@@ -12,10 +12,11 @@ app.post('/', function(req, res, next){
 	const err = new Error('something\'s busted');
 	const cardType = req.body.command.replace('/','');
 	const cardText = req.body.text
+	const user = req.body.user
 	if (!req) next(err);
 
 	res.send({
-		"text": "New " + cardType + " created: " + "\"" + cardText + "\"", 
+		"text": "New " + cardType + " created by " + user + ": " + "\"" + cardText + "\"", 
 		"response-type": "in_channel"
 	}).status(200);
 
