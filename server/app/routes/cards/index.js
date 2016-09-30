@@ -34,7 +34,19 @@ router.get('/', (req, res, next) => {
 
 
 router.post('/', (req, res, next) => {
+    const cardType = req.body.command.replace('/','');
+    const cardText = req.body.text
+    const user = req.body.user_name
+
+    // note: req.body will not currently create a valid card. we need to set this up to work with the
+    // req defaults from slack. i'll do this next week. -KF
+
     return Card.create(req.body)
-    .then(createdCard => res.send(createdCard))
+    .then(createdCard => {
+        res.send({
+            "text": "New " + cardType + " created by " + user + ": " + "\"" + cardText + "\"", 
+            "response_type": "in_channel"
+        }).status(200);
+    })
     .catch(next);
 })
