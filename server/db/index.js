@@ -11,7 +11,7 @@ const User = require('./models/user');
 
 
 User.belongsToMany(Game, {through: 'player_games'}); 
-User.belongsToMany(Round, {through: 'user_round'}); //dont need this because rounds belong to a game? 
+ 
 User.belongsTo(Team, {as: 'userTeam'}); //User.belongsTo(Team)
 User.hasMany(Card, {as: 'created_cards'});
 User.belongsToMany(Card, {through: 'tagged_cards'}); //can tag many people in a card

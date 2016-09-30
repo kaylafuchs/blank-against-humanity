@@ -15,6 +15,9 @@ module.exports = db.define('user', {
     salt: {
         type: Sequelize.STRING
     },
+    slack_id: {
+        type: Sequelize.STRING
+    },
     twitter_id: {
         type: Sequelize.STRING
     },
