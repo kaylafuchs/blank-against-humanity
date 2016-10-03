@@ -6,6 +6,13 @@ app.config(function($stateProvider){
 	})
 })
 
-app.controller('LoginCtrl', function($scope, $state){
- console.log('LOGIN STATE')
+app.controller('LoginCtrl', function($scope, $state, LoginFactory){
+	console.log($scope)
+ 	$scope.loginWithSlack = function(){
+ 		console.log("im being called")
+ 		return LoginFactory.loginWithSlack()
+ 		.then(data  => {
+ 			console.log("data from slack: ", data)
+ 		})
+ 	}
 })

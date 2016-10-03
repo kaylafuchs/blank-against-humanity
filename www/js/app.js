@@ -5,6 +5,7 @@
 // the 2nd parameter is an array of 'requires'
 window.app = angular.module('BlankAgainstHumanity', ['ionic', 'ui.router'])
 
+console.log("APP", app)
 app.run(function($ionicPlatform) {
   $ionicPlatform.ready(function() {
     if(window.cordova && window.cordova.plugins.Keyboard) {
@@ -21,8 +22,4 @@ app.run(function($ionicPlatform) {
       StatusBar.styleDefault();
     }
   });
-})
-
-app.run(function($http){
-  $http.get('http://localhost:1337/api/cards');
 })

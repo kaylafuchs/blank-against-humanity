@@ -4,7 +4,7 @@ module.exports = {
   SLACK: {
     clientID: '85257560000.86181104260',
     clientSecret: 'f6d57e53f68d012eae2ea5485de4f5d0',
-    callbackURL: '/'
+    callbackURL: 'http://localhost:1337/auth/slack/callback'
   },
   LOGGING: true,
   NATIVE: true
