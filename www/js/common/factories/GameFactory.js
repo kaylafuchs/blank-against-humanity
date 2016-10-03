@@ -2,18 +2,6 @@ angular
     .module('starter')
     .factory('GameFactory', () => {
         const GameFactory = {};
-        var config = {
-            apiKey: "AIzaSyAjm8gBlobk922u5APxv3SB-9KnjQwJqmw",
-            authDomain: "blankagainst.firebaseapp.com",
-            databaseURL: "https://blankagainst.firebaseio.com",
-            storageBucket: "blankagainst.appspot.com",
-            messagingSenderId: "580664847840"
-        };
-        firebase.initializeApp(config);
-
-        // GameFactory.test = () => {
-        //     console.log('it worked')
-        // };
 
         GameFactory.addUser = () => {
 
@@ -21,13 +9,10 @@ angular
 
         GameFactory.startNewGame = () => {
             console.log('starting new game');
-            var newRef = firebase.database().ref().child('games').push();
-            newRef.set({
-                players: 'obj',
-                whitecards: 'whitecardObj',
-                blackCards: 'blackcardObj'
-            })
-
+            return $http.post('http://localhost:1337/api/games', {
+                    name: 'testgame'
+                })
+                .then(res => res.data);
         };
 
         return GameFactory;

@@ -22,6 +22,7 @@ router.get('/', (req, res, next) => {
         .then(foundGames => res.send(foundGames));
 });
 
+// 
 router.post('/', (req, res, next) => {
     return Game.create(req.body)
         .then(createdGame => {
