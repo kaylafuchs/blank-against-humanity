@@ -1,5 +1,5 @@
 'use strict';
-var router = require('express').Router(); // eslint-disable-line new-cap
+const router = require('express').Router(); // eslint-disable-line new-cap
 module.exports = router;
 
 // var ensureAuthenticated = function (req, res, next) {
@@ -10,8 +10,19 @@ module.exports = router;
 //     }
 // };
 
-router.get('/', (req, res) => {
 
-    
-
+router.get('/', (req, res, next) => {
+    if (req.query.type) {
+        return Card.findAll({
+                where: {
+                    type: req.query.type
+                }
+            })
+            .then(foundCards => res.send(foundCards))
+            .catch(next);
+    } else {
+        return Card.findAll()
+            .then(foundCards => res.send(foundCards))
+            .catch(next);
+    }
 });

@@ -23,6 +23,34 @@ angular.module('starter', ['ionic'])
     });
 })
 
+.factory('GameFactory', () => {
+    const GameFactory = {};
+    var config = {
+        apiKey: "AIzaSyAjm8gBlobk922u5APxv3SB-9KnjQwJqmw",
+        authDomain: "blankagainst.firebaseapp.com",
+        databaseURL: "https://blankagainst.firebaseio.com",
+        storageBucket: "blankagainst.appspot.com",
+        messagingSenderId: "580664847840"
+    };
+    firebase.initializeApp(config);
+
+    GameFactory.startNewGame = () => {
+        console.log('starting new game');
+        //var newRef = firebase.database().ref().child('games').push();
+        var newRef = firebase.database().ref('games/').push();
+        newRef.set({
+            players: 'obj',
+            whitecards: 'whitecardObj',
+            blackCards: 'blackcardObj'
+        })
+
+    };
+
+    return GameFactory;
+})
+
 .controller('MainCtrl', ($scope, GameFactory) => {
     $scope.test = 'hey'
+    $scope.func = GameFactory.test
+    $scope.startNewGame = GameFactory.startNewGame;
 })

@@ -17,24 +17,22 @@ module.exports = router;
 router.get('/', (req, res, next) => {
     if (req.query.type) {
         return Card.findAll({
-            where: {
-                type: req.query.type
-            }
-        })
-        .then(foundCards => res.send(foundCards))
-        .catch(next);
-    }
-
-    else {
+                where: {
+                    type: req.query.type
+                }
+            })
+            .then(foundCards => res.send(foundCards))
+            .catch(next);
+    } else {
         return Card.findAll()
-        .then(foundCards => res.send(foundCards))
-        .catch(next);
+            .then(foundCards => res.send(foundCards))
+            .catch(next);
     }
 });
 
 
 router.post('/', (req, res, next) => {
-    const cardType = req.body.command.replace('/','');
+    const cardType = req.body.command.replace('/', '');
     const cardText = req.body.text
     const user = req.body.user_name
 
@@ -42,11 +40,11 @@ router.post('/', (req, res, next) => {
     // req defaults from slack. i'll do this next week. -KF
 
     return Card.create(req.body)
-    .then(createdCard => {
-        res.send({
-            "text": "New " + cardType + " created by " + user + ": " + "\"" + cardText + "\"", 
-            "response_type": "in_channel"
-        }).status(200);
-    })
-    .catch(next);
+        .then(createdCard => {
+            res.send({
+                "text": "New " + cardType + " created by " + user + ": " + "\"" + cardText + "\"",
+                "response_type": "in_channel"
+            }).status(200);
+        })
+        .catch(next);
 })
