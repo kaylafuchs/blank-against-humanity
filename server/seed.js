@@ -1,5 +1,5 @@
 const chalk = require('chalk');
-const db = require('./server/db');
+const db = require('./db');
 const User = db.model('user');
 const Card = db.model('card')
 const Promise = require('sequelize').Promise;

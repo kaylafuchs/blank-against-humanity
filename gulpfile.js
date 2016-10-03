@@ -56,7 +56,7 @@ gulp.task('lintJS', function () {
 });
 
 gulp.task('buildJS', ['lintJS'], function () {
-    return gulp.src(['./www/js/app.js', './browser/js/**/*.js'])
+    return gulp.src(['./www/js/app.js', './www/js/**/*.js'])
         .pipe(plumber())
         .pipe(sourcemaps.init())
         .pipe(concat('main.js'))
@@ -64,7 +64,7 @@ gulp.task('buildJS', ['lintJS'], function () {
             presets: ['es2015']
         }))
         .pipe(sourcemaps.write())
-        .pipe(gulp.dest('./www/js'));
+        .pipe(gulp.dest('./www/public'));
 });
 
 gulp.task('buildJSProduction', function () {
@@ -75,7 +75,7 @@ gulp.task('buildJSProduction', function () {
         }))
         .pipe(ngAnnotate())
         .pipe(uglify())
-        .pipe(gulp.dest('./www/js'));
+        .pipe(gulp.dest('./www/public'));
 });
 
 gulp.task('build', function () {
@@ -97,19 +97,6 @@ gulp.task('install', ['git-check'], function() {
     });
 });
 
-gulp.task('git-check', function(done) {
-  if (!sh.which('git')) {
-    console.log(
-      '  ' + gutil.colors.red('Git is not installed.'),
-      '\n  Git, the version control system, is required to download Ionic.',
-      '\n  Download git here:', gutil.colors.cyan('http://git-scm.com/downloads') + '.',
-      '\n  Once git is installed, run \'' + gutil.colors.cyan('gulp install') + '\' again.'
-    );
-    process.exit(1);
-  }
-  done();
-});
-
 gulp.task('default', function (){
   gulp.start('build');
 
@@ -120,7 +107,7 @@ gulp.task('default', function (){
 
   // Run when anything inside of browser/scss changes.
   gulp.watch('www/scss/**', function () {
-      runSeq('buildCSS', 'reloadCSS');
+      runSeq('sass', 'reloadCSS');
   });
 
   gulp.watch('server/**/*.js', ['lintJS']);
