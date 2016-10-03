@@ -57,6 +57,7 @@ gulp.task('lintJS', function() {
 
 });
 
+
 gulp.task('buildJS', ['lintJS'], function() {
     return gulp.src(['./www/js/app.js', './www/js/**/*.js'])
         .pipe(plumber())
@@ -66,7 +67,7 @@ gulp.task('buildJS', ['lintJS'], function() {
             presets: ['es2015']
         }))
         .pipe(sourcemaps.write())
-        .pipe(gulp.dest('./www/js'));
+        .pipe(gulp.dest('./www/public'));
 });
 
 gulp.task('buildJSProduction', function() {
@@ -77,7 +78,7 @@ gulp.task('buildJSProduction', function() {
         }))
         .pipe(ngAnnotate())
         .pipe(uglify())
-        .pipe(gulp.dest('./www/js'));
+        .pipe(gulp.dest('./www/public'));
 });
 
 gulp.task('build', function() {
@@ -99,6 +100,7 @@ gulp.task('install', ['git-check'], function() {
         });
 });
 
+
 gulp.task('git-check', function(done) {
     if (!sh.which('git')) {
         console.log(
@@ -113,28 +115,45 @@ gulp.task('git-check', function(done) {
 });
 
 gulp.task('default', function() {
-    gulp.start('build');
+            gulp.start('build'); ===
+            ===
+            =
+            gulp.task('default', function() {
+                gulp.start('build'); >>>
+                >>>
+                > master
 
-    // Run when anything inside of browser/js changes.
-    gulp.watch('www/js/**', function() {
-        runSeq('buildJS', 'reload');
-    });
+                // Run when anything inside of browser/js changes.
+                gulp.watch('www/js/**', function() {
+                    runSeq('buildJS', 'reload');
+                });
 
-    // Run when anything inside of browser/scss changes.
-    gulp.watch('www/scss/**', function() {
-        runSeq('buildCSS', 'reloadCSS');
-    });
+                <<
+                <<
+                << < HEAD
+                // Run when anything inside of browser/scss changes.
+                gulp.watch('www/scss/**', function() {
+                    runSeq('buildCSS', 'reloadCSS');
+                }); ===
+                ===
+                =
+                // Run when anything inside of browser/scss changes.
+                gulp.watch('www/scss/**', function() {
+                    runSeq('sass', 'reloadCSS');
+                }); >>>
+                >>>
+                > master
 
-    gulp.watch('server/**/*.js', ['lintJS']);
+                gulp.watch('server/**/*.js', ['lintJS']);
 
-    // Reload when a template (.html) file changes.
-    gulp.watch(['www/**/*.html', 'server/app/views/*.html'], ['reload']);
+                // Reload when a template (.html) file changes.
+                gulp.watch(['www/**/*.html', 'server/app/views/*.html'], ['reload']);
 
-    // // Run server tests when a server file or server test file changes.
-    // gulp.watch(['tests/server/**/*.js', 'server/app/**/*.js'], ['testServerJS']);
+                // // Run server tests when a server file or server test file changes.
+                // gulp.watch(['tests/server/**/*.js', 'server/app/**/*.js'], ['testServerJS']);
 
-    // // Run browser testing when a browser test file changes.
-    // gulp.watch('tests/browser/**/*', ['testBrowserJS']);
+                // // Run browser testing when a browser test file changes.
+                // gulp.watch('tests/browser/**/*', ['testBrowserJS']);
 
-    livereload.listen();
-})
+                livereload.listen();
+            })
