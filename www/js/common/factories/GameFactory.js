@@ -1,4 +1,4 @@
-app.factory('GameFactory', () => {
+app.factory('GameFactory', ($http) => {
     const GameFactory = {};
 
     GameFactory.addUser = () => {
