@@ -1,5 +1,5 @@
 'use strict';
-const db = require('./_db');
+const db2 = require('./_db');
 module.exports = db;
 
 // eslint-disable-next-line no-unused-consts
