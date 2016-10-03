@@ -1,28 +1,40 @@
 'use strict';
 const router = require('express').Router(); // eslint-disable-line new-cap
+const db = require('../../../db/');
+const Game = db.model('game');
+const firebase = require('firebase')
 module.exports = router;
 
-// var ensureAuthenticated = function (req, res, next) {
-//     if (req.isAuthenticated()) {
-//         next();
-//     } else {
-//         res.status(401).end();
-//     }
-// };
+
+
+const initializeFB = () => {
+    const config = {
+        apiKey: "AIzaSyAjm8gBlobk922u5APxv3SB-9KnjQwJqmw",
+        authDomain: "blankagainst.firebaseapp.com",
+        databaseURL: "https://blankagainst.firebaseio.com",
+        storageBucket: "blankagainst.appspot.com",
+        messagingSenderId: "580664847840"
+    };
+    firebase.initializeApp(config);
+};
+
+initializeFB()
+
 
 
 router.get('/', (req, res, next) => {
-    if (req.query.type) {
-        return Card.findAll({
-                where: {
-                    type: req.query.type
-                }
-            })
-            .then(foundCards => res.send(foundCards))
-            .catch(next);
-    } else {
-        return Card.findAll()
-            .then(foundCards => res.send(foundCards))
-            .catch(next);
-    }
+
+});
+
+router.post('/', (req, res, next) => {
+    return Game.create(req.body)
+        .then(createdGame => {
+            //var newRef = firebase.database().ref().child('games').push();
+            var newRef = firebase.database().ref(`games/${createdGame.id}`).push();
+            newRef.set({
+                players: 'obj',
+                whitecards: 'whitecardObj',
+                blackCards: 'blackcardObj'
+            });
+        })
 });
