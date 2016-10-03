@@ -5,9 +5,7 @@ const Game = db.model('game');
 const firebase = require('firebase')
 module.exports = router;
 
-
-
-const initializeFB = () => {
+const initializeFirebase = () => {
     const config = {
         apiKey: "AIzaSyAjm8gBlobk922u5APxv3SB-9KnjQwJqmw",
         authDomain: "blankagainst.firebaseapp.com",
@@ -17,24 +15,22 @@ const initializeFB = () => {
     };
     firebase.initializeApp(config);
 };
-
-initializeFB()
-
-
+initializeFirebase();
 
 router.get('/', (req, res, next) => {
-
+    return Game.findAll()
+        .then(foundGames => res.send(foundGames));
 });
 
 router.post('/', (req, res, next) => {
     return Game.create(req.body)
         .then(createdGame => {
-            //var newRef = firebase.database().ref().child('games').push();
-            var newRef = firebase.database().ref(`games/${createdGame.id}`).push();
+            res.send(createdGame);
+            var newRef = firebase.database().ref(`games/${createdGame.id}`) //.push();
             newRef.set({
                 players: 'obj',
                 whitecards: 'whitecardObj',
                 blackCards: 'blackcardObj'
-            });
+            })
         })
 });

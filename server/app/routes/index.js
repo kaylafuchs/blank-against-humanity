@@ -6,8 +6,11 @@ router.use('/members', require('./members'));
 
 router.use('/cards', require('./cards'));
 
+router.use('/games', require('./games'));
+
+
 // Make sure this is after all of
 // the registered routes!
-router.use(function (req, res) {
+router.use(function(req, res) {
     res.status(404).end();
 });
