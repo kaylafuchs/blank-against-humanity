@@ -18,7 +18,7 @@ module.exports = db.define('card', {
         type: Sequelize.STRING
     },
     type: {
-        type: Sequelize.ENUM('white', 'black')
+        type: Sequelize.STRING
     }
 }, {
 
