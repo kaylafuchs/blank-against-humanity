@@ -57,7 +57,6 @@ gulp.task('lintJS', function() {
 
 });
 
-
 gulp.task('buildJS', ['lintJS'], function() {
     return gulp.src(['./www/js/app.js', './www/js/**/*.js'])
         .pipe(plumber())
@@ -100,60 +99,29 @@ gulp.task('install', ['git-check'], function() {
         });
 });
 
-
-gulp.task('git-check', function(done) {
-    if (!sh.which('git')) {
-        console.log(
-            '  ' + gutil.colors.red('Git is not installed.'),
-            '\n  Git, the version control system, is required to download Ionic.',
-            '\n  Download git here:', gutil.colors.cyan('http://git-scm.com/downloads') + '.',
-            '\n  Once git is installed, run \'' + gutil.colors.cyan('gulp install') + '\' again.'
-        );
-        process.exit(1);
-    }
-    done();
-});
-
 gulp.task('default', function() {
-            gulp.start('build'); ===
-            ===
-            =
-            gulp.task('default', function() {
-                gulp.start('build'); >>>
-                >>>
-                > master
+    gulp.start('build');
 
-                // Run when anything inside of browser/js changes.
-                gulp.watch('www/js/**', function() {
-                    runSeq('buildJS', 'reload');
-                });
+    // Run when anything inside of browser/js changes.
+    gulp.watch('www/js/**', function() {
+        runSeq('buildJS', 'reload');
+    });
 
-                <<
-                <<
-                << < HEAD
-                // Run when anything inside of browser/scss changes.
-                gulp.watch('www/scss/**', function() {
-                    runSeq('buildCSS', 'reloadCSS');
-                }); ===
-                ===
-                =
-                // Run when anything inside of browser/scss changes.
-                gulp.watch('www/scss/**', function() {
-                    runSeq('sass', 'reloadCSS');
-                }); >>>
-                >>>
-                > master
+    // Run when anything inside of browser/scss changes.
+    gulp.watch('www/scss/**', function() {
+        runSeq('sass', 'reloadCSS');
+    });
 
-                gulp.watch('server/**/*.js', ['lintJS']);
+    gulp.watch('server/**/*.js', ['lintJS']);
 
-                // Reload when a template (.html) file changes.
-                gulp.watch(['www/**/*.html', 'server/app/views/*.html'], ['reload']);
+    // Reload when a template (.html) file changes.
+    gulp.watch(['www/**/*.html', 'server/app/views/*.html'], ['reload']);
 
-                // // Run server tests when a server file or server test file changes.
-                // gulp.watch(['tests/server/**/*.js', 'server/app/**/*.js'], ['testServerJS']);
+    // // Run server tests when a server file or server test file changes.
+    // gulp.watch(['tests/server/**/*.js', 'server/app/**/*.js'], ['testServerJS']);
 
-                // // Run browser testing when a browser test file changes.
-                // gulp.watch('tests/browser/**/*', ['testBrowserJS']);
+    // // Run browser testing when a browser test file changes.
+    // gulp.watch('tests/browser/**/*', ['testBrowserJS']);
 
-                livereload.listen();
-            })
+    livereload.listen();
+})
