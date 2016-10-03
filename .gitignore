@@ -1,4 +1,4 @@
 node_modules
-env/development.js
+server/env/development.js
 .DS_Store
 npm-debug.log
