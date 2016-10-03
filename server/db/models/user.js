@@ -18,16 +18,7 @@ module.exports = db.define('user', {
     slack_id: {
         type: Sequelize.STRING
     },
-    twitter_id: {
-        type: Sequelize.STRING
-    },
-    facebook_id: {
-        type: Sequelize.STRING
-    },
-    google_id: {
-        type: Sequelize.STRING
-    }
-}, {
+   {
     instanceMethods: {
         sanitize: function () {
             return _.omit(this.toJSON(), ['password', 'salt']);
