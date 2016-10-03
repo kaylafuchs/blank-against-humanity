@@ -11,9 +11,6 @@ module.exports = db.define('card', {
     pick: {
         type: Sequelize.INTEGER
     },
-    deck: {
-        type: Sequelize.STRING
-    },
     nsfw: {
         type: Sequelize.BOOLEAN
     },
@@ -24,5 +21,5 @@ module.exports = db.define('card', {
         type: Sequelize.ENUM('white', 'black')
     }
 }, {
-   
+
 });
