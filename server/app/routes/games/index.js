@@ -6,7 +6,7 @@ const firebase = require('firebase')
 module.exports = router;
 
 router.param('id', (req, res, next, id) => {
-    Game.findById(id)
+    return Game.findById(id)
         .then(foundGame => {
             if (!foundGame) res.sendStatus(404)
             else req.requestedGame = foundGame;
@@ -19,19 +19,31 @@ router.get('/:id', (req, res, next) => {
     res.send(req.requestedGame);
 });
 
+// api/games/teamId=25?
 router.get('/', (req, res, next) => {
-    return Game.findAll()
-        .then(foundGames => res.send(foundGames));
+    if (req.query.team) {
+        return Game.findAll({
+                where: {
+                    teamId: req.query.teamId
+                }
+            })
+            .then(foundGames => res.send(foundGames))
+            .catch(next);
+    } else {
+        return Game.findAll()
+            .then(foundGames => res.send(foundGames));
+    }
+
 });
 
 router.post('/', (req, res, next) => {
     return Game.create(req.body)
         .then(createdGame => {
             res.send(createdGame);
-            var newRef = firebase.database().ref(`games/${createdGame.id}`) //.push();
+            const newRef = firebase.database().ref(`games/${createdGame.id}`) //.push();
             newRef.set({
                 players: 'obj',
-                whitecards: 'whitecardObj',
+                whiteCards: 'whitecardObj',
                 blackCards: 'blackcardObj'
             });
         });
