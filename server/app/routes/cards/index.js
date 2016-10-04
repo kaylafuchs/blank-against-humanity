@@ -46,6 +46,11 @@ router.post('/', (req, res, next) => {
     .filter(word => _.startsWith(word, '@'))
     .map(userName => userName.slice(1, userName.length))
     .value();
+    const imgUrl = _.chain(cardText)
+    .split(' ')
+    .dropWhile(element => !/(https?:\/\/\S+\.(?:jpg|png|gif))/.test(element))
+    .value()
+    console.log(imgUrl)
     let taggedUsersProm = []
     _.forEach(taggedUserNames, name => {
         taggedUsersProm.push(User
@@ -94,6 +99,7 @@ router.post('/', (req, res, next) => {
         .create({
             text: cardText,
             type: cardType,
+            image_url: imgUrl[0]
         })
         .then(createdCard => {
             return createdCard
