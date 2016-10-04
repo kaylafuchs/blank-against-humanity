@@ -1,7 +1,8 @@
 app.factory('LoginFactory', function($http){
 	return {
-		loginWithSlack: function(){
-			window.location.href = 'http://localhost:1337/auth/slack'	
+		getSlackCreds: function(){
+			return $http.get('http://localhost:1337/api/slack')	
+				.then(res => res.data)
 		}
 	}
 })
