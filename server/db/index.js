@@ -27,7 +27,7 @@ Team.hasMany(Deck);
 
 
 Card.belongsTo(User, {as: 'author'})
-Card.belongsTo(User, {as: 'taggedUser'})
+Card.belongsToMany(User, {through: 'tagged_cards'})
 
 
 Round.hasOne(Card, {as: 'blackCard'});

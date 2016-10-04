@@ -5,6 +5,7 @@ const Card = db.model('card')
 const User = db.model('user')
 const Team = db.model('team')
 const Deck = db.model('deck')
+const _ = require('lodash')
 module.exports = router;
 
 
@@ -40,6 +41,23 @@ router.post('/', (req, res, next) => {
     const user = req.body.user_name
     const deck = req.body.channel_name
     const team = req.body.team_domain
+    const taggedUserNames = _.chain(cardText)
+    .split(' ')
+    .filter(word => _.startsWith(word, '@'))
+    .map(userName => userName.slice(1, userName.length))
+    .value();
+    let taggedUsersProm = []
+    _.forEach(taggedUserNames, name => {
+        taggedUsersProm.push(User
+            .findOrCreate({
+                where: {
+                    slack_id: name
+                }
+            })
+            .spread(foundUser => foundUser))
+    })
+    taggedUsersProm = Promise.all(taggedUsersProm)
+        .then(taggedUsersArr => taggedUsersArr)
         // a promise for finding or creating the team associated with the post message
     const teamProm = Team
         .findOrCreate({
@@ -52,7 +70,7 @@ router.post('/', (req, res, next) => {
         })
         .catch(err => console.log('team findorcreate failed bc of' + err))
         // a promise for finding or creating the user associated with the post message
-    const userProm = User
+    const authorProm = User
         .findOrCreate({
             where: {
                 slack_id: user
@@ -83,7 +101,7 @@ router.post('/', (req, res, next) => {
         .catch(err => console.log('card create failed bc of' + err))
         // run all this async goodness in parallel, and when we're all done let's do some more cool stuff
     Promise
-        .all([teamProm, userProm, deckProm, cardProm])
+        .all([teamProm, authorProm, deckProm, cardProm, taggedUsersProm])
         .then(resultArr => {
             // a promise for associating a user to the team
             const userTeamProm = resultArr[1]
@@ -113,8 +131,11 @@ router.post('/', (req, res, next) => {
                     return updatedCard
                 })
                 .catch(err => console.log('card author assoc failed bc of' + err))
+            const cardTaggedUsersProm = resultArr[3]
+                .setUsers(resultArr[4])
+                .then(updatedCard => updatedCard)
             return Promise
-                .all([userTeamProm, deckTeamProm, cardDeckProm, cardAuthorProm])
+                .all([userTeamProm, deckTeamProm, cardDeckProm, cardAuthorProm, cardTaggedUsersProm])
         })
         .then(resArray => {
             res.send({
@@ -126,6 +147,4 @@ router.post('/', (req, res, next) => {
                 })
         })
         .catch(err => console.log(err))
-
-
 })
