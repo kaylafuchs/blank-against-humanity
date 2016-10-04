@@ -7,7 +7,5 @@ app.config(($stateProvider) => {
 })
 
 app.controller('GameCtrl', ($scope, GameFactory) => {
-    $scope.test = 'hey'
-    $scope.func = GameFactory.test
     $scope.startNewGame = GameFactory.startNewGame;
 })
