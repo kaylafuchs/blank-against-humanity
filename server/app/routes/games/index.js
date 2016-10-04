@@ -33,17 +33,15 @@ router.post('/', (req, res, next) => {
                 players: 'obj',
                 whitecards: 'whitecardObj',
                 blackCards: 'blackcardObj'
-            })
-        })
+            });
+        });
 });
 
 // api/games/32?playerId=42
 router.post('/:id', (req, res, next) => {
     if (req.query.playerId) {
         console.log('the req game is', req.requestedGame)
-        // res.send(req.requestedGame)
         return req.requestedGame.addUsers(req.query.playerId)
-            //.updateAttributes(req.body)
             .then(updatedGame => res.send(updatedGame));
 
     } else {
