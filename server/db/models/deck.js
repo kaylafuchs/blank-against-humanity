@@ -4,10 +4,10 @@ var Sequelize = require('sequelize');
 
 var db = require('../_db');
 
-module.exports = db.define('black_card', {
+module.exports = db.define('deck', {
     name: {
         type: Sequelize.STRING
     },
 }, {
-   
+
 });

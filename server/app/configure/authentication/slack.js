@@ -6,7 +6,7 @@ module.exports = function(app, db) {
 
     var User = db.model('user');
 
-    var slackConfig = app.getValue('env').SLACK; //Is this correct?
+    var slackConfig = app.getValue('env').SLACK;
 
     var slackCredentials = {
         clientID: slackConfig.clientID,
@@ -37,12 +37,11 @@ module.exports = function(app, db) {
     app.get('/auth/slack', passport.authorize('slack'));
 
     app.get('/auth/slack/callback',
-        passport.authorize('slack', {
-            failureRedirect: '/login'
-        }),
+        passport.authorize('slack', { failureRedirect: '/' }),
         function(req, res) {
             // Successful authentication, redirect home.
-            res.redirect('/');
+            console.log("HOLY MOLY IT WORKED")
+            res.redirect('/auth/slack/callback');
         });
 
 };
