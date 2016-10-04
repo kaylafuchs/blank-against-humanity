@@ -11,7 +11,7 @@ module.exports = function (app, db) {
     var slackCredentials = {
         clientID: slackConfig.clientID,
         clientSecret:slackConfig.clientSecret,
-        callbackURL: slackConfig.callbackURL
+        callbackURL: slackConfig.callbackURL,
         scope: 'channels:read chat:write:bot team:read',
     };
 
