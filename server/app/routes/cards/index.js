@@ -1,15 +1,11 @@
 'use strict';
 const router = require('express').Router(); // eslint-disable-line new-cap
-const db = require('../../../db/'); <<
-<< << < HEAD
-const Card = db.model('card'); ===
-=== =
+const db = require('../../../db/');
 const Card = db.model('card')
 const User = db.model('user')
 const Team = db.model('team')
 const Deck = db.model('deck')
-const _ = require('lodash') >>>
-    >>> > master
+const _ = require('lodash')
 module.exports = router;
 
 
