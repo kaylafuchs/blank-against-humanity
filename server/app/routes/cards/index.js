@@ -50,7 +50,19 @@ router.post('/', (req, res, next) => {
     .split(' ')
     .dropWhile(element => !/(https?:\/\/\S+\.(?:jpg|png|gif))/.test(element))
     .value()
-    console.log(imgUrl)
+    let pick = 0
+    if (cardType === 'blackcard') {
+        _.chain(cardText)
+        .split(' ')
+        .each(element => {
+            if (element === 'blank') {
+                pick++
+            }
+        })
+        .value()
+        // pick should always be one for black cards because people will always be submitting at least 1 card
+        if (pick === 0) pick++
+    }
     let taggedUsersProm = []
     _.forEach(taggedUserNames, name => {
         taggedUsersProm.push(User
@@ -99,7 +111,8 @@ router.post('/', (req, res, next) => {
         .create({
             text: cardText,
             type: cardType,
-            image_url: imgUrl[0]
+            image_url: imgUrl[0],
+            pick: pick
         })
         .then(createdCard => {
             return createdCard
