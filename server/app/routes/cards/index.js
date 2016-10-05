@@ -34,6 +34,13 @@ router.get('/', (req, res, next) => {
     }
 });
 
+// /api/cards/deckId?type=white
+router.get('/:deckId', (req,res,next) => {
+    Deck.findById(req.params.id)
+    .then(deckCards => res.send(foundCards))
+    .catch(next);
+})
+
 
 router.post('/', (req, res, next) => {
     const cardType = req.body.command.replace('/', '');

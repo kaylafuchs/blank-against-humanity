@@ -67,6 +67,10 @@ app.factory('GameFactory', ($http) => {
         return $http.get(`http://localhost:1337/api/games/?teamId=${teamId}`);
     };
 
+    GameFactory.getCardsByDeckId = (deckId) => {
+        return $http.get(`http://localhost:1337/api/cards/${deckId}`);
+    }
+
 
 
     //get all games by team route
