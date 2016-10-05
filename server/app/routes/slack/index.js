@@ -6,5 +6,8 @@ var creds = require('../../../env/development.js')
 
 
 router.get('/', function(req, res, next){
-	res.json({'clientID':creds.SLACK.clientID, 'clientSecret': creds.SLACK.clientSecret})
+	console.log("hit route")
+	console.log("creds",creds)
+	res.json({'clientID': creds.SLACK.clientID, 'clientSecret': creds.SLACK.clientSecret})
+	console.log("res", res)
 })
