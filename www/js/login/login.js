@@ -7,6 +7,7 @@ app.config(function($stateProvider){
 })
 
 app.controller('LoginCtrl', function($scope, $state, LoginFactory, UserFactory, $cordovaOauth, $localStorage){
+	console.log("now in login state")
  	$scope.loginWithSlack = function(){
  		console.log("im being called")
  		return LoginFactory.getSlackCreds()
