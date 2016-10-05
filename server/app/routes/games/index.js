@@ -93,21 +93,28 @@ router.post('/firebase/:id', (req, res, next) => {
 })
 
 //create game in postgres then in firebase
+// api/teams/2/games/
+
 router.post('/', (req, res, next) => {
-
-    return Game.create(req.body)
+    var gameId;
+    return Game.create({
+            name: req.body.name,
+        })
         .then(createdGame => {
-            //return Promise.all(createdGame.addUsers(req.body.userId), createdGame.addDecks(req.body.))
-            const newRef = firebase.database().ref(`games/${createdGame.id}`)
-
-            return newRef.set({
-                    players: 'obj',
-                    whiteCards: 'whitecardObj',
-                    blackCards: 'blackcardObj'
+            const gameRef = firebase.database().ref(`teams/${req.body.teamId}/games/${createdGame.id}`)
+            gameId = createdGame.id;
+            return gameRef.set({
+                    name: req.body.name
                 })
-                .then((game) => {
-                    console.log('createdGame', game)
-                    res.send(game)
+                .then(() => {
+                    const firstPlayerRef = firebase.database().ref(`teams/${req.body.teamId}/games/${createdGame.id}/players/${req.body.creatorId}`)
+                    return firstPlayerRef.set({
+                        name: 'Dan' //should be player name
+                    })
+                })
+                .then(() => {
+                    //console.log('createdGame', game)
+                    res.send(gameId + '')
                 })
         })
         .catch(next)

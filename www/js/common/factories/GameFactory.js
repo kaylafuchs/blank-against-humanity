@@ -1,21 +1,42 @@
-app.factory('GameFactory', ($http) => {
+app.factory('GameFactory', ($http, $rootScope) => {
     const GameFactory = {};
+
+    const initializeFirebase = () => {
+        const config = {
+            apiKey: "AIzaSyD-tDevXvipyuE5lzheWARq4huu1UmqoJk",
+            authDomain: "capstone-fb0e8.firebaseapp.com",
+            databaseURL: "https://capstone-fb0e8.firebaseio.com",
+            storageBucket: "capstone-fb0e8.appspot.com",
+            messagingSenderId: "849839680107"
+        };
+        firebase.initializeApp(config);
+    };
+    initializeFirebase();
+
 
     GameFactory.addUser = () => {
 
     };
 
-    GameFactory.startNewGame = () => {
-        console.log('starting new game');
+    GameFactory.startNewGame = (gameName, teamName) => {
+        //return $http.get('/session').then(userId => {
         return $http.post('http://localhost:1337/api/games', {
-                name: 'testgame'
+                name: gameName || 'Boring Name',
+                teamId: teamId || 2,
+                creatorId: 2
             })
-            .then(res => res.data);
+            .then(res => res.data)
+            .then(gameId => {
+                //const reff = firebase.database().ref(`/games/`)
+                const reff = firebase.database().ref(`/games/${gameId}`)
+                reff.on('value', snapshot => {
+                    console.log(snapshot.val())
+                    $rootScope.$broadcast('changedGame', snapshot.val())
+                });
+            })
+            //set up watcher
     };
 
-    // GameFactory.getLoggedInUsersGame = () => {
-
-    // };
 
     GameFactory.joinGameById = (gameId) => {
         console.log('joining game')
@@ -64,7 +85,16 @@ app.factory('GameFactory', ($http) => {
 
 
     GameFactory.getGamesByTeamId = (teamId) => {
-        return $http.get(`http://localhost:1337/api/games/?teamId=${teamId}`);
+        console.log('the team is id', teamId)
+
+        const gamesRef = firebase.database().ref(`teams/${teamId}/games`)
+        return gamesRef.once('value').then(snapshot => {
+                console.log('the val is', snapshot.val())
+                return snapshot.val();
+            })
+            // return $http.get(`http://localhost:1337/api/games?teamId=${teamId}`)
+            //     .then(res => res.data)
+            //.then(foundGames => )
     };
 
 
