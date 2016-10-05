@@ -8,5 +8,9 @@ module.exports = db.define('game', {
         type: Sequelize.STRING,
         
     },
+    // rules: {
+    //     type: Sequelize.STRING
+    // }
+
 
 });

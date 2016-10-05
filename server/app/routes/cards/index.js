@@ -42,25 +42,25 @@ router.post('/', (req, res, next) => {
     const deck = req.body.channel_name
     const team = req.body.team_domain
     const taggedUserNames = _.chain(cardText)
-    .split(' ')
-    .filter(word => _.startsWith(word, '@'))
-    .map(userName => userName.slice(1, userName.length))
-    .value();
+        .split(' ')
+        .filter(word => _.startsWith(word, '@'))
+        .map(userName => userName.slice(1, userName.length))
+        .value();
     const imgUrl = _.chain(cardText)
-    .split(' ')
-    .dropWhile(element => !/(https?:\/\/\S+\.(?:jpg|png|gif))/.test(element))
-    .value()
+        .split(' ')
+        .dropWhile(element => !/(https?:\/\/\S+\.(?:jpg|png|gif))/.test(element))
+        .value()
     let pick = 0
     if (cardType === 'blackcard') {
         _.chain(cardText)
-        .split(' ')
-        .each(element => {
-            if (element === 'blank') {
-                pick++
-            }
-        })
-        .value()
-        // pick should always be one for black cards because people will always be submitting at least 1 card
+            .split(' ')
+            .each(element => {
+                if (element === 'blank') {
+                    pick++
+                }
+            })
+            .value()
+            // pick should always be one for black cards because people will always be submitting at least 1 card
         if (pick === 0) pick++
     }
     let taggedUsersProm = []
@@ -158,12 +158,12 @@ router.post('/', (req, res, next) => {
         })
         .then(resArray => {
             res.send({
-                    "response_type": "in_channel",
-                    "text": resArray[0].slack_id + ' added a new ' + resArray[2].type + ' to deck ' + resArray[1].name,
-                    "attachments": [{
-                        "text": resArray[2].text
-                    }]
-                })
+                "response_type": "in_channel",
+                "text": resArray[0].slack_id + ' added a new ' + resArray[2].type + ' to deck ' + resArray[1].name,
+                "attachments": [{
+                    "text": resArray[2].text
+                }]
+            })
         })
         .catch(err => console.log(err))
 })
