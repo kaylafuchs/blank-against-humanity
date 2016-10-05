@@ -10,8 +10,6 @@ const Team = require('./models/team');
 const User = require('./models/user');
 const Deck = require('./models/deck')
 
-
-
 User.belongsToMany(Game, { through: 'player_games' });
 
 User.belongsTo(Team); //User.belongsTo(Team)
