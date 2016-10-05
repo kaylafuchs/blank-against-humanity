@@ -2,3 +2,4 @@ node_modules
 server/env/development.js
 .DS_Store
 npm-debug.log
+bower_components
