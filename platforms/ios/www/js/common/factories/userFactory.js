@@ -1,4 +1,4 @@
-app.factory('UserFactory', function($http){
+app.factory('UserFactory', function($http, $localStorage){
 	var currentUser, currentTeam; 
 
 	return {
@@ -12,16 +12,21 @@ app.factory('UserFactory', function($http){
 				data: info
 			})
 			.then(res => {
-				console.log("res data", JSON.stringify(res.data))
 				currentUser = res.data.user[0];
 				console.log("user", JSON.stringify(currentUser));
 				currentTeam = res.data.team[0];
 				console.log("team", JSON.stringify(currentTeam));
+				this.setLocalStorage();
 			})
 		},
 
 		getSlackInfo: function(){
 			return $http.get('https://slack.com/api/users.identity')
+		},
+
+		setLocalStorage: function(){
+			$localStorage.user = currentUser;
+			$localStorage.team = currentTeam;
 		},
 
 		getCurrentUser: function(){
