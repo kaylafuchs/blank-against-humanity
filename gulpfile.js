@@ -15,15 +15,15 @@ var babel = require('gulp-babel');
 var livereload = require('gulp-livereload');
 
 var paths = {
-  sass: ['./scss/**/*.scss']
+    sass: ['./scss/**/*.scss']
 };
 
 // Live reload business.
-gulp.task('reload', function () {
+gulp.task('reload', function() {
     livereload.reload();
 });
 
-gulp.task('reloadCSS', function () {
+gulp.task('reloadCSS', function() {
     return gulp.src('./www/css/style.css').pipe(livereload());
 });
 
@@ -31,19 +31,21 @@ gulp.task('reloadCSS', function () {
 gulp.task('default', ['sass']);
 
 gulp.task('sass', function(done) {
-  gulp.src('./scss/ionic.app.scss')
-    .pipe(sass())
-    .on('error', sass.logError)
-    .pipe(gulp.dest('./www/css/'))
-    .pipe(minifyCss({
-      keepSpecialComments: 0
-    }))
-    .pipe(rename({ extname: '.min.css' }))
-    .pipe(gulp.dest('./www/css/'))
-    .on('end', done);
+    gulp.src('./scss/ionic.app.scss')
+        .pipe(sass())
+        .on('error', sass.logError)
+        .pipe(gulp.dest('./www/css/'))
+        .pipe(minifyCss({
+            keepSpecialComments: 0
+        }))
+        .pipe(rename({
+            extname: '.min.css'
+        }))
+        .pipe(gulp.dest('./www/css/'))
+        .on('end', done);
 });
 
-gulp.task('lintJS', function () {
+gulp.task('lintJS', function() {
 
     return gulp.src(['./www/js/**/*.js', './server/**/*.js'])
         .pipe(plumber({
@@ -55,7 +57,7 @@ gulp.task('lintJS', function () {
 
 });
 
-gulp.task('buildJS', ['lintJS'], function () {
+gulp.task('buildJS', ['lintJS'], function() {
     return gulp.src(['./www/js/app.js', './www/js/**/*.js'])
         .pipe(plumber())
         .pipe(sourcemaps.init())
@@ -67,7 +69,7 @@ gulp.task('buildJS', ['lintJS'], function () {
         .pipe(gulp.dest('./www/public'));
 });
 
-gulp.task('buildJSProduction', function () {
+gulp.task('buildJSProduction', function() {
     return gulp.src(['./www/js/app.js', './www/js/**/*.js'])
         .pipe(concat('main.js'))
         .pipe(babel({
@@ -78,7 +80,7 @@ gulp.task('buildJSProduction', function () {
         .pipe(gulp.dest('./www/public'));
 });
 
-gulp.task('build', function () {
+gulp.task('build', function() {
     if (process.env.NODE_ENV === 'production') {
         runSeq(['buildJSProduction', 'sass']);
     } else {
@@ -87,39 +89,39 @@ gulp.task('build', function () {
 });
 
 gulp.task('watch', function() {
-  gulp.watch(paths.sass, ['sass']);
+    gulp.watch(paths.sass, ['sass']);
 });
 
 gulp.task('install', ['git-check'], function() {
-  return bower.commands.install()
-    .on('log', function(data) {
-      gutil.log('bower', gutil.colors.cyan(data.id), data.message);
-    });
+    return bower.commands.install()
+        .on('log', function(data) {
+            gutil.log('bower', gutil.colors.cyan(data.id), data.message);
+        });
 });
 
-gulp.task('default', function (){
-  gulp.start('build');
+gulp.task('default', function() {
+    gulp.start('build');
 
-  // Run when anything inside of browser/js changes.
-  gulp.watch('www/js/**', function () {
-      runSeq('buildJS', 'reload');
-  });
+    // Run when anything inside of browser/js changes.
+    gulp.watch('www/js/**', function() {
+        runSeq('buildJS', 'reload');
+    });
 
-  // Run when anything inside of browser/scss changes.
-  gulp.watch('www/scss/**', function () {
-      runSeq('sass', 'reloadCSS');
-  });
+    // Run when anything inside of browser/scss changes.
+    gulp.watch('www/scss/**', function() {
+        runSeq('sass', 'reloadCSS');
+    });
 
-  gulp.watch('server/**/*.js', ['lintJS']);
+    gulp.watch('server/**/*.js', ['lintJS']);
 
-  // Reload when a template (.html) file changes.
-  gulp.watch(['www/**/*.html', 'server/app/views/*.html'], ['reload']);
+    // Reload when a template (.html) file changes.
+    gulp.watch(['www/**/*.html', 'server/app/views/*.html'], ['reload']);
 
-  // // Run server tests when a server file or server test file changes.
-  // gulp.watch(['tests/server/**/*.js', 'server/app/**/*.js'], ['testServerJS']);
+    // // Run server tests when a server file or server test file changes.
+    // gulp.watch(['tests/server/**/*.js', 'server/app/**/*.js'], ['testServerJS']);
 
-  // // Run browser testing when a browser test file changes.
-  // gulp.watch('tests/browser/**/*', ['testBrowserJS']);
+    // // Run browser testing when a browser test file changes.
+    // gulp.watch('tests/browser/**/*', ['testBrowserJS']);
 
-  livereload.listen();
+    livereload.listen();
 })

@@ -15,4 +15,4 @@ module.exports = db.define('user', {
     name: {
     	type: Sequelize.STRING
     }
-});
+};
