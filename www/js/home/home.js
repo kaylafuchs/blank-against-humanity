@@ -2,10 +2,16 @@ app.config(function($stateProvider){
 	$stateProvider.state('home', {
 		url: '/',
 		templateUrl: 'js/home/home.html',
-		controller: 'HomeCtrl'
+		controller: 'HomeCtrl',
 	})
 })
 
-app.controller('HomeCtrl', function($scope, $state, $cordovaOauth){
-	console.log("Made it home")
+app.controller('HomeCtrl', function($scope, $state, $cordovaOauth, UserFactory){
+	$scope.user = UserFactory.getCurrentUser();
+	$scope.team = UserFactory.getCurrentTeam();
+	// $localStorage.user = $scope.user
+	// $localStorage.team = $scope.team
+	// console.log("local storage", JSON.stringify($localStorage))
+	console.log("user in home controller", JSON.stringify($scope.user))
+	console.log("team in home controller", JSON.stringify($scope.team))
 })

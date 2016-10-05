@@ -1,4 +1,6 @@
 app.factory('UserFactory', function($http){
+	var currentUser, currentTeam; 
+
 	return {
 		setUser: function(info){
 			return $http({
@@ -9,11 +11,28 @@ app.factory('UserFactory', function($http){
 				},
 				data: info
 			})
-			.then(res => res.data)
+			.then(res => {
+				console.log("res data", JSON.stringify(res.data))
+				currentUser = res.data.user[0];
+				console.log("user", JSON.stringify(currentUser));
+				currentTeam = res.data.team[0];
+				console.log("team", JSON.stringify(currentTeam));
+			})
 		},
 
 		getSlackInfo: function(){
 			return $http.get('https://slack.com/api/users.identity')
+		},
+
+		getCurrentUser: function(){
+			console.log("current user in factory", JSON.stringify(currentUser))
+			return currentUser
+		},
+
+		getCurrentTeam: function(){
+			console.log("current team in factory", JSON.stringify(currentTeam))
+			return currentTeam
+
 		}
 	}
 })

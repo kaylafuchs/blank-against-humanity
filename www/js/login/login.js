@@ -14,17 +14,9 @@ app.controller('LoginCtrl', function($scope, $state, LoginFactory, UserFactory, 
  			console.log("got to oauth step")
  			return $cordovaOauth.slack(creds.clientID, creds.clientSecret, ['identity.basic', 'identity.team', 'identity.avatar'])
  		})
- 		.then(info => {
- 			return UserFactory.setUser(info)
- 		})
- 		.then(data => {
- 			$scope.userTeam = data;
- 			console.log('data from slack', JSON.stringify(data))
-
- 			// console.log("userTeam", JSON.stringify($scope.userTeam))
+ 		.then(info => UserFactory.setUser(info))
+ 		.then(() => {
  			$state.go('home');
  		})
  	}
 })
-
-//,'channels:read', 'chat:write:bot', 'team:read'

@@ -12,22 +12,11 @@ app.controller('LoginCtrl', function($scope, $state, LoginFactory, UserFactory, 
  		return LoginFactory.getSlackCreds()
  		.then(creds =>{
  			console.log("got to oauth step")
- 			return $cordovaOauth.slack(creds.clientID, creds.clientSecret, ['identity.basic'])
+ 			return $cordovaOauth.slack(creds.clientID, creds.clientSecret, ['identity.basic', 'identity.team', 'identity.avatar'])
  		})
- 		.then(info => {
-
- 			console.log('type of info', typeof info);
- 			// var testObj = JSON.parse(JSON.stringify(info))
- 			// console.log("testobj", testObj)
- 			return UserFactory.setUser(info.user.id)
- 		})
- 		.then(data => {
- 			$scope.userTeam = data;
-
- 			// console.log("userTeam", JSON.stringify($scope.userTeam))
+ 		.then(info => UserFactory.setUser(info))
+ 		.then(() => {
  			$state.go('home');
  		})
  	}
 })
-
-//,'channels:read', 'chat:write:bot', 'team:read'
