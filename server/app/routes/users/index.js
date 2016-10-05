@@ -1,7 +1,8 @@
 'use strict';
 const router = require('express').Router(); // eslint-disable-line new-cap
 const db = require('../../../db/');
-const User = db.model('user')
+const User = db.model('user');
+const Team = db.model('team');
 module.exports = router;
 
 
@@ -33,7 +34,10 @@ router.get('/', (req, res, next) => {
 
 
 router.post('/', (req, res, next) => {
-    return User.create(req.body)
-    .then(createdUser => res.send(createdUser))
+    return Promise.all([
+        User.findOrCreate({where: {slack_id: req.body.user.id}, defaults: {name: req.body.user.name, avatar: req.body.user.image_32}}), 
+        Team.findOrCreate({where: {slack_id: req.body.team.id}, defaults: {name: req.body.team.name}})
+    ])
+    .then(result => res.send(result))
     .catch(next);
 })

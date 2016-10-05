@@ -5,9 +5,6 @@ var app = express();
 
 module.exports = function (db) {
 
-    // Pass our express application pipeline into the configuration
-    // function located at server/app/configure/index.js
-
     app.use(function(req, res, next){
         res.header('Access-Control-Allow-Origin', 'http://192.168.4.225:8100');
         res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE');
@@ -15,12 +12,6 @@ module.exports = function (db) {
         next();
     })
 
-    // app.use(function(req, res, next){
-    //     res.header('Access-Control-Allow-Origin', 'http://localhost:8100');
-    //     res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE');
-    //     res.header('Access-Control-Allow-Headers', 'Content-Type');
-    //     next();
-    // })
     require('./configure')(app, db);
     
 
