@@ -6,7 +6,7 @@ app.config(function($stateProvider){
 	})
 })
 
-app.controller('HomeCtrl', function($scope, $state, $cordovaOauth, UserFactory, GameFactory $localStorage){
+app.controller('HomeCtrl', function($scope, $state, $cordovaOauth, UserFactory, GameFactory, $localStorage){
 	$scope.storage = $localStorage
 	
 	GameFactory.getGamesByUserId(2)
