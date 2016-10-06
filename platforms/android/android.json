@@ -20,6 +20,9 @@
     "installed_plugins": {
         "cordova-plugin-inappbrowser": {
             "PACKAGE_NAME": "com.ionicframework.blankagainsthumanity351522"
+        },
+        "cordova-plugin-console": {
+            "PACKAGE_NAME": "com.ionicframework.blankagainsthumanity351522"
         }
     },
     "dependent_plugins": {},
@@ -35,6 +38,7 @@
         }
     ],
     "plugin_metadata": {
-        "cordova-plugin-inappbrowser": "1.5.1-dev"
+        "cordova-plugin-inappbrowser": "1.5.1-dev",
+        "cordova-plugin-console": "1.0.5-dev"
     }
 }
