@@ -137,9 +137,9 @@ router.post('/', (req, res, next) => {
     return Game.create({
             name: req.body.name
                 // decks:
-
         })
         .then(createdGame => {
+
             const gameRef = firebase.database().ref(`teams/${req.body.teamId}/games/${createdGame.id}`)
             gameId = createdGame.id;
             return gameRef.set({
@@ -152,7 +152,7 @@ router.post('/', (req, res, next) => {
                     })
                 })
                 .then(() => {
-                    //console.log('createdGame', game)
+                    console.log('createdGame')
                     res.send(gameId + '')
                 })
         })

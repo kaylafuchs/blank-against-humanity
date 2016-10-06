@@ -2,11 +2,11 @@ app.config(($stateProvider) => {
     $stateProvider
 
         .state('game', {
-            url: '/game/:teamId', ///:teamId /game/:teamId
+            url: '/games/:teamId', ///:teamId /game/:teamId
             templateUrl: 'js/game/game.html',
             //abstract: true,
             controller: 'GameCtrl',
-            // resolve: { //this could still get the team games even without stateparams by using /session
+            // resolve: { //this could still get the team games even without statepara ms by using /session
             //     teamGames: (GameFactory, $stateParams) => GameFactory.getGamesByTeamId($stateParams.teamId)
             // }
 
@@ -43,13 +43,14 @@ app.controller('GameCtrl', ($scope, GameFactory) => {
     $scope.startNewGame = GameFactory.startNewGame;
     $scope.addDecksToGame = GameFactory.addDecks
     $scope.$on('changedGame', (event, data) => {
-            console.log('received event')
-            console.log('data obj:', data)
-            $scope.game = data;
-            $scope.$digest()
+        console.log('received event')
+        console.log('data obj:', data)
+        $scope.game = data;
+        $scope.$digest()
 
-        })
-        //$scope.games = teamGames;
+    })
+
+    //$scope.games = teamGames;
 
     //console.log('teamgames ', teamGames)
 })
