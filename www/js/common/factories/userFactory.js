@@ -1,4 +1,4 @@
-app.factory('UserFactory', function($http, $localStorage){
+app.factory('UserFactory', function($http, $localStorage, $timeout, $state){
 	var currentUser, currentTeam; 
 
 	return {
@@ -27,6 +27,11 @@ app.factory('UserFactory', function($http, $localStorage){
 		setLocalStorage: function(){
 			$localStorage.user = currentUser;
 			$localStorage.team = currentTeam;
+		},
+
+		logOut: function(){
+			currentTeam = currentUser = null;
+			$localStorage.$reset();
 		},
 
 		getCurrentUser: function(){

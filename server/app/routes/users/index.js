@@ -20,7 +20,7 @@ router.post('/', (req, res, next) => {
     .then(returnedTeam => {
         return User.findOrCreate({
             where: {slack_id: req.body.user.id}, 
-            defaults: {name: req.body.user.name, avatar: req.body.user.image_32, teamId: returnedTeam[0].dataValues.id}
+            defaults: {name: req.body.user.name, avatar: req.body.user.image_72, teamId: returnedTeam[0].dataValues.id}
         })
         .then(returnedUser => {
             res.json({user: returnedUser, team: returnedTeam})

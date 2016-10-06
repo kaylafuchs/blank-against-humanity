@@ -6,7 +6,7 @@ app.config(function($stateProvider){
 	})
 })
 
-app.controller('LoginCtrl', function($scope, $state, LoginFactory, UserFactory, $cordovaOauth, $localStorage){
+app.controller('LoginCtrl', function($scope, $state, LoginFactory, UserFactory, $cordovaOauth, $localStorage, $timeout){
 	console.log("now in login state")
  	$scope.loginWithSlack = function(){
  		console.log("im being called")
@@ -17,13 +17,12 @@ app.controller('LoginCtrl', function($scope, $state, LoginFactory, UserFactory, 
  		})
  		.then(info => UserFactory.setUser(info))
  		.then(() => {
- 			$state.go('home');
+ 			$scope.user = UserFactory.getCurrentUser() || $localStorage.user
+ 			$scope.team = UserFactory.getCurrentTeam() || $localStorage.team
+ 			$state.go('home')
  		})
  	}
 
- 	$scope.user = $localStorage.user || UserFactory.getCurrentUser();
- 	$scope.team = $localStorage.team || UserFactory.getCurrentTeam();
-
- 	console.log("user in login js", $scope.user);
- 	console.log("team in login js", $scope.team);
+ 	console.log("user in login js", JSON.stringify($scope.user));
+ 	console.log("team in login js", JSON.stringify($scope.team));
 })

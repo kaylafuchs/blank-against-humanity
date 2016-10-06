@@ -29,6 +29,10 @@ app.factory('UserFactory', function($http, $localStorage){
 			$localStorage.team = currentTeam;
 		},
 
+		logOut: function(){
+			$localStorage.team = $localStorage.user =  currentTeam = currentUser = null;
+		},
+
 		getCurrentUser: function(){
 			console.log("current user in factory", JSON.stringify(currentUser))
 			return currentUser
