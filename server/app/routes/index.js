@@ -12,6 +12,8 @@ router.use('/decks', require('./decks'));
 
 router.use('/slack', require('./slack'));
 
+router.use('/users', require('./users'));
+
 // Make sure this is after all of
 // the registered routes!
 router.use(function(req, res) {

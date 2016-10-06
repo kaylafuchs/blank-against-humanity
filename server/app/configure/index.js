@@ -10,6 +10,7 @@ module.exports = function (app, db) {
         return app.get(path);
     };
 
+
     require('./app-variables')(app);
     require('./static-middleware')(app);
     require('./parsing-middleware')(app);
