@@ -104,16 +104,14 @@ app.factory('GameFactory', ($http, $rootScope, $localStorage) => {
         };
 
 
-        GameFactory.getGamesByUserId = (userId) => {
-                return $http.get(`http://localhost:1337/api/games/?userId=${userId}`)
-                    .then(res => res.data)
-            }
-            // .then(createdGame =>
-            //     //addwatcher to game id in firebase)
-            //     return createdGame
-            // };
 
-
+        GameFactory.getGameByGameId = (gameId) => {
+            const teamId = $localStorage.team.id
+            const gamesRef = firebase.database().ref(`teams/${teamId}/games/${gameId}`)
+            return gamesRef.once('value').then(snapshot => {
+                return snapshot.val();
+            })
+        }
 
         GameFactory.getGamesByTeamId = (teamId) => {
             console.log('the team is id', teamId)
