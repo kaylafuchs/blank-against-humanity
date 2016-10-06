@@ -1,7 +1,7 @@
 const chalk = require('chalk');
 const db = require('./db');
 const User = db.model('user');
-const Card = db.model('card')
+const Card = db.model('card');
 const Promise = require('sequelize').Promise;
 const getBlackCardData = require('./getBlackCards');
 const getWhiteCardData = require('./getWhiteCards');
@@ -41,6 +41,7 @@ const seedWhiteCards = () => {
             return Card.create(cardObj);
         })))
 };
+
 
 db.sync({
         force: true
