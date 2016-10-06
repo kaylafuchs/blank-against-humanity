@@ -88,7 +88,7 @@ app.factory('GameFactory', ($http, $rootScope) => {
         console.log('the team is id', teamId)
 
         const gamesRef = firebase.database().ref(`teams/${teamId}/games`)
-        return gamesRef.once('value').then(snapshot => {
+        return gamesRef.once('value').then(snapshot => { //might break after you do it once
                 console.log('the val is', snapshot.val())
                 return snapshot.val();
             })

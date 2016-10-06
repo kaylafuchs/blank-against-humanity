@@ -7,10 +7,12 @@
 
 		games::{{games}}
 		<h1> Name: {{game.name}} </h1>
-		<h2> Players </h1>
+		<h2> Players </h2>
 		<ul>
-			<li ng-repeat="(key, value) in game.players"> {{key}}</li>
+			<li ng-repeat="(key, value) in game.players"> {{key}}, val: {{value}}</li>
 
 			<hr>
 			<li ng-repeat="(key, value) in games"> {{key}}, val: {{value}}</li>
+		</ul>
+	</ion-content>
 </ion-view>
