@@ -101,7 +101,7 @@ router.post('/firebase/:id', (req, res, next) => {
 
 router.post('/:id/decks', (req, res, next) => {
     // decksArr = req.body.deck.makearr()
-    const addingDecks = decksArr.map(deck => Game.addDeck(deckId))
+    const addingDecks = req.body.decks.map(deck => Game.addDeck(deckId));
     return Promise.all(addingDecks)
         .then(createdDecks => {
             const gettingCards = createdDecks.map(deck => deck.getCards())
@@ -109,20 +109,22 @@ router.post('/:id/decks', (req, res, next) => {
             return Promise.all(gettingCards)
         })
         .then((cardsArr) => {
+
             const flatcards = _.flattenDeep(cardsArr)
-            flatcards.forEach(card => {
+            const addingCardsToFb = flatcards.map(card => {
                 if (card.type === 'white') {
                     let whiteCardRef = firebase.database().ref(`teams/${requestedGame.teamId}/games/${requestedGame.id}/pile/whitecard`)
-                    whiteCardRef.set({
+                    return whiteCardRef.set({
                         [`${card.id}`]: card
                     })
                 } else {
                     let blackCardRef = firebase.database().ref(`teams/${requestedGame.teamId}/games/${requestedGame.id}/pile/blackcard`)
-                    blackCardRef.set({
+                    return blackCardRef.set({
                         [`${card.id}`]: card
                     })
                 }
             })
+            return Promise.all(addingCardsToFB);
         })
 
 })
@@ -133,8 +135,8 @@ router.post('/:id/decks', (req, res, next) => {
 router.post('/', (req, res, next) => {
     var gameId;
     return Game.create({
-            name: req.body.name,
-            // decks:
+            name: req.body.name
+                // decks:
 
         })
         .then(createdGame => {

@@ -1,4 +1,4 @@
-app.factory('GameFactory', ($http, $rootScope, $localStorage) => {
+app.factory('GameFactory', ($http, $rootScope) => {
     const GameFactory = {};
 
     const initializeFirebase = () => {
@@ -45,13 +45,13 @@ app.factory('GameFactory', ($http, $rootScope, $localStorage) => {
 
     }
 
-    GameFactory.addDeckToGame = (gameId, decks) => {
+    GameFactory.addDecksToGame = (gameId, decks) => {
         return $http.post(`api/games/${gameId}/decks`, decks)
 
-            // const gameRef = firebase.database().ref(`teams/${teamId}/games/${gameId}/pile/`)
-            // gameRef.set({
-            //     deckId: true
-            // })
+        // const gameRef = firebase.database().ref(`teams/${teamId}/games/${gameId}/pile/`)
+        // gameRef.set({
+        //     deckId: true
+        // })
     }
 
     GameFactory.joinGameById = (gameId) => {

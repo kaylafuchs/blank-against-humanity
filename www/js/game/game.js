@@ -9,6 +9,8 @@ app.config(($stateProvider) => {
             resolve: { //this could still get the team games even without stateparams by using /session
                 teamGames: (GameFactory, $stateParams) => GameFactory.getGamesByTeamId($stateParams.teamId)
             }
+
+
         })
         // .state('game.gameview', {
         //     url: '', // '' means this state becomes active when the parent state is navigated tp
@@ -27,6 +29,7 @@ app.config(($stateProvider) => {
         //         teamGames: (GameFactory, $stateParams) => GameFactory.getGamesByTeamId($stateParams.teamId) 
         //     }
         // })
+        //.state('game.pickDecks')
 
 
 })
@@ -34,6 +37,7 @@ app.config(($stateProvider) => {
 app.controller('GameCtrl', ($scope, GameFactory, teamGames) => {
     console.log('running gamecrl')
     $scope.startNewGame = GameFactory.startNewGame;
+    $scope.addDecksToGame = GameFactory.addDecks
     $scope.$on('changedGame', (event, data) => {
         console.log('received event')
         console.log('data obj:', data)
@@ -43,5 +47,5 @@ app.controller('GameCtrl', ($scope, GameFactory, teamGames) => {
     })
     $scope.games = teamGames;
 
-    console.log('teamgames ', teamGames)
+    //console.log('teamgames ', teamGames)
 })

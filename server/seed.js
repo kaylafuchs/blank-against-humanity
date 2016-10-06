@@ -25,7 +25,7 @@ const seedUsers = function() {
 const seedBlackCards = () => {
     return getBlackCardData
         .then(cards => Promise.all(cards.map(card => {
-            card.deck = 'Base Set';
+            card.deck = 1;
             card.type = 'black'
             return Card.create(card)
         })));
@@ -36,7 +36,7 @@ const seedWhiteCards = () => {
     return getWhiteCardData
         .then(cards => Promise.all(cards.map(card => {
             cardObj.text = card;
-            cardObj.deck = 'Base Set'
+            cardObj.deck = 1;
             cardObj.type = 'white';
             return Card.create(cardObj);
         })))
