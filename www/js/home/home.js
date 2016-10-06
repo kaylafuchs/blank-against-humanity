@@ -8,7 +8,7 @@ app.config(function($stateProvider){
 
 app.controller('HomeCtrl', function($scope, $state, $cordovaOauth, GameFactory){
 	
-	GameFactory.getGamesByUserId(2)
+	GameFactory.getGamesByUserId(userId)
 		.then(userGames => { $scope.userGames = userGames })
 
 	$scope.greeting = "hello";

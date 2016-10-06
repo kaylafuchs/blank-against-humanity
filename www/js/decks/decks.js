@@ -10,7 +10,9 @@ app.config(($stateProvider) => {
 
 })
 
-app.controller('DeckCtrl', ($scope) => {
+app.controller('DeckCtrl', ($scope, decks) => {
+
+	$scope.decks = decks;
 
 
 	
