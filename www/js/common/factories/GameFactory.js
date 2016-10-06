@@ -63,6 +63,9 @@ app.factory('GameFactory', ($http, $rootScope) => {
     //vs getCardsByTeamId
     GameFactory.getDecksByTeamId = (teamId) => {
 
+        return $http.get(`http://localhost:1337/api/decks/${teamId}`)
+            .the(res => res.data)
+
     };
 
     GameFactory.getCardsByCreator = (userId) => {
@@ -76,6 +79,7 @@ app.factory('GameFactory', ($http, $rootScope) => {
 
     GameFactory.getGamesByUserId = (userId) => {
             return $http.get(`http://localhost:1337/api/games/?userId=${userId}`)
+                .then(res => res.data)
         }
         // .then(createdGame =>
         //     //addwatcher to game id in firebase)
@@ -96,7 +100,6 @@ app.factory('GameFactory', ($http, $rootScope) => {
             //     .then(res => res.data)
             //.then(foundGames => )
     };
-
 
 
     //get all games by team route

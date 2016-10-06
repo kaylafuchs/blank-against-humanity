@@ -8,6 +8,8 @@ router.use('/cards', require('./cards'));
 
 router.use('/games', require('./games'));
 
+router.use('/decks', require('./decks'));
+
 router.use('/slack', require('./slack'));
 
 // Make sure this is after all of
