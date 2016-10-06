@@ -4,6 +4,7 @@ const db = require('../../../db/');
 const Game = db.model('game');
 const User = db.model('user');
 const firebase = require('firebase')
+const _ = require('lodash');
 module.exports = router;
 
 router.param('id', (req, res, next, id) => {
@@ -14,6 +15,11 @@ router.param('id', (req, res, next, id) => {
             next();
         })
         .catch(next);
+})
+
+router.get('/:id/decks', (req, res, next) => {
+    return req.requestedGame.getDecks()
+        .then(foundDecks => res.send(foundDecks))
 })
 
 router.get('/:id/users', (req, res, next) => {
@@ -92,6 +98,35 @@ router.post('/firebase/:id', (req, res, next) => {
     }
 })
 
+
+router.post('/:id/decks', (req, res, next) => {
+    // decksArr = req.body.deck.makearr()
+    const addingDecks = decksArr.map(deck => Game.addDeck(deckId))
+    return Promise.all(addingDecks)
+        .then(createdDecks => {
+            const gettingCards = createdDecks.map(deck => deck.getCards())
+
+            return Promise.all(gettingCards)
+        })
+        .then((cardsArr) => {
+            const flatcards = _.flattenDeep(cardsArr)
+            flatcards.forEach(card => {
+                if (card.type === 'white') {
+                    let whiteCardRef = firebase.database().ref(`teams/${requestedGame.teamId}/games/${requestedGame.id}/pile/whitecard`)
+                    whiteCardRef.set({
+                        [`${card.id}`]: card
+                    })
+                } else {
+                    let blackCardRef = firebase.database().ref(`teams/${requestedGame.teamId}/games/${requestedGame.id}/pile/blackcard`)
+                    blackCardRef.set({
+                        [`${card.id}`]: card
+                    })
+                }
+            })
+        })
+
+})
+
 //create game in postgres then in firebase
 // api/teams/2/games/
 
@@ -99,6 +134,8 @@ router.post('/', (req, res, next) => {
     var gameId;
     return Game.create({
             name: req.body.name,
+            // decks:
+
         })
         .then(createdGame => {
             const gameRef = firebase.database().ref(`teams/${req.body.teamId}/games/${createdGame.id}`)

@@ -1,4 +1,4 @@
-app.factory('GameFactory', ($http, $rootScope) => {
+app.factory('GameFactory', ($http, $rootScope, $localStorage) => {
     const GameFactory = {};
 
     const initializeFirebase = () => {
@@ -18,8 +18,9 @@ app.factory('GameFactory', ($http, $rootScope) => {
 
     };
 
-    GameFactory.startNewGame = (gameName, teamName) => {
+    GameFactory.startNewGame = (gameName, teamId) => {
         //return $http.get('/session').then(userId => {
+        //can also get all the decks by team here to prepare
         return $http.post('http://localhost:1337/api/games', {
                 name: gameName || 'Boring Name',
                 teamId: teamId || 2,
@@ -37,16 +38,40 @@ app.factory('GameFactory', ($http, $rootScope) => {
             //set up watcher
     };
 
+    //see all decks for the team
+
+
+    GameFactory.addCardToGame = (gameId) => {
+
+    }
+
+    GameFactory.addDeckToGame = (gameId, decks) => {
+        return $http.post(`api/games/${gameId}/decks`, decks)
+
+            // const gameRef = firebase.database().ref(`teams/${teamId}/games/${gameId}/pile/`)
+            // gameRef.set({
+            //     deckId: true
+            // })
+    }
 
     GameFactory.joinGameById = (gameId) => {
-        console.log('joining game')
-            //var playersTeam = 
-        var gameId = 8;
-        var playerId = 2; //eventually make it get current 
-        return $http.post(`http://localhost:1337/api/games/${gameId}?playerId=${playerId}`, {
+            //teamid
+            //playerid
+            //name
+            const gameRef = firebase.database().ref(`teams/${teamId}/games/${gameId}/players/${playerId}`)
+            gameRef.set({
+                name: $localStorage.name
+            })
+        }
+        // GameFactory.joinGameById = (gameId) => {
+        //     console.log('joining game')
+        //         //var playersTeam = 
+        //     var gameId = 8;
+        //     var playerId = 2; //eventually make it get current 
+        //     return $http.post(`http://localhost:1337/api/games/${gameId}?playerId=${playerId}`, {
 
-        })
-    }
+    //     })
+    // }
 
     //
     GameFactory.createGameByIdFireBase = (firebasegameId) => {
