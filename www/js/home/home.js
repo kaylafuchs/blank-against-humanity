@@ -7,12 +7,5 @@ app.config(function($stateProvider){
 })
 
 app.controller('HomeCtrl', function($scope, $state, $cordovaOauth, UserFactory, $localStorage){
-	$scope.user = UserFactory.getCurrentUser() || $localStorage.user
-	$scope.team = UserFactory.getCurrentTeam() || $localStorage.team
-	// $localStorage.user = $scope.user
-	// $localStorage.team = $scope.team
-	// console.log("local storage", JSON.stringify($localStorage))
-	console.log("user in home controller", JSON.stringify($scope.user))
-	console.log("team in home controller", JSON.stringify($scope.team))
-	console.log("local storage", JSON.stringify($localStorage));
+	$scope.storage = $localStorage
 })
