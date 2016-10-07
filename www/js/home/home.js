@@ -20,8 +20,9 @@ app.controller('HomeCtrl', function($scope, $state, $cordovaOauth, UserFactory, 
 
     })
 
-    GameFactory.getGamesByUserId(2)
-        .then(userGames => { $scope.userGames = userGames });
+    // GameFactory.getGamesByUserId(2)
+    //     .then(userGames => { $scope.userGames = userGames });
+
 
 
 

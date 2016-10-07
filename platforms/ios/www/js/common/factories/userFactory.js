@@ -1,6 +1,5 @@
 app.factory('UserFactory', function($http, $localStorage, $timeout, $state){
-	var currentUser, currentTeam; 
-
+	
 	return {
 		setUser: function(info){
 			return $http({
@@ -12,7 +11,7 @@ app.factory('UserFactory', function($http, $localStorage, $timeout, $state){
 				data: info
 			})
 			.then(res => {
-				this.setLocalStorage(res.data.user[0], res.data.user[0]);
+				this.setLocalStorage(res.data.user[0], res.data.team[0]);
 			})
 		},
 
