@@ -27,13 +27,17 @@ $black: #000;
 
 .card-game
 {
-	background: $white;
+	background: #f1f1f1;
+	//background: $white;
 	font-family: "Helvetica Neue", sans-serif;
+	font-weight: 500;
 	height: 100vh;
 	//position: relative;
 	line-height: 1.25rem;
 	display: flex;
 	flex-direction: column;
+	// background-image: url('http://www.fr.rockpanel.be/files/RP%20Files/Images/Products/Rockpanel%20Woods/Large/Rockpanel_Woods_Beech2.jpg');
+	// background-size: cover;
 	//margin: 0 0.5rem 3rem 0.5rem;
 }
 
@@ -47,30 +51,29 @@ $black: #000;
 {
 	counter-reset: rotation;
 	display: flex;
-	width: 70%;
+	width: 63%;
 	justify-content: space-around;
 	// position: absolute;
 	// bottom: 1rem;
-	margin: 2rem auto;
+	margin: 1rem auto 4rem auto;
 }
 
-.current-black-card {
-	margin: 5rem auto;
-}
 
 .card
 {
 	counter-increment: rotation;
 	height: 17rem;
 	width: 12.021rem;
-	margin-left: -4.24rem;
-	margin-right: -4.24rem;
+	//min-width: 192px;
+	margin-left: -4.21rem;
+	margin-right: -4.21rem;
 	transform-origin: bottom left;
 	transition: transform 0.4s ease, margin 0.4s ease;
 	border-radius: 9px;
 	border: 1px solid $black;
 	display: flex;
 	flex-direction: column;
+	//box-shadow: -1px 1px 4px -1px rgba(0,0,0,0.75);
 
 	
 	&:hover
@@ -92,6 +95,17 @@ $black: #000;
 	}
 }
 
+.current-black-card {
+	margin: 5rem auto;
+	height: 18rem;
+	width: 12.73rem;
+	box-shadow: -1px 2px 7px -1px rgba(0,0,0,0.75);
+
+	&:hover {
+		transform: none;
+	}
+}
+
 .white {
 	color: $black;
 	background: $white;
@@ -102,31 +116,31 @@ $black: #000;
 	background: $black;
 }
 
-.one {
-	transform: rotate(-8deg) translateY(1rem);
-}
+// .one {
+// 	transform: rotate(-8deg) translateY(1.3rem);
+// }
 
-.two {
-	transform: rotate(-4deg) translateY(0.2rem);
-}
+// .two {
+// 	transform: rotate(-5deg) translateY(0.7rem);
+// }
 
-.three {
-	transform: rotate(-3deg);
-}
+// .three {
+// 	transform: rotate(-3deg) translateY(0.2rem);
+// }
 
-.four {
-	transform: rotate(0);
-}
+// .four {
+// 	transform: rotate(0);
+// }
 
-.five {
-	transform: rotate(2deg);
-}
+// .five {
+// 	transform: rotate(2deg);
+// }
 
-.six {
-	transform: rotate(4deg);
-}
+// .six {
+// 	transform: rotate(4deg);
+// }
 
-.seven {
-	transform: rotate(8deg);
-	// margin-right: 0;
-}
+// .seven {
+// 	transform: rotate(8deg) translateY(-0.1rem);
+// 	// margin-right: 0;
+// }
