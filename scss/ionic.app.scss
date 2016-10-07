@@ -38,7 +38,9 @@ $black: #000;
 }
 
 .other-content {
+	display: flex;
 	flex-grow: 1;
+	justify-content: center;
 }
 
 .hand
@@ -52,12 +54,17 @@ $black: #000;
 	margin: 2rem auto;
 }
 
+.current-black-card {
+	margin: 5rem auto;
+}
+
 .card
 {
 	counter-increment: rotation;
 	height: 17rem;
 	width: 12.021rem;
-	margin-left: -8.48rem;
+	margin-left: -4.24rem;
+	margin-right: -4.24rem;
 	transform-origin: bottom left;
 	transition: transform 0.4s ease, margin 0.4s ease;
 	border-radius: 9px;
@@ -96,15 +103,15 @@ $black: #000;
 }
 
 .one {
-	transform: rotate(-8deg);
+	transform: rotate(-8deg) translateY(1rem);
 }
 
 .two {
-	transform: rotate(-4deg);
+	transform: rotate(-4deg) translateY(0.2rem);
 }
 
 .three {
-	transform: rotate(-2deg);
+	transform: rotate(-3deg);
 }
 
 .four {
@@ -121,4 +128,5 @@ $black: #000;
 
 .seven {
 	transform: rotate(8deg);
+	// margin-right: 0;
 }
