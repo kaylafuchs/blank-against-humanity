@@ -7,11 +7,10 @@ const firebase = require('firebase')
 module.exports = router;
 
 router.get('/:teamId', (req, res, next) => {
+    return Deck.findAll({
+            where: { teamId: req.params.teamId }
+        })
+        .then(decks => res.send(decks))
+        .catch(next);
+});
 
-	Deck.findAll({
-		where : {teamId: req.params.teamId}
-	})
-	.then(decks => res.send(decks)) 
-	.catch(next);
-
-})

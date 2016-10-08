@@ -10,7 +10,10 @@ app.controller('HomeCtrl', function($scope, $state, $cordovaOauth, UserFactory, 
     $scope.storage = $localStorage;
 
 
-    $scope.startNewGame = GameFactory.startNewGame;
+    //$scope.startNewGame = GameFactory.startNewGame;
+    $scope.createNewGame = () => {
+        $state.go('new-game')
+    }
 
     $scope.$on('changedGame', (event, data) => {
         console.log('received event in home')
