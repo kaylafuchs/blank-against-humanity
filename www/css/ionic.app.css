@@ -9906,7 +9906,7 @@ a.button {
 
 .cards {
   display: flex;
-  margin: 30px auto;
+  margin: 1.75rem auto;
   flex-direction: row;
   justify-content: center; }
 

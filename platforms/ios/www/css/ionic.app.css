@@ -9874,3 +9874,45 @@ a.button {
 .black {
   color: #FFF;
   background: #000; }
+
+.slack-btn {
+  width: 250px;
+  margin-top: 10px; }
+
+.login-page {
+  background-color: #000;
+  padding: 0 20px; }
+
+.login-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 70vh;
+  padding-top: 12rem; }
+
+.login-card {
+  margin: 0 auto;
+  border: 1px solid #FFF;
+  pointer-events: none; }
+
+.left {
+  margin-right: -15rem;
+  transform: rotate(-5deg) translateY(1rem); }
+
+.right {
+  margin-left: -15rem;
+  transform: rotate(5deg); }
+
+.cards {
+  display: flex;
+  margin: 1.75rem auto;
+  flex-direction: row;
+  justify-content: center; }
+
+.login {
+  color: #FFF;
+  text-align: center; }
+
+.login-titles {
+  flex-grow: 1; }

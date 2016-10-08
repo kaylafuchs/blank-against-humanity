@@ -6,7 +6,6 @@ app.config(function($stateProvider, $urlRouterProvider){
 	})
 
 	$urlRouterProvider.otherwise('/login');
-
 })
 
 app.controller('LoginCtrl', function($scope, $state, LoginFactory, UserFactory, $cordovaOauth, $localStorage, $timeout, $ionicSideMenuDelegate){

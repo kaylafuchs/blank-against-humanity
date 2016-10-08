@@ -1,9 +1,16 @@
-app.config(function($stateProvider){
+app.config(function($stateProvider, $urlRouterProvider){
 	$stateProvider.state('home', {
 		url: '/home',
 		templateUrl: 'js/home/home.html',
 		controller: 'HomeCtrl',
+		// onEnter: function($state, $localStorage){
+		// 	if (!localStorage.user){
+		// 		$state.go('login');
+		// 	}
+		// }
 	})
+
+	// $urlRouterProvider.otherwise('/');
 })
 
 app.controller('HomeCtrl', function($scope, $state, $cordovaOauth, UserFactory, GameFactory, $localStorage){

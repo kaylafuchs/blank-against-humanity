@@ -1,12 +1,15 @@
-app.config(function($stateProvider){
+app.config(function($stateProvider, $urlRouterProvider){
 	$stateProvider.state('login', {
 		url: '/login',
 		templateUrl: 'js/login/login.html',
 		controller: 'LoginCtrl'
 	})
+
+	$urlRouterProvider.otherwise('/login');
+
 })
 
-app.controller('LoginCtrl', function($scope, $state, LoginFactory, UserFactory, $cordovaOauth, $localStorage, $timeout){
+app.controller('LoginCtrl', function($scope, $state, LoginFactory, UserFactory, $cordovaOauth, $localStorage, $timeout, $ionicSideMenuDelegate){
  	$scope.loginWithSlack = function(){
  		return LoginFactory.getSlackCreds()
  		.then(creds =>{
@@ -15,6 +18,10 @@ app.controller('LoginCtrl', function($scope, $state, LoginFactory, UserFactory, 
  		.then(info => UserFactory.setUser(info))
  		.then(() => $state.go('home'))
  	}
+
+ 	$ionicSideMenuDelegate.canDragContent(false);
+
+ 	$scope.$on('$ionicView.leave', function () { $ionicSideMenuDelegate.canDragContent(true) });
 
  	$scope.storage = $localStorage
 })
