@@ -135,7 +135,7 @@ $black: #000;
 	justify-content: center;
 	align-items: center;
 	height: 70vh;
-	padding-top: 150px;
+	padding-top: 12rem;
 }
 
 .login-card {
@@ -149,11 +149,7 @@ $black: #000;
 	border: 1px solid $white;
 	// display: flex;
 	// flex-direction: column;
-
-
-	&:hover {
-		transform: none;
-	}
+	pointer-events: none;
 
 
 }
@@ -163,9 +159,10 @@ $black: #000;
 	margin-right: -15rem;
 	transform: rotate(-5deg) translateY(1rem);
 
-	&:hover {
-		transform: rotate(-5deg) translateY(1rem);
-	}
+	// &:hover {
+	// 	transform: rotate(-5deg) translateY(1rem);
+	// 	z-index: 999;
+	// }
 }
 
 .center {
@@ -176,16 +173,17 @@ $black: #000;
 	margin-left: -15rem;
 	// margin-right: -10rem;
 	transform: rotate(5deg);
-	z-index: 999;
+	//z-index: 999;
 
-	&:hover {
-		transform: rotate(5deg);
-	}
+	// &:hover {
+	// 	transform: rotate(5deg);
+	// 	z-index: 999;
+	// }
 }
 
 .cards {
 	display: flex;
-	margin: 20px auto;
+	margin: 30px auto;
 	flex-direction: row;
 	justify-content: center;
 }
