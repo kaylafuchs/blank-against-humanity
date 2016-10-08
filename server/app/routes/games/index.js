@@ -135,26 +135,29 @@ router.post('/:id/decks', (req, res, next) => {
 router.post('/', (req, res, next) => {
     var gameId;
     return Game.create({
-            name: req.body.name
-                // decks:
+            name: req.body.name,
+            teamId: req.body.teamId
         })
         .then(createdGame => {
+            // res.send(createdGame)
 
             const gameRef = firebase.database().ref(`teams/${req.body.teamId}/games/${createdGame.id}`)
             gameId = createdGame.id;
             return gameRef.set({
-                    name: req.body.name
+                    name: req.body.name,
+                    teamId: req.body.teamId
                 })
                 .then(() => {
                     const firstPlayerRef = firebase.database().ref(`teams/${req.body.teamId}/games/${createdGame.id}/players/${req.body.creatorId}`)
                     return firstPlayerRef.set({
-                        name: 'Dan' //should be player name
+                        name: req.body.creatorName //should be player name
                     })
                 })
                 .then(() => {
-                    console.log('createdGame')
+                    console.log('createdGame', gameId + '')
                     res.send(gameId + '')
                 })
+
         })
         .catch(next)
 });

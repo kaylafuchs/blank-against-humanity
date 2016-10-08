@@ -13,26 +13,25 @@ app.factory('GameFactory', ($http, $rootScope, $localStorage) => {
         };
         initializeFirebase();
 
-        GameFactory.startNewGame = (gameName, teamId) => {
-            //return $http.get('/session').then(userId => {
+        GameFactory.startNewGame = (gameName) => {
             //can also get all the decks by team here to prepare
-            return $http.post('http://localhost:1337/api/games', {
+            const teamId = $localStorage.team.id;
+            const creatorId = $localStorage.user.id;
+            return $http.post('http://192.168.4.236:1337/api/games', {
                     name: gameName || 'Boring Name',
                     teamId: teamId || 2,
-
-                    creatorId: 2
+                    creatorId: creatorId || 3,
+                    creatorName: $localStorage.user.name || 'dan' //might be unnecessary if we have the user id
                 })
                 .then(res => res.data)
                 .then(gameId => {
-                    console.log('the gameid is:', gameId)
-                        //const reff = firebase.database().ref(`/games/`)
-                    const reff = firebase.database().ref(`/games/${gameId}`)
-                    reff.on('value', snapshot => {
+                    const gameRef = firebase.database().ref(`/teams/${teamId}/games/${gameId}`)
+                    gameRef.on('value', snapshot => {
                         console.log('snapshot is:', snapshot.val())
                         $rootScope.$broadcast('changedGame', snapshot.val())
                     });
                 })
-                //set up watcher
+
         };
 
         //see all decks for the team
