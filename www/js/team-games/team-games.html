@@ -2,9 +2,11 @@
 	<ion-content>
 		<ul>
 			<span ng-repeat="(key,val) in games">
-			<li>{{val.name}}</li>
-			<button ng-click="joinGame(key)">Join Game</button>
+			<li>{{val.name}} <button type="button" class="btn btn-default" ng-click="showPopup()">Join Game</button>
+			</li>
+			
 			</span>
 		</ul>
+		
 	</ion-content>
 </ion-view>

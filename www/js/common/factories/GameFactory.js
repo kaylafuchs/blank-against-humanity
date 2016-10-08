@@ -35,8 +35,6 @@ app.factory('GameFactory', ($http, $rootScope, $localStorage) => {
                 //set up watcher
         };
 
-        //see all decks for the team
-
 
         GameFactory.addCardToGame = (gameId) => {
 
@@ -52,15 +50,18 @@ app.factory('GameFactory', ($http, $rootScope, $localStorage) => {
         }
 
         GameFactory.joinGameById = (gameId) => {
-                const teamId = $localStorage.team.id;
-                const playerId = $localStorage.user.id
-                const playerName = $localStorage.user.name
-
-                const playerRef = firebase.database().ref(`teams/${teamId}/games/${gameId}/players/${playerId}`)
-                playerRef.set({
-                    name: playerName
-                })
-            }
+            const teamId = 'team';
+            const playerId = 2;
+            const playerName = 'poop';
+            const playerRef = firebase.database().ref(`teams/${teamId}/games/${gameId}/players/${playerId}`)
+            playerRef.set({
+                name: playerName
+            })
+            const gameRef = firebase.database().ref(`teams/${teamId}/games/${gameId}`)
+            gameRef.on('value', snapshot => {
+                $rootScope.$broadcast('changedGame', snapshot.val());
+            })
+        }
             
 
         GameFactory.createGameByIdFireBase = (firebasegameId) => {
@@ -74,8 +75,6 @@ app.factory('GameFactory', ($http, $rootScope, $localStorage) => {
 
         // }
 
-
-        //vs getCardsByTeamId
         GameFactory.getDecksByTeamId = (teamId) => {
 
             return $http.get(`http://localhost:1337/api/decks/${teamId}`)
@@ -96,7 +95,7 @@ app.factory('GameFactory', ($http, $rootScope, $localStorage) => {
             return gamesRef.on('value').then(snapshot => {
                 return snapshot.val();
             })
-        }
+        };
 
         GameFactory.getGamesByTeamId = (teamId) => {
             console.log('the team is id', teamId)
