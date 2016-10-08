@@ -101,6 +101,16 @@ app.factory('GameFactory', ($http, $rootScope) => {
             //.then(foundGames => )
     };
 
+    GameFactory.getGameByGameId = (gameId) => {
+        const teamId = $localStorage.team.id
+        const gamesRef = firebase.database().ref(`teams/${teamId}/games/${gameId}`)
+        return gamesRef.once('value').then(snapshot => {
+            return snapshot.val();
+        })
+    }
+
+
+
 
     //get all games by team route
 

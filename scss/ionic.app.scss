@@ -116,6 +116,92 @@ $black: #000;
 	background: $black;
 }
 
+.slack-btn {
+	width: 250px;
+	margin-top: 10px;
+}
+
+.login-page {
+	// width:100vw;
+	// height: 100vh;
+	background-color: $positive;
+	padding: 0 20px;
+	// color: $white;
+}
+
+.login-container {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	height: 70vh;
+	padding-top: 150px;
+}
+
+.login-card {
+
+	margin: 0 auto;
+	// height: 17rem;
+	// width: 12.021rem;
+	// background-color: $black;
+	// color: $white;
+	// border-radius: 9px;
+	border: 1px solid $white;
+	// display: flex;
+	// flex-direction: column;
+
+
+	&:hover {
+		transform: none;
+	}
+
+
+}
+
+.left {
+	//margin-left: -1rem;
+	margin-right: -15rem;
+	transform: rotate(-5deg) translateY(1rem);
+
+	&:hover {
+		transform: rotate(-5deg) translateY(1rem);
+	}
+}
+
+.center {
+	// margin-left: -0.1
+}
+
+.right {
+	margin-left: -15rem;
+	// margin-right: -10rem;
+	transform: rotate(5deg);
+	z-index: 999;
+
+	&:hover {
+		transform: rotate(5deg);
+	}
+}
+
+.cards {
+	display: flex;
+	margin: 20px auto;
+	flex-direction: row;
+	justify-content: center;
+}
+
+.login {
+	color: $white;
+	text-align: center;
+
+	// .game-title {
+	// 	font-size: 100px;
+	// }
+}
+
+.login-titles {
+	flex-grow: 1;
+}
 // .one {
 // 	transform: rotate(-8deg) translateY(1.3rem);
 // }
