@@ -86,6 +86,13 @@ app.factory('GameFactory', ($http, $rootScope, $localStorage) => {
 
         // }
 
+<<<<<<< HEAD
+=======
+        return $http.get(`http://localhost:1337/api/decks/${teamId}`)
+            .the(res => res.data)
+
+    };
+>>>>>>> master
 
         //vs getCardsByTeamId
         GameFactory.getDecksByTeamId = (teamId) => {
@@ -97,7 +104,18 @@ app.factory('GameFactory', ($http, $rootScope, $localStorage) => {
 
         // GameFactory.getCardsByCreator = (userId) => {
 
+<<<<<<< HEAD
         // }
+=======
+    GameFactory.getGamesByUserId = (userId) => {
+            return $http.get(`http://localhost:1337/api/games/?userId=${userId}`)
+                .then(res => res.data)
+        }
+        // .then(createdGame =>
+        //     //addwatcher to game id in firebase)
+        //     return createdGame
+        // };
+>>>>>>> master
 
         GameFactory.getUsersByGameId = (gameId) => {
             return $http.get(`http://localhost:1337/api/games/${gameId}/users`);
@@ -111,6 +129,7 @@ app.factory('GameFactory', ($http, $rootScope, $localStorage) => {
             return gamesRef.once('value').then(snapshot => {
                 return snapshot.val();
             })
+<<<<<<< HEAD
         }
 
         GameFactory.getGamesByTeamId = (teamId) => {
@@ -125,6 +144,15 @@ app.factory('GameFactory', ($http, $rootScope, $localStorage) => {
                 //     .then(res => res.data)
                 //.then(foundGames => )
         };
+=======
+            // return $http.get(`http://localhost:1337/api/games?teamId=${teamId}`)
+            //     .then(res => res.data)
+            //.then(foundGames => )
+    };
+
+
+    //get all games by team route
+>>>>>>> master
 
 
         //get all games by team route
