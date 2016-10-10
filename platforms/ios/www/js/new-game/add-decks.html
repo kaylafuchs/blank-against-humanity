@@ -1,5 +1,10 @@
 <ion-view title="Add Decks">
     <ion-content>
-        <a ui-sref="new-game.main">main</a> deck content ng-repeat over base set bg-repeat over al ldecks all decks here:
+        <a ui-sref="new-game.main">main</a>
+        <hr>
+        <ol>
+            <li ng-repeat="deck in teamDecks">Deck Name: {{deck.name}}</li>
+        </ol>
+        <hr> teamdecks: {{teamDecks}}
     </ion-content>
 </ion-view>

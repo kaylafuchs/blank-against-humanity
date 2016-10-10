@@ -16,12 +16,13 @@ router.get('/:deckId/cards', (req, res, next) => {
             }
         })
         .then(cards => res.send(cards))
-        .catch(next)
+        .catch(next);
 })
 
 router.get('/:deckId', (req, res, next) => {
     return Deck.findById(req.params.deckId)
         .then(decks => res.send(decks))
+        .catch(next);
 });
 
 router.get('/', (req, res, next) => {
@@ -38,6 +39,5 @@ router.get('/', (req, res, next) => {
             .then(decks => res.send(decks))
             .catch(next);
     }
-
 });
 

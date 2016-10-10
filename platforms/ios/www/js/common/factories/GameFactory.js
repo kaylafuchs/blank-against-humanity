@@ -52,14 +52,11 @@ app.factory('GameFactory', ($http, $rootScope, $localStorage) => {
             // })
         }
 
-        GameFactory.joinGameById = (gameId) => {
+        GameFactory.joinGameById = (id) => {
                 const teamId = $localStorage.team.id;
-                const playerId = $localStorage.user.id
-                const playerName = $localStorage.user.name
+                const playerId = $localStorage.user.id;
+                const playerName = $localStorage.user.name;
 
-                //teamid
-                //playerid
-                //name
                 const gameRef = firebase.database().ref(`teams/${teamId}/games/${gameId}/players/${playerId}`)
                 gameRef.set({
                     name: playerName
@@ -70,30 +67,19 @@ app.factory('GameFactory', ($http, $rootScope, $localStorage) => {
             //         //var playersTeam = 
             //     var gameId = 8;
             //     var playerId = 2; //eventually make it get current 
-            //     return $http.post(`http://localhost:1337/api/games/${gameId}?playerId=${playerId}`, {
-
-        //     })
-        // }
-
-        //
-        GameFactory.createGameByIdFireBase = (firebasegameId) => {
-            //return $http.post(`http://localhost:1337/api/firebase/games/${gameId}`)
-            //needs to be .thenable
-            const newRef = firebase.database().ref(`games/${firebasegameId}`).push();
-            newRef.set({
-                playerId: req.query.playerId
-            });
-        }
-
-        // }
-
+            //     return $http.post(`http://localhost:1337/api/games/${gameId}?playerId=${playerId}` }
 
         //vs getCardsByTeamId
-        GameFactory.getDecksByTeamId = () => {
-            const teamId = $localStorage.team.id
-            return $http.get(`http://localhost:1337/api/decks/${teamId}`)
-                .then(res => res.data)
+        GameFactory.getDecksByTeamId = (id) => {
+            const teamId = (typeof id !== 'number') ? $localStorage.team.id : id; // uses localstorage unless id param is provided
+            return $http.get(`http://192.168.4.236:1337/api/decks/?team=${teamId}`)
+                .then(res => {
+                    console.log('res', res.data)
+                    return res.data
+                })
         };
+
+        //GameFactory.getCardsByDeckId 
 
         //GameFactory.getBaseDeck
 

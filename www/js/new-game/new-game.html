@@ -8,8 +8,11 @@
                 <span> Name your Game</span>
                 <input ng-model="gameConfig.name"> </input>
             </div>
-            <div>
+            <div ng-show="teamDecks.length > 1">
                 <span>Choose your Decks</span>
+                <ol>
+                    <li ng-repeat="deck in teamDecks">Deck Name: {{deck.name}}</li>
+                </ol>
                 <button ng-click="goToDecks()"> Add Decks </button>
             </div>
             <div>
