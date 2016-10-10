@@ -25,9 +25,9 @@ app.config(($stateProvider, $urlRouterProvider) => {
         url: '/deck/:deckId',
         templateUrl: 'js/new-game/deck.html',
         controller: 'DeckCtrl',
-        // resolve: {
-        //     cards: (GameFactory, $stateParams) => GameFactory.getCardsByDeckId(0)
-        // },
+        resolve: {
+            cards: (GameFactory, $stateParams) => GameFactory.getCardsByDeckId($stateParams.deckId)
+        },
     })
 
     $urlRouterProvider.otherwise('/new-game/setup-game');
@@ -60,8 +60,8 @@ app.controller('NewGameCtrl', ($scope, GameFactory, $state, teamDecks, standardD
     //console.log('teamgames ', teamGames)
 })
 
-app.controller('DeckCtrl', ($scope, GameFactory, $state) => {
+app.controller('DeckCtrl', ($scope, GameFactory, $state, cards) => {
     console.log('runnign decktrls')
-        //$scope.cards = cards
+    $scope.cards = cards
 })
 

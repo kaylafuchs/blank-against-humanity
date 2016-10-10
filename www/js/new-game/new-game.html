@@ -11,7 +11,10 @@
             <div ng-show="teamDecks.length > 1">
                 <span>Choose your Decks</span>
                 <ol>
-                    <li ng-repeat="deck in teamDecks">Deck Name: {{deck.name}}</li>
+                    <li ng-repeat="deck in teamDecks">
+                        <span>{{deck.name}} <a ui-sref="new-game.deck({deckId: {{deck.id}}})">view deck</a> </span>
+                        <div> </div>
+                    </li>
                 </ol>
                 <button ng-click="goToDecks()"> Add Decks </button>
             </div>
@@ -36,6 +39,6 @@
         <button>Invite Entire Channel</button>
         <button>Invite Specific People</button>
         <hr>
-        <button ng-click="startNewGame(gameConfig)">Start Game</button>
+        <button ng-click="startNewGame(gameConfig)">Begin Game</button>
     </ion-content>
 </ion-view>
