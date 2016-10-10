@@ -26,12 +26,15 @@
     <script src="lib/ng-cordova.min.js"></script>
     <script src="lib/ng-cordova-oauth.min.js"></script>
     <script src="lib/ngStorage.min.js"></script>
+    <script src="lib/ui-bootstrap-tpls.min.js"></script>
 
     <!-- cordova script (this will be a 404 during development) -->
     <script src="cordova.js"></script>
 
     <!-- firebase -->
     <script src="https://www.gstatic.com/firebasejs/3.4.1/firebase.js"></script>
+
+
 
     <!-- your app's js -->
     <script src="public/main.js"></script>
@@ -55,9 +58,6 @@
           <ion-list>
             <ion-item menu-close ui-sref="home">
               Games
-            </ion-item>
-            <ion-item menu-close ui-sref="login">
-              Login
             </ion-item>
             <ion-item menu-close ng-controller="LogoutCtrl" ng-click="logOut()">
               Sign Out

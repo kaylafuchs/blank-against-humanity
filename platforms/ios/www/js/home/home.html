@@ -1,5 +1,6 @@
-<ion-view title="Home">
+<ion-view title="_______ Against Humanity" class="black-bg">
 	<ion-content>
+<<<<<<< HEAD
 		<h1> Welcome, {{storage.user.name}}.</h1>
 		<h2> Your team is: {{storage.team.name}}</h2>
 		<div>
@@ -7,6 +8,23 @@
 		</div>
 		<div>
 			<h1>{{ userGames }}</h1>
+=======
+		<div class="games-container">
+			<div class="titles">
+				<div class="user-info">
+				<span class="user-name">{{storage.user.name}}</span>
+				<span class="user-team">{{storage.team.name}}</span>
+				</div>
+				<button class="button icon-right ion-chevron-right button-block button-assertive" ng-click="startNewGame()">Start new game</button>
+			</div>
+			<div class="games-list">
+				<span>Your games</span>
+				<div ng-repeat="game in games" class="game-listing">
+					<span>{{game.name}}</span>
+					<button class="button button-small button-assertive">View game</button>
+				</div>
+			</div>
+>>>>>>> master
 		</div>
 
 	</ion-content>

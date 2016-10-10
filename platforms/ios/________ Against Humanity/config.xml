@@ -21,6 +21,9 @@
     <feature name="Device">
         <param name="ios-package" value="CDVDevice" />
     </feature>
+    <feature name="InAppBrowser">
+        <param name="ios-package" value="CDVInAppBrowser" />
+    </feature>
     <feature name="SplashScreen">
         <param name="ios-package" value="CDVSplashScreen" />
         <param name="onload" value="true" />
@@ -32,9 +35,6 @@
     <feature name="Keyboard">
         <param name="ios-package" onload="true" value="IonicKeyboard" />
     </feature>
-    <feature name="InAppBrowser">
-        <param name="ios-package" value="CDVInAppBrowser" />
-    </feature>
     <name>________ Against Humanity</name>
     <description>
         A (digital) party game for horrible people and their colleagues.
@@ -45,6 +45,7 @@
     <content src="index.html" />
     <access origin="*" />
     <allow-navigation href="*://192.168.4.225*" />
+    <icon src="resources/android/icon/drawable-xhdpi-icon.png" />
     <icon height="57" src="resources/ios/icon/icon.png" width="57" />
     <icon height="114" src="resources/ios/icon/icon@2x.png" width="114" />
     <icon height="40" src="resources/ios/icon/icon-40.png" width="40" />
@@ -68,10 +69,8 @@
     <splash height="2208" src="resources/ios/splash/Default-736h.png" width="1242" />
     <splash height="1242" src="resources/ios/splash/Default-Landscape-736h.png" width="2208" />
     <splash height="1536" src="resources/ios/splash/Default-Landscape@2x~ipad.png" width="2048" />
-    <splash height="2048" src="resources/ios/splash/Default-Landscape@~ipadpro.png" width="2732" />
     <splash height="768" src="resources/ios/splash/Default-Landscape~ipad.png" width="1024" />
     <splash height="2048" src="resources/ios/splash/Default-Portrait@2x~ipad.png" width="1536" />
-    <splash height="2732" src="resources/ios/splash/Default-Portrait@~ipadpro.png" width="2048" />
     <splash height="1024" src="resources/ios/splash/Default-Portrait~ipad.png" width="768" />
     <splash height="960" src="resources/ios/splash/Default@2x~iphone.png" width="640" />
     <splash height="480" src="resources/ios/splash/Default~iphone.png" width="320" />
