@@ -27,7 +27,7 @@ app.config(($stateProvider, $urlRouterProvider) => {
         controller: 'DeckCtrl',
         resolve: {
             cards: (GameFactory, $stateParams) => GameFactory.getCardsByDeckId($stateParams.deckId)
-        },
+        }
     })
 
     $urlRouterProvider.otherwise('/new-game/setup-game');
@@ -38,12 +38,12 @@ app.controller('NewGameCtrl', ($scope, GameFactory, $state, teamDecks, standardD
     $scope.test = 1345234523
     $scope.currentView = 'addDecks'
     $scope.gameConfig = {};
+    $scope.gameConfig.decks = {};
     $scope.goToDecks = () => {
-            $state.go('new-game.add-decks', {}, { location: true, reload: true })
-        }
-        //console.log('teamdecks is:', teamDecks)
-        //$scope.cards = cards
-    $scope.teamDecks = standardDeck.concat(teamDecks)
+        $state.go('new-game.add-decks', {}, { location: true, reload: true })
+    }
+
+    $scope.decks = standardDeck.concat(teamDecks);
 
     $scope.startNewGame = GameFactory.startNewGame;
     $scope.addDecksToGame = GameFactory.addDecks;
@@ -55,13 +55,10 @@ app.controller('NewGameCtrl', ($scope, GameFactory, $state, teamDecks, standardD
 
     // })
 
-    //$scope.games = teamGames;
 
-    //console.log('teamgames ', teamGames)
 })
 
 app.controller('DeckCtrl', ($scope, GameFactory, $state, cards) => {
-    console.log('runnign decktrls')
     $scope.cards = cards
 })
 
