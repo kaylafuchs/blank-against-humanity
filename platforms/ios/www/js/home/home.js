@@ -12,7 +12,7 @@ app.controller('HomeCtrl', function($scope, $state, $cordovaOauth, UserFactory, 
 
     //$scope.startNewGame = GameFactory.startNewGame;
     $scope.createNewGame = () => {
-        $state.go('new-game')
+        $state.go('new-game.main')
     }
 
     $scope.$on('changedGame', (event, data) => {
@@ -31,3 +31,4 @@ app.controller('HomeCtrl', function($scope, $state, $cordovaOauth, UserFactory, 
 
     $scope.greeting = "hello";
 })
+

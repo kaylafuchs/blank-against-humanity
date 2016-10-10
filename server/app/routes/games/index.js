@@ -137,15 +137,15 @@ router.post('/', (req, res, next) => {
     return Game.create({
             name: req.body.name,
             teamId: req.body.teamId
+                //settings: req.body.gameConfig
         })
         .then(createdGame => {
-            // res.send(createdGame)
-
             const gameRef = firebase.database().ref(`teams/${req.body.teamId}/games/${createdGame.id}`)
             gameId = createdGame.id;
             return gameRef.set({
-                    name: req.body.name,
-                    teamId: req.body.teamId
+                    //name: req.body.name,
+                    teamId: req.body.teamId,
+                    settings: req.body.settings
                 })
                 .then(() => {
                     const firstPlayerRef = firebase.database().ref(`teams/${req.body.teamId}/games/${createdGame.id}/players/${req.body.creatorId}`)
@@ -161,3 +161,4 @@ router.post('/', (req, res, next) => {
         })
         .catch(next)
 });
+

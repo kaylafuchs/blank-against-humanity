@@ -2,7 +2,7 @@
     <ion-content>
         <a ui-sref="new-game.main">main</a>
         <a ui-sref="new-game.add-decks">deck</a> thing
-        <hr>
+        <hr> {{test}}
         <form name="game-rules">
             <div>
                 <span> Name your Game</span>
@@ -10,23 +10,23 @@
             </div>
             <div>
                 <span>Choose your Decks</span>
-                <button ng-click="goToDecks()"> button new-game.add-decks </button>
+                <button ng-click="goToDecks()"> Add Decks </button>
             </div>
             <div>
-                <span>add Players</span>
+                <span>Select Players</span>
                 <button> Add Players </button>
             </div>
             <div>
-                <span> Max time per turn</span>
-                <input ng-model="gameConfig.maxTurnTime"></input>
-            </div>
-            <div>
-                <span> Max Number of Players</span>
-                <input ng-model="gameConfig.maxPlayers"></input>
+                <span> Max time per Turn (minutes)</span>
+                <input ng-model="gameConfig.maxTurnTime" placeholder="5"></input>
             </div>
             <div>
                 <span> Min Number of Players</span>
                 <input ng-model="gameConfig.minPlayers"></input>
+            </div>
+            <div>
+                <span> Max Number of Players</span>
+                <input ng-model="gameConfig.maxPlayers"></input>
             </div>
         </form>
         <hr>
@@ -34,6 +34,5 @@
         <button>Invite Specific People</button>
         <hr>
         <button ng-click="startNewGame(gameConfig)">Start Game</button>
-        other stuff
     </ion-content>
 </ion-view>

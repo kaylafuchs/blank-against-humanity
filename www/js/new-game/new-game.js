@@ -1,67 +1,34 @@
 app.config(($stateProvider, $urlRouterProvider) => {
 
-    $stateProvider
-        .state('new-game', {
-            url: '/new-game',
-            templateUrl: 'js/new-game/main.html',
-            controller: 'NewGameCtrl'
-
-        })
+    $stateProvider.state('new-game', {
+        url: '/new-game',
+        abstract: true,
+        templateUrl: 'js/new-game/main.html',
+        controller: 'NewGameCtrl'
+    })
 
     .state('new-game.main', {
-        url: '/stoof',
+        url: '/setup-game',
         templateUrl: 'js/new-game/new-game.html',
     })
 
     .state('new-game.add-decks', {
-        url: '/stuff',
+        url: '/add-decks',
         templateUrl: 'js/new-game/add-decks.html',
         resolve: {
             teamDecks: (GameFactory) => GameFactory.getDecksByTeamId
         }
     })
 
-    $urlRouterProvider.otherwise('/new-game/stoof');
+    $urlRouterProvider.otherwise('/new-game/setup-game');
 })
-
-
-
-//         //controller: 'DeckCtrl',
-//         // resolve: {
-//         //     teamGames: (GameFactory, $stateParams) => GameFactory.getGamesByTeamId($stateParams.teamId) //stateParams.teamId
-//         // }
-//     })
-
-// .state('new-game.add-decks', {
-//     url: '/stuff',
-//     views: {
-//
-// '': { templateUrl: 'js/new-game/add-decks.html' }
-//        }
-//        //templateUrl: 'js/new-game/add-decks.html',
-//        //controller: 'DeckCtrl',
-//        // resolve: {
-//        //     teamGames: (GameFactory, $stateParams) => GameFactory.getGamesByTeamId($stateParams.teamId) //stateParams.teamId
-//        // }
-//    })
-
-
-
-//$
-
-
 
 app.controller('NewGameCtrl', ($scope, GameFactory, $state) => {
     console.log('curre', $scope)
+    $scope.test = 1345234523
     $scope.currentView = 'addDecks'
     $scope.gameConfig = {};
     $scope.goToDecks = () => {
-        console.log('runnign t', $scope)
-
-
-        // $scope.$digest()
-
-
         $state.go('new-game.add-decks', {}, { location: true, reload: true })
     }
 

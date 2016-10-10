@@ -19,11 +19,11 @@ app.factory('GameFactory', ($http, $rootScope, $localStorage) => {
             const teamId = $localStorage.team.id || 2;
             const creatorId = $localStorage.user.id || 3;
             return $http.post('http://192.168.4.236:1337/api/games', {
-                    name: gameName || 'Boring Name',
+                    name: gameConfig.name || 'Boring Name',
                     teamId: teamId,
                     creatorId: creatorId,
                     creatorName: $localStorage.user.name || 'dan', //might be unnecessary if we have the user id
-                    gameSettings: gameSettings
+                    settings: gameConfig
                 })
                 .then(res => res.data)
                 .then(gameId => {
@@ -89,12 +89,13 @@ app.factory('GameFactory', ($http, $rootScope, $localStorage) => {
 
 
         //vs getCardsByTeamId
-        GameFactory.getDecksByTeamId = (teamId) => {
-
+        GameFactory.getDecksByTeamId = () => {
+            const teamId = $localStorage.team.id
             return $http.get(`http://localhost:1337/api/decks/${teamId}`)
-                .the(res => res.data)
-
+                .then(res => res.data)
         };
+
+        //GameFactory.getBaseDeck
 
         // GameFactory.getCardsByCreator = (userId) => {
 
