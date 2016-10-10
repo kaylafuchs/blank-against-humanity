@@ -79,6 +79,14 @@ app.factory('GameFactory', ($http, $rootScope, $localStorage) => {
                 })
         };
 
+        GameFactory.getCardsByDeckId = (id) => {
+            return $http.get(`http://192.168.4.236:1337/api/decks/${id}/cards`)
+                .then(res => {
+                    console.log('res.data is:', res.data)
+                    return res.data
+                });
+        }
+
         //GameFactory.getCardsByDeckId 
 
         //GameFactory.getBaseDeck

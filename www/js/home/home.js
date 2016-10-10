@@ -12,6 +12,7 @@ app.controller('HomeCtrl', function($scope, $state, $cordovaOauth, UserFactory, 
 
     //$scope.startNewGame = GameFactory.startNewGame;
     $scope.createNewGame = () => {
+        console.log('going to new state')
         $state.go('new-game.main')
     }
 

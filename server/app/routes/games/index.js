@@ -143,7 +143,6 @@ router.post('/', (req, res, next) => {
             const gameRef = firebase.database().ref(`teams/${req.body.teamId}/games/${createdGame.id}`)
             gameId = createdGame.id;
             return gameRef.set({
-                    //name: req.body.name,
                     teamId: req.body.teamId,
                     settings: req.body.settings
                 })

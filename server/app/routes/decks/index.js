@@ -8,7 +8,6 @@ const firebase = require('firebase')
 module.exports = router;
 
 
-
 router.get('/:deckId/cards', (req, res, next) => {
     return Card.findAll({
             where: {
