@@ -107,8 +107,8 @@ gulp.task('default', function() {
         runSeq('buildJS', 'reload');
     });
 
-    // Run when anything inside of browser/scss changes.
-    gulp.watch('www/scss/**', function() {
+    // Run when anything inside of scss changes.
+    gulp.watch('scss/**', function() {
         runSeq('sass', 'reloadCSS');
     });
 
