@@ -3,12 +3,32 @@ app.config(function($stateProvider, $urlRouterProvider){
 		url: '/',
 		templateUrl: 'js/home/home.html',
 		controller: 'HomeCtrl',
+        resolve: {
+            games: function(GameFactory){
+                return GameFactory.getGamesByTeamId()
+            }
+        }
 	})
 })
 
-app.controller('HomeCtrl', function($scope, $state, $cordovaOauth, UserFactory, GameFactory, $localStorage) {
+app.controller('HomeCtrl', function($scope, $state, $cordovaOauth, UserFactory, GameFactory, $localStorage, games) {
     $scope.storage = $localStorage;
+    $scope.games = games;
+    console.log("games", JSON.stringify($scope.games))
 
+    // // get games from postgres
+    // GameFactory.getGamesByUser()
+    // .then(games => {
+    //     console.log("games found:", games)
+    //     $scope.games = games;
+    // })
+
+    //get games from firebase
+    // GameFactory.getGamesByTeamId($scope.storage.team.id)
+    // .then(games => {
+    //     console.log("the games are:", games)
+    //     $scope.games = games;
+    // })
 
     $scope.startNewGame = GameFactory.startNewGame;
 

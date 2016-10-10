@@ -9879,7 +9879,7 @@ a.button {
   width: 250px;
   margin-top: 10px; }
 
-.login-page {
+.black-bg {
   background-color: #000;
   padding: 0 20px; }
 
@@ -9916,3 +9916,48 @@ a.button {
 
 .login-titles {
   flex-grow: 1; }
+
+.games-container {
+  padding: 0 2.5rem;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center; }
+
+.titles {
+  width: 100%;
+  flex-grow: 1;
+  padding: 10px 10px 5px 10px;
+  margin-bottom: 10px;
+  border: 1px solid #FFF;
+  border-radius: 6px;
+  color: #000;
+  font-size: 0.8rem;
+  background-color: #b9edfb; }
+
+.user-info {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin-bottom: 20px; }
+
+.games-list {
+  border: 1px solid #FFF;
+  color: #000;
+  border-radius: 8px;
+  padding: 0.5rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  background-color: #b9edfb;
+  width: 100%; }
+
+.game-listing {
+  border: 1px solid #000;
+  border-radius: 4px;
+  padding: 4px;
+  margin: 4px 10px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around; }

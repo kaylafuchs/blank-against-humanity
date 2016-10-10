@@ -1,14 +1,14 @@
-app.factory('GameFactory', ($http, $rootScope, $localStorage) => {
+app.factory('GameFactory', ($http, $rootScope, $localStorage, $q) => {
         const GameFactory = {};
 
         const initializeFirebase = () => {
             const config = {
-                apiKey: "AIzaSyCved6m8mUtuuqVmScEQEK_TMQIvcIoVoQ",
-                authDomain: "blank-against-humanity-9f962.firebaseapp.com",
-                databaseURL: "https://blank-against-humanity-9f962.firebaseio.com",
-                storageBucket: "blank-against-humanity-9f962.appspot.com",
-                messagingSenderId: "1032852247621"
-            };
+                    apiKey: "AIzaSyAvQ7yQ7fKIUUOxEqHP2-hCBLzuMkdoXko",
+                    authDomain: "blank-against-humanity-d9cbf.firebaseapp.com",
+                    databaseURL: "https://blank-against-humanity-d9cbf.firebaseio.com",
+                    storageBucket: "blank-against-humanity-d9cbf.appspot.com",
+                    messagingSenderId: "778108071646"
+                  };
             firebase.initializeApp(config);
         };
         initializeFirebase();
@@ -106,6 +106,25 @@ app.factory('GameFactory', ($http, $rootScope, $localStorage) => {
                     return snapshot.val();
                 })
         };
+
+        GameFactory.getGamesByTeamId = (teamId) => {
+            teamId = teamId || $localStorage.team.id
+            console.log('the team is id', teamId)
+            const defer = $q.defer();
+
+            const gamesRef = firebase.database().ref(`teams/${teamId}/games`)
+            gamesRef.on('value', snapshot => {
+                console.log('the val is', snapshot.val())
+                defer.resolve(snapshot.val());
+            });
+            console.log("defer promise", defer.promise)
+            return defer.promise;
+        };
+
+        GameFactory.getGamesByUser = (userId) => {
+            return $http.get('http://localStorage:1337/api/games/?userId=' + userId)
+            .then(res => res.data)
+        }
 
 
         return GameFactory;
