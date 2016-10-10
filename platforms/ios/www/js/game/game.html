@@ -1,0 +1,19 @@
+<ion-view title="Game">
+	<ion-content>
+		game content right here 
+		{{3+3}}
+		<button ng-click="startNewGame()"> start new game</button>
+		<button ng-click="">	</button>
+	
+
+		games::{{games}}
+		<h1> Name: {{game.name}} </h1>
+		<h2> Players </h2>
+		<ul>
+			<li ng-repeat="(key, value) in game.players"> PlayerId: {{key}}, val: {{value}}</li>
+
+			<hr>
+			<li ng-repeat="(key, value) in games"> {{key}}, val: {{value}}</li>
+		</ul>
+	</ion-content>
+</ion-view>
