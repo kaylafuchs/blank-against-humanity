@@ -3,7 +3,7 @@
 	<div class="login-container">
 		<div class="login-titles">
 <!-- 			<h2 class="login" ng-show="storage.user">Hi, {{storage.user.name}}. You are already logged in!</h2> -->
-			<h1 class="login game-title" ng-hide="storage.user">______ Against Humanity</h1>
+			<h1 class="login game-title">______ Against Humanity</h1>
 			<div class="cards">
 				<div class="card black login-card left">
 					<p class="card-text">A party game for horrible people and their colleagues.</p>
@@ -20,8 +20,8 @@
 			</div>
 <!-- 			<h4 class="login" ng-hide="storage.user">A party game for horrible people and their colleagues.</h4> -->
 		</div>
-		<h4 class="login" ng-hide="storage.user"> Sign in with Slack to start playing!</h4>
-		<div ng-click="loginWithSlack()" ng-hide="storage.user">
+		<h4 class="login"> Sign in with Slack to start playing!</h4>
+		<div ng-click="loginWithSlack()">
 			<img class="slack-btn" src="https://platform.slack-edge.com/img/sign_in_with_slack.png" srcset="https://platform.slack-edge.com/img/sign_in_with_slack.png 1x, https://platform.slack-edge.com/img/sign_in_with_slack@2x.png 2x"/>
 		</div>
 	</div>

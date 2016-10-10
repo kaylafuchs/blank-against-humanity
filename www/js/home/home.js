@@ -1,6 +1,6 @@
 app.config(function($stateProvider, $urlRouterProvider){
 	$stateProvider.state('home', {
-		url: '/home',
+		url: '/',
 		templateUrl: 'js/home/home.html',
 		controller: 'HomeCtrl',
 		// onEnter: function($state, $localStorage){

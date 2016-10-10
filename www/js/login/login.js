@@ -5,6 +5,18 @@ app.config(function($stateProvider, $urlRouterProvider){
 		controller: 'LoginCtrl'
 	})
 
+
+	//var user = $localStorage.user
+	// $urlRouterProvider.otherwise(($injector, $location) => {
+	// 	return user ? '/games' : '/login'
+	// })
+
+
+	// $urlRouterProvider.otherwise(($injector, $location) => {
+	// 	var user = true;
+	// 	return user ? '/' : '/login'
+	// })
+
 	$urlRouterProvider.otherwise('/login');
 })
 
@@ -23,4 +35,11 @@ app.controller('LoginCtrl', function($scope, $state, LoginFactory, UserFactory, 
  	$scope.$on('$ionicView.leave', function () { $ionicSideMenuDelegate.canDragContent(true) });
 
  	$scope.storage = $localStorage
+
+ 	function redirectUser(){
+ 		console.log("scope storage user", $scope.storage.user)
+ 		if ($scope.storage.user) $state.go('home')
+ 	}
+
+	redirectUser();
 })
