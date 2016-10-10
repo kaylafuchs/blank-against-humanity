@@ -10,6 +10,7 @@
     "node": ">=4.0.0"
   },
   "dependencies": {
+    "@ionic/cloud-angular": "^0.5.2",
     "angular": "^1.5.0-beta.0",
     "angular-animate": "^1.4.7",
     "angular-mocks": "^1.4.0",
