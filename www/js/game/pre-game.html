@@ -1,0 +1,16 @@
+<ion-view title={{name}}>
+	<ion-content>
+		<div class="card-game">
+			<div class="other-content">
+				<h2>Number of Players: {{playerCount}}</h2>
+			</div>
+			<ul class="hand">
+				<li class="card white one" ng-repeat="card in whiteCards">
+					<p class="card-text">{{card.cardText}}</p>
+					<p class="logo white">______ Against Humanity</p>
+				</li>
+			</ul>
+		</div>
+	</ion-content>
+</ion-view>
+

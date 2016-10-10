@@ -9827,7 +9827,9 @@ a.button {
 .other-content {
   display: flex;
   flex-grow: 1;
-  justify-content: center; }
+  justify-content: center;
+  align-items: center;
+  flex-direction: column; }
 
 .hand {
   counter-reset: rotation;
