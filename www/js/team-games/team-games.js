@@ -6,26 +6,23 @@ app.config(($stateProvider) => {
 	})
 })
 
-app.controller('TeamGamesCtrl', ($scope, GameFactory, $ionicPopup, $timeout) => {
+app.controller('TeamGamesCtrl', ($scope, GameFactory, $ionicPopup, $timeout, $state) => {
 	 
-	 GameFactory.getGamesByTeamId('team')
+	 GameFactory.getGamesByTeamId('1')
 	 	.then(games => {
-	 		console.log(games);
 	 		$scope.games = games;
 	 		$scope.$digest();
 	 	})
 
 	 
 	 $scope.$on('changedGame', (event,snapshot) =>{
-	 	console.log(snapshot);
-	 	$scope.name = snapshot.name;
+	 	$scope.name= snapshot.name;
 	 	$scope.$digest();
 	 })
 
 	 $scope.joinGame = GameFactory.joinGameById;
 
-	 $scope.showPopup = function () {
-	 	 console.log('TEST');
+	 $scope.showPopup = function (gameId) {
 	     
 	     const myPopup = $ionicPopup.show({
 	     	template: '<p>Information</p>',
@@ -37,12 +34,12 @@ app.controller('TeamGamesCtrl', ($scope, GameFactory, $ionicPopup, $timeout) => 
 	     			text: '<b>Join</b>',
 	     		 	type: 'button-positive',
 	     		 	onTap: e => {
-	     		 		$scope.joinGame();
+	     		 		console.log(gameId);
+	     		 		$scope.joinGame(gameId);
+	     		 		$state.go('game.pre-game', {gameId: gameId})
 	     		 	}
 	     		}
 			]
 	    })
 	 }
-
-
 })

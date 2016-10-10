@@ -1,4 +1,4 @@
-app.factory('GameFactory', ($http, $rootScope, $localStorage) => {
+app.factory('GameFactory', ($http, $rootScope, $localStorage,$q) => {
         const GameFactory = {};
 
         const initializeFirebase = () => {
@@ -50,9 +50,9 @@ app.factory('GameFactory', ($http, $rootScope, $localStorage) => {
         }
 
         GameFactory.joinGameById = (gameId) => {
-            const teamId = 'team';
-            const playerId = 2;
-            const playerName = 'poop';
+            const teamId = 1;
+            const playerId = 4;
+            const playerName = 'cat';
             const playerRef = firebase.database().ref(`teams/${teamId}/games/${gameId}/players/${playerId}`)
             playerRef.set({
                 name: playerName
@@ -89,12 +89,16 @@ app.factory('GameFactory', ($http, $rootScope, $localStorage) => {
 
 
         GameFactory.getGameByGameId = (gameId) => {
-            const teamId = $localStorage.team.id
-            console.log(teamId);
-            const gamesRef = firebase.database().ref(`teams/2/games/${gameId}`)
-            return gamesRef.on('value').then(snapshot => {
+            // const defer = $q.defer();
+            console.log(gameId);
+            const teamId = 1;
+            const gamesRef = firebase.database().ref(`teams/${teamId}/games/${gameId}`)
+            return gamesRef.once('value').then(snapshot => {
+                console.log('TEST3', snapshot.val())
                 return snapshot.val();
             })
+
+            // return defer.promise;
         };
 
         GameFactory.getGamesByTeamId = (teamId) => {
