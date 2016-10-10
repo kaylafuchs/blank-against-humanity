@@ -118,6 +118,143 @@ $black: #000;
 	background: $black;
 }
 
+.slack-btn {
+	width: 250px;
+	margin-top: 10px;
+}
+
+.black-bg {
+	// width:100vw;
+	// height: 100vh;
+	background-color: $positive;
+	padding: 0 20px;
+	// color: $white;
+}
+
+.login-container {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	height: 70vh;
+	padding-top: 12rem;
+}
+
+.login-card {
+
+	margin: 0 auto;
+	// height: 17rem;
+	// width: 12.021rem;
+	// background-color: $black;
+	// color: $white;
+	// border-radius: 9px;
+	border: 1px solid $white;
+	// display: flex;
+	// flex-direction: column;
+	pointer-events: none;
+
+
+}
+
+.left {
+	//margin-left: -1rem;
+	margin-right: -15rem;
+	transform: rotate(-5deg) translateY(1rem);
+
+	// &:hover {
+	// 	transform: rotate(-5deg) translateY(1rem);
+	// 	z-index: 999;
+	// }
+}
+
+.center {
+	// margin-left: -0.1
+}
+
+.right {
+	margin-left: -15rem;
+	// margin-right: -10rem;
+	transform: rotate(5deg);
+	//z-index: 999;
+
+	// &:hover {
+	// 	transform: rotate(5deg);
+	// 	z-index: 999;
+	// }
+}
+
+.cards {
+	display: flex;
+	margin: 1.75rem auto;
+	flex-direction: row;
+	justify-content: center;
+}
+
+.login {
+	color: $white;
+	text-align: center;
+
+	// .game-title {
+	// 	font-size: 100px;
+	// }
+}
+
+.login-titles {
+	flex-grow: 1;
+}
+
+.games-container {
+	padding: 0 2.5rem;
+	text-align: center;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+
+}
+
+.titles {
+	width: 100%;
+	flex-grow: 1;
+	padding: 10px 10px 5px 10px;
+	margin-bottom: 10px;
+	border: 1px solid $white;
+	border-radius: 6px;
+	color: $black;
+	font-size: 0.8rem;
+	background-color: #b9edfb;
+}
+
+.user-info {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	margin-bottom: 20px;
+}
+
+.games-list {
+	border: 1px solid $white;
+	color: $black;
+	border-radius: 8px;
+	padding: 0.5rem;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	background-color: #b9edfb;
+	width: 100%;
+}
+
+.game-listing {
+	border: 1px solid $black;
+	border-radius: 4px;
+	padding: 4px;
+	margin: 4px 10px;
+	display: flex;
+	flex-direction: row;
+	justify-content: space-around;
+}
+
+
 // .one {
 // 	transform: rotate(-8deg) translateY(1.3rem);
 // }
