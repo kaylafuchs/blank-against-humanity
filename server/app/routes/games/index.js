@@ -153,8 +153,8 @@ router.post('/:id/decks', (req, res, next) => {
                     console.log('the card is', card.id, card.type)
                     blackCardRef = firebase.database().ref(`teams/${req.requestedGame.teamId}/games/${req.requestedGame.id}/pile/blackcards/${card.id}`)
                     return blackCardRef.set({
-                            'text': card.text,
-                            'pick': card.pick
+                            'text': card.text
+                                // 'pick': card.pick
                         })
                         // var blackCardRef = firebase.database().ref(`teams/${req.requestedGame.teamId}/games/${req.requestedGame.id}/pile/blackcards`)
                         // blackCardRef.set({
