@@ -11,40 +11,43 @@ app.config(function($stateProvider, $urlRouterProvider) {
     })
 })
 
-app.controller('HomeCtrl', function($scope, $state, $cordovaOauth, UserFactory, GameFactory, $localStorage, games) {
+app.controller('HomeCtrl', function($scope, $state, $cordovaOauth, UserFactory, GameFactory, $localStorage, games, $ionicPopup) {
+    $scope.startNewGame = GameFactory.startNewGame;
     $scope.storage = $localStorage;
     $scope.games = games;
+
     console.log("games", JSON.stringify($scope.games))
+    $scope.goToNewGame = () => {
+        console.log("calling goToNewGame")
+        $state.go('new-game.main')
+    }
 
-    // // get games from postgres
-    // GameFactory.getGamesByUser()
-    // .then(games => {
-    //     console.log("games found:", games)
-    //     $scope.games = games;
-    // })
+    $scope.joinGame = GameFactory.joinGameById;
 
-    //get games from firebase
-    // GameFactory.getGamesByTeamId($scope.storage.team.id)
-    // .then(games => {
-    //     console.log("the games are:", games)
-    //     $scope.games = games;
-    // })
+    $scope.showPopup = function (gameId) {
 
-    //$scope.startNewGame = GameFactory.startNewGame;
-    // $scope.createNewGame = () => {
-    //     GameFactory.startNewGame()
-    //     .then(() => {
-    //         console.log('going to new state')
-    //         $state.go('new-game.main')
-    //     })
-    // }
-
-    $scope.$on('changedGame', (event, data) => {
-        console.log('received event in home')
-        console.log('data obj:', data)
-            //$scope.game = data;
-            // $scope.$digest()
-
-    })
+        $scope.game = $scope.games[gameId];
+        $scope.gameName = $scope.game.settings.name;
+        $scope.playerCount = Object.keys($scope.game.players).length;
+        $scope.waitingForPlayers =  $scope.game.settings.minPlayers - $scope.playerCount;
+         
+         const myPopup = $ionicPopup.show({
+            templateUrl: 'js/home/popup.html',
+            title: 'Join Game',
+            scope: $scope,
+            buttons: 
+            [
+                {text: 'Cancel'},
+                {
+                    text: '<b>Join</b>',
+                    type: 'button-positive',
+                    onTap: e => {
+                        $scope.joinGame(gameId);
+                        $state.go('game.active-game', {gameId: gameId})
+                    }
+                }
+            ]
+        })
+    }
 })
 

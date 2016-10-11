@@ -146,7 +146,7 @@
 		</data>
 		<key>MainViewController.nib</key>
 		<data>
-		aHwebxyzXZSuX8SdedSf345Y3uU=
+		v7TMD+jRIiDNkm2yrs1KIh71Vho=
 		</data>
 		<key>PkgInfo</key>
 		<data>
@@ -174,11 +174,11 @@
 		</data>
 		<key>www/css/ionic.app.css</key>
 		<data>
-		UJUw9B/T3pw0Hc5AYd85x84vpo8=
+		kIY5Pj86/YQSpJ7RtM/lcuSvkHA=
 		</data>
 		<key>www/css/ionic.app.min.css</key>
 		<data>
-		xGoqLlovaPh8npXf0PHWW1IT/h8=
+		eO8wCXVDDsW6d6PM9/OQSfsrMek=
 		</data>
 		<key>www/css/style.css</key>
 		<data>
@@ -198,7 +198,7 @@
 		</data>
 		<key>www/js/cards-test/cards-test.html</key>
 		<data>
-		h66k2ukg96SL2651i/ExAhQ/zKQ=
+		vR0sdUPIbcd2SOOf3ZD8k4NbWR8=
 		</data>
 		<key>www/js/cards-test/cardsTest.js</key>
 		<data>
@@ -208,9 +208,13 @@
 		<data>
 		Yk9WD+rbbgX5xr6zXBwD0WgOYjY=
 		</data>
+		<key>www/js/common/factories/ActiveGameFactory.js</key>
+		<data>
+		YZvZ0ysdUr4z8FUn0GtmmVJaxog=
+		</data>
 		<key>www/js/common/factories/GameFactory.js</key>
 		<data>
-		+OIG+59B4WY8mB5sNykoecAL/Ig=
+		nbmRHismdmKeb0MsZE4he76BRYI=
 		</data>
 		<key>www/js/common/factories/loginFactory.js</key>
 		<data>
@@ -232,25 +236,29 @@
 		<data>
 		DIlLGmGxzrlNkZLVdZFY2cCJAZ4=
 		</data>
+		<key>www/js/game/active-game.html</key>
+		<data>
+		ZXMz0jziH7kw7NihoM2QggsyCKI=
+		</data>
 		<key>www/js/game/game.html</key>
 		<data>
 		gMty0LtspJxKRYvHz4ra/sMJjiI=
 		</data>
 		<key>www/js/game/game.js</key>
 		<data>
-		ZWr0XJxXM4yKS3/gUMnGalP6Edo=
-		</data>
-		<key>www/js/game/pre-game.html</key>
-		<data>
-		5PI/F+BYDWQhsziZgIvpZPs4GcY=
+		inSeOzo8SWv0zbaAUMOoLtuQKjE=
 		</data>
 		<key>www/js/home/home.html</key>
 		<data>
-		nBSseEC3ebFJMce9rkcrqDdZ/RU=
+		e63bJrOuF6L58FdVAVLIi/C1DYE=
 		</data>
 		<key>www/js/home/home.js</key>
 		<data>
-		ALn2ALiyOQWa5etod0i6zIl87Tg=
+		WmLC0UE53jiBQuBoPhwhL+O02mU=
+		</data>
+		<key>www/js/home/popup.html</key>
+		<data>
+		a2nQphyy2T4AicwYWwpljJMebmI=
 		</data>
 		<key>www/js/login/login.html</key>
 		<data>
@@ -266,7 +274,7 @@
 		</data>
 		<key>www/js/new-game/add-decks.html</key>
 		<data>
-		Kjs9lSJohUdbSiS1auyw8T4dHJY=
+		j59XIVrpCi7lScAPteDhMx1bjW8=
 		</data>
 		<key>www/js/new-game/deck.html</key>
 		<data>
@@ -274,23 +282,15 @@
 		</data>
 		<key>www/js/new-game/main.html</key>
 		<data>
-		8ulgDuqZNZMfY5MiHGcma/88tjE=
+		GKw2uHTpwHnTouFDCQ/MIM9Th9k=
 		</data>
 		<key>www/js/new-game/new-game.html</key>
 		<data>
-		+MW0zBXw8kXL09YqJQss0IXx2kQ=
+		7qRpsQvBZhoW4ILH9qTE8zrzCqg=
 		</data>
 		<key>www/js/new-game/new-game.js</key>
 		<data>
-		3R55vJTR5XM8e22wZ9Nl7RIxVGo=
-		</data>
-		<key>www/js/team-games/team-games.html</key>
-		<data>
-		zRH043eS8a5xWzvWLfGv269XWC0=
-		</data>
-		<key>www/js/team-games/team-games.js</key>
-		<data>
-		Vzr5bZEUJB3hntIFie6mipCn3Vc=
+		xSa8aLH4OilZYPlCKJbHHkSmdtI=
 		</data>
 		<key>www/lib/ionic/css/ionic.css</key>
 		<data>
@@ -594,7 +594,7 @@
 		</data>
 		<key>www/public/main.js</key>
 		<data>
-		Q2y69FZfZfdotbgL8eawcxRF+zY=
+		wbQ3YANwE3kcXoAQfi4KUYhGoDE=
 		</data>
 		<key>www/service-worker.js</key>
 		<data>
@@ -981,11 +981,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			aHwebxyzXZSuX8SdedSf345Y3uU=
+			v7TMD+jRIiDNkm2yrs1KIh71Vho=
 			</data>
 			<key>hash2</key>
 			<data>
-			XfKPuh7CAVKxI2+rmm4WhhKs57+y/PFM4k1plMX6Erg=
+			40sPsKBdg2G6F4Q4JCMfPBRZ0L12xmuGJgOUcYrOdbQ=
 			</data>
 		</dict>
 		<key>config.xml</key>
@@ -1047,22 +1047,22 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			UJUw9B/T3pw0Hc5AYd85x84vpo8=
+			kIY5Pj86/YQSpJ7RtM/lcuSvkHA=
 			</data>
 			<key>hash2</key>
 			<data>
-			+kV/VkSa4SfNgc5j8VlTJlE06HCBluOemX3v9BU3ujs=
+			dnft3XYd7X2aqI01C3FGEvTa2ArTYQP1YXTGHKKDol0=
 			</data>
 		</dict>
 		<key>www/css/ionic.app.min.css</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			xGoqLlovaPh8npXf0PHWW1IT/h8=
+			eO8wCXVDDsW6d6PM9/OQSfsrMek=
 			</data>
 			<key>hash2</key>
 			<data>
-			FWg7lZzlmE+fz/yWxi9LsgOWYbd4dJBsp6M1UCjDhYg=
+			S8rwEHYqng+o586ay3WYYg4hzyrQS1364WH7SiEhLso=
 			</data>
 		</dict>
 		<key>www/css/style.css</key>
@@ -1113,11 +1113,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			h66k2ukg96SL2651i/ExAhQ/zKQ=
+			vR0sdUPIbcd2SOOf3ZD8k4NbWR8=
 			</data>
 			<key>hash2</key>
 			<data>
-			OSD99prNAm8chyPU2EV7mskjRapFw9hF6cOWj/bnGZw=
+			s0lp9fXbQI8MWLHgocE52u2oDH2tN3Tkvqcl6NXhMAI=
 			</data>
 		</dict>
 		<key>www/js/cards-test/cardsTest.js</key>
@@ -1142,15 +1142,26 @@
 			iBdYHQRmDQSsAquCuIATcYq2ATlQNEZ0KPKE20DRJh8=
 			</data>
 		</dict>
+		<key>www/js/common/factories/ActiveGameFactory.js</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			YZvZ0ysdUr4z8FUn0GtmmVJaxog=
+			</data>
+			<key>hash2</key>
+			<data>
+			E3W2+8altfU7WjA2GcV5Lq+VbuZ1NmQ4z7JIAyIA6MA=
+			</data>
+		</dict>
 		<key>www/js/common/factories/GameFactory.js</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			+OIG+59B4WY8mB5sNykoecAL/Ig=
+			nbmRHismdmKeb0MsZE4he76BRYI=
 			</data>
 			<key>hash2</key>
 			<data>
-			cPB5TuI2a1f3xwYRvA4hSLIg5hwxJfg6jl9pTMaKFf8=
+			cplFYqBwgy78iDdN59AKbjm9j8pAxNl0KZhHcn1yGXU=
 			</data>
 		</dict>
 		<key>www/js/common/factories/loginFactory.js</key>
@@ -1208,6 +1219,17 @@
 			fMraPIoTR0WdfMDDeWpEi5+0HL47cdb5BwfBD5xVZzE=
 			</data>
 		</dict>
+		<key>www/js/game/active-game.html</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			ZXMz0jziH7kw7NihoM2QggsyCKI=
+			</data>
+			<key>hash2</key>
+			<data>
+			ZWUajwUPN+SA/ML5CUKBFp/syDCc1ymmqU9oHrGayUc=
+			</data>
+		</dict>
 		<key>www/js/game/game.html</key>
 		<dict>
 			<key>hash</key>
@@ -1223,44 +1245,44 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			ZWr0XJxXM4yKS3/gUMnGalP6Edo=
+			inSeOzo8SWv0zbaAUMOoLtuQKjE=
 			</data>
 			<key>hash2</key>
 			<data>
-			BKhnErRTMZ2cXk1lECKy2gb2qSKdVC/H5buHtp+vN3o=
-			</data>
-		</dict>
-		<key>www/js/game/pre-game.html</key>
-		<dict>
-			<key>hash</key>
-			<data>
-			5PI/F+BYDWQhsziZgIvpZPs4GcY=
-			</data>
-			<key>hash2</key>
-			<data>
-			J5E77ZyLdQVLUbh5RelUoeWiQy2WqU/gqh1IpgdLmzo=
+			NsgCsb8cqN1qSX96NZAl3x9lheUNUYUXgboT9UWXT2w=
 			</data>
 		</dict>
 		<key>www/js/home/home.html</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			nBSseEC3ebFJMce9rkcrqDdZ/RU=
+			e63bJrOuF6L58FdVAVLIi/C1DYE=
 			</data>
 			<key>hash2</key>
 			<data>
-			tkO40ItPAotXySTVd/BWrAtApF3QSm72kWM0rapq3ek=
+			MZlHVt/y5oQS/Z9gVK8/YrFicuBFDufQ1vXEW2HHAGk=
 			</data>
 		</dict>
 		<key>www/js/home/home.js</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			ALn2ALiyOQWa5etod0i6zIl87Tg=
+			WmLC0UE53jiBQuBoPhwhL+O02mU=
 			</data>
 			<key>hash2</key>
 			<data>
-			vVk3KUZtQOFZCXPxXSBvuCaTMtMIR3JKVS99verMZ10=
+			CpLcI4bgfdnBCKcHSyl/pexY0+frG8stPemxW8nu6mI=
+			</data>
+		</dict>
+		<key>www/js/home/popup.html</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			a2nQphyy2T4AicwYWwpljJMebmI=
+			</data>
+			<key>hash2</key>
+			<data>
+			tFHIPwOcWWT3GP9WkY1C2K2aAyMYPumH9mXj4mTaCBA=
 			</data>
 		</dict>
 		<key>www/js/login/login.html</key>
@@ -1300,11 +1322,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			Kjs9lSJohUdbSiS1auyw8T4dHJY=
+			j59XIVrpCi7lScAPteDhMx1bjW8=
 			</data>
 			<key>hash2</key>
 			<data>
-			OG9GGldPgVAdoEQusqOT3akMxZkOFURxwuP1g7bCeSY=
+			5MAMYHKugLFRSjyYVbsRlPFjybmXrTB0kv72XHFwxFw=
 			</data>
 		</dict>
 		<key>www/js/new-game/deck.html</key>
@@ -1322,55 +1344,33 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			8ulgDuqZNZMfY5MiHGcma/88tjE=
+			GKw2uHTpwHnTouFDCQ/MIM9Th9k=
 			</data>
 			<key>hash2</key>
 			<data>
-			KWIZkMucaTsDzkAiwGEQkEfP2vm14yRgqWs7Q0k0rag=
+			XmtxTOBzvtJzJ1dU1DbFCQsNUwot0h6CU3RNZsQsKOs=
 			</data>
 		</dict>
 		<key>www/js/new-game/new-game.html</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			+MW0zBXw8kXL09YqJQss0IXx2kQ=
+			7qRpsQvBZhoW4ILH9qTE8zrzCqg=
 			</data>
 			<key>hash2</key>
 			<data>
-			CuQKYrf858UA5pz6YQrCdcG9IVUcvCmm9nHzPD7Ng6k=
+			AzKWBRPjzvmBQQcHkHFvFGtWDVyxMkUzJXWLZmhMz6k=
 			</data>
 		</dict>
 		<key>www/js/new-game/new-game.js</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			3R55vJTR5XM8e22wZ9Nl7RIxVGo=
+			xSa8aLH4OilZYPlCKJbHHkSmdtI=
 			</data>
 			<key>hash2</key>
 			<data>
-			Z4vPEKL1eKw9ZsPocgySrbe0hR4qzIcbnVuzAuykQxE=
-			</data>
-		</dict>
-		<key>www/js/team-games/team-games.html</key>
-		<dict>
-			<key>hash</key>
-			<data>
-			zRH043eS8a5xWzvWLfGv269XWC0=
-			</data>
-			<key>hash2</key>
-			<data>
-			32byeEle+hBSJ4UWpcHvXGOnjC7kZ5jN4CSqGiD5HpA=
-			</data>
-		</dict>
-		<key>www/js/team-games/team-games.js</key>
-		<dict>
-			<key>hash</key>
-			<data>
-			Vzr5bZEUJB3hntIFie6mipCn3Vc=
-			</data>
-			<key>hash2</key>
-			<data>
-			B6nFhW9KYX/Xb7nNFfM70QWtZLt9DmanteDHRKvuRBc=
+			HDcxwrgM543aHziuKw1Ph3x/e7dYfRl4ouQj4Kd1rcI=
 			</data>
 		</dict>
 		<key>www/lib/ionic/css/ionic.css</key>
@@ -2202,11 +2202,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			Q2y69FZfZfdotbgL8eawcxRF+zY=
+			wbQ3YANwE3kcXoAQfi4KUYhGoDE=
 			</data>
 			<key>hash2</key>
 			<data>
-			23ij3HeBS3SwHy6mpmoAQkODD06zxN+v98BjYY5M54I=
+			sKGB/SvGn0ZPsoCAk7j9BN1fMmkmpxsJSQAIDKFEkm8=
 			</data>
 		</dict>
 		<key>www/service-worker.js</key>

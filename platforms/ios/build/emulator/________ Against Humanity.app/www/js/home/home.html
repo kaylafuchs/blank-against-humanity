@@ -1,25 +1,26 @@
-<ion-view title="_______ Against Humanity">
+<ion-view title="_______ Against Humanity" class="gray-bg">
     <ion-content overflow-scroll="true">
         <div class="games-container">
             <div class="cards">
-                <div class="game-card white home-card home-right">
+                <div class="game-card white home-right">
                     <p class="card-text">{{storage.team.name}} Against Humanity</p>
                     <p class="logo white">______ Against Humanity</p>
                 </div>
-                <div class="game-card white home-card center">
+                <div class="game-card white center">
                     <p class="card-text">{{storage.team.name}} Against Humanity</p>
-                    <a ui-sref="cards"><button class="button icon-right ion-chevron-right button-assertive start-game">Start new game</button></a>
+                    <a ui-sref="new-game.main"><button class="button icon-right ion-chevron-right button-assertive start-game">Start new game</button></a>
                 </div>
-                <div class="game-card white home-card home-left">
+                <div class="game-card white home-left">
                     <p class="card-text">{{storage.team.name}} Against Humanity</p>
                     <p class="logo white">______ Against Humanity</p>
                 </div>
             </div>
             <div class="games-list">
                 <span class="your-games">Your games</span>
-                <div ng-repeat="(key, value) in games track by $index" ng-if="value.name" class="game-listing">
-                    <span>{{value.name}}</span>
+                <div ng-repeat="(key, value) in games track by $index" ng-if="value.settings.name" class="game-listing">
+                    <span>{{value.settings.name}}</span>
                     <button class="button button-outline button-small button-assertive">View game</button>
+<!--                     showPopup(key) -->
                 </div>
             </div>
         </div>
