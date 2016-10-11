@@ -28,6 +28,8 @@ app.config(($stateProvider, $urlRouterProvider) => {
         resolve: {
             cards: (GameFactory, $stateParams) => GameFactory.getCardsByDeckId($stateParams.deckId)
         }
+
+
     })
 
     $urlRouterProvider.otherwise('/new-game/setup-game');
@@ -42,7 +44,6 @@ app.controller('NewGameCtrl', ($scope, GameFactory, $state, teamDecks, standardD
     }
 
     $scope.decks = standardDeck.concat(teamDecks);
-    console.log('the decks are: ', $scope.decks)
 
     $scope.startNewGame = (gameConfig) => {
         GameFactory.startNewGame(gameConfig).then(() => {
