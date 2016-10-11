@@ -3,6 +3,7 @@ const router = require('express').Router(); // eslint-disable-line new-cap
 const db = require('../../../db/');
 const Game = db.model('game');
 const User = db.model('user');
+const Card = db.model('card');
 const firebase = require('firebase')
 const _ = require('lodash');
 module.exports = router;
@@ -101,31 +102,69 @@ router.post('/firebase/:id', (req, res, next) => {
 
 
 router.post('/:id/decks', (req, res, next) => {
-    // decksArr = req.body.deck.makearr()
-    const addingDecks = req.body.decks.map(deck => Game.addDeck(deckId));
-    return Promise.all(addingDecks)
-        .then(createdDecks => {
-            const gettingCards = createdDecks.map(deck => deck.getCards())
 
-            return Promise.all(gettingCards)
-        })
+    // const addingDecks = req.body.decks.map(deckId => Game.addDecks(deckId));
+
+    // return Promise.all(addingDecks)
+    //     .then(createdDecks => {
+    //         const gettingCards = createdDecks.map(deck => deck.getCards())
+
+    //         return Promise.all(gettingCards);
+    //     })
+
+    console.log(`teams/${req.requestedGame.teamId}/games/${req.requestedGame.id}/pile/blackcard`)
+    const gettingCards = req.body.decks.map(deckId => Card.findAll({
+        where: {
+            deckId: deckId
+        }
+    }));
+
+    return Promise.all(gettingCards)
         .then((cardsArr) => {
-
             const flatcards = _.flattenDeep(cardsArr)
+
+            // const addingCardsToFB = flatcards.map(card => {
+            //     if (card.type === 'white') {
+            //         let whiteCardRef = firebase.database().ref(`teams/${req.requestedGame.teamId}/games/${req.requestedGame.id}/pile/whitecards`)
+            //         whiteCardRef.set({
+            //             //[`${card.id}`]: card
+            //             [`${card.id}`]: 'asdfad'
+            //         })
+            //     } else {
+            //         // console.log('adding bcard:', card)
+            //         let blackCardRef = firebase.database().ref(`teams/${req.requestedGame.teamId}/games/${req.requestedGame.id}/pile/blackcards`)
+            //         blackCardRef.set({
+            //             //[`${card.id}`]: card
+            //             [`${card.id}`]: 'asdfasfd'
+            //         })
+            //     }
+            // })
+            // return Promise.all(addingCardsToFB);
+            var blackCardRef;
+            var whiteCardRef;
             const addingCardsToFb = flatcards.map(card => {
+
                 if (card.type === 'white') {
-                    let whiteCardRef = firebase.database().ref(`teams/${requestedGame.teamId}/games/${requestedGame.id}/pile/whitecard`)
+                    //console.log('the card is', card.id, card.type)
+                    whiteCardRef = firebase.database().ref(`teams/${req.requestedGame.teamId}/games/${req.requestedGame.id}/pile/whitecards/${card.id}`)
                     return whiteCardRef.set({
-                        [`${card.id}`]: card
+                        'text': card.text
                     })
                 } else {
-                    let blackCardRef = firebase.database().ref(`teams/${requestedGame.teamId}/games/${requestedGame.id}/pile/blackcard`)
+                    console.log('the card is', card.id, card.type)
+                    blackCardRef = firebase.database().ref(`teams/${req.requestedGame.teamId}/games/${req.requestedGame.id}/pile/blackcards/${card.id}`)
                     return blackCardRef.set({
-                        [`${card.id}`]: card
-                    })
+                            'text': card.text
+                                // 'pick': card.pick
+                        })
+                        // var blackCardRef = firebase.database().ref(`teams/${req.requestedGame.teamId}/games/${req.requestedGame.id}/pile/blackcards`)
+                        // blackCardRef.set({
+                        //     //[`${card.id}`]: card
+                        //     [`${card.id}`]: 'asdfasfd'
+                        // })
                 }
             })
-            return Promise.all(addingCardsToFB);
+            return Promise.all(addingCardsToFb);
         })
 
 })
