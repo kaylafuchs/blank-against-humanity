@@ -57,9 +57,9 @@ app.factory('GameFactory', ($http, $rootScope, $localStorage, $q) => {
 
 
         GameFactory.joinGameById = (gameId) => {
-            const teamId = 1;
-            const playerId = 4;
-            const playerName = 'cat';
+            const teamId = $localStorage.team.id;
+            const playerId = $localStorage.user.id;
+            const playerName = $localStorage.user.name;
             const playerRef = firebase.database().ref(`teams/${teamId}/games/${gameId}/players/${playerId}`)
             playerRef.set({
                 name: playerName
@@ -100,7 +100,7 @@ app.factory('GameFactory', ($http, $rootScope, $localStorage, $q) => {
             const teamId = 1;
             const gamesRef = firebase.database().ref(`teams/${teamId}/games/${gameId}`)
             return gamesRef.once('value').then(snapshot => {
-                console.log('TEST3', snapshot.val())
+                console.log('FACTORYTEST', snapshot.val())
                 return snapshot.val();
             })
 

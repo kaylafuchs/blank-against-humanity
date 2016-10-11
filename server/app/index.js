@@ -4,7 +4,6 @@ var express = require('express');
 var app = express();
 
 module.exports = function(db) {
-
     app.use(function(req, res, next) {
         res.header('Access-Control-Allow-Origin', 'http://192.168.4.225:8100');
         res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE');
