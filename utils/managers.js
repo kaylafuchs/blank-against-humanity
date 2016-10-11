@@ -17,3 +17,4 @@ const judgePicker = () => {
   judgeArr.push(currentJudge)
   console.log(judgeArr)
 }
+
