@@ -9854,15 +9854,12 @@ a {
   width: 170px;
   margin-left: -70px;
   margin-right: -70px;
+  border-radius: 9px;
   transform-origin: bottom left;
   transition: transform 0.4s ease, margin 0.4s ease;
-  border-radius: 9px;
   border: 1px solid #000;
   display: flex;
   flex-direction: column; }
-  .game-card:hover {
-    z-index: 1000;
-    transform: translateY(-2rem) rotate(0); }
   .game-card .card-text {
     margin: 10px;
     flex-grow: 1; }
@@ -9870,6 +9867,10 @@ a {
     font-size: 0.5rem;
     margin: 0.5rem;
     align-self: flex-start; }
+
+.animate:hover {
+  z-index: 1000;
+  transform: translateY(-2rem) rotate(0); }
 
 .current-black-card {
   margin: 5px auto;
@@ -9907,9 +9908,6 @@ a {
 .login-card {
   margin: 0 auto;
   border: 1px solid #FFF;
-  pointer-events: none; }
-
-.home-card {
   pointer-events: none; }
 
 .home-left {
@@ -9990,12 +9988,12 @@ a {
 
 .game-listing {
   border-radius: 4px;
-  padding: 4px;
+  padding: 4px 15px;
   margin: 4px 10px;
   display: flex;
   flex-direction: row;
-  justify-content: space-around;
+  justify-content: space-between;
   align-items: center; }
 
 .start-game {
-  margin-bottom: 6px; }
+  margin: 5px; }

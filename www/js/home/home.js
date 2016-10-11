@@ -16,6 +16,7 @@ app.controller('HomeCtrl', function($scope, $state, $cordovaOauth, UserFactory, 
     $scope.games = games;
     console.log("games", JSON.stringify($scope.games))
     $scope.goToNewGame = () => {
+        console.log("calling goToNewGame")
         $state.go('new-game.main')
     }
 

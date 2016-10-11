@@ -107,15 +107,17 @@ app.factory('GameFactory', ($http, $rootScope, $localStorage, $q) => {
             // return defer.promise;
         };
 
-        GameFactory.getGamesByTeamId = (teamId) => {
-            console.log('the team is id', teamId)
+        // Keep this commented out or the home state will break!!
+        // GameFactory.getGamesByTeamId = (teamId) => {
+        //     console.log('the team is id', teamId)
+        //     teamId = teamId || $localStorage.team.id
 
-            const gamesRef = firebase.database().ref(`teams/${teamId}/games`)
-            return gamesRef.once('value').then(snapshot => { //might break after you do it once
-                console.log('the val is', snapshot.val())
-                return snapshot.val();
-            })
-        };
+        //     const gamesRef = firebase.database().ref(`teams/${teamId}/games`)
+        //     return gamesRef.once('value').then(snapshot => { //might break after you do it once
+        //         console.log('the val is', snapshot.val())
+        //         return snapshot.val();
+        //     })
+        // };
 
         GameFactory.getGamesByTeamId = (teamId) => {
             teamId = teamId || $localStorage.team.id

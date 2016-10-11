@@ -84,22 +84,14 @@ a {
 	//min-width: 192px;
 	margin-left: -70px;
 	margin-right: -70px;
+	border-radius: 9px;
 	transform-origin: bottom left;
 	transition: transform 0.4s ease, margin 0.4s ease;
-	border-radius: 9px;
 	border: 1px solid $black;
 	display: flex;
 	flex-direction: column;
 	//box-shadow: -1px 1px 4px -1px rgba(0,0,0,0.75);
 
-	
-	&:hover
-	{
-		z-index: 1000;
-		//margin: 0 0.1rem;
-		transform: translateY(-2rem) rotate(0);
-	}
-	
 	.card-text {
 		margin: 10px;
 		flex-grow: 1;
@@ -110,6 +102,16 @@ a {
 		margin: 0.5rem;
 		align-self: flex-start;
 	}
+}
+
+.animate {
+	&:hover
+	{
+		z-index: 1000;
+		//margin: 0 0.1rem;
+		transform: translateY(-2rem) rotate(0);
+	}
+
 }
 
 .current-black-card {
@@ -174,10 +176,6 @@ a {
 	pointer-events: none;
 
 
-}
-
-.home-card {
-	pointer-events: none;
 }
 
 .home-left {
@@ -300,18 +298,21 @@ a {
 .game-listing {
 	//border: 1px solid $black;
 	border-radius: 4px;
-	padding: 4px;
+	padding: 4px 15px;
 	margin: 4px 10px;
 	display: flex;
 	flex-direction: row;
-	justify-content: space-around;
+	justify-content: space-between;
 	align-items: center;
 }
 
 .start-game {
-	margin-bottom: 6px;
+	margin: 5px;
 }
 
+// .allow-click {
+// 	pointer-events: auto;
+// }
 
 // .one {
 // 	transform: rotate(-8deg) translateY(1.3rem);
