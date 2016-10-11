@@ -4,12 +4,12 @@ app.factory('GameFactory', ($http, $rootScope, $localStorage, $q) => {
 
         const initializeFirebase = () => {
             const config = {
-                apiKey: "AIzaSyAvQ7yQ7fKIUUOxEqHP2-hCBLzuMkdoXko",
-                authDomain: "blank-against-humanity-d9cbf.firebaseapp.com",
-                databaseURL: "https://blank-against-humanity-d9cbf.firebaseio.com",
-                storageBucket: "blank-against-humanity-d9cbf.appspot.com",
-                messagingSenderId: "778108071646"
-            };
+                    apiKey: "AIzaSyAvQ7yQ7fKIUUOxEqHP2-hCBLzuMkdoXko",
+                    authDomain: "blank-against-humanity-d9cbf.firebaseapp.com",
+                    databaseURL: "https://blank-against-humanity-d9cbf.firebaseio.com",
+                    storageBucket: "blank-against-humanity-d9cbf.appspot.com",
+                    messagingSenderId: "778108071646"
+                  };
             firebase.initializeApp(config);
         };
         initializeFirebase();
@@ -19,7 +19,7 @@ app.factory('GameFactory', ($http, $rootScope, $localStorage, $q) => {
             console.log('the settings are:', gameConfig)
             const teamId = $localStorage.team.id || 2;
             const creatorId = $localStorage.user.id || 3;
-            return $http.post('http://192.168.4.236:1337/api/games', {
+            return $http.post('http://192.168.4.225:1337/api/games', {
                     name: gameConfig.name || 'Boring Name',
                     teamId: teamId,
                     creatorId: creatorId,
@@ -80,6 +80,7 @@ app.factory('GameFactory', ($http, $rootScope, $localStorage, $q) => {
 
 
         GameFactory.getDecksByTeamId = (teamId) => {
+            teamId = teamId || $localStorage.team.id
 
             return $http.get(`http://localhost:1337/api/decks/${teamId}`)
                 .the(res => res.data)

@@ -31,10 +31,13 @@ app.controller('HomeCtrl', function($scope, $state, $cordovaOauth, UserFactory, 
     // })
 
     //$scope.startNewGame = GameFactory.startNewGame;
-    $scope.createNewGame = () => {
-        console.log('going to new state')
-        $state.go('new-game.main')
-    }
+    // $scope.createNewGame = () => {
+    //     GameFactory.startNewGame()
+    //     .then(() => {
+    //         console.log('going to new state')
+    //         $state.go('new-game.main')
+    //     })
+    // }
 
     $scope.$on('changedGame', (event, data) => {
         console.log('received event in home')
