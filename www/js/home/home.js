@@ -1,26 +1,30 @@
-app.config(function($stateProvider, $urlRouterProvider){
-	$stateProvider.state('home', {
-		url: '/',
-		templateUrl: 'js/home/home.html',
-		controller: 'HomeCtrl',
+app.config(function($stateProvider, $urlRouterProvider) {
+    $stateProvider.state('home', {
+        url: '/',
+        templateUrl: 'js/home/home.html',
+        controller: 'HomeCtrl',
         resolve: {
-            games: function(GameFactory){
+            games: function(GameFactory) {
                 return GameFactory.getGamesByTeamId()
             }
         }
-	})
+    })
 })
 
 app.controller('HomeCtrl', function($scope, $state, $cordovaOauth, UserFactory, GameFactory, $localStorage, games, $ionicPopup) {
     $scope.startNewGame = GameFactory.startNewGame;
     $scope.storage = $localStorage;
     $scope.games = games;
-    
 
-    $scope.$on('changedGame', (event,snapshot) =>{
-        $scope.name= snapshot.name;
-        $scope.$digest();
-    })
+    console.log("games", JSON.stringify($scope.games))
+    $scope.goToNewGame = () => {
+        $state.go('new-game.main')
+    }
+
+    $scope.createNewGame = () => {
+        console.log('going to new state')
+        $state.go('new-game.main')
+    }
 
     $scope.joinGame = GameFactory.joinGameById;
 
@@ -50,3 +54,4 @@ app.controller('HomeCtrl', function($scope, $state, $cordovaOauth, UserFactory, 
         })
     }
 })
+
