@@ -34,8 +34,6 @@ app.config(($stateProvider, $urlRouterProvider) => {
 })
 
 app.controller('NewGameCtrl', ($scope, GameFactory, $state, teamDecks, standardDeck) => {
-    console.log('curre', $scope)
-    $scope.test = 1345234523
     $scope.currentView = 'addDecks'
     $scope.gameConfig = {};
     $scope.gameConfig.decks = {};
@@ -44,8 +42,13 @@ app.controller('NewGameCtrl', ($scope, GameFactory, $state, teamDecks, standardD
     }
 
     $scope.decks = standardDeck.concat(teamDecks);
+    console.log('the decks are: ', $scope.decks)
 
-    $scope.startNewGame = GameFactory.startNewGame;
+    $scope.startNewGame = (gameConfig) => {
+        GameFactory.startNewGame(gameConfig).then(() => {
+            $state.go('home') //'game.pre-game', { 'gameId': 100 }
+        })
+    }
     $scope.addDecksToGame = GameFactory.addDecks;
     // $scope.$on('changedGame', (event, data) => {
     //     console.log('received event')

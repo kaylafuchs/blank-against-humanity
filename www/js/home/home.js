@@ -15,6 +15,10 @@ app.controller('HomeCtrl', function($scope, $state, $cordovaOauth, UserFactory, 
     $scope.storage = $localStorage;
     $scope.games = games;
     console.log("games", JSON.stringify($scope.games))
+    $scope.goToNewGame = () => {
+        $state.go('new-game.main')
+    }
+
 
     // // get games from postgres
     // GameFactory.getGamesByUser()

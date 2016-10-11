@@ -4,11 +4,11 @@ app.factory('GameFactory', ($http, $rootScope, $localStorage, $q) => {
 
         const initializeFirebase = () => {
             const config = {
-                apiKey: "AIzaSyAvQ7yQ7fKIUUOxEqHP2-hCBLzuMkdoXko",
-                authDomain: "blank-against-humanity-d9cbf.firebaseapp.com",
-                databaseURL: "https://blank-against-humanity-d9cbf.firebaseio.com",
-                storageBucket: "blank-against-humanity-d9cbf.appspot.com",
-                messagingSenderId: "778108071646"
+                apiKey: "AIzaSyD-tDevXvipyuE5lzheWARq4huu1UmqoJk",
+                authDomain: "capstone-fb0e8.firebaseapp.com",
+                databaseURL: "https://capstone-fb0e8.firebaseio.com",
+                storageBucket: "capstone-fb0e8.appspot.com",
+                messagingSenderId: "849839680107"
             };
             firebase.initializeApp(config);
         };
@@ -30,7 +30,7 @@ app.factory('GameFactory', ($http, $rootScope, $localStorage, $q) => {
                 .then(gameId => {
                     const gameRef = firebase.database().ref(`/teams/${teamId}/games/${gameId}`)
                     gameRef.on('value', snapshot => {
-                        console.log('snapshot is:', snapshot.val())
+                        console.log('snapshot in gamefactory is:', snapshot.val())
                         $rootScope.$broadcast('changedGame', snapshot.val())
                     });
                 })
@@ -79,10 +79,11 @@ app.factory('GameFactory', ($http, $rootScope, $localStorage, $q) => {
         //GameFactory.getCardsByDeckId 
 
 
-        GameFactory.getDecksByTeamId = (teamId) => {
-
-            return $http.get(`http://localhost:1337/api/decks/${teamId}`)
-                .the(res => res.data)
+        GameFactory.getDecksByTeamId = (id) => {
+            const teamId = (typeof id !== 'number') ? $localStorage.team.id : id; // id || localstorage doesn't work because 0 is falsey
+            console.log('the id requested is', teamId)
+            return $http.get(`http://localhost:1337/api/decks?team=${teamId}`)
+                .then(res => res.data)
 
         };
 

@@ -79,10 +79,10 @@ app.factory('GameFactory', ($http, $rootScope, $localStorage, $q) => {
         //GameFactory.getCardsByDeckId 
 
 
-        GameFactory.getDecksByTeamId = (teamId) => {
-
+        GameFactory.getDecksByTeamId = (id) => {
+            const teamId = id || $localStorage.team.id //(typeof id !== 'number') ? $localStorage.team.id : id; // uses localstorage unless id param is provided
             return $http.get(`http://localhost:1337/api/decks/${teamId}`)
-                .the(res => res.data)
+                .then(res => res.data)
 
         };
 
