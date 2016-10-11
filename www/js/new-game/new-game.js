@@ -46,7 +46,8 @@ app.controller('NewGameCtrl', ($scope, GameFactory, $state, teamDecks, standardD
     $scope.decks = standardDeck.concat(teamDecks);
 
     $scope.startNewGame = (gameConfig) => {
-        GameFactory.startNewGame(gameConfig).then(() => {
+        GameFactory.startNewGame(gameConfig).then((id) => {
+            console.log('the game id is', id)
             $state.go('home') //'game.pre-game', { 'gameId': 100 }
         })
     }
