@@ -1,14 +1,14 @@
-app.config(function($stateProvider, $urlRouterProvider){
-	$stateProvider.state('home', {
-		url: '/',
-		templateUrl: 'js/home/home.html',
-		controller: 'HomeCtrl',
+app.config(function($stateProvider, $urlRouterProvider) {
+    $stateProvider.state('home', {
+        url: '/',
+        templateUrl: 'js/home/home.html',
+        controller: 'HomeCtrl',
         resolve: {
-            games: function(GameFactory){
+            games: function(GameFactory) {
                 return GameFactory.getGamesByTeamId()
             }
         }
-	})
+    })
 })
 
 app.controller('HomeCtrl', function($scope, $state, $cordovaOauth, UserFactory, GameFactory, $localStorage, games) {
@@ -30,7 +30,11 @@ app.controller('HomeCtrl', function($scope, $state, $cordovaOauth, UserFactory, 
     //     $scope.games = games;
     // })
 
-    $scope.startNewGame = GameFactory.startNewGame;
+    //$scope.startNewGame = GameFactory.startNewGame;
+    $scope.createNewGame = () => {
+        console.log('going to new state')
+        $state.go('new-game.main')
+    }
 
     $scope.$on('changedGame', (event, data) => {
         console.log('received event in home')
@@ -39,5 +43,5 @@ app.controller('HomeCtrl', function($scope, $state, $cordovaOauth, UserFactory, 
             // $scope.$digest()
 
     })
-
 })
+

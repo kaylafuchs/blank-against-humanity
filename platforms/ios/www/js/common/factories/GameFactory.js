@@ -1,38 +1,40 @@
 app.factory('GameFactory', ($http, $rootScope, $localStorage, $q) => {
+
         const GameFactory = {};
 
         const initializeFirebase = () => {
             const config = {
-                    apiKey: "AIzaSyAvQ7yQ7fKIUUOxEqHP2-hCBLzuMkdoXko",
-                    authDomain: "blank-against-humanity-d9cbf.firebaseapp.com",
-                    databaseURL: "https://blank-against-humanity-d9cbf.firebaseio.com",
-                    storageBucket: "blank-against-humanity-d9cbf.appspot.com",
-                    messagingSenderId: "778108071646"
-                  };
+                apiKey: "AIzaSyAvQ7yQ7fKIUUOxEqHP2-hCBLzuMkdoXko",
+                authDomain: "blank-against-humanity-d9cbf.firebaseapp.com",
+                databaseURL: "https://blank-against-humanity-d9cbf.firebaseio.com",
+                storageBucket: "blank-against-humanity-d9cbf.appspot.com",
+                messagingSenderId: "778108071646"
+            };
             firebase.initializeApp(config);
         };
         initializeFirebase();
 
-        GameFactory.startNewGame = (gameName, teamId) => {
-            //return $http.get('/session').then(userId => {
+        GameFactory.startNewGame = (gameConfig) => {
             //can also get all the decks by team here to prepare
-            return $http.post('http://localhost:1337/api/games', {
-                    name: gameName || 'Boring Name',
-                    teamId: teamId || 2,
-
-                    creatorId: 2
+            console.log('the settings are:', gameConfig)
+            const teamId = $localStorage.team.id || 2;
+            const creatorId = $localStorage.user.id || 3;
+            return $http.post('http://192.168.4.236:1337/api/games', {
+                    name: gameConfig.name || 'Boring Name',
+                    teamId: teamId,
+                    creatorId: creatorId,
+                    creatorName: $localStorage.user.name || 'dan', //might be unnecessary if we have the user id
+                    settings: gameConfig
                 })
                 .then(res => res.data)
                 .then(gameId => {
-                    console.log('the gameid is:', gameId)
-                        //const reff = firebase.database().ref(`/games/`)
-                    const reff = firebase.database().ref(`/games/${gameId}`)
-                    reff.on('value', snapshot => {
+                    const gameRef = firebase.database().ref(`/teams/${teamId}/games/${gameId}`)
+                    gameRef.on('value', snapshot => {
                         console.log('snapshot is:', snapshot.val())
                         $rootScope.$broadcast('changedGame', snapshot.val())
                     });
                 })
-                //set up watcher
+
         };
 
 
@@ -49,10 +51,11 @@ app.factory('GameFactory', ($http, $rootScope, $localStorage, $q) => {
             // })
         }
 
+
         GameFactory.joinGameById = (gameId) => {
-            const teamId = 'team';
-            const playerId = 2;
-            const playerName = 'poop';
+            const teamId = 1;
+            const playerId = 4;
+            const playerName = 'cat';
             const playerRef = firebase.database().ref(`teams/${teamId}/games/${gameId}/players/${playerId}`)
             playerRef.set({
                 name: playerName
@@ -62,7 +65,7 @@ app.factory('GameFactory', ($http, $rootScope, $localStorage, $q) => {
                 $rootScope.$broadcast('changedGame', snapshot.val());
             })
         }
-            
+
 
         GameFactory.createGameByIdFireBase = (firebasegameId) => {
             //return $http.post(`http://localhost:1337/api/firebase/games/${gameId}`)
@@ -73,7 +76,8 @@ app.factory('GameFactory', ($http, $rootScope, $localStorage, $q) => {
             });
         }
 
-        // }
+        //GameFactory.getCardsByDeckId 
+
 
         GameFactory.getDecksByTeamId = (teamId) => {
 
@@ -82,6 +86,7 @@ app.factory('GameFactory', ($http, $rootScope, $localStorage, $q) => {
 
         };
 
+
         GameFactory.getUsersByGameId = (gameId) => {
             return $http.get(`http://localhost:1337/api/games/${gameId}/users`);
         };
@@ -89,25 +94,30 @@ app.factory('GameFactory', ($http, $rootScope, $localStorage, $q) => {
 
 
         GameFactory.getGameByGameId = (gameId) => {
-            const teamId = $localStorage.team.id
-            console.log(teamId);
-            const gamesRef = firebase.database().ref(`teams/2/games/${gameId}`)
-            return gamesRef.on('value').then(snapshot => {
+            // const defer = $q.defer();
+            console.log(gameId);
+            const teamId = 1;
+            const gamesRef = firebase.database().ref(`teams/${teamId}/games/${gameId}`)
+            return gamesRef.once('value').then(snapshot => {
+                console.log('TEST3', snapshot.val())
+                return snapshot.val();
+            })
+
+            // return defer.promise;
+        };
+
+        GameFactory.getGamesByTeamId = (teamId) => {
+            console.log('the team is id', teamId)
+
+            const gamesRef = firebase.database().ref(`teams/${teamId}/games`)
+            return gamesRef.once('value').then(snapshot => { //might break after you do it once
+                console.log('the val is', snapshot.val())
                 return snapshot.val();
             })
         };
 
-        // GameFactory.getGamesByTeamId = (teamId) => {
-        //     console.log('the team is id', teamId)
-
-        //     const gamesRef = firebase.database().ref(`teams/${teamId}/games`)
-        //     return gamesRef.once('value').then(snapshot => { //might break after you do it once
-        //             console.log('the val is', snapshot.val())
-        //             return snapshot.val();
-        //         })
-        // };
-
         GameFactory.getGamesByTeamId = (teamId) => {
+            teamId = teamId || $localStorage.team.id
             console.log('the team is id', teamId)
             const defer = $q.defer();
 
@@ -122,7 +132,7 @@ app.factory('GameFactory', ($http, $rootScope, $localStorage, $q) => {
 
         GameFactory.getGamesByUser = (userId) => {
             return $http.get('http://localStorage:1337/api/games/?userId=' + userId)
-            .then(res => res.data)
+                .then(res => res.data)
         }
 
 
@@ -130,3 +140,4 @@ app.factory('GameFactory', ($http, $rootScope, $localStorage, $q) => {
     }
 
 );
+

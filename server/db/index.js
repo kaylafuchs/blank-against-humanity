@@ -38,3 +38,4 @@ Game.hasMany(Round);
 Game.belongsToMany(User, { through: 'player_games' });
 Game.belongsTo(Team);
 Game.hasMany(Round);
+

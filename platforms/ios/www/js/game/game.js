@@ -1,28 +1,40 @@
 app.config(($stateProvider) => {
 
     $stateProvider.state('game', {
-        url: '/games/:teamId',
+        url: '/game',
+        abstract: true,
         templateUrl: 'js/game/game.html',
         controller: 'GameCtrl',
+    })
+    .state('game.pre-game', {
+        url: '/:gameId/pre-game',
+        templateUrl: 'js/game/pre-game.html',
+        controller: 'PreGameCtrl',
         resolve: {
-            teamGames: (GameFactory, $stateParams) => GameFactory.getGamesByTeamId($stateParams.teamId) //stateParams.teamId
+            game : (GameFactory, $stateParams) => GameFactory.getGameByGameId($stateParams.gameId)
         }
     })
 })
 
 app.controller('GameCtrl', ($scope, GameFactory) => {
-    console.log('running gamecrl')
-    $scope.startNewGame = GameFactory.startNewGame;
-    $scope.addDecksToGame = GameFactory.addDecks
-    $scope.$on('changedGame', (event, data) => {
-        console.log('received event')
-        console.log('data obj:', data)
-        $scope.game = data;
-        $scope.$digest()
-
-    })
-
-    //$scope.games = teamGames;
-
-    //console.log('teamgames ', teamGames)
+   
 })
+
+app.controller("PreGameCtrl", ($scope, GameFactory, game) => {
+
+    // $scope.$on('changedGame', (event,snapshot) => {
+    //     console.log(snapshot);
+    //     $scope.name = snapshot.name;
+    //     $scope.$digest();
+    // })
+
+    console.log(game);
+    $scope.game = game;
+    $scope.name = game.settings.name;
+    $scope.playerCount = Object.keys(game.players).length;
+    $scope.waitingForPlayers =  game.settings.minPlayers - $scope.playerCount;
+    $scope.whiteCards = game.pile.whitecards;
+   
+    
+})
+
