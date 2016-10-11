@@ -10000,3 +10000,8 @@ a {
 
 .start-game {
   margin: 5px; }
+
+.popup {
+  border-radius: 5px !important;
+  opacity: 1;
+  text-align: center; }
