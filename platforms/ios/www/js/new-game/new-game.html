@@ -24,7 +24,8 @@
                 <span> Max Number of Players</span>
                 <input ng-model="gameConfig.maxPlayers" placeholder="100"></input>
             </div>
-            <div ng-show="decks.length > 1">
+            <div>
+                <!-- ng-show="decks.length > 1" -->
                 <span>Choose your Decks</span>
                 <ol>
                     <li ng-repeat="deck in decks">
@@ -35,9 +36,11 @@
             </div>
         </form>
         <hr>
-        <button>Invite Entire Channel</button>
-        <button>Invite Specific People</button>
-        <hr>
+        <div ng-hide="true">
+            <button>Invite Entire Channel</button>
+            <button>Invite Specific People</button>
+            <hr>
+        </div>
         <button ng-click="startNewGame(gameConfig)">Begin Game</button>
     </ion-content>
 </ion-view>

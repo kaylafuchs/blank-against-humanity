@@ -1,14 +1,12 @@
 <ion-view title="Start a Game">
     <ion-content>
-        <a ui-sref="new-game.main">main</a>
-        <a ui-sref="new-game.add-decks">deck</a> thing
         <hr>
         <form name="game-rules">
             <div>
                 <span> Name your Game</span>
                 <input ng-model="gameConfig.name"> </input>
             </div>
-            <div>
+            <div ng-hide="true">
                 <span>Select Players</span>
                 <button> Add Players </button>
             </div>
@@ -24,7 +22,8 @@
                 <span> Max Number of Players</span>
                 <input ng-model="gameConfig.maxPlayers" placeholder="100"></input>
             </div>
-            <div ng-show="decks.length > 1">
+            <div>
+                <!-- ng-show="decks.length > 1" -->
                 <span>Choose your Decks</span>
                 <ol>
                     <li ng-repeat="deck in decks">
@@ -35,9 +34,11 @@
             </div>
         </form>
         <hr>
-        <button>Invite Entire Channel</button>
-        <button>Invite Specific People</button>
-        <hr>
+        <div ng-hide="true">
+            <button>Invite Entire Channel</button>
+            <button>Invite Specific People</button>
+            <hr>
+        </div>
         <button ng-click="startNewGame(gameConfig)">Begin Game</button>
     </ion-content>
 </ion-view>
