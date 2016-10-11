@@ -1,14 +1,12 @@
 <ion-view title="Start a Game">
     <ion-content>
-        <a ui-sref="new-game.main">main</a>
-        <a ui-sref="new-game.add-decks">deck</a> thing
         <hr>
         <form name="game-rules">
             <div>
                 <span> Name your Game</span>
                 <input ng-model="gameConfig.name"> </input>
             </div>
-            <div>
+            <div ng-hide="true">
                 <span>Select Players</span>
                 <button> Add Players </button>
             </div>
