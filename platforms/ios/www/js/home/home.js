@@ -1,55 +1,20 @@
-<<<<<<< HEAD
-app.config(function($stateProvider) {
+app.config(function($stateProvider, $urlRouterProvider) {
     $stateProvider.state('home', {
-        url: '/home',
+        url: '/',
         templateUrl: 'js/home/home.html',
         controller: 'HomeCtrl',
-    })
-})
-
-app.controller('HomeCtrl', function($scope, $state, $cordovaOauth, UserFactory, GameFactory, $localStorage) {
-    $scope.storage = $localStorage;
-
-
-    //$scope.startNewGame = GameFactory.startNewGame;
-    $scope.createNewGame = () => {
-        console.log('going to new state')
-        $state.go('new-game.main')
-    }
-
-    $scope.$on('changedGame', (event, data) => {
-        console.log('received event in home')
-        console.log('data obj:', data)
-            //$scope.game = data;
-            // $scope.$digest()
-
-    })
-
-    // GameFactory.getGamesByUserId(2)
-    //     .then(userGames => { $scope.userGames = userGames });
-
-
-
-
-    $scope.greeting = "hello";
-})
-=======
-app.config(function($stateProvider, $urlRouterProvider){
-	$stateProvider.state('home', {
-		url: '/',
-		templateUrl: 'js/home/home.html',
-		controller: 'HomeCtrl',
         resolve: {
-            games: function(GameFactory){
-                return GameFactory.getGamesByTeamId(1)
+            games: function(GameFactory) {
+                return GameFactory.getGamesByTeamId()
             }
         }
-	})
+    })
 })
 
 app.controller('HomeCtrl', function($scope, $state, $cordovaOauth, UserFactory, GameFactory, $localStorage, games) {
     $scope.storage = $localStorage;
     $scope.games = games;
+    console.log("games", JSON.stringify($scope.games))
 
     // // get games from postgres
     // GameFactory.getGamesByUser()
@@ -65,8 +30,11 @@ app.controller('HomeCtrl', function($scope, $state, $cordovaOauth, UserFactory, 
     //     $scope.games = games;
     // })
 
-    $scope.startNewGame = GameFactory.startNewGame;
->>>>>>> master
+    //$scope.startNewGame = GameFactory.startNewGame;
+    $scope.createNewGame = () => {
+        console.log('going to new state')
+        $state.go('new-game.main')
+    }
 
     $scope.$on('changedGame', (event, data) => {
         console.log('received event in home')
@@ -75,5 +43,5 @@ app.controller('HomeCtrl', function($scope, $state, $cordovaOauth, UserFactory, 
             // $scope.$digest()
 
     })
-
 })
+
