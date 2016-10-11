@@ -1,5 +1,36 @@
+
+
+const firebaseMoveMultipleKeyValues = (oldRef, newRef) => {
+  let removeUpdate = {}
+  let addUpdate = {}
+  oldRef.once('value')
+    .then(snapshot => {
+      snapshot.forEach(childSnapshot => {
+        addUpdate[childSnapshot.key] = childSnapshot.val()
+        removeUpdate[childSnapshot.key] = null
+      })
+      return newRef.update(addUpdate)
+    })
+    .then(() => oldRef.ref.update(removeUpdate))
+    .catch(err => console.log(err))
+}
+
 const pickBlackCard = (gameRef) => {
-  firebaseMoveMultipleKeyValues(gameRef.child('pile/blackCards').orderByKey().limitToFirst(1), gameRef.child('currentBlackCard'))
+  const nextBlackCard = gameRef.child('pile/blackCards').orderByKey().limitToFirst(1)
+  firebaseMoveMultipleKeyValues(nextBlackCard, gameRef.child('currentBlackCard'))
+}
+
+const firebaseMoveSingleKeyValue = (oldRef, newRef) => {
+  let removeUpdate = {}
+  let newUpdate = {}
+  return oldRef.once('value')
+    .catch(err => console.log(err))
+    .then(snapshot => {
+      removeUpdate[snapshot.key] = null
+      newUpdate[snapshot.key] = snapshot.val()
+      return newRef.update(newUpdate)
+    })
+    .then(() => oldRef.parent.update(removeUpdate))
 }
 
 const judgeArrManager = (playersRef, judgeArr) => {
@@ -10,17 +41,15 @@ const judgeArrManager = (playersRef, judgeArr) => {
 
 const judgePicker = (judgeArr) => {
   const currentJudge = judgeArr.shift();
-  console.log(currentJudge)
   gameRef.child('currentJudge').set(currentJudge)
   judgeArr.push(currentJudge)
-  console.log(judgeArr)
 }
 
 const stateManager = (gameId, teamId, roundTime) => {
   const gameRef = firebase.database().ref(`teams/${teamId}/games/${gameId}`);
   const gameStateRef = gameRef.child('state');
   const playersRef = gameRef.child('players');
-  const nextBlackCard = gameRef.child('pile/blackCards').orderByKey().limitToFirst(1)
+
 
   gameStateRef.set('pregame')
     .then(() => {
@@ -32,6 +61,7 @@ const stateManager = (gameId, teamId, roundTime) => {
           case 'pregame':
             {
               pickBlackCard(gameId, teamId)
+              judgePicker(judgeArr)
               gameStateRef.parent.child('players').on('child_added', newPlayerSnapshot => {
                 playerCount++
                 if (playerCount === 4) gameStateRef.set('submission')
@@ -58,6 +88,11 @@ const stateManager = (gameId, teamId, roundTime) => {
               }
               break;
             }
+          case 'postround':
+          {
+            judgePicker(judgeArr)
+            pickBlackCard(gameId, teamId)
+          }
         }
       }))
     })
