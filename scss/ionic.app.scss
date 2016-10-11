@@ -25,6 +25,10 @@ $ionicons-font-path: "../lib/ionic/fonts" !default;
 $white: #FFF;
 $black: #000;
 
+a {
+	text-decoration: none;
+}
+
 .card-game
 {
 	background: #f1f1f1;
@@ -168,6 +172,21 @@ $black: #000;
 
 }
 
+.home-card {
+	pointer-events: none;
+}
+
+.home-left {
+	margin-right: -130px;
+	transform: rotate(8deg) translateY(-15px);
+}
+
+.home-right {
+	margin-left: -130px;
+	// margin-right: -10rem;
+	transform: rotate(-8deg) translateY(10px);
+}
+
 .left {
 	//margin-left: -1rem;
 	margin-right: -15rem;
@@ -181,6 +200,7 @@ $black: #000;
 
 .center {
 	// margin-left: -0.1
+	z-index: 2000;
 }
 
 .right {
@@ -219,51 +239,74 @@ $black: #000;
 	padding: 0 2.5rem;
 	text-align: center;
 	display: flex;
+	height: 100%;
 	flex-direction: column;
 	justify-content: center;
 	align-items: center;
+	background: #f1f1f1;
 
 }
 
 .titles {
 	width: 100%;
-	flex-grow: 1;
+	//flex-grow: 1;
 	padding: 10px 10px 5px 10px;
-	margin-bottom: 10px;
-	border: 1px solid $white;
+	margin: 20px 0;
+	//border: 1px solid $black;
 	border-radius: 6px;
 	color: $black;
-	font-size: 0.8rem;
-	background-color: #b9edfb;
+	font-size: 15px;
+	//font-weight: bold;
+	display: flex;
+	justify-content: center;
+	//background-color: #b9edfb;
 }
 
 .user-info {
 	display: flex;
 	flex-direction: row;
-	justify-content: space-between;
+	justify-content: center;
 	margin-bottom: 20px;
 }
 
+.user-team {
+	text-transform: uppercase;
+	font-size: 20px;
+	line-height: 30px;
+}
+
 .games-list {
-	border: 1px solid $white;
+	//border: 1px solid $white;
 	color: $black;
 	border-radius: 8px;
 	padding: 0.5rem;
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
-	background-color: #b9edfb;
+	// background-color: #b9edfb;
 	width: 100%;
 }
 
+.your-games {
+	font-size: 20px;
+	font-weight: bold;
+	text-transform: uppercase;
+	margin-bottom: 10px;
+}
+
 .game-listing {
-	border: 1px solid $black;
+	//border: 1px solid $black;
 	border-radius: 4px;
 	padding: 4px;
 	margin: 4px 10px;
 	display: flex;
 	flex-direction: row;
 	justify-content: space-around;
+	align-items: center;
+}
+
+.start-game {
+	margin-bottom: 6px;
 }
 
 

@@ -9826,20 +9826,24 @@ a.button {
   flex-direction: column; }
 
 .other-content {
+  flex-grow: 1; }
+
+.black-card-content {
   display: flex;
   justify-content: center;
   align-items: center;
-  flex-direction: column; }
+  flex-direction: column;
+  padding-bottom: 35px; }
 
 .hand {
   counter-reset: rotation;
   display: flex;
-  flex-grow: 1;
   align-items: flex-end;
   width: 50%;
   justify-content: space-around;
   margin: 0 auto;
-  padding-bottom: 10px; }
+  padding-bottom: 20px;
+  align-self: flex-end; }
 
 .game-card {
   counter-increment: rotation;
@@ -9866,7 +9870,6 @@ a.button {
 
 .current-black-card {
   margin: 5px auto;
-  align-self: flex-start;
   box-shadow: -1px 2px 7px -1px rgba(0, 0, 0, 0.75); }
   .current-black-card:hover {
     transform: none; }
