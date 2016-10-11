@@ -4,6 +4,7 @@ app.factory('GameFactory', ($http, $rootScope, $localStorage, $q) => {
 
         const initializeFirebase = () => {
             const config = {
+<<<<<<< HEAD
                     apiKey: "AIzaSyAvQ7yQ7fKIUUOxEqHP2-hCBLzuMkdoXko",
                     authDomain: "blank-against-humanity-d9cbf.firebaseapp.com",
                     databaseURL: "https://blank-against-humanity-d9cbf.firebaseio.com",
@@ -11,8 +12,16 @@ app.factory('GameFactory', ($http, $rootScope, $localStorage, $q) => {
                     messagingSenderId: "778108071646"
                   };
             firebase.initializeApp(config);
+=======
+                apiKey: "AIzaSyD-tDevXvipyuE5lzheWARq4huu1UmqoJk",
+                authDomain: "capstone-fb0e8.firebaseapp.com",
+                databaseURL: "https://capstone-fb0e8.firebaseio.com",
+                storageBucket: "capstone-fb0e8.appspot.com",
+                messagingSenderId: "849839680107"
+            };
+            initializeFirebase();
+>>>>>>> master
         };
-        initializeFirebase();
 
         GameFactory.startNewGame = (gameConfig) => {
             //can also get all the decks by team here to prepare
@@ -30,17 +39,21 @@ app.factory('GameFactory', ($http, $rootScope, $localStorage, $q) => {
                 .then(gameId => {
                     const gameRef = firebase.database().ref(`/teams/${teamId}/games/${gameId}`)
                     gameRef.on('value', snapshot => {
-                        console.log('snapshot is:', snapshot.val())
+                        console.log('snapshot in gamefactory is:', snapshot.val())
                         $rootScope.$broadcast('changedGame', snapshot.val())
                     });
+                    return gameId;
                 })
 
         };
 
-
-        GameFactory.addCardToGame = (gameId) => {
-
-        }
+        GameFactory.getCardsByDeckId = (id) => {
+            return $http.get(`http://192.168.4.236:1337/api/decks/${id}/cards`)
+                .then(res => {
+                    console.log('res.data is:', res.data)
+                    return res.data
+                });
+        };
 
         GameFactory.addDecksToGame = (gameId, decks) => {
             return $http.post(`api/games/${gameId}/decks`, decks)
@@ -67,23 +80,27 @@ app.factory('GameFactory', ($http, $rootScope, $localStorage, $q) => {
         }
 
 
-        GameFactory.createGameByIdFireBase = (firebasegameId) => {
-            //return $http.post(`http://localhost:1337/api/firebase/games/${gameId}`)
-            //needs to be .thenable
-            const newRef = firebase.database().ref(`games/${firebasegameId}`).push();
-            newRef.set({
-                playerId: req.query.playerId
-            });
-        }
+        // GameFactory.createGameByIdFireBase = (firebasegameId) => {
+        //     //return $http.post(`http://localhost:1337/api/firebase/games/${gameId}`)
+        //     //needs to be .thenable
+        //     const newRef = firebase.database().ref(`games/${firebasegameId}`).push();
+        //     newRef.set({
+        //         playerId: req.query.playerId
+        //     });
+        // }
 
-        //GameFactory.getCardsByDeckId 
-
-
+<<<<<<< HEAD
         GameFactory.getDecksByTeamId = (teamId) => {
             teamId = teamId || $localStorage.team.id
 
             return $http.get(`http://localhost:1337/api/decks/${teamId}`)
                 .the(res => res.data)
+=======
+        GameFactory.getDecksByTeamId = (id) => {
+            const teamId = (typeof id !== 'number') ? $localStorage.team.id : id; // id || localstorage doesn't work because 0 is falsey
+            return $http.get(`http://localhost:1337/api/decks?team=${teamId}`)
+                .then(res => res.data)
+>>>>>>> master
 
         };
 
