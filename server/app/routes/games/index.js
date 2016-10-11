@@ -6,6 +6,7 @@ const User = db.model('user');
 const firebase = require('firebase')
 const _ = require('lodash');
 module.exports = router;
+const stateManager = require('../../../../utils/managers')
 
 router.param('id', (req, res, next, id) => {
     return Game.findById(id)
@@ -153,6 +154,7 @@ router.post('/', (req, res, next) => {
                     })
                 })
                 .then(() => {
+                    stateManager(gameId, req.body.teamId)
                     console.log('createdGame', gameId + '')
                     res.send(gameId + '')
                 })
