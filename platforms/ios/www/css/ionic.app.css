@@ -9815,6 +9815,9 @@ a.button {
   -webkit-transition-duration: 0s;
   transition-duration: 0s; }
 
+a {
+  text-decoration: none; }
+
 .card-game {
   background: #f1f1f1;
   font-family: "Helvetica Neue", sans-serif;
@@ -9903,9 +9906,23 @@ a.button {
   border: 1px solid #FFF;
   pointer-events: none; }
 
+.home-card {
+  pointer-events: none; }
+
+.home-left {
+  margin-right: -130px;
+  transform: rotate(8deg) translateY(-15px); }
+
+.home-right {
+  margin-left: -130px;
+  transform: rotate(-8deg) translateY(10px); }
+
 .left {
   margin-right: -15rem;
   transform: rotate(-5deg) translateY(1rem); }
+
+.center {
+  z-index: 2000; }
 
 .right {
   margin-left: -15rem;
@@ -9925,46 +9942,58 @@ a.button {
   flex-grow: 1; }
 
 .games-container {
-  padding: 0 2.5rem;
+  padding: 10px 26px;
   text-align: center;
   display: flex;
   flex-direction: column;
   justify-content: center;
-  align-items: center; }
+  align-items: center;
+  background: #f1f1f1; }
 
 .titles {
   width: 100%;
-  flex-grow: 1;
   padding: 10px 10px 5px 10px;
-  margin-bottom: 10px;
-  border: 1px solid #FFF;
+  margin: 20px 0;
   border-radius: 6px;
   color: #000;
-  font-size: 0.8rem;
-  background-color: #b9edfb; }
+  font-size: 15px;
+  display: flex;
+  justify-content: center; }
 
 .user-info {
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
+  justify-content: center;
   margin-bottom: 20px; }
 
+.user-team {
+  text-transform: uppercase;
+  font-size: 20px;
+  line-height: 30px; }
+
 .games-list {
-  border: 1px solid #FFF;
   color: #000;
   border-radius: 8px;
   padding: 0.5rem;
   display: flex;
   flex-direction: column;
   justify-content: center;
-  background-color: #b9edfb;
   width: 100%; }
 
+.your-games {
+  font-size: 20px;
+  font-weight: bold;
+  text-transform: uppercase;
+  margin-bottom: 10px; }
+
 .game-listing {
-  border: 1px solid #000;
   border-radius: 4px;
   padding: 4px;
   margin: 4px 10px;
   display: flex;
   flex-direction: row;
-  justify-content: space-around; }
+  justify-content: space-around;
+  align-items: center; }
+
+.start-game {
+  margin-bottom: 6px; }

@@ -1,18 +1,25 @@
-<ion-view title="_______ Against Humanity" class="black-bg">
-    <ion-content>
+<ion-view title="_______ Against Humanity">
+    <ion-content overflow-scroll="true">
         <div class="games-container">
-            <div class="titles">
-                <div class="user-info">
-                    <span class="user-name">{{storage.user.name}}</span>
-                    <span class="user-team">{{storage.team.name}}</span>
+            <div class="cards">
+                <div class="game-card white home-card home-right">
+                    <p class="card-text">{{storage.team.name}} Against Humanity</p>
+                    <p class="logo white">______ Against Humanity</p>
                 </div>
-                <a ui-sref="cards"><button class="button icon-right ion-chevron-right button-block button-assertive">Start new game</button></a>
+                <div class="game-card white home-card center">
+                    <p class="card-text">{{storage.team.name}} Against Humanity</p>
+                    <a ui-sref="cards"><button class="button icon-right ion-chevron-right button-assertive start-game">Start new game</button></a>
+                </div>
+                <div class="game-card white home-card home-left">
+                    <p class="card-text">{{storage.team.name}} Against Humanity</p>
+                    <p class="logo white">______ Against Humanity</p>
+                </div>
             </div>
             <div class="games-list">
-                <span>Your games</span>
-                <div ng-repeat="(key, value) in games" class="game-listing">
+                <span class="your-games">Your games</span>
+                <div ng-repeat="(key, value) in games track by $index" ng-if="value.name" class="game-listing">
                     <span>{{value.name}}</span>
-                    <button class="button button-small button-assertive">View game</button>
+                    <button class="button button-outline button-small button-assertive">View game</button>
                 </div>
             </div>
         </div>
