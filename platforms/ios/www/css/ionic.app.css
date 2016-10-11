@@ -9827,7 +9827,9 @@ a.button {
 .other-content {
   display: flex;
   flex-grow: 1;
-  justify-content: center; }
+  justify-content: center;
+  align-items: center;
+  flex-direction: column; }
 
 .hand {
   counter-reset: rotation;
@@ -9889,7 +9891,7 @@ a.button {
   justify-content: center;
   align-items: center;
   height: 70vh;
-  padding-top: 12rem; }
+  padding-top: 2rem; }
 
 .login-card {
   margin: 0 auto;
@@ -9957,4 +9959,7 @@ a.button {
   border: 1px solid #000;
   border-radius: 4px;
   padding: 4px;
-  margin: 4px 10px; }
+  margin: 4px 10px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around; }

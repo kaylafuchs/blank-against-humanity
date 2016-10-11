@@ -1,13 +1,15 @@
+
 app.factory('GameFactory', ($http, $rootScope, $localStorage, $q) => {
+
         const GameFactory = {};
 
         const initializeFirebase = () => {
             const config = {
-                    apiKey: "AIzaSyAvQ7yQ7fKIUUOxEqHP2-hCBLzuMkdoXko",
-                    authDomain: "blank-against-humanity-d9cbf.firebaseapp.com",
-                    databaseURL: "https://blank-against-humanity-d9cbf.firebaseio.com",
-                    storageBucket: "blank-against-humanity-d9cbf.appspot.com",
-                    messagingSenderId: "778108071646"
+                    apiKey: "AIzaSyCihSNkUl_O-xuzVrLZFz_mZJAGcwqJcdE",
+                    authDomain: "blankagainsthumanity-a3e7c.firebaseapp.com",
+                    databaseURL: "https://blankagainsthumanity-a3e7c.firebaseio.com",
+                    storageBucket: "blankagainsthumanity-a3e7c.appspot.com",
+                    messagingSenderId: "647415099169"
                   };
             firebase.initializeApp(config);
         };
@@ -50,9 +52,9 @@ app.factory('GameFactory', ($http, $rootScope, $localStorage, $q) => {
         }
 
         GameFactory.joinGameById = (gameId) => {
-            const teamId = 'team';
-            const playerId = 2;
-            const playerName = 'poop';
+            const teamId = $localStorage.team.id;
+            const playerId = $localStorage.user.id;
+            const playerName = $localStorage.user.name;
             const playerRef = firebase.database().ref(`teams/${teamId}/games/${gameId}/players/${playerId}`)
             playerRef.set({
                 name: playerName
@@ -89,25 +91,30 @@ app.factory('GameFactory', ($http, $rootScope, $localStorage, $q) => {
 
 
         GameFactory.getGameByGameId = (gameId) => {
-            const teamId = $localStorage.team.id
-            console.log(teamId);
-            const gamesRef = firebase.database().ref(`teams/2/games/${gameId}`)
-            return gamesRef.on('value').then(snapshot => {
+            // const defer = $q.defer();
+            console.log(gameId);
+            const teamId = 1;
+            const gamesRef = firebase.database().ref(`teams/${teamId}/games/${gameId}`)
+            return gamesRef.once('value').then(snapshot => {
+                console.log('FACTORYTEST', snapshot.val())
                 return snapshot.val();
             })
+
+            // return defer.promise;
         };
 
-        // GameFactory.getGamesByTeamId = (teamId) => {
-        //     console.log('the team is id', teamId)
+        GameFactory.getGamesByTeamId = (teamId) => {
+            console.log('the team is id', teamId)
 
-        //     const gamesRef = firebase.database().ref(`teams/${teamId}/games`)
-        //     return gamesRef.once('value').then(snapshot => { //might break after you do it once
-        //             console.log('the val is', snapshot.val())
-        //             return snapshot.val();
-        //         })
-        // };
+            const gamesRef = firebase.database().ref(`teams/${teamId}/games`)
+            return gamesRef.once('value').then(snapshot => { //might break after you do it once
+                    console.log('the val is', snapshot.val())
+                    return snapshot.val();
+                })
+        };
 
         GameFactory.getGamesByTeamId = (teamId) => {
+            teamId = teamId || $localStorage.team.id
             console.log('the team is id', teamId)
             const defer = $q.defer();
 

@@ -6,34 +6,51 @@ app.config(($stateProvider) => {
         templateUrl: 'js/game/game.html',
         controller: 'GameCtrl',
     })
-    .state('game.pre-game', {
-        url: '/:gameId/pre-game',
-        templateUrl: 'js/game/pre-game.html',
-        controller: 'PreGameCtrl',
+    .state('game.active-game', {
+        url: '/:gameId/active-game',
+        templateUrl: 'js/game/active-game.html',
+        controller: 'ActiveGameCtrl',
         resolve: {
             game : (GameFactory, $stateParams) => GameFactory.getGameByGameId($stateParams.gameId)
         }
     })
 })
 
-app.controller('GameCtrl', ($scope, GameFactory) => {
+app.controller('GameCtrl', ($scope, GameFactory) => {   
    
 })
 
-app.controller("PreGameCtrl", ($scope, GameFactory, game) => {
+app.controller("ActiveGameCtrl", ($scope, GameFactory, ActiveGameFactory, game, $stateParams, $localStorage) => {
 
-    // $scope.$on('changedGame', (event,snapshot) => {
-    //     console.log(snapshot);
-    //     $scope.name = snapshot.name;
-    //     $scope.$digest();
-    // })
-
-    console.log(game);
+    const gameId = $stateParams.gameId;
+    const playerId = $localStorage.user.id;
+    const teamId = $localStorage.team.id
     $scope.game = game;
-    $scope.name = game.settings.name;
-    $scope.playerCount = Object.keys(game.players).length;
-    $scope.waitingForPlayers =  game.settings.minPlayers - $scope.playerCount;
-    $scope.whiteCards = game.pile.whitecards;
+    $scope.gameName = $scope.game.settings.name;
+    $scope.whiteCards = $scope.game.players[playerId].hand;
+    
+    $scope.showCards = false;
+
+    $scope.playerCount = Object.keys($scope.game.players).length;
+    
+    console.log('WHITECARDS', $scope.whiteCards);
+
+    $scope.onSwipeDown = () => {
+        console.log('working');
+        console.log($scope.showCards);
+        $scope.showCards = true ;
+        console.log($scope.showCards);
+        $scope.$evalAsync();
+
+    }
+
+    ActiveGameFactory.refillMyHand(gameId, playerId, teamId);
+
+    $scope.$on('changedGame', (event,snapshot) =>{
+        $scope.game = snapshot;
+    })
+
+
    
     
 })

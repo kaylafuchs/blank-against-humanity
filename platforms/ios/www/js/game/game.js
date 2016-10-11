@@ -1,28 +1,57 @@
 app.config(($stateProvider) => {
 
     $stateProvider.state('game', {
-        url: '/games/:teamId',
+        url: '/game',
+        abstract: true,
         templateUrl: 'js/game/game.html',
         controller: 'GameCtrl',
+    })
+    .state('game.active-game', {
+        url: '/:gameId/active-game',
+        templateUrl: 'js/game/active-game.html',
+        controller: 'ActiveGameCtrl',
         resolve: {
-            teamGames: (GameFactory, $stateParams) => GameFactory.getGamesByTeamId($stateParams.teamId) //stateParams.teamId
+            game : (GameFactory, $stateParams) => GameFactory.getGameByGameId($stateParams.gameId)
         }
     })
 })
 
-app.controller('GameCtrl', ($scope, GameFactory) => {
-    console.log('running gamecrl')
-    $scope.startNewGame = GameFactory.startNewGame;
-    $scope.addDecksToGame = GameFactory.addDecks
-    $scope.$on('changedGame', (event, data) => {
-        console.log('received event')
-        console.log('data obj:', data)
-        $scope.game = data;
-        $scope.$digest()
+app.controller('GameCtrl', ($scope, GameFactory) => {   
+   
+})
 
+app.controller("ActiveGameCtrl", ($scope, GameFactory, ActiveGameFactory, game, $stateParams, $localStorage) => {
+
+    const gameId = $stateParams.gameId;
+    const playerId = $localStorage.user.id;
+    const teamId = $localStorage.team.id
+    $scope.game = game;
+    $scope.gameName = $scope.game.settings.name;
+    $scope.whiteCards = $scope.game.players[playerId].hand;
+    
+    $scope.showCards = false;
+
+    $scope.playerCount = Object.keys($scope.game.players).length;
+    
+    console.log('WHITECARDS', $scope.whiteCards);
+
+    $scope.onSwipeDown = () => {
+        console.log('working');
+        console.log($scope.showCards);
+        $scope.showCards = true ;
+        console.log($scope.showCards);
+        $scope.$evalAsync();
+
+    }
+
+    ActiveGameFactory.refillMyHand(gameId, playerId, teamId);
+
+    $scope.$on('changedGame', (event,snapshot) =>{
+        $scope.game = snapshot;
     })
 
-    //$scope.games = teamGames;
 
-    //console.log('teamgames ', teamGames)
+   
+    
 })
+
