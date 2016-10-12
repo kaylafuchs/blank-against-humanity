@@ -18,13 +18,18 @@ app.controller('HomeCtrl', function($scope, $state, $cordovaOauth, UserFactory, 
 
     console.log("games", JSON.stringify($scope.games))
     $scope.goToNewGame = () => {
-        console.log("calling goToNewGame")
+        $state.go('new-game.main')
+    }
+
+
+    $scope.createNewGame = () => {
+        console.log('going to new state')
         $state.go('new-game.main')
     }
 
     $scope.joinGame = GameFactory.joinGameById;
 
-    $scope.showPopup = function (gameId) {
+    $scope.showPopup = function(gameId) {
 
         $scope.game = $scope.games[gameId];
         $scope.gameName = $scope.game.settings.name;
@@ -43,7 +48,7 @@ app.controller('HomeCtrl', function($scope, $state, $cordovaOauth, UserFactory, 
                     type: 'button-balanced',
                     onTap: e => {
                         $scope.joinGame(gameId);
-                        $state.go('game.active-game', {gameId: gameId})
+                        $state.go('game.active-game', { gameId: gameId })
                     }
                 }
             ]
