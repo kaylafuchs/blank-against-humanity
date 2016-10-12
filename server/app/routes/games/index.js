@@ -8,7 +8,6 @@ const firebase = require('firebase')
 const _ = require('lodash');
 module.exports = router;
 const stateManager = require('../../../../utils/managers')
-const Card = db.model('card');
 
 router.param('id', (req, res, next, id) => {
     return Game.findById(id)
