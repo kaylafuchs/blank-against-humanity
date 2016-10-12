@@ -49,6 +49,7 @@ app.controller('NewGameCtrl', ($scope, GameFactory, $state, teamDecks, standardD
         GameFactory.startNewGame(gameConfig).then((id) => {
             GameFactory.addPileToGame(id, $scope.gameConfig.decks)
             $state.go('game.active-game', {gameId: id}) 
+
         })
     }
     $scope.addDecksToGame = GameFactory.addDecks;

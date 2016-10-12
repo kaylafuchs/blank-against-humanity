@@ -3,6 +3,7 @@ const router = require('express').Router(); // eslint-disable-line new-cap
 const db = require('../../../db/');
 const Game = db.model('game');
 const User = db.model('user');
+const Card = db.model('card');
 const firebase = require('firebase')
 const _ = require('lodash');
 module.exports = router;
@@ -143,6 +144,7 @@ router.post('/:id/decks', (req, res, next) => {
     return Promise.all(gettingCards)
         .then((cardsArr) => {
             const flatcards = _.flattenDeep(cardsArr)
+
             var blackCardRef;
             var whiteCardRef;
             const addingCardsToFb = flatcards.map(card => {
@@ -160,7 +162,7 @@ router.post('/:id/decks', (req, res, next) => {
                             'text': card.text
                                 // 'pick': card.pick
                         })
-                        
+
                 }
             })
             return Promise.all(addingCardsToFb);
