@@ -8,6 +8,7 @@ const firebase = require('firebase')
 const _ = require('lodash');
 module.exports = router;
 const stateManager = require('../../../../utils/managers')
+const Card = db.model('card');
 
 router.param('id', (req, res, next, id) => {
     return Game.findById(id)
@@ -101,16 +102,37 @@ router.post('/firebase/:id', (req, res, next) => {
 })
 
 
+// router.post('/:id/decks', (req, res, next) => {
+//     // decksArr = req.body.deck.makearr()
+//     const addingDecks = req.body.decks.map(deck => Game.addDeck(deckId));
+//     return Promise.all(addingDecks)
+//         .then(createdDecks => {
+//             const gettingCards = createdDecks.map(deck => deck.getCards())
+
+//             return Promise.all(gettingCards)
+//         })
+//         .then((cardsArr) => {
+
+//             const flatcards = _.flattenDeep(cardsArr)
+//             const addingCardsToFb = flatcards.map(card => {
+//                 if (card.type === 'white') {
+//                     let whiteCardRef = firebase.database().ref(`teams/${requestedGame.teamId}/games/${requestedGame.id}/pile/whitecard`)
+//                     return whiteCardRef.set({
+//                         [`${card.id}`]: card
+//                     })
+//                 } else {
+//                     let blackCardRef = firebase.database().ref(`teams/${requestedGame.teamId}/games/${requestedGame.id}/pile/blackcard`)
+//                     return blackCardRef.set({
+//                         [`${card.id}`]: card
+//                     })
+//                 }
+//             })
+//             return Promise.all(addingCardsToFB);
+//         })
+
+// })
+
 router.post('/:id/decks', (req, res, next) => {
-
-    // const addingDecks = req.body.decks.map(deckId => Game.addDecks(deckId));
-
-    // return Promise.all(addingDecks)
-    //     .then(createdDecks => {
-    //         const gettingCards = createdDecks.map(deck => deck.getCards())
-
-    //         return Promise.all(gettingCards);
-    //     })
 
     console.log(`teams/${req.requestedGame.teamId}/games/${req.requestedGame.id}/pile/blackcard`)
     const gettingCards = req.body.decks.map(deckId => Card.findAll({
@@ -123,23 +145,6 @@ router.post('/:id/decks', (req, res, next) => {
         .then((cardsArr) => {
             const flatcards = _.flattenDeep(cardsArr)
 
-            // const addingCardsToFB = flatcards.map(card => {
-            //     if (card.type === 'white') {
-            //         let whiteCardRef = firebase.database().ref(`teams/${req.requestedGame.teamId}/games/${req.requestedGame.id}/pile/whitecards`)
-            //         whiteCardRef.set({
-            //             //[`${card.id}`]: card
-            //             [`${card.id}`]: 'asdfad'
-            //         })
-            //     } else {
-            //         // console.log('adding bcard:', card)
-            //         let blackCardRef = firebase.database().ref(`teams/${req.requestedGame.teamId}/games/${req.requestedGame.id}/pile/blackcards`)
-            //         blackCardRef.set({
-            //             //[`${card.id}`]: card
-            //             [`${card.id}`]: 'asdfasfd'
-            //         })
-            //     }
-            // })
-            // return Promise.all(addingCardsToFB);
             var blackCardRef;
             var whiteCardRef;
             const addingCardsToFb = flatcards.map(card => {
@@ -157,20 +162,13 @@ router.post('/:id/decks', (req, res, next) => {
                             'text': card.text
                                 // 'pick': card.pick
                         })
-                        // var blackCardRef = firebase.database().ref(`teams/${req.requestedGame.teamId}/games/${req.requestedGame.id}/pile/blackcards`)
-                        // blackCardRef.set({
-                        //     //[`${card.id}`]: card
-                        //     [`${card.id}`]: 'asdfasfd'
-                        // })
+
                 }
             })
             return Promise.all(addingCardsToFb);
         })
 
 })
-
-//create game in postgres then in firebase
-// api/teams/2/games/
 
 router.post('/', (req, res, next) => {
     var gameId;
@@ -193,7 +191,7 @@ router.post('/', (req, res, next) => {
                     })
                 })
                 .then(() => {
-                    stateManager(gameId, req.body.teamId)
+                    //stateManager(gameId, req.body.teamId)
                     console.log('createdGame', gameId + '')
                     res.send(gameId + '')
                 })
