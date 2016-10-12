@@ -5,7 +5,9 @@ var app = express();
 
 module.exports = function(db) {
     app.use(function(req, res, next) {
-        res.header('Access-Control-Allow-Origin', 'http://192.168.4.225:8100');
+        //kayla home ip
+        res.header('Access-Control-Allow-Origin', 'http://192.168.0.2:8100');
+        // res.header('Access-Control-Allow-Origin', 'http://192.168.4.225:8100');
         res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE');
         res.header('Access-Control-Allow-Headers', 'Content-Type');
         next();

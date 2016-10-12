@@ -3,15 +3,15 @@
 		<div class="card-game">
 			<div class="other-content">
 					<p class="card-text">There are {{playerCount}} players</p>
-					<p> Swipe Down for Your Cards </p>
-				<button ng-click="onSwipeDown()">Test</button>
+					<p> Swipe down to draw your white cards</p>
+				<button class="button button-outline icon-right ion-arrow-dropdown button-balanced" ng-click="onSwipeDown()">Swipe here</button>
 			</div>
 				<ul class="hand">
-					<li class="card white one" ng-repeat="card in whiteCards">
-						<p class="card-text">{{card.cardText}}</p>
+					<li class="game-card animate white" ng-repeat="card in whiteCards">
+						<p class="card-text">{{card}}</p>
 						<p class="logo white">______ Against Humanity</p>
-					</li>
-				</ul>	
+					</li>	
+				</ul>
 		</div>
 	</ion-content>
 </ion-view>

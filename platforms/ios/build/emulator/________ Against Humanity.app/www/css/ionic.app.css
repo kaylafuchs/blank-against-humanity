@@ -9986,6 +9986,9 @@ a {
   text-transform: uppercase;
   margin-bottom: 10px; }
 
+.open {
+  margin-top: 30px; }
+
 .game-listing {
   border-radius: 4px;
   padding: 4px 15px;
@@ -9997,3 +10000,8 @@ a {
 
 .start-game {
   margin: 5px; }
+
+.popup {
+  border-radius: 5px !important;
+  opacity: 1;
+  text-align: center; }

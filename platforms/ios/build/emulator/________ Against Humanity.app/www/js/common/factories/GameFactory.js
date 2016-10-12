@@ -4,11 +4,11 @@ app.factory('GameFactory', ($http, $rootScope, $localStorage, $q) => {
 
         const initializeFirebase = () => {
             const config = {
-                    apiKey: "AIzaSyAvQ7yQ7fKIUUOxEqHP2-hCBLzuMkdoXko",
-                    authDomain: "blank-against-humanity-d9cbf.firebaseapp.com",
-                    databaseURL: "https://blank-against-humanity-d9cbf.firebaseio.com",
-                    storageBucket: "blank-against-humanity-d9cbf.appspot.com",
-                    messagingSenderId: "778108071646"
+                    apiKey: "AIzaSyCihSNkUl_O-xuzVrLZFz_mZJAGcwqJcdE",
+                    authDomain: "blankagainsthumanity-a3e7c.firebaseapp.com",
+                    databaseURL: "https://blankagainsthumanity-a3e7c.firebaseio.com",
+                    storageBucket: "blankagainsthumanity-a3e7c.appspot.com",
+                    messagingSenderId: "647415099169"
                   };
             firebase.initializeApp(config);
         };

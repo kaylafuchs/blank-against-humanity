@@ -10,12 +10,12 @@ const db = new Sequelize(env.DATABASE_URI, {
 
 const initializeFirebase = () => {
     const config = {
-        apiKey: "AIzaSyD-tDevXvipyuE5lzheWARq4huu1UmqoJk",
-        authDomain: "capstone-fb0e8.firebaseapp.com",
-        databaseURL: "https://capstone-fb0e8.firebaseio.com",
-        storageBucket: "capstone-fb0e8.appspot.com",
-        messagingSenderId: "849839680107"
-    };
+        apiKey: "AIzaSyCihSNkUl_O-xuzVrLZFz_mZJAGcwqJcdE",
+        authDomain: "blankagainsthumanity-a3e7c.firebaseapp.com",
+        databaseURL: "https://blankagainsthumanity-a3e7c.firebaseio.com",
+        storageBucket: "blankagainsthumanity-a3e7c.appspot.com",
+        messagingSenderId: "647415099169"
+      };
     firebase.initializeApp(config);
 }
 initializeFirebase();

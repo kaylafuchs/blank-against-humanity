@@ -86,7 +86,7 @@
 		</data>
 		<key>Info.plist</key>
 		<data>
-		+GYb7MR86Gz27OcmuElGtFBSd1Y=
+		ZsZ4OUsRU3qAOC9lqk5cN6YNG9Q=
 		</data>
 		<key>LaunchImage-568h@2x.png</key>
 		<data>
@@ -154,7 +154,7 @@
 		</data>
 		<key>config.xml</key>
 		<data>
-		OXV3zFDylL7n8NIT96N8kYTF5Gs=
+		VhreIqxrj8kqFsJlztoxd5N7DkQ=
 		</data>
 		<key>www/cordova-js-src/exec.js</key>
 		<data>
@@ -174,11 +174,11 @@
 		</data>
 		<key>www/css/ionic.app.css</key>
 		<data>
-		kIY5Pj86/YQSpJ7RtM/lcuSvkHA=
+		GbnCTFlXgIuOEZGtTsQmA0GCKXQ=
 		</data>
 		<key>www/css/ionic.app.min.css</key>
 		<data>
-		eO8wCXVDDsW6d6PM9/OQSfsrMek=
+		a1zXIlSmLXLfUQx3RRndc7nAGsA=
 		</data>
 		<key>www/css/style.css</key>
 		<data>
@@ -214,7 +214,7 @@
 		</data>
 		<key>www/js/common/factories/GameFactory.js</key>
 		<data>
-		nbmRHismdmKeb0MsZE4he76BRYI=
+		NcabjTw0rU+nGkUEJuViWuo38/o=
 		</data>
 		<key>www/js/common/factories/loginFactory.js</key>
 		<data>
@@ -238,7 +238,7 @@
 		</data>
 		<key>www/js/game/active-game.html</key>
 		<data>
-		ZXMz0jziH7kw7NihoM2QggsyCKI=
+		SkMhe7kUJEFFnbXvVeaRlHHQ1zQ=
 		</data>
 		<key>www/js/game/game.html</key>
 		<data>
@@ -246,19 +246,19 @@
 		</data>
 		<key>www/js/game/game.js</key>
 		<data>
-		inSeOzo8SWv0zbaAUMOoLtuQKjE=
+		ZpbnhQkIEw7V4t98SBeItCsmGBI=
 		</data>
 		<key>www/js/home/home.html</key>
 		<data>
-		e63bJrOuF6L58FdVAVLIi/C1DYE=
+		X46KJblbajsE4s6PDjD0w33zF8o=
 		</data>
 		<key>www/js/home/home.js</key>
 		<data>
-		WmLC0UE53jiBQuBoPhwhL+O02mU=
+		M5Qk0znhv3HhP3ij7WWhxuvevsI=
 		</data>
 		<key>www/js/home/popup.html</key>
 		<data>
-		a2nQphyy2T4AicwYWwpljJMebmI=
+		GdS77zHRyeHct5BuUS+04engn50=
 		</data>
 		<key>www/js/login/login.html</key>
 		<data>
@@ -594,7 +594,7 @@
 		</data>
 		<key>www/public/main.js</key>
 		<data>
-		wbQ3YANwE3kcXoAQfi4KUYhGoDE=
+		asLedpzAkncKVjZUF3BXseQrhMY=
 		</data>
 		<key>www/service-worker.js</key>
 		<data>
@@ -992,11 +992,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			OXV3zFDylL7n8NIT96N8kYTF5Gs=
+			VhreIqxrj8kqFsJlztoxd5N7DkQ=
 			</data>
 			<key>hash2</key>
 			<data>
-			rRpSBq6eyi3KLNd3+2sb1unzMyiIzlidex7XGukyWJc=
+			9euy9QN7174TI+rD7Hnfy63bnBqoNMkBQJ1NLwknygM=
 			</data>
 		</dict>
 		<key>www/cordova-js-src/exec.js</key>
@@ -1047,22 +1047,22 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			kIY5Pj86/YQSpJ7RtM/lcuSvkHA=
+			GbnCTFlXgIuOEZGtTsQmA0GCKXQ=
 			</data>
 			<key>hash2</key>
 			<data>
-			dnft3XYd7X2aqI01C3FGEvTa2ArTYQP1YXTGHKKDol0=
+			la5taEVqaafXfZ6zhWb4JrsIXERSR8YLgWt8A1kKrYo=
 			</data>
 		</dict>
 		<key>www/css/ionic.app.min.css</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			eO8wCXVDDsW6d6PM9/OQSfsrMek=
+			a1zXIlSmLXLfUQx3RRndc7nAGsA=
 			</data>
 			<key>hash2</key>
 			<data>
-			S8rwEHYqng+o586ay3WYYg4hzyrQS1364WH7SiEhLso=
+			1QukKl/aAaEoy1yZXX6/WZuYeXyFgYHN9M1zk6fztck=
 			</data>
 		</dict>
 		<key>www/css/style.css</key>
@@ -1157,11 +1157,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			nbmRHismdmKeb0MsZE4he76BRYI=
+			NcabjTw0rU+nGkUEJuViWuo38/o=
 			</data>
 			<key>hash2</key>
 			<data>
-			cplFYqBwgy78iDdN59AKbjm9j8pAxNl0KZhHcn1yGXU=
+			yg3gML4FZe5e+PVNkTNhiIFCgLTx/L4MCw7sSk5TErY=
 			</data>
 		</dict>
 		<key>www/js/common/factories/loginFactory.js</key>
@@ -1223,11 +1223,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			ZXMz0jziH7kw7NihoM2QggsyCKI=
+			SkMhe7kUJEFFnbXvVeaRlHHQ1zQ=
 			</data>
 			<key>hash2</key>
 			<data>
-			ZWUajwUPN+SA/ML5CUKBFp/syDCc1ymmqU9oHrGayUc=
+			M6i2Z+ZefbVvCOqmDjMlognOD4H7t2hpQ9BGEptmhVY=
 			</data>
 		</dict>
 		<key>www/js/game/game.html</key>
@@ -1245,44 +1245,44 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			inSeOzo8SWv0zbaAUMOoLtuQKjE=
+			ZpbnhQkIEw7V4t98SBeItCsmGBI=
 			</data>
 			<key>hash2</key>
 			<data>
-			NsgCsb8cqN1qSX96NZAl3x9lheUNUYUXgboT9UWXT2w=
+			UUhGErk8mr1l9bB1XrmwHIAmWkpMnCNk8KoAvxvERkY=
 			</data>
 		</dict>
 		<key>www/js/home/home.html</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			e63bJrOuF6L58FdVAVLIi/C1DYE=
+			X46KJblbajsE4s6PDjD0w33zF8o=
 			</data>
 			<key>hash2</key>
 			<data>
-			MZlHVt/y5oQS/Z9gVK8/YrFicuBFDufQ1vXEW2HHAGk=
+			NA3N+Weiq358P53p1NDzWxglv1n6DQ4z/H8jTX9MIcw=
 			</data>
 		</dict>
 		<key>www/js/home/home.js</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			WmLC0UE53jiBQuBoPhwhL+O02mU=
+			M5Qk0znhv3HhP3ij7WWhxuvevsI=
 			</data>
 			<key>hash2</key>
 			<data>
-			CpLcI4bgfdnBCKcHSyl/pexY0+frG8stPemxW8nu6mI=
+			2CqlsRkXu2UzY26NFVpHOJmj9WDK+l91J7c5aIecolY=
 			</data>
 		</dict>
 		<key>www/js/home/popup.html</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			a2nQphyy2T4AicwYWwpljJMebmI=
+			GdS77zHRyeHct5BuUS+04engn50=
 			</data>
 			<key>hash2</key>
 			<data>
-			tFHIPwOcWWT3GP9WkY1C2K2aAyMYPumH9mXj4mTaCBA=
+			h9vTLd/VHeFadhZdyga5mxcFejCpRkTK5GcrOPSbG5A=
 			</data>
 		</dict>
 		<key>www/js/login/login.html</key>
@@ -2202,11 +2202,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			wbQ3YANwE3kcXoAQfi4KUYhGoDE=
+			asLedpzAkncKVjZUF3BXseQrhMY=
 			</data>
 			<key>hash2</key>
 			<data>
-			sKGB/SvGn0ZPsoCAk7j9BN1fMmkmpxsJSQAIDKFEkm8=
+			7kOKB1Fi1LIRLD8f0Lk8/TvYukHnJVmrpE/7t0bTU5I=
 			</data>
 		</dict>
 		<key>www/service-worker.js</key>

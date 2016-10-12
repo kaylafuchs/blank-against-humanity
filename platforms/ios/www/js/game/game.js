@@ -27,8 +27,12 @@ app.controller("ActiveGameCtrl", ($scope, GameFactory, ActiveGameFactory, game, 
     const teamId = $localStorage.team.id
     $scope.game = game;
     $scope.gameName = $scope.game.settings.name;
-    $scope.whiteCards = $scope.game.players[playerId].hand;
-    
+
+    //this should be uncommented in final versions
+    //$scope.whiteCards = $scope.game.players[playerId].hand;
+
+    //temporary implementation for design purposes.
+    $scope.game.whiteCards = $scope.game.pile.whitecards
     $scope.showCards = false;
 
     $scope.playerCount = Object.keys($scope.game.players).length;
