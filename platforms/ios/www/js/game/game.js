@@ -53,7 +53,6 @@ app.controller("ActiveGameCtrl", ($scope, GameFactory, ActiveGameFactory, game, 
         console.log("swiped up");
         //this will trigger submisson function using card's 
         //unique id
-        
     }
 
     ActiveGameFactory.refillMyHand(gameId, playerId, teamId);
