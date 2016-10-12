@@ -30,7 +30,6 @@ app.factory('GameFactory', ($http, $rootScope, $localStorage, $q) => {
                 .then(gameId => {
                     const gameRef = firebase.database().ref(`/teams/${teamId}/games/${gameId}`)
                     gameRef.on('value', snapshot => {
-                        console.log('snapshot in gamefactory is:', snapshot.val())
                         $rootScope.$broadcast('changedGame', snapshot.val())
                     });
                     return gameId;
@@ -40,20 +39,76 @@ app.factory('GameFactory', ($http, $rootScope, $localStorage, $q) => {
 
         GameFactory.getCardsByDeckId = (id) => {
             return $http.get(`http://192.168.4.236:1337/api/decks/${id}/cards`)
-                .then(res => {
-                    console.log('res.data is:', res.data)
-                    return res.data
-                });
+                .then(res => res.data);
         };
 
-        GameFactory.addDecksToGame = (gameId, decks) => {
-            return $http.post(`api/games/${gameId}/decks`, decks)
-
-            // const gameRef = firebase.database().ref(`teams/${teamId}/games/${gameId}/pile/`)
-            // gameRef.set({
-            //     deckId: true
-            // })
+        GameFactory.addPileToGame = (gameId, decks) => {
+            const decksArr = [];
+            for (var deckId in decks) {
+                decksArr.push(deckId)
+            }
+            //console.log('the pile is', decksArr) //currently adds all decks
+            return $http.post(`http://192.168.4.236:1337/api/games/${gameId}/decks`, { 'decks': decksArr })
         }
+
+
+
+        // GameFactory.addDecksToGame = (gameId, decks) => {
+        //     return $http.post(`api/games/${gameId}/decks`, decks)
+
+        //     // const gameRef = firebase.database().ref(`teams/${teamId}/games/${gameId}/pile/`)
+        //     // gameRef.set({
+        //     //     deckId: true
+        //     // })
+        // }
+        // GameFactory.getCardsByDeckId = (gameId, deckId) => {
+        //     const teamId = $localStorage.team.id;
+        //     let pileRef = firebase.database().ref(`teams/${teamId}/games/${gameId}/pile`);
+
+        //     return $http.get(`api/decks/${deckId}/cards`)
+        //         .then(data => res.data)
+        //         .then(cards => {
+        //             const addingCards = cards.map(card => pileRef.set({
+        //                 [`${card.id}`]: true
+        //             }))
+
+        //         })
+        // }
+
+        // GameFactory.addPileToGame2 = (gameId) => {
+        //     console.log('runnign addPileToGame with id', gameId)
+        //     const teamId = $localStorage.team.id;
+        //     let deckRef = firebase.database().ref(`teams/${teamId}/games/${gameId}/settings/decks`)
+
+        //     deckRef.once('value').then(snapshot => {
+        //             const addingCards = [];
+        //             console.log('the value issss ', snapshot.val())
+        //                                 //all deck ids
+        //             for (var deckId in snapshot.val()){
+        //                 let x = GameFactory.getCardsByDeckId
+        //                 addingCards.push()
+        //             }
+
+
+        //             _.mapValues(snapshot.val(), v => deckRef.set({
+
+        //             }))
+
+        //             snapshot.val()
+
+        //             _.mapValues({ one: 1, two: 2, three: 3 }, v => v * 3);
+        //         })
+        // let pileRef = firebase.database().ref(`teams/${teamId}/games/${gameId}/pile`);
+
+        // return $http.get(`api/decks/${deckId}/cards`)
+        //     .then(data => res.data)
+        //     .then(cards => {
+        //         const addingCards = cards.map(card => pileRef.set({
+        //             [`${card.id}`]: true
+        //         }))
+
+        //     })
+        // }
 
 
         GameFactory.joinGameById = (gameId) => {
@@ -134,6 +189,15 @@ app.factory('GameFactory', ($http, $rootScope, $localStorage, $q) => {
         GameFactory.getGamesByUser = (userId) => {
             return $http.get('http://localStorage:1337/api/games/?userId=' + userId)
                 .then(res => res.data)
+        }
+
+        GameFactory.addPileToGame = (gameId, decks) => {
+                    const decksArr = [];
+                    for (var deckId in decks) {
+                        decksArr.push(deckId)
+                    }
+                    //console.log('the pile is', decksArr) //currently adds all decks
+                    return $http.post(`http://192.168.1.48:1337/api/games/${gameId}/decks`, { 'decks': decksArr })
         }
 
 
