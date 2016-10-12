@@ -4,12 +4,12 @@ app.factory('GameFactory', ($http, $rootScope, $localStorage, $q) => {
 
         const initializeFirebase = () => {
             const config = {
-                apiKey: "AIzaSyCihSNkUl_O-xuzVrLZFz_mZJAGcwqJcdE",
-                authDomain: "blankagainsthumanity-a3e7c.firebaseapp.com",
-                databaseURL: "https://blankagainsthumanity-a3e7c.firebaseio.com",
-                storageBucket: "blankagainsthumanity-a3e7c.appspot.com",
-                messagingSenderId: "647415099169"
-              };
+                    apiKey: "AIzaSyCihSNkUl_O-xuzVrLZFz_mZJAGcwqJcdE",
+                    authDomain: "blankagainsthumanity-a3e7c.firebaseapp.com",
+                    databaseURL: "https://blankagainsthumanity-a3e7c.firebaseio.com",
+                    storageBucket: "blankagainsthumanity-a3e7c.appspot.com",
+                    messagingSenderId: "647415099169"
+                  };
             firebase.initializeApp(config);
         };
         initializeFirebase();
@@ -19,7 +19,7 @@ app.factory('GameFactory', ($http, $rootScope, $localStorage, $q) => {
             console.log('the settings are:', gameConfig)
             const teamId = $localStorage.team.id || 2;
             const creatorId = $localStorage.user.id || 3;
-            return $http.post('http://192.168.1.48:1337/api/games', {
+            return $http.post('http://192.168.4.225:1337/api/games', {
                     name: gameConfig.name || 'Boring Name',
                     teamId: teamId,
                     creatorId: creatorId,
@@ -38,7 +38,7 @@ app.factory('GameFactory', ($http, $rootScope, $localStorage, $q) => {
         };
 
         GameFactory.getCardsByDeckId = (id) => {
-            return $http.get(`http://192.168.4.236:1337/api/decks/${id}/cards`)
+            return $http.get(`http://192.168.4.225:1337/api/decks/${id}/cards`)
                 .then(res => res.data);
         };
 
@@ -48,7 +48,7 @@ app.factory('GameFactory', ($http, $rootScope, $localStorage, $q) => {
                 decksArr.push(deckId)
             }
             //console.log('the pile is', decksArr) //currently adds all decks
-            return $http.post(`http://192.168.4.236:1337/api/games/${gameId}/decks`, { 'decks': decksArr })
+            return $http.post(`http://192.168.4.225:1337/api/games/${gameId}/decks`, { 'decks': decksArr })
         }
 
 
@@ -137,14 +137,14 @@ app.factory('GameFactory', ($http, $rootScope, $localStorage, $q) => {
 
         GameFactory.getDecksByTeamId = (id) => {
             const teamId = (typeof id !== 'number') ? $localStorage.team.id : id; // id || localstorage doesn't work because 0 is falsey
-            return $http.get(`http://localhost:1337/api/decks?team=${teamId}`)
+            return $http.get(`http://192.168.4.225:1337/api/decks?team=${teamId}`)
                 .then(res => res.data)
 
         };
 
 
         GameFactory.getUsersByGameId = (gameId) => {
-            return $http.get(`http://localhost:1337/api/games/${gameId}/users`);
+            return $http.get(`http://192.168.4.225:1337/api/games/${gameId}/users`);
         };
 
 
@@ -162,15 +162,17 @@ app.factory('GameFactory', ($http, $rootScope, $localStorage, $q) => {
             // return defer.promise;
         };
 
-        GameFactory.getGamesByTeamId = (teamId) => {
-            console.log('the team is id', teamId)
+        // Keep this commented out or the home state will break!!
+        // GameFactory.getGamesByTeamId = (teamId) => {
+        //     console.log('the team is id', teamId)
+        //     teamId = teamId || $localStorage.team.id
 
-            const gamesRef = firebase.database().ref(`teams/${teamId}/games`)
-            return gamesRef.once('value').then(snapshot => { //might break after you do it once
-                console.log('the val is', snapshot.val())
-                return snapshot.val();
-            })
-        };
+        //     const gamesRef = firebase.database().ref(`teams/${teamId}/games`)
+        //     return gamesRef.once('value').then(snapshot => { //might break after you do it once
+        //         console.log('the val is', snapshot.val())
+        //         return snapshot.val();
+        //     })
+        // };
 
         GameFactory.getGamesByTeamId = (teamId) => {
             teamId = teamId || $localStorage.team.id
@@ -187,7 +189,7 @@ app.factory('GameFactory', ($http, $rootScope, $localStorage, $q) => {
         };
 
         GameFactory.getGamesByUser = (userId) => {
-            return $http.get('http://localStorage:1337/api/games/?userId=' + userId)
+            return $http.get('http://192.168.4.225:1337/api/games/?userId=' + userId)
                 .then(res => res.data)
         }
 

@@ -4,7 +4,7 @@ app.factory('UserFactory', function($http, $localStorage, $timeout, $state){
 		setUser: function(info){
 			return $http({
 				method: 'POST',
-				url: 'http://localhost:1337/api/users',
+				url: 'http://192.168.4.225:1337/api/users',
 				headers: {
 					'Content-Type': 'application/json'
 				},

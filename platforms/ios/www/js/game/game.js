@@ -45,6 +45,12 @@ app.controller("ActiveGameCtrl", ($scope, GameFactory, ActiveGameFactory, game, 
         $scope.$evalAsync();
     }
 
+    $scope.onSwipeUp = () => {
+        console.log("swiped up");
+        //this will trigger submisson function using card's 
+        //unique id
+    }
+
     ActiveGameFactory.refillMyHand(gameId, playerId, teamId);
 
     $scope.$on('changedGame', (event,snapshot) =>{
