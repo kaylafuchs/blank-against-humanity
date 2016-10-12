@@ -46,8 +46,28 @@ a {
 	//margin: 0 0.5rem 3rem 0.5rem;
 }
 
-.other-content {
+.large-arrow {
+	align-self: center;
+	font-size: 100px;
 	flex-grow: 1;
+}
+
+.pile {
+	flex-grow: 0;
+}
+
+.fade.ng-hide-add, .fade.ng-hide-remove {
+  transition: all linear 0.5s;
+}
+
+.other-content {
+	width: 90%;
+	margin: 20px auto;
+	flex-grow: 1;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
 }
 
 .black-card-content {
@@ -59,6 +79,7 @@ a {
 	padding-bottom: 35px;
 	//align-self: flex-end;
 }
+
 
 .hand
 {
@@ -136,6 +157,15 @@ a {
 	background: $black;
 }
 
+.transparent {
+	color: $black;
+	background: transparent;
+}
+
+.outline {
+	border: dashed 1px $black;
+}
+
 .slack-btn {
 	width: 250px;
 	margin-top: 10px;
@@ -158,8 +188,7 @@ a {
 	flex-direction: column;
 	justify-content: center;
 	align-items: center;
-	height: 70vh;
-	padding-top: 2rem;
+	padding-top: 70px;
 }
 
 .login-card {

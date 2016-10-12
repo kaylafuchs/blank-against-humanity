@@ -9828,8 +9828,25 @@ a {
   display: flex;
   flex-direction: column; }
 
-.other-content {
+.large-arrow {
+  align-self: center;
+  font-size: 100px;
   flex-grow: 1; }
+
+.pile {
+  flex-grow: 0; }
+
+.fade.ng-hide-add, .fade.ng-hide-remove {
+  transition: all linear 0.5s; }
+
+.other-content {
+  width: 90%;
+  margin: 20px auto;
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center; }
 
 .black-card-content {
   display: flex;
@@ -9886,6 +9903,13 @@ a {
   color: #FFF;
   background: #000; }
 
+.transparent {
+  color: #000;
+  background: transparent; }
+
+.outline {
+  border: dashed 1px #000; }
+
 .slack-btn {
   width: 250px;
   margin-top: 10px; }
@@ -9902,8 +9926,7 @@ a {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  height: 70vh;
-  padding-top: 2rem; }
+  padding-top: 70px; }
 
 .login-card {
   margin: 0 auto;

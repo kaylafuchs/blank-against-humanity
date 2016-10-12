@@ -1,16 +1,61 @@
-<ion-view title={{gameName}}>
-	<ion-content>
+<ion-view title={{gameName}} class="gray-bg">
+	<ion-content overflow-scroll="true">
 		<div class="card-game">
 			<div class="other-content">
-					<p class="card-text">There are {{playerCount}} players</p>
-					<p> Swipe down to draw your white cards</p>
-				<button class="button button-outline icon-right ion-arrow-dropdown button-balanced" ng-click="onSwipeDown()">Swipe here</button>
+				<p class="card-text">{{playerCount}} player(s) in game. Waiting for {{4 - playerCount}} to start.</p>
+				<div class="game-card white pile fade" on-swipe-down="onSwipeDown()" ng-show="!showCards">
+				    <p class="card-text">Swipe down to draw white cards.</p>
+				    <i class="icon ion-arrow-down-c large-arrow"></i>
+				    <p class="logo white">______ Against Humanity</p>
+				</div>
+				<div class="game-card outline fade" ng-show="showCards">
+				    <p class="card-text">Waiting for the judge to draw a black card.</p>
+				    <p class="logo transparent">______ Against Humanity</p>
+				</div>
+				<div class="black-card-content" ng-hide="true">
+					<div class="game-card black current-black-card">
+						<p class="card-text">I drink to forget _____________ .</p>
+						<p class="logo black">______ Against Humanity</p>
+					</div>
+				</div>
+<!-- 					<p> Swipe down to draw your white cards</p>
+				<button class="button button-small icon-right ion-arrow-down-b button-balanced" ng-click="onSwipeDown()">Swipe here</button> -->
 			</div>
-				<ul class="hand">
+<!-- 				<ul class="hand">
 					<li class="game-card animate white" ng-repeat="card in whiteCards">
 						<p class="card-text">{{card}}</p>
 						<p class="logo white">______ Against Humanity</p>
 					</li>	
+				</ul> -->
+				<ul class="hand fade" ng-show="showCards">
+					<li class="game-card animate white">
+						<p class="card-text">Justin Bieber</p>
+						<p class="logo white">______ Against Humanity</p>
+					</li>
+					<li class="game-card animate white">
+						<p class="card-text">Mitt Romney doing a burlesque routine in a giant champagne glass.</p>
+						<p class="logo white">______ Against Humanity</p>
+					</li>
+					<li class="game-card animate white">
+						<p class="card-text">The Rapture.</p>
+						<p class="logo white">______ Against Humanity</p>
+					</li>
+					<li class="game-card animate white">
+						<p class="card-text">Drinking Alone.</p>
+						<p class="logo white">______ Against Humanity</p>
+					</li>
+					<li class="game-card animate white">
+						<p class="card-text">Googling photos of Betty White nude.</p>
+						<p class="logo white">______ Against Humanity</p>
+					</li>
+					<li class="game-card animate white">
+						<p class="card-text">Daddy issues.</p>
+						<p class="logo white">______ Against Humanity</p>
+					</li>
+					<li class="game-card animate white">
+						<p class="card-text">Licking things to claim them as your own.</p>
+						<p class="logo white">______ Against Humanity</p>
+					</li>
 				</ul>
 		</div>
 	</ion-content>
