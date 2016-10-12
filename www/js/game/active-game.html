@@ -4,16 +4,16 @@
 			<div class="other-content">
 				<p class="card-text">{{playerCount}} player(s) in game. Waiting for {{4 - playerCount}} to start.</p>
 				<p class="card-text" ng-hide="true">Judge: {{judge.name}}</p>
-				<div class="game-card white pile fade" on-swipe-down="onSwipeDown()" ng-show="!showCards">
+				<div class="game-card outline fade" ng-if="showCards">
+				    <p class="card-text">Waiting for the judge to draw a black card.</p>
+				    <p class="logo transparent">______ Against Humanity</p>
+				</div>
+				<div class="game-card white pile fade" on-swipe-down="onSwipeDown()" ng-if="!showCards">
 				    <p class="card-text">Swipe down to draw white cards.</p>
 				    <i class="icon ion-arrow-down-c large-arrow"></i>
 				    <p class="logo white">______ Against Humanity</p>
 				</div>
-				<div class="game-card outline fade" ng-show="showCards" ng-cloak>
-				    <p class="card-text">Waiting for the judge to draw a black card.</p>
-				    <p class="logo transparent">______ Against Humanity</p>
-				</div>
-				<div class="black-card-content" ng-hide="true">
+				<div class="black-card-content" ng-show="false">
 					<div class="game-card black current-black-card">
 						<p class="card-text">I drink to forget _____________ .</p>
 						<p class="logo black">______ Against Humanity</p>
@@ -26,7 +26,7 @@
 						<p class="logo white">______ Against Humanity</p>
 					</li>	
 				</ul> -->
-				<ul class="hand fade" ng-show="showCards" ng-cloak>
+				<ul class="hand fade" ng-show="showCards">
 					<li class="game-card animate white" on-double-tap="onDoubleTap()">
 						<p class="card-text">Justin Bieber</p>
 						<p class="logo white">______ Against Humanity</p>

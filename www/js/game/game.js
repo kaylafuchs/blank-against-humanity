@@ -41,11 +41,9 @@ app.controller("ActiveGameCtrl", ($scope, GameFactory, ActiveGameFactory, game, 
     console.log('WHITECARDS', $scope.whiteCards);
 
     $scope.onSwipeDown = () => {
-        console.log('working');
-        console.log($scope.showCards);
-        $scope.showCards = true ;
-        console.log($scope.showCards);
-        $scope.$evalAsync();
+        $scope.showCards = true;
+        //$timeout(() => {}, 3000)
+        //$scope.$evalAsync();
 
     }
 
