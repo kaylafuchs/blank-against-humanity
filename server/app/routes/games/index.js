@@ -7,8 +7,7 @@ const Card = db.model('card');
 const firebase = require('firebase')
 const _ = require('lodash');
 module.exports = router;
-const stateManager = require('../../../../utils/managers')
-const Card = db.model('card');
+const stateManager = require('../../../../utils/managers').stateManager
 
 router.param('id', (req, res, next, id) => {
     return Game.findById(id)
@@ -182,17 +181,15 @@ router.post('/', (req, res, next) => {
             gameId = createdGame.id;
             return gameRef.set({
                     teamId: req.body.teamId,
-                    settings: req.body.settings
+                    // settings: req.body.settings
                 })
                 .then(() => {
-                    const firstPlayerRef = firebase.database().ref(`teams/${req.body.teamId}/games/${createdGame.id}/players/${req.body.creatorId}`)
-                    return firstPlayerRef.set({
+                    return gameRef.child(`players/${req.body.creatorId}`).set({
                         name: req.body.creatorName //should be player name
                     })
                 })
                 .then(() => {
-                    //stateManager(gameId, req.body.teamId)
-                    console.log('createdGame', gameId + '')
+                    stateManager(gameId, req.body.teamId)
                     res.send(gameId + '')
                 })
 
