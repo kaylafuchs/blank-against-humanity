@@ -21,6 +21,7 @@ app.controller('HomeCtrl', function($scope, $state, $cordovaOauth, UserFactory, 
         $state.go('new-game.main')
     }
 
+
     $scope.createNewGame = () => {
         console.log('going to new state')
         $state.go('new-game.main')
@@ -28,26 +29,26 @@ app.controller('HomeCtrl', function($scope, $state, $cordovaOauth, UserFactory, 
 
     $scope.joinGame = GameFactory.joinGameById;
 
-    $scope.showPopup = function (gameId) {
+    $scope.showPopup = function(gameId) {
 
         $scope.game = $scope.games[gameId];
         $scope.gameName = $scope.game.settings.name;
         $scope.playerCount = Object.keys($scope.game.players).length;
-        $scope.waitingForPlayers =  $scope.game.settings.minPlayers - $scope.playerCount;
+        $scope.waitingForPlayers =  ($scope.game.settings.minPlayers || 4) - $scope.playerCount;
          
          const myPopup = $ionicPopup.show({
             templateUrl: 'js/home/popup.html',
-            title: 'Join Game',
+            title: 'Join ' + $scope.gameName,
             scope: $scope,
             buttons: 
             [
-                {text: 'Cancel'},
+                {text: 'Go back'},
                 {
-                    text: '<b>Join</b>',
-                    type: 'button-positive',
+                    text: 'Join game',
+                    type: 'button-balanced',
                     onTap: e => {
                         $scope.joinGame(gameId);
-                        $state.go('game.active-game', {gameId: gameId})
+                        $state.go('game.active-game', { gameId: gameId })
                     }
                 }
             ]

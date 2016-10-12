@@ -27,8 +27,13 @@ app.controller("ActiveGameCtrl", ($scope, GameFactory, ActiveGameFactory, game, 
     const teamId = $localStorage.team.id
     $scope.game = game;
     $scope.gameName = $scope.game.settings.name;
-    $scope.whiteCards = $scope.game.players[playerId].hand;
-    
+    console.log("active state game", JSON.stringify($scope.game));
+
+    //this should be uncommented in final versions
+    //$scope.whiteCards = $scope.game.players[playerId].hand;
+
+    //temporary implementation for design purposes.
+    // $scope.game.whiteCards = $scope.game.pile.whitecards
     $scope.showCards = false;
 
     $scope.playerCount = Object.keys($scope.game.players).length;
@@ -42,6 +47,12 @@ app.controller("ActiveGameCtrl", ($scope, GameFactory, ActiveGameFactory, game, 
         console.log($scope.showCards);
         $scope.$evalAsync();
 
+    }
+
+    $scope.onSwipeUp = () => {
+        console.log("swiped up");
+        //this will trigger submisson function using card's 
+        //unique id
     }
 
     ActiveGameFactory.refillMyHand(gameId, playerId, teamId);

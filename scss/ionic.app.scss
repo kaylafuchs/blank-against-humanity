@@ -25,15 +25,20 @@ $ionicons-font-path: "../lib/ionic/fonts" !default;
 $white: #FFF;
 $black: #000;
 
+a {
+	text-decoration: none;
+}
+
 .card-game
 {
 	background: #f1f1f1;
 	//background: $white;
 	font-family: "Helvetica Neue", sans-serif;
 	font-weight: 500;
-	height: 100vh;
+	height: 100%;
+	width: 100%;
 	//position: relative;
-	line-height: 1.25rem;
+	line-height: 18px;
 	display: flex;
 	flex-direction: column;
 	// background-image: url('http://www.fr.rockpanel.be/files/RP%20Files/Images/Products/Rockpanel%20Woods/Large/Rockpanel_Woods_Beech2.jpg');
@@ -41,50 +46,73 @@ $black: #000;
 	//margin: 0 0.5rem 3rem 0.5rem;
 }
 
-.other-content {
-	display: flex;
+.large-arrow {
+	align-self: center;
+	font-size: 100px;
 	flex-grow: 1;
+}
+
+.pile {
+	flex-grow: 0;
+}
+
+.fade.ng-hide-add, .fade.ng-hide-remove {
+  transition: all linear 0.5s;
+}
+
+.other-content {
+	width: 90%;
+	margin: 20px auto;
+	flex-grow: 1;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+}
+
+.black-card-content {
+	display: flex;
+	//flex-grow: 1;
 	justify-content: center;
 	align-items: center;
 	flex-direction: column;
+	padding-bottom: 35px;
+	//align-self: flex-end;
 }
+
 
 .hand
 {
 	counter-reset: rotation;
 	display: flex;
-	width: 63%;
+	//flex-grow: 1;
+	align-items: flex-end;
+	width: 50%;
 	justify-content: space-around;
 	// position: absolute;
 	// bottom: 1rem;
-	margin: 1rem auto 4rem auto;
+	margin: 0 auto;
+	padding-bottom: 20px;
+	align-self: flex-end;
 }
 
 
-.card
+.game-card
 {
 	counter-increment: rotation;
-	height: 17rem;
-	width: 12.021rem;
+	height: 230px;
+	width: 170px;
 	//min-width: 192px;
-	margin-left: -4.21rem;
-	margin-right: -4.21rem;
+	margin-left: -70px;
+	margin-right: -70px;
+	border-radius: 9px;
 	transform-origin: bottom left;
 	transition: transform 0.4s ease, margin 0.4s ease;
-	border-radius: 9px;
 	border: 1px solid $black;
 	display: flex;
 	flex-direction: column;
 	//box-shadow: -1px 1px 4px -1px rgba(0,0,0,0.75);
 
-	
-	&:hover
-	{
-		z-index: 1000;
-		//margin: 0 0.1rem;
-		transform: translateY(-2rem) rotate(0);
-	}
-	
 	.card-text {
 		margin: 10px;
 		flex-grow: 1;
@@ -97,10 +125,21 @@ $black: #000;
 	}
 }
 
+.animate {
+	&:hover
+	{
+		z-index: 1000;
+		//margin: 0 0.1rem;
+		transform: translateY(-2rem) rotate(0);
+	}
+
+}
+
 .current-black-card {
-	margin: 5rem auto;
-	height: 18rem;
-	width: 12.73rem;
+	margin: 5px auto;
+	//align-self: flex-end;
+	// height: 18rem;
+	// width: 12.73rem;
 	box-shadow: -1px 2px 7px -1px rgba(0,0,0,0.75);
 
 	&:hover {
@@ -118,6 +157,15 @@ $black: #000;
 	background: $black;
 }
 
+.transparent {
+	color: $black;
+	background: transparent;
+}
+
+.outline {
+	border: dashed 1px $black;
+}
+
 .slack-btn {
 	width: 250px;
 	margin-top: 10px;
@@ -131,13 +179,16 @@ $black: #000;
 	// color: $white;
 }
 
+.gray-bg {
+	background-color: #f1f1f1;
+}
+
 .login-container {
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
 	align-items: center;
-	height: 70vh;
-	padding-top: 2rem;
+	padding-top: 70px;
 }
 
 .login-card {
@@ -156,6 +207,17 @@ $black: #000;
 
 }
 
+.home-left {
+	margin-right: -130px;
+	transform: rotate(8deg) translateY(-15px);
+}
+
+.home-right {
+	margin-left: -130px;
+	// margin-right: -10rem;
+	transform: rotate(-8deg) translateY(10px);
+}
+
 .left {
 	//margin-left: -1rem;
 	margin-right: -15rem;
@@ -169,6 +231,7 @@ $black: #000;
 
 .center {
 	// margin-left: -0.1
+	z-index: 2000;
 }
 
 .right {
@@ -204,56 +267,92 @@ $black: #000;
 }
 
 .games-container {
-	padding: 0 2.5rem;
+	padding: 10px 26px;
 	text-align: center;
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
 	align-items: center;
+	// background: #f1f1f1;
 
 }
 
 .titles {
 	width: 100%;
-	flex-grow: 1;
+	//flex-grow: 1;
 	padding: 10px 10px 5px 10px;
-	margin-bottom: 10px;
-	border: 1px solid $white;
+	margin: 20px 0;
+	//border: 1px solid $black;
 	border-radius: 6px;
 	color: $black;
-	font-size: 0.8rem;
-	background-color: #b9edfb;
+	font-size: 15px;
+	//font-weight: bold;
+	display: flex;
+	justify-content: center;
+	//background-color: #b9edfb;
 }
 
 .user-info {
 	display: flex;
 	flex-direction: row;
-	justify-content: space-between;
+	justify-content: center;
 	margin-bottom: 20px;
 }
 
+.user-team {
+	text-transform: uppercase;
+	font-size: 20px;
+	line-height: 30px;
+}
+
 .games-list {
-	border: 1px solid $white;
+	//border: 1px solid $white;
 	color: $black;
 	border-radius: 8px;
 	padding: 0.5rem;
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
-	background-color: #b9edfb;
+	// background-color: #b9edfb;
 	width: 100%;
 }
 
+.your-games {
+	font-size: 20px;
+	font-weight: bold;
+	text-transform: uppercase;
+	margin-bottom: 10px;
+}
+
+.open {
+	margin-top: 30px;
+}
+
 .game-listing {
-	border: 1px solid $black;
+	//border: 1px solid $black;
 	border-radius: 4px;
-	padding: 4px;
+	padding: 4px 15px;
 	margin: 4px 10px;
 	display: flex;
 	flex-direction: row;
-	justify-content: space-around;
+	justify-content: space-between;
+	align-items: center;
 }
 
+.start-game {
+	margin: 5px;
+}
+
+.popup {
+	border-radius: 5px!important;
+	opacity: 1;
+	text-align: center;
+}
+
+
+// .allow-click {
+// 	pointer-events: auto;
+// }
 
 // .one {
 // 	transform: rotate(-8deg) translateY(1.3rem);
