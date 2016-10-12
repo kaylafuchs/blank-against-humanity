@@ -15,7 +15,7 @@ const initializeFirebase = () => {
         databaseURL: "https://blankagainsthumanity-a3e7c.firebaseio.com",
         storageBucket: "blankagainsthumanity-a3e7c.appspot.com",
         messagingSenderId: "647415099169"
-      };
+    };
     firebase.initializeApp(config);
 }
 initializeFirebase();

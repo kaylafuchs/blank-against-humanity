@@ -60,9 +60,11 @@ app.controller("ActiveGameCtrl", ($scope, GameFactory, ActiveGameFactory, game, 
     $scope.$on('changedGame', (event,snapshot) =>{
         $scope.game = snapshot;
     })
-
-
-   
     
+})
+
+app.controller('SubmissionGameCtrl', ($scope, $localStorage) => {
+
+
 })
 

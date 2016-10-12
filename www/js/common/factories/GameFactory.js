@@ -193,6 +193,15 @@ app.factory('GameFactory', ($http, $rootScope, $localStorage, $q) => {
                 .then(res => res.data)
         }
 
+        GameFactory.addPileToGame = (gameId, decks) => {
+                    const decksArr = [];
+                    for (var deckId in decks) {
+                        decksArr.push(deckId)
+                    }
+                    //console.log('the pile is', decksArr) //currently adds all decks
+                    return $http.post(`http://192.168.1.48:1337/api/games/${gameId}/decks`, { 'decks': decksArr })
+        }
+
 
         return GameFactory;
     }
