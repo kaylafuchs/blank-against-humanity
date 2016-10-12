@@ -190,8 +190,7 @@ router.post('/', (req, res, next) => {
                 })
                 .then(() => {
                     stateManager(gameId, req.body.teamId)
-                    console.log('createdGame', gameId + '')
-                    // res.send(gameId + '')
+                    res.send(gameId + '')
                 })
 
         })
