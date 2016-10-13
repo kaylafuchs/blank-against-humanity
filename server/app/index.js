@@ -8,6 +8,7 @@ const ourIps = {
     nithya: "192.168.1.48",
     dan: "192.168.4.236"
 }
+
 const currentIp = ourIps.dan
 module.exports = function(db) {
     app.use(function(req, res, next) {

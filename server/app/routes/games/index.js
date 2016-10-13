@@ -9,6 +9,7 @@ const _ = require('lodash');
 module.exports = router;
 const stateManager = require('../../../../utils/managers').stateManager
 
+
 // get game instance for id, put on req object
 router.param('id', (req, res, next, id) => {
     return Game.findById(id)
@@ -104,7 +105,6 @@ router.post('/:id/decks', (req, res, next) => {
             })
             return Promise.all(addingCardsToFb);
         })
-
 })
 
 router.post('/', (req, res, next) => {
