@@ -110,11 +110,12 @@ router.post('/:id/decks', (req, res, next) => {
 
 router.post('/', (req, res, next) => {
     var gameId;
-    // TODO: update model to account for settings
     return Game.create({
             name: req.body.name,
             teamId: req.body.teamId,
-            settings: req.body.gameConfig
+            maxPlayers: req.body.gameConfig.maxPlayers,
+            minPlayers: req.body.gameConfig.minPlayers,
+            maxTurnTime: req.body.gameConfig.maxTurnTime
         })
         .then(createdGame => {
             const gameRef = firebase.database().ref(`teams/${req.body.teamId}/games/${createdGame.id}`)

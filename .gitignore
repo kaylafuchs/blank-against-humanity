@@ -4,3 +4,4 @@ server/env/development.js
 npm-debug.log
 bower_components
 public/main.js
+typings
