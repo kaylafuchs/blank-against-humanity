@@ -5,7 +5,7 @@ app.factory('UserFactory', function($http, $localStorage){
         nithya: "192.168.1.48",
         dan: "192.168.4.236"
     }
-    const currentIp = ourIps.nikita
+    const currentIp = ourIps.kayla
 	return {
 		setUser: function(info){
 			return $http({

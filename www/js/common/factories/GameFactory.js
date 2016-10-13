@@ -5,7 +5,7 @@ app.factory('GameFactory', ($http, $rootScope, $localStorage) => {
         nithya: "192.168.1.48",
         dan: "192.168.4.236"
     }
-    const currentIp = ourIps.nithya;
+    const currentIp = ourIps.kayla;
 
         // start a new game derp
         const GameFactory = {};
@@ -38,6 +38,7 @@ app.factory('GameFactory', ($http, $rootScope, $localStorage) => {
         // TODO: combine this into the above startNewGame func
         // take all of the selected decks' cards and put them in the firebase game object pile (through route)
         GameFactory.addPileToGame = (gameId, decks) => {
+            console.log("adding pile to game")
             const decksArr = [];
             for (var deckId in decks) {
                 decksArr.push(deckId)
