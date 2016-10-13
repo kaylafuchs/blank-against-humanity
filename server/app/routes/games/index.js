@@ -53,11 +53,19 @@ router.get('/', (req, res, next) => {
             })
             .then(foundGames => res.send(foundGames))
             .catch(next);
+    }
+
+    if (req.query.teamId && req.query.open) {
+        return Game.findAll({
+                where: {
+                    teamId: req.query.teamId
+                }
+            })
+            .then(foundGames => res.send(foundGames))
     } else {
         return Game.findAll()
             .then(foundGames => res.send(foundGames));
     }
-
 
 });
 
