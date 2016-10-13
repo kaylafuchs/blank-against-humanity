@@ -1,5 +1,13 @@
 const firebase = require('firebase');
 
+const config = {
+        apiKey: "AIzaSyCihSNkUl_O-xuzVrLZFz_mZJAGcwqJcdE",
+        authDomain: "blankagainsthumanity-a3e7c.firebaseapp.com",
+        databaseURL: "https://blankagainsthumanity-a3e7c.firebaseio.com",
+        storageBucket: "blankagainsthumanity-a3e7c.appspot.com",
+        messagingSenderId: "647415099169"
+    };
+    firebase.initializeApp(config);
 const firebaseMoveMultipleKeyValues = (oldRef, newRef) => {
   let removeUpdate = {}
   let addUpdate = {}
@@ -58,7 +66,12 @@ const stateManager = (gameId, teamId, roundTime) => {
         switch (stateSnapshot.val()) {
           case 'pregame':
             {
-              pickBlackCard(gameRef)
+              gameRef.child('pile/blackCards').on('value', () => {
+                gameRef.child('currentBlackCard').once('value')
+                .then(currentBCsnapshot => {ß
+                  if (!currentBCsnapshot.val()) pickBlackCard(gameRef)
+                })
+              })
               judgePicker(judgeArr, gameRef)
               gameStateRef.parent.child('players').on('child_added', () => {
                 playerCount++
@@ -92,6 +105,8 @@ const stateManager = (gameId, teamId, roundTime) => {
       }))
     })
 }
+
+stateManager(1,2)
 module.exports = {
   stateManager: stateManager
 }
