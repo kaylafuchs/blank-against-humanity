@@ -1,11 +1,13 @@
 app.factory('GameFactory', ($http, $rootScope, $localStorage) => {
-    const ourIps = {
-        nikita: "192.168.4.213",
-        kayla: "192.168.4.225",
-        nithya: "192.168.1.48",
-        dan: "192.168.4.236"
-    }
-    const currentIp = ourIps.kayla;
+
+        const ourIps = {
+            nikita: "192.168.4.213",
+            kayla: "192.168.4.225",
+            nithya: "192.168.1.48",
+            dan: "192.168.4.236"
+        }
+        const currentIp = ourIps.dan
+
 
         // start a new game derp
         const GameFactory = {};
@@ -101,3 +103,4 @@ app.factory('GameFactory', ($http, $rootScope, $localStorage) => {
     }
 
 );
+

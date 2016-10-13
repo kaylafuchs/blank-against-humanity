@@ -7,7 +7,7 @@ app.config(($stateProvider, $urlRouterProvider) => {
         controller: 'NewGameCtrl',
         resolve: {
             teamDecks: (GameFactory) => GameFactory.getDecksByTeamId(),
-            standardDeck: (GameFactory) => GameFactory.getDecksByTeamId(0)
+            standardDeck: (GameFactory) => GameFactory.getDecksByTeamId(1)
         }
     })
 
@@ -50,8 +50,8 @@ app.controller('NewGameCtrl', ($scope, GameFactory, $state, teamDecks, standardD
         GameFactory.startNewGame(gameConfig).then((id) => {
             console.log("made it to the .then")
             GameFactory.addPileToGame(id, $scope.gameConfig.decks)
-            console.log("added pile to game")
-            $state.go('game.active-game', {gameId: id}) 
+            $state.go('game.active-game', { gameId: id })
+
 
         })
     }
