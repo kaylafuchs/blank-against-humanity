@@ -24,6 +24,8 @@ $ionicons-font-path: "../lib/ionic/fonts" !default;
 
 $white: #FFF;
 $black: #000;
+$red: #ef473a;
+$pink: #fdeceb;
 
 a {
 	text-decoration: none;
@@ -162,6 +164,8 @@ a {
 
 }
 
+
+
 .current-black-card {
 	margin: 5px auto;
 	//align-self: flex-end;
@@ -187,6 +191,11 @@ a {
 .transparent {
 	color: $black;
 	background: transparent;
+}
+
+.played-card {
+	border-color: $red;
+	background-color: $pink;
 }
 
 .outline {
