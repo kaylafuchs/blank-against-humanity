@@ -8,6 +8,7 @@ const firebase = require('firebase')
 const _ = require('lodash');
 module.exports = router;
 const stateManager = require('../../../../utils/managers').stateManager
+var gameId;
 
 
 // get game instance for id, put on req object
@@ -104,17 +105,21 @@ router.post('/:id/decks', (req, res, next) => {
 
                 }
             })
-            return Promise.all(addingCardsToFb);
+            return Promise.all(addingCardsToFb)
         })
+        .then(() => {
+            stateManager(req.requestedGame.id, req.requestedGame.teamId)
+            res.sendStatus(200)
+        })
+
 })
 
 router.post('/', (req, res, next) => {
-    var gameId;
+
     // TODO: update model to account for settings
     return Game.create({
             name: req.body.name,
-            teamId: req.body.teamId,
-            settings: req.body.gameConfig
+            teamId: req.body.teamId
         })
         .then(createdGame => {
             const gameRef = firebase.database().ref(`teams/${req.body.teamId}/games/${createdGame.id}`)
@@ -129,8 +134,7 @@ router.post('/', (req, res, next) => {
                     })
                 })
                 .then(() => {
-                    stateManager(gameId, req.body.teamId, req.body.settings.maxTurnTime)
-                    res.send(gameId + '')
+                    res.send(gameId + '');
                 })
 
         })

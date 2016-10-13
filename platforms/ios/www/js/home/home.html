@@ -8,7 +8,9 @@
                 </div>
                 <div class="game-card white center">
                     <p class="card-text">{{storage.team.name}} Against Humanity</p>
-                    <a ui-sref="new-game.main"><button class="button icon-right ion-chevron-right button-assertive start-game">Start new game</button></a>
+                    <a ui-sref="new-game.main">
+                        <button class="button icon-right ion-chevron-right button-assertive start-game">Start new game</button>
+                    </a>
                 </div>
                 <div class="game-card white home-left">
                     <p class="card-text">{{storage.team.name}} Against Humanity</p>
@@ -19,7 +21,9 @@
                 <span class="your-games">Your games</span>
                 <div ng-repeat="(key, value) in games track by $index" ng-if="value.settings.name" class="game-listing">
                     <span>{{value.settings.name}}</span>
-                    <a ui-sref="game.active-game({gameId: key})"><button class="button button-outline button-small button-assertive">View game</button></a>
+                    <a ui-sref="game.active-game({gameId: key})">
+                        <button class="button button-outline button-small button-assertive">View game</button>
+                    </a>
                 </div>
                 <span class="your-games open">Open games</span>
                 <div ng-repeat="(key, value) in games track by $index" ng-if="value.settings.name" class="game-listing">
