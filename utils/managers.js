@@ -1,4 +1,4 @@
-
+const firebase = require('firebase');
 
 const firebaseMoveMultipleKeyValues = (oldRef, newRef) => {
   let removeUpdate = {}
@@ -33,13 +33,13 @@ const firebaseMoveSingleKeyValue = (oldRef, newRef) => {
     .then(() => oldRef.parent.update(removeUpdate))
 }
 
-const judgeArrManager = (playersRef, judgeArr) => {
-  playersRef.on('child_added', (joinedPlayer) => {
-    judgeArr.push(joinedPlayer.key)
+const judgeManager = (playersRef, judgeArr) => {
+  playersRef.on('child_added', newPlayerSnapshot => {
+    judgeArr.push(newPlayerSnapshot.key);
   })
 }
 
-const judgePicker = (judgeArr) => {
+const judgePicker = (judgeArr, gameRef) => {
   const currentJudge = judgeArr.shift();
   gameRef.child('currentJudge').set(currentJudge)
   judgeArr.push(currentJudge)
@@ -49,22 +49,27 @@ const stateManager = (gameId, teamId, roundTime) => {
   const gameRef = firebase.database().ref(`teams/${teamId}/games/${gameId}`);
   const gameStateRef = gameRef.child('state');
   const playersRef = gameRef.child('players');
-
-
+  let judgeArr = [];
+  judgeManager(playersRef, judgeArr);
   gameStateRef.set('pregame')
     .then(() => {
       gameStateRef.on('value', (stateSnapshot => {
         let playerCount = 0;
-        let judgeArr = []
-        judgeArrManager(playersRef, judgeArr)
         switch (stateSnapshot.val()) {
           case 'pregame':
             {
-              pickBlackCard(gameId, teamId)
-              judgePicker(judgeArr)
-              gameStateRef.parent.child('players').on('child_added', newPlayerSnapshot => {
+              gameRef.child('pile/blackCards').on('value', () => {
+                gameRef.child('currentBlackCard').once('value')
+                .then(currentBCsnapshot => {ß
+                  if (!currentBCsnapshot.val()) pickBlackCard(gameRef)
+                })
+              })
+              judgePicker(judgeArr, gameRef)
+              gameStateRef.parent.child('players').on('child_added', () => {
                 playerCount++
-                if (playerCount === 4) gameStateRef.set('submission')
+                if (playerCount === 4) {
+                  gameStateRef.set('submission')
+                }
               })
               break;
             }
@@ -88,15 +93,12 @@ const stateManager = (gameId, teamId, roundTime) => {
               }
               break;
             }
-          case 'postround':
-          {
-            judgePicker(judgeArr)
-            pickBlackCard(gameId, teamId)
-          }
         }
       }))
     })
 }
+
+stateManager(1,2)
 module.exports = {
   stateManager: stateManager
 }

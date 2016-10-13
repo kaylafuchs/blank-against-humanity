@@ -1,10 +1,16 @@
-app.factory('UserFactory', function($http, $localStorage, $timeout, $state){
-	
+app.factory('UserFactory', function($http, $localStorage){
+	const ourIps = {
+        nikita: "192.168.4.213",
+        kayla: "192.168.4.225",
+        nithya: "192.168.1.48",
+        dan: "192.168.4.236"
+    }
+    const currentIp = ourIps.nikita
 	return {
 		setUser: function(info){
 			return $http({
 				method: 'POST',
-				url: 'http://192.168.4.225:1337/api/users',
+				url: `http://${currentIp}:1337/api/users`,
 				headers: {
 					'Content-Type': 'application/json'
 				},
@@ -14,7 +20,12 @@ app.factory('UserFactory', function($http, $localStorage, $timeout, $state){
 				this.setLocalStorage(res.data.user[0], res.data.team[0]);
 			})
 		},
-
+		getSlackCreds: function(){
+			return $http.get(`http://${currentIp}:1337/api/slack`)
+				.then(res => {
+					return res.data
+				})
+		},
 		getSlackInfo: function(){
 			return $http.get('https://slack.com/api/users.identity')
 		},

@@ -22,11 +22,6 @@ app.controller('HomeCtrl', function($scope, $state, $cordovaOauth, UserFactory, 
     }
 
 
-    $scope.createNewGame = () => {
-        console.log('going to new state')
-        $state.go('new-game.main')
-    }
-
     $scope.joinGame = GameFactory.joinGameById;
 
     $scope.showPopup = function(gameId) {

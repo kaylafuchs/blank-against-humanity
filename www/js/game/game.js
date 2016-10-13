@@ -1,27 +1,30 @@
 app.config(($stateProvider) => {
 
     $stateProvider.state('game', {
-        url: '/game',
+        url: '/game/:gameId',
         abstract: true,
         templateUrl: 'js/game/game.html',
         controller: 'GameCtrl',
+        resolve: {
+            game : (GameFactory, $stateParams) => GameFactory.getGameByGameId($stateParams.gameId)
+        }  
     })
     .state('game.active-game', {
-        url: '/:gameId/active-game',
+        url: '/active-game',
         templateUrl: 'js/game/active-game.html',
         controller: 'ActiveGameCtrl',
         resolve: {
             game : (GameFactory, $stateParams) => GameFactory.getGameByGameId($stateParams.gameId)
-        }
+        }    
+    })
+    .state('game.submission-game', {
+        url: '/submission-game',
+        templateUrl: 'js/game/submission-game.html',
+        controller: 'SubmissionGameCtrl'
     })
 })
 
-app.controller('GameCtrl', ($scope, GameFactory) => {   
-   
-})
-
-app.controller("ActiveGameCtrl", ($scope, GameFactory, ActiveGameFactory, game, $stateParams, $localStorage) => {
-
+app.controller('GameCtrl', ($scope, GameFactory, $stateParams, $localStorage, game) => {   
     const gameId = $stateParams.gameId;
     const playerId = $localStorage.user.id;
     console.log("player id", playerId)
@@ -48,23 +51,24 @@ app.controller("ActiveGameCtrl", ($scope, GameFactory, ActiveGameFactory, game, 
     //$scope.playerHand = $scope.game.players[playerId].hand;
     //(console.log("player hand", $scope.hand))
 
-    $scope.playerCount = Object.keys($scope.game.players).length;
+    $scope.playerCount = Object.keys($scope.game.players).length;     
+})
+
+
+app.controller("ActiveGameCtrl", ($scope, GameFactory, ActiveGameFactory, game, $stateParams, $localStorage, $state) => {
+
     
-
     $scope.onSwipeDown = () => {
-        $scope.showCards = true;
-        //$timeout(() => {}, 3000)
-        //$scope.$evalAsync();
-
+        console.log('working');
+        console.log($scope.showCards);
+        $scope.showCards = true ;
+        console.log($scope.showCards);
+        $scope.$evalAsync();
     }
 
     $scope.onSwipeUp = () => {
         console.log("swiped up");
-        //this will trigger submisson function using card's 
-        //unique id
     }
-
-    //still need to be able to get player's hand from deck and set it on scope so we can render it
 
     $scope.onDoubleTap = (key) => {
         console.log("double tapped")
@@ -72,17 +76,22 @@ app.controller("ActiveGameCtrl", ($scope, GameFactory, ActiveGameFactory, game, 
         //call submit card function here.
     }
 
-    ActiveGameFactory.refillMyHand(gameId, playerId, teamId);
+    ActiveGameFactory.refillMyHand($scope.gameId, $scope.playerId, $scope.teamId);
 
     $scope.$on('changedGame', (event,snapshot) =>{
         $scope.game = snapshot;
+        console.log($scope.game);
+        if(game.state === 'submission'){
+            $state.go('game.submission-game')
+        } 
     })
-    //need to listen for judge choice, refill hand after round
-    
 })
 
 app.controller('SubmissionGameCtrl', ($scope, $localStorage) => {
+    $scope.$on('changedGame', (event,snapshot) =>{
+        $scope.game = snapshot;
+    })
 
-
+   $scope.judge = $scope.game.players[$scope.game.currentJudge].name
 })
 
