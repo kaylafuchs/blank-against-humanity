@@ -6,9 +6,9 @@ app.config(function($stateProvider){
 	})
 })
 
-app.controller('LoginCtrl', function($scope, $state, LoginFactory, UserFactory, $cordovaOauth, $localStorage, $timeout){
+app.controller('LoginCtrl', function($scope, $state, UserFactory, $cordovaOauth, $localStorage, $timeout){
  	$scope.loginWithSlack = function(){
- 		return LoginFactory.getSlackCreds()
+ 		return UserFactory.getSlackCreds()
  		.then(creds =>{
  			return $cordovaOauth.slack(creds.clientID, creds.clientSecret, ['identity.basic', 'identity.team', 'identity.avatar'])
  		})
