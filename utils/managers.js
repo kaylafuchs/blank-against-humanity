@@ -1,13 +1,5 @@
 const firebase = require('firebase');
 
-const config = {
-        apiKey: "AIzaSyCihSNkUl_O-xuzVrLZFz_mZJAGcwqJcdE",
-        authDomain: "blankagainsthumanity-a3e7c.firebaseapp.com",
-        databaseURL: "https://blankagainsthumanity-a3e7c.firebaseio.com",
-        storageBucket: "blankagainsthumanity-a3e7c.appspot.com",
-        messagingSenderId: "647415099169"
-    };
-    firebase.initializeApp(config);
 const firebaseMoveMultipleKeyValues = (oldRef, newRef) => {
   let removeUpdate = {}
   let addUpdate = {}

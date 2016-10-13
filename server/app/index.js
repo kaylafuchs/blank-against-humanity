@@ -8,7 +8,7 @@ const ourIps = {
     nithya: "192.168.1.48",
     dan: "192.168.4.236"
 }
-const currentIp = ourIps.nikita
+const currentIp = ourIps.nithya
 module.exports = function (db) {
     app.use(function (req, res, next) {
         res.header('Access-Control-Allow-Origin', `http://${currentIp}:8100`);
