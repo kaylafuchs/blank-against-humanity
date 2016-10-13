@@ -1,19 +1,6 @@
 app.factory('GameFactory', ($http, $rootScope, $localStorage, $q) => {
 
         const GameFactory = {};
-
-        const initializeFirebase = () => {
-            const config = {
-                    apiKey: "AIzaSyCihSNkUl_O-xuzVrLZFz_mZJAGcwqJcdE",
-                    authDomain: "blankagainsthumanity-a3e7c.firebaseapp.com",
-                    databaseURL: "https://blankagainsthumanity-a3e7c.firebaseio.com",
-                    storageBucket: "blankagainsthumanity-a3e7c.appspot.com",
-                    messagingSenderId: "647415099169"
-                  };
-            firebase.initializeApp(config);
-        };
-        initializeFirebase();
-
         GameFactory.startNewGame = (gameConfig) => {
             //can also get all the decks by team here to prepare
             console.log('the settings are:', gameConfig)
@@ -47,7 +34,9 @@ app.factory('GameFactory', ($http, $rootScope, $localStorage, $q) => {
                 decksArr.push(deckId)
             }
             //console.log('the pile is', decksArr) //currently adds all decks
-            return $http.post(`http://192.168.1.48:1337/api/games/${gameId}/decks`, { 'decks': decksArr })
+            return $http.post(`http://192.168.1.48:1337/api/games/${gameId}/decks`, {
+                'decks': decksArr
+            })
         }
 
 
@@ -193,12 +182,14 @@ app.factory('GameFactory', ($http, $rootScope, $localStorage, $q) => {
         }
 
         GameFactory.addPileToGame = (gameId, decks) => {
-                    const decksArr = [];
-                    for (var deckId in decks) {
-                        decksArr.push(deckId)
-                    }
-                    //console.log('the pile is', decksArr) //currently adds all decks
-                    return $http.post(`http://192.168.1.48:1337/api/games/${gameId}/decks`, { 'decks': decksArr })
+            const decksArr = [];
+            for (var deckId in decks) {
+                decksArr.push(deckId)
+            }
+            //console.log('the pile is', decksArr) //currently adds all decks
+            return $http.post(`http://192.168.1.48:1337/api/games/${gameId}/decks`, {
+                'decks': decksArr
+            })
         }
 
 
@@ -206,4 +197,3 @@ app.factory('GameFactory', ($http, $rootScope, $localStorage, $q) => {
     }
 
 );
-
