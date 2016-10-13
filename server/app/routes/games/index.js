@@ -9,6 +9,7 @@ const _ = require('lodash');
 module.exports = router;
 const stateManager = require('../../../../utils/managers').stateManager
 
+
 router.param('id', (req, res, next, id) => {
     return Game.findById(id)
         .then(foundGame => {
@@ -100,36 +101,6 @@ router.post('/firebase/:id', (req, res, next) => {
     }
 })
 
-
-// router.post('/:id/decks', (req, res, next) => {
-//     // decksArr = req.body.deck.makearr()
-//     const addingDecks = req.body.decks.map(deck => Game.addDeck(deckId));
-//     return Promise.all(addingDecks)
-//         .then(createdDecks => {
-//             const gettingCards = createdDecks.map(deck => deck.getCards())
-
-//             return Promise.all(gettingCards)
-//         })
-//         .then((cardsArr) => {
-
-//             const flatcards = _.flattenDeep(cardsArr)
-//             const addingCardsToFb = flatcards.map(card => {
-//                 if (card.type === 'white') {
-//                     let whiteCardRef = firebase.database().ref(`teams/${requestedGame.teamId}/games/${requestedGame.id}/pile/whitecard`)
-//                     return whiteCardRef.set({
-//                         [`${card.id}`]: card
-//                     })
-//                 } else {
-//                     let blackCardRef = firebase.database().ref(`teams/${requestedGame.teamId}/games/${requestedGame.id}/pile/blackcard`)
-//                     return blackCardRef.set({
-//                         [`${card.id}`]: card
-//                     })
-//                 }
-//             })
-//             return Promise.all(addingCardsToFB);
-//         })
-
-// })
 
 router.post('/:id/decks', (req, res, next) => {
 

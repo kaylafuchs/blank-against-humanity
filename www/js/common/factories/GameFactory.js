@@ -19,7 +19,7 @@ app.factory('GameFactory', ($http, $rootScope, $localStorage, $q) => {
             console.log('the settings are:', gameConfig)
             const teamId = $localStorage.team.id || 2;
             const creatorId = $localStorage.user.id || 3;
-            return $http.post('http://192.168.4.225:1337/api/games', {
+            return $http.post('http://192.168.1.48:1337/api/games', {
                     name: gameConfig.name || 'Boring Name',
                     teamId: teamId,
                     creatorId: creatorId,
@@ -34,11 +34,10 @@ app.factory('GameFactory', ($http, $rootScope, $localStorage, $q) => {
                     });
                     return gameId;
                 })
-
         };
 
         GameFactory.getCardsByDeckId = (id) => {
-            return $http.get(`http://192.168.4.225:1337/api/decks/${id}/cards`)
+            return $http.get(`http://192.168.1.48:1337/api/decks/${id}/cards`)
                 .then(res => res.data);
         };
 
@@ -48,7 +47,7 @@ app.factory('GameFactory', ($http, $rootScope, $localStorage, $q) => {
                 decksArr.push(deckId)
             }
             //console.log('the pile is', decksArr) //currently adds all decks
-            return $http.post(`http://192.168.4.225:1337/api/games/${gameId}/decks`, { 'decks': decksArr })
+            return $http.post(`http://192.168.1.48:1337/api/games/${gameId}/decks`, { 'decks': decksArr })
         }
 
 
@@ -137,14 +136,14 @@ app.factory('GameFactory', ($http, $rootScope, $localStorage, $q) => {
 
         GameFactory.getDecksByTeamId = (id) => {
             const teamId = (typeof id !== 'number') ? $localStorage.team.id : id; // id || localstorage doesn't work because 0 is falsey
-            return $http.get(`http://192.168.4.225:1337/api/decks?team=${teamId}`)
+            return $http.get(`http://192.168.1.48:1337/api/decks?team=${teamId}`)
                 .then(res => res.data)
 
         };
 
 
         GameFactory.getUsersByGameId = (gameId) => {
-            return $http.get(`http://192.168.4.225:1337/api/games/${gameId}/users`);
+            return $http.get(`http://192.168.1.48:1337/api/games/${gameId}/users`);
         };
 
 
@@ -189,7 +188,7 @@ app.factory('GameFactory', ($http, $rootScope, $localStorage, $q) => {
         };
 
         GameFactory.getGamesByUser = (userId) => {
-            return $http.get('http://192.168.4.225:1337/api/games/?userId=' + userId)
+            return $http.get('http://192.168.1.48:1337/api/games/?userId=' + userId)
                 .then(res => res.data)
         }
 
