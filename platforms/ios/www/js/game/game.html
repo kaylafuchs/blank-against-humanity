@@ -1,7 +1,33 @@
-<ion-view class="gray-bg">
-    <ion-content overflow-scroll="true">
-<!--         <div style="height: 500px"> -->
-            <ion-nav-view></ion-nav-view>
-<!--         </div> -->
-    </ion-content>
+<ion-view title={{gameName}} class="gray-bg">
+	<ion-content overflow-scroll="true">
+		<div class="card-game">
+			<div class="other-content">
+				<p class="card-text" ng-if="playerCount < 4">Waiting for {{4 - playerCount}} player(s) to start.</p>
+				<p class="card-text" ng-if="playerCount > 0">The judge is: Joe</p>
+				<p class="card-text" ng-hide="true">Please submit a white card!</p>
+				<p class="card-text" ng-hide="true">White card submitted. {{judge.name}} is picking a winner.</p>
+	<!-- 			<div class="game-card outline fade" ng-if="showCards">
+				    <p class="card-text">Waiting for the judge to draw a black card.</p>
+				    <p class="logo transparent">______ Against Humanity</p>
+				</div>  -->
+				<div class="game-card white pile fade" on-swipe-down="onSwipeDown()" ng-if="!showCards">
+				    <p class="card-text">Swipe down to draw white cards.</p>
+				    <i class="icon ion-arrow-down-c large-arrow"></i>
+				    <p class="logo white">______ Against Humanity</p>
+				</div>
+				<div class="black-card-content" ng-if="showCards">
+					<div class="game-card black current-black-card">
+						<p class="card-text">{{blackCardText}}</p>
+						<p class="logo black">______ Against Humanity</p>
+					</div>
+				</div>
+			</div>
+				<ul class="hand fade" ng-show="showCards">
+					<li class="game-card animate white" ng-repeat="(key,val) in playerHand">
+						<p class="card-text">{{val.text}}</p>
+						<p class="logo white">______ Against Humanity</p>
+					</li>	
+				</ul>
+		</div>
+	</ion-content>
 </ion-view>
