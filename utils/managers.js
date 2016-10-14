@@ -16,8 +16,12 @@ const firebaseMoveMultipleKeyValues = (oldRef, newRef) => {
 }
 
 const pickBlackCard = (gameRef) => {
-    const nextBlackCard = gameRef.child('pile/blackCards').orderByKey().limitToFirst(1)
-    firebaseMoveMultipleKeyValues(nextBlackCard, gameRef.child('currentBlackCard'))
+    const nextBlackCard = gameRef.child('pile/blackcards').orderByKey().limitToFirst(1)
+    nextBlackCard.once('value')
+        .then(nextBlackCardSnapshot => {
+            console.log('value is', nextBlackCardSnapshot.val())
+            firebaseMoveMultipleKeyValues(nextBlackCard, gameRef.child('currentBlackCard'))
+        })
 }
 
 const firebaseMoveSingleKeyValue = (oldRef, newRef) => {
@@ -51,19 +55,15 @@ const stateManager = (gameId, teamId, roundTime) => {
     const playersRef = gameRef.child('players');
     let judgeArr = [];
     judgeManager(playersRef, judgeArr);
-    gameStateRef.set('pregame')
+    return gameStateRef.set('pregame')
         .then(() => {
+            console.log('game state set to pregame')
             gameStateRef.on('value', (stateSnapshot => {
                 let playerCount = 0;
                 switch (stateSnapshot.val()) {
                     case 'pregame':
                         {
-                            gameRef.child('pile/blackCards').on('value', () => {
-                                gameRef.child('currentBlackCard').once('value')
-                                    .then(currentBCsnapshot => {
-                                        if (!currentBCsnapshot.val()) pickBlackCard(gameRef)
-                                    })
-                            })
+                            pickBlackCard(gameRef)
                             judgePicker(judgeArr, gameRef)
                             gameStateRef.parent.child('players').on('child_added', () => {
                                 playerCount++
@@ -98,7 +98,6 @@ const stateManager = (gameId, teamId, roundTime) => {
         })
 }
 
-stateManager(1, 2)
 module.exports = {
     stateManager: stateManager
 }

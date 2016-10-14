@@ -26,3 +26,9 @@ app.run(function($ionicPlatform) {
 
 })
 
+app.run(function($rootScope) {
+    $rootScope.$on('$stateChangeError', function() {
+        console.log(JSON.stringify(arguments[5]));
+    });
+});
+

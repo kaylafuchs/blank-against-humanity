@@ -46,8 +46,9 @@ app.factory('GameFactory', ($http, $rootScope, $localStorage) => {
                 decksArr.push(deckId)
             }
             return $http.post(`http://${currentIp}:1337/api/games/${gameId}/decks`, {
-                'decks': decksArr
-            })
+                    'decks': decksArr
+                })
+                .then(() => gameId)
         }
 
         GameFactory.joinGameById = (gameId) => {
@@ -89,6 +90,7 @@ app.factory('GameFactory', ($http, $rootScope, $localStorage) => {
 
         GameFactory.getGamesByTeamId = (teamId) => {
             teamId = teamId || $localStorage.team.id
+            console.log('the team id is:', teamId)
             return $http.get(`http://${currentIp}:1337/api/games/?teamId=${teamId}`)
                 .then(res => res.data)
                 .catch(err => console.log(err))

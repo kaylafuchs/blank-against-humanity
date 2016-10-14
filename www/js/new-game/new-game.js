@@ -6,7 +6,10 @@ app.config(($stateProvider, $urlRouterProvider) => {
         templateUrl: 'js/new-game/main.html',
         controller: 'NewGameCtrl',
         resolve: {
-            teamDecks: (GameFactory) => GameFactory.getDecksByTeamId(),
+            teamDecks: (GameFactory) => {
+                console.log('Navigating to state or trying to hello')
+                return GameFactory.getDecksByTeamId()
+            },
             standardDeck: (GameFactory) => GameFactory.getDecksByTeamId(1)
         }
     })
@@ -46,14 +49,12 @@ app.controller('NewGameCtrl', ($scope, GameFactory, $state, teamDecks, standardD
     $scope.decks = standardDeck.concat(teamDecks);
 
     $scope.startNewGame = (gameConfig) => {
-        console.log("called start new game")
-        GameFactory.startNewGame(gameConfig).then((id) => {
-            console.log("made it to the .then")
-            GameFactory.addPileToGame(id, $scope.gameConfig.decks)
-            $state.go('game.active-game', { gameId: id })
-
-
-        })
+        return GameFactory.startNewGame(gameConfig)
+            .then((id) => GameFactory.addPileToGame(id, $scope.gameConfig.decks))
+            .then((id) => {
+                console.log('im here')
+                $state.go('game.active-game', { gameId: id })
+            });
     }
     $scope.addDecksToGame = GameFactory.addDecks;
     // $scope.$on('changedGame', (event, data) => {
