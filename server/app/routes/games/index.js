@@ -77,7 +77,7 @@ router.get('/', (req, res, next) => {
 router.post('/:id', (req, res, next) => {
         if (req.query.playerId) {
             console.log(req.body);
-            return req.requestedGame.addUsers(req.query.playerId)
+            return req.requestedGame.addUsers(+req.query.playerId)
                 .then(updatedGame => res.send(updatedGame));
         } else {
             res.send('bad request')
@@ -129,9 +129,9 @@ router.post('/', (req, res, next) => {
     return Game.create({
             name: req.body.name,
             teamId: req.body.teamId,
-            maxPlayers: req.body.gameConfig.maxPlayers,
-            minPlayers: req.body.gameConfig.minPlayers,
-            maxTurnTime: req.body.gameConfig.maxTurnTime
+            maxPlayers: req.body.settings.maxPlayers,
+            minPlayers: req.body.settings.minPlayers,
+            maxTurnTime: req.body.settings.maxTurnTime
 
         })
         .then(createdGame => {
