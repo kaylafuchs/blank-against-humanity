@@ -75,6 +75,7 @@ router.get('/', (req, res, next) => {
 // associate a user to a game in postGreSQL
 router.post('/:id', (req, res, next) => {
         if (req.query.playerId) {
+            console.log(req.body);
             return req.requestedGame.addUsers(req.query.playerId)
                 .then(updatedGame => res.send(updatedGame));
         } else {

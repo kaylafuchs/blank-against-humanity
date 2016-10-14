@@ -31,14 +31,29 @@ app.factory('ActiveGameFactory', ($http, $rootScope, $localStorage) => {
             })
         }
 
+        const firebaseMoveSingleKeyValue = (oldRef, newRef) => {
+            let removeUpdate = {}
+            let newUpdate = {}
+            return oldRef.once('value')
+                .catch(err => console.log(err))
+                .then(snapshot => {
+                    removeUpdate[snapshot.key] = null
+                    newUpdate[snapshot.key] = snapshot.val()
+                    return newRef.update(newUpdate)
+                })
+                .then(() => oldRef.parent.update(removeUpdate))
+        }
+
         ActiveGameFactory.submitWhiteCard = (playerId, cardId, gameId, teamId) => {
           const gameRef = firebase.database().ref(`teams/${teamId}/games/${gameId}`);
           const cardToSubmit = gameRef.child(`players/${playerId}/hand/${cardId}`);
           const submitRef = gameRef.child('submittedWhiteCards');
           firebaseMoveSingleKeyValue(cardToSubmit, submitRef)
-            .then(() => submitRef.child(cardId).set({
+            .then(() => {
+              console.log(cardToSubmit, submitRef)
+              submitRef.child(cardId).set({
               submittedBy: playerId
-            }))
+            })})
         }
 
         return ActiveGameFactory; 

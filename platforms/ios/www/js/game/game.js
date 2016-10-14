@@ -12,25 +12,43 @@ app.config(($stateProvider) => {
 
 app.controller('GameCtrl', ($scope, GameFactory, $stateParams, $localStorage, ActiveGameFactory) => {   
     // const gameId = $stateParams.gameId;
-    const gameId = 32;
+    $scope.gameId = 32;
     const playerId = $localStorage.user.id;
     const teamId = 2; 
     // const teamId = $localStorage.team.id
     const gameRef = firebase.database().ref(`teams/${teamId}/games/${gameId}/`);
+    $scope.round ={};
+
+
     gameRef.on('value', gameSnapshot => {
         $scope.game = gameSnapshot.val();
         $scope.gameName = $scope.game.settings.name;
+        $scope.playerHand = $scope.game.players[playerId].hand
+        $scope.blackCard = $scope.game.currentBlackCard;
+        $scope.blackCardText = $scope.blackCard[Object.keys($scope.blackCard)[0]]
+        $scope.$evalAsync();
     })
 
-    ActiveGameFactory.refillMyHand(gameId, playerId, teamId)
-    $scope.playerHand = $scope.game.players[playerId].hand;
+
+
+    ActiveGameFactory.refillMyHand(gameId, playerId, teamId, GameFactory)
+
 
     $scope.showCards = false;
 
-    $scope.onSwipeDown = () => {
-             $scope.showCards = true ;
-             $scope.$evalAsync();
+
+    $scope.onSwipeDown = (gameId) => {
+        console.log('GAME ID', gameId);
+        $scope.showCards = true ;
+        GameFactory.joinGameById(gameId);
+        $scope.$evalAsync();
     }  
+
+    $scope.onDoubleTap = (cardId) => {
+        console.log('DOUBLE TAP')
+        ActiveGameFactory.submitWhiteCard(playerId, cardId, gameId, teamId)
+        console.log('AFTER')
+    }
 })
 
 

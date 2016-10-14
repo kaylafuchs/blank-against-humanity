@@ -12,25 +12,47 @@ app.config(($stateProvider) => {
 
 app.controller('GameCtrl', ($scope, GameFactory, $stateParams, $localStorage, ActiveGameFactory) => {   
     // const gameId = $stateParams.gameId;
-    const gameId = 32;
+    $scope.gameId = 32;
     const playerId = $localStorage.user.id;
     const teamId = 2; 
     // const teamId = $localStorage.team.id
-    const gameRef = firebase.database().ref(`teams/${teamId}/games/${gameId}/`);
+    const gameRef = firebase.database().ref(`teams/${teamId}/games/${$scope.gameId}/`);
+    $scope.round ={};
+
+
     gameRef.on('value', gameSnapshot => {
         $scope.game = gameSnapshot.val();
         $scope.gameName = $scope.game.settings.name;
+        $scope.playerHand = $scope.game.players[playerId].hand;
+        $scope.playerHandCount = Object.keys($scope.playerHand).length; 
+        $scope.blackCard = $scope.game.currentBlackCard;
+        $scope.blackCardText = $scope.blackCard[Object.keys($scope.blackCard)[0]]
+        $scope.judge = $scope.game.currentJudge;
+        $scope.$evalAsync();
     })
 
-    ActiveGameFactory.refillMyHand(gameId, playerId, teamId)
-    $scope.playerHand = $scope.game.players[playerId].hand;
+
+
+    ActiveGameFactory.refillMyHand($scope.gameId, playerId, teamId)
+
 
     $scope.showCards = false;
 
-    $scope.onSwipeDown = () => {
-             $scope.showCards = true ;
-             $scope.$evalAsync();
+
+    $scope.onSwipeDown = (gameId) => {
+        if($scope.playerHandCount<7){
+            ActiveGameFactory.refillMyHand($scope.gameId, playerId, teamId)
+        }
+        $scope.showCards = true ;
+        GameFactory.joinGameById(gameId);
+        $scope.$evalAsync();
     }  
+
+    $scope.onDoubleTap = (cardId) => {
+        ActiveGameFactory.submitWhiteCard(playerId, cardId, $scope.gameId, teamId)
+    }
+
+
 })
 
 

@@ -10,8 +10,8 @@
 				    <p class="card-text">Waiting for the judge to draw a black card.</p>
 				    <p class="logo transparent">______ Against Humanity</p>
 				</div>  -->
-				<div class="game-card white pile fade" on-swipe-down="onSwipeDown()" ng-if="!showCards">
-				    <p class="card-text">Swipe down to draw white cards.</p>
+				<div class="game-card white pile fade" on-swipe-down="onSwipeDown(gameId)" ng-if="!showCards">
+				    <p class="card-text">Swipe down to join game.</p>
 				    <i class="icon ion-arrow-down-c large-arrow"></i>
 				    <p class="logo white">______ Against Humanity</p>
 				</div>
@@ -22,7 +22,7 @@
 					</div>
 				</div>
 			</div>
-				<ul class="hand fade" ng-show="showCards">
+				<ul class="hand fade" ng-show="showCards" on-double-tap="onDoubleTap(key)">
 					<li class="game-card animate white" ng-repeat="(key,val) in playerHand">
 						<p class="card-text">{{val.text}}</p>
 						<p class="logo white">______ Against Humanity</p>

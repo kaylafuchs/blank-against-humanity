@@ -28,7 +28,7 @@
                 <span class="your-games open">Open games</span>
                 <div ng-repeat="(key, value) in games track by $index" ng-if="value.settings.name" class="game-listing">
                     <span>{{value.settings.name}}</span>
-                    <button class="button button-outline button-small button-balanced" ng-click="showPopup(key)">Join game</button>
+                    <button class="button button-outline button-small button-balanced" ui-sref="game({gameId: key})">Join game</button>
                 </div>
             </div>
         </div>

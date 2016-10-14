@@ -98,7 +98,7 @@ const stateManager = (gameId, teamId, roundTime) => {
         })
 }
 
-stateManager(1, 2)
+
 module.exports = {
     stateManager: stateManager
 }

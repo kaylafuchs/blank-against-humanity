@@ -54,6 +54,7 @@ app.factory('GameFactory', ($http, $rootScope, $localStorage) => {
             const teamId = $localStorage.team.id;
             const playerId = $localStorage.user.id;
             const playerName = $localStorage.user.name;
+            //console.log(JSON.stringify($localStorage));
             const playerRef = firebase.database().ref(`teams/${teamId}/games/${gameId}/players/${playerId}`)
             playerRef.set({
                 name: playerName
@@ -62,7 +63,7 @@ app.factory('GameFactory', ($http, $rootScope, $localStorage) => {
             gameRef.on('value', snapshot => {
                 $rootScope.$broadcast('changedGame', snapshot.val());
             })
-            $http.post(`http://${currentIp}:1337/api/games/${gameId}?playerId=${playerId}`)
+            $http.post(`http://${currentIp}:1337/api/games/${gameId}/?playerId=${playerId}`)
         }
 
         GameFactory.getDecksByTeamId = (id) => {
