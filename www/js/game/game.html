@@ -1,29 +1,29 @@
 <ion-view title={{gameName}} class="gray-bg">
-	<ion-content overflow-scroll="true">
-		<div class="card-game">
-			<div class="other-content">
-				<p class="card-text" ng-if="playerCount < 4">Waiting for {{4 - playerCount}} player(s) to start.</p>
-				<p class="card-text" ng-if="playerCount > 0">The judge is: Joe</p>
-				<p class="card-text" ng-hide="true">Please submit a white card!</p>
-				<p class="card-text" ng-hide="true">White card submitted. {{judge.name}} is picking a winner.</p>
-	<!-- 			<div class="game-card outline fade" ng-if="showCards">
+    <ion-content overflow-scroll="true">
+        <div class="card-game">
+            <div class="other-content">
+                <p class="card-text" ng-if="playerCount < 4">Waiting for {{4 - playerCount}} player(s) to start.</p>
+                <p class="card-text" ng-if="playerCount > 0">The judge is: Joe</p>
+                <p class="card-text" ng-hide="true">Please submit a white card!</p>
+                <p class="card-text" ng-hide="true">White card submitted. {{judge.name}} is picking a winner.</p>
+                <!-- 			<div class="game-card outline fade" ng-if="showCards">
 				    <p class="card-text">Waiting for the judge to draw a black card.</p>
 				    <p class="logo transparent">______ Against Humanity</p>
 				</div>  -->
-				<div class="game-card white pile fade" on-swipe-down="onSwipeDown(gameId)" ng-if="!showCards || playerHandCount < 7">
-				    <p class="card-text" ng-if="!showCards">Swipe down to join game.</p>
-				    <p class="card-text" ng-if="playerHandCount<7">Swipe down to draw a new card.</p>
-				    <i class="icon ion-arrow-down-c large-arrow"></i>
-				    <p class="logo white">______ Against Humanity</p>
-				</div>
-				<div class="black-card-content" ng-if="showCards && playerHandCount === 7">
-					<div class="game-card black current-black-card">
-						<p class="card-text">{{blackCardText}}</p>
-						<p class="logo black">______ Against Humanity</p>
-					</div>
-				</div>
-			</div>
-				<white-cards></white-cards>
-		</div>
-	</ion-content>
+                <div class="game-card white pile fade" on-swipe-down="joinThenGetCards()" ng-if="!showCards">
+                    <p class="card-text" ng-if="!showCards">Swipe down to join game and get cards.</p>
+                    <!-- <p class="card-text" ng-if="playerHandCount<7">Swipe down to draw a new card.</p> -->
+                    <i class="icon ion-arrow-down-c large-arrow"></i>
+                    <p class="logo white">______ Against Humanity</p>
+                </div>
+                <div class="black-card-content" ng-if="showCards && playerHandCount === 7">
+                    <div class="game-card black current-black-card">
+                        <p class="card-text">{{blackCardText}}</p>
+                        <p class="logo black">______ Against Humanity</p>
+                    </div>
+                </div>
+            </div>
+            <white-cards></white-cards>
+        </div>
+    </ion-content>
 </ion-view>

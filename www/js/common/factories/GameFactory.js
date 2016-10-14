@@ -6,7 +6,7 @@ app.factory('GameFactory', ($http, $rootScope, $localStorage) => {
             nithya: "192.168.1.48",
             dan: "192.168.4.236"
         }
-        const currentIp = ourIps.nithya
+        const currentIp = ourIps.dan
 
 
         // start a new game derp
@@ -60,11 +60,7 @@ app.factory('GameFactory', ($http, $rootScope, $localStorage) => {
             playerRef.set({
                 name: playerName
             })
-            const gameRef = firebase.database().ref(`teams/${teamId}/games/${gameId}`)
-            gameRef.on('value', snapshot => {
-                $rootScope.$broadcast('changedGame', snapshot.val());
-            })
-            $http.post(`http://${currentIp}:1337/api/games/${gameId}/?playerId=${playerId}`)
+            return $http.post(`http://${currentIp}:1337/api/games/${gameId}/?playerId=${playerId}`)
         }
 
         GameFactory.getDecksByTeamId = (id) => {
