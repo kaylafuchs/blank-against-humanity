@@ -53,19 +53,22 @@ const stateManager = (gameId, teamId, roundTime) => {
     const gameRef = firebase.database().ref(`teams/${teamId}/games/${gameId}`);
     const gameStateRef = gameRef.child('state');
     const playersRef = gameRef.child('players');
+    const timerRef = gameRef.child('timer')
+    const submittedWhiteCardsRef = gameRef.child('submittedWhiteCards')
+    console.log('My name is State Manager. Im here to manage states and chew gum, and im all out of gum')
     let judgeArr = [];
     judgeManager(playersRef, judgeArr);
     return gameStateRef.set('pregame')
         .then(() => {
-            console.log('game state set to pregame')
+            let playerCount = 0;
             gameStateRef.on('value', (stateSnapshot => {
-                let playerCount = 0;
                 switch (stateSnapshot.val()) {
                     case 'pregame':
                         {
+                            console.log('game state updated to pregame')
                             pickBlackCard(gameRef)
                             judgePicker(judgeArr, gameRef)
-                            gameStateRef.parent.child('players').on('child_added', () => {
+                            playersRef.on('child_added', () => {
                                 playerCount++
                                 if (playerCount === 4) {
                                     gameStateRef.set('submission')
@@ -75,15 +78,16 @@ const stateManager = (gameId, teamId, roundTime) => {
                         }
                     case 'submission':
                         {
+                            console.log('game state updated to submission')
                             let submittedWhiteCardsCount = 0
-                            gameStateRef.parent.child('submittedWhiteCards').on('child_added', () => {
+                            submittedWhiteCardsRef.on('child_added', () => {
                                 submittedWhiteCardsCount++
                                 if (submittedWhiteCardsCount === playerCount) gameStateRef.set('judgement')
                             })
                             if (roundTime) {
-                                let currentRoundTime = roundTime
+                                let currentRoundTime = roundTime * 60
                                 const timer = setInterval(() => {
-                                    gameStateRef.parent.child('roundTime').set(`${currentRoundTime}`)
+                                    timerRef.set(`${currentRoundTime}`)
                                     currentRoundTime--
                                     if (currentRoundTime === 0) {
                                         clearInterval(timer)
@@ -93,6 +97,21 @@ const stateManager = (gameId, teamId, roundTime) => {
                             }
                             break;
                         }
+                    case 'postround':
+                    {
+                        console.log('game state updated to postround')
+                        pickBlackCard(gameRef);
+                        judgePicker(judgeArr, gameRef);
+                        let postRoundTime = 60;
+                        const timer = setInterval(() => {
+                            timerRef.set(`${postRoundTime}`)
+                            postRoundTime--
+                            if (postRoundTime === 0) {
+                                clearInterval(timer)
+                                gameStateRef.set('submission')
+                            }
+                        })
+                    }
                 }
             }))
         })
