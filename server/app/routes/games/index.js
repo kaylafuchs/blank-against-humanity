@@ -54,11 +54,19 @@ router.get('/', (req, res, next) => {
             })
             .then(foundGames => res.send(foundGames))
             .catch(next);
+    }
+
+    if (req.query.teamId && req.query.open) {
+        return Game.findAll({
+                where: {
+                    teamId: req.query.teamId
+                }
+            })
+            .then(foundGames => res.send(foundGames))
     } else {
         return Game.findAll()
             .then(foundGames => res.send(foundGames));
     }
-
 
 });
 
@@ -116,10 +124,14 @@ router.post('/:id/decks', (req, res, next) => {
 
 router.post('/', (req, res, next) => {
 
-    // TODO: update model to account for settings
+    var gameId;
     return Game.create({
             name: req.body.name,
-            teamId: req.body.teamId
+            teamId: req.body.teamId,
+            maxPlayers: req.body.gameConfig.maxPlayers,
+            minPlayers: req.body.gameConfig.minPlayers,
+            maxTurnTime: req.body.gameConfig.maxTurnTime
+
         })
         .then(createdGame => {
             const gameRef = firebase.database().ref(`teams/${req.body.teamId}/games/${createdGame.id}`)

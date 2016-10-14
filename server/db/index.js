@@ -18,7 +18,6 @@ User.belongsToMany(Card, { through: 'tagged_cards' }); //can tag many people in 
 Card.belongsTo(Deck)
 Deck.hasMany(Card)
 Deck.belongsTo(Team)
-    //Channel.belongsTo(team)
 
 Team.hasMany(User);
 Team.hasMany(Game);
