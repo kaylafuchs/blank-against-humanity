@@ -9925,6 +9925,10 @@ a {
   color: #000;
   background: transparent; }
 
+.grey {
+  color: #000;
+  background: #f1f1f1; }
+
 .played-card {
   border-color: #ef473a;
   background-color: #fdeceb; }

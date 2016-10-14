@@ -16,9 +16,7 @@ app.controller('GameCtrl', ($scope, GameFactory, $stateParams, $localStorage, Ac
     const playerId = $localStorage.user.id;
     const teamId = 2; 
     // const teamId = $localStorage.team.id
-    const gameRef = firebase.database().ref(`teams/${teamId}/games/${$scope.gameId}/`);
-    $scope.round ={};
-
+    const gameRef = firebase.database().ref(`teams/${teamId}/games/${$scope.gameId}/`); 
 
     gameRef.on('value', gameSnapshot => {
         $scope.game = gameSnapshot.val();
@@ -28,14 +26,14 @@ app.controller('GameCtrl', ($scope, GameFactory, $stateParams, $localStorage, Ac
         $scope.blackCard = $scope.game.currentBlackCard;
         $scope.blackCardText = $scope.blackCard[Object.keys($scope.blackCard)[0]]
         $scope.judge = $scope.game.currentJudge;
+        $scope.players = $scope.game.players;
+        $scope.submittedWhiteCards= $scope.game.submittedWhiteCards
         $scope.$evalAsync();
     })
 
 
-
     ActiveGameFactory.refillMyHand($scope.gameId, playerId, teamId)
-
-
+    
     $scope.showCards = false;
 
 
@@ -44,13 +42,23 @@ app.controller('GameCtrl', ($scope, GameFactory, $stateParams, $localStorage, Ac
             ActiveGameFactory.refillMyHand($scope.gameId, playerId, teamId)
         }
         $scope.showCards = true ;
-        GameFactory.joinGameById(gameId);
+        //GameFactory.joinGameById(gameId);
         $scope.$evalAsync();
     }  
 
-    $scope.onDoubleTap = (cardId) => {
-        ActiveGameFactory.submitWhiteCard(playerId, cardId, $scope.gameId, teamId)
+    $scope.onDoubleTap = (cardId, cardText) => {
+        ActiveGameFactory.submitWhiteCard(playerId, cardId, $scope.gameId, teamId, cardText)
     }
+
+
+
+    $scope.getSubmittedPlayers = () => {
+        $scope.submittedPlayers =  _.keyBy($scope.submittedWhiteCards, card =>{
+            return card.submittedBy; 
+        })
+    }
+
+
 
 
 })

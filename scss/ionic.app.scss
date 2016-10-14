@@ -26,6 +26,7 @@ $white: #FFF;
 $black: #000;
 $red: #ef473a;
 $pink: #fdeceb;
+$grey: #f1f1f1;
 
 a {
 	text-decoration: none;
@@ -191,6 +192,11 @@ a {
 .transparent {
 	color: $black;
 	background: transparent;
+}
+
+.grey {
+	color: $black;
+	background: $grey;
 }
 
 .played-card {

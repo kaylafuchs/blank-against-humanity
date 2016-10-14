@@ -16,39 +16,53 @@ app.controller('GameCtrl', ($scope, GameFactory, $stateParams, $localStorage, Ac
     const playerId = $localStorage.user.id;
     const teamId = 2; 
     // const teamId = $localStorage.team.id
-    const gameRef = firebase.database().ref(`teams/${teamId}/games/${gameId}/`);
-    $scope.round ={};
-
+    const gameRef = firebase.database().ref(`teams/${teamId}/games/${$scope.gameId}/`); 
 
     gameRef.on('value', gameSnapshot => {
         $scope.game = gameSnapshot.val();
         $scope.gameName = $scope.game.settings.name;
-        $scope.playerHand = $scope.game.players[playerId].hand
+        $scope.playerHand = $scope.game.players[playerId].hand;
+        $scope.playerHandCount = Object.keys($scope.playerHand).length; 
         $scope.blackCard = $scope.game.currentBlackCard;
         $scope.blackCardText = $scope.blackCard[Object.keys($scope.blackCard)[0]]
+        $scope.judge = $scope.game.currentJudge;
+        $scope.players = $scope.game.players;
+        $scope.submittedWhiteCards= $scope.game.submittedWhiteCards
+        console.log($scope.players);
         $scope.$evalAsync();
     })
 
 
-
-    ActiveGameFactory.refillMyHand(gameId, playerId, teamId, GameFactory)
-
-
+    ActiveGameFactory.refillMyHand($scope.gameId, playerId, teamId)
+    
     $scope.showCards = false;
 
 
     $scope.onSwipeDown = (gameId) => {
-        console.log('GAME ID', gameId);
+        if($scope.playerHandCount<7){
+            ActiveGameFactory.refillMyHand($scope.gameId, playerId, teamId)
+        }
         $scope.showCards = true ;
-        GameFactory.joinGameById(gameId);
+        //GameFactory.joinGameById(gameId);
         $scope.$evalAsync();
     }  
 
-    $scope.onDoubleTap = (cardId) => {
-        console.log('DOUBLE TAP')
-        ActiveGameFactory.submitWhiteCard(playerId, cardId, gameId, teamId)
-        console.log('AFTER')
+    $scope.onDoubleTap = (cardId, cardText) => {
+        ActiveGameFactory.submitWhiteCard(playerId, cardId, $scope.gameId, teamId, cardText)
+        console.log('TEST',  $scope.getSubmittedPlayers());
     }
+
+
+
+    $scope.getSubmittedPlayers = () => {
+       return  _.keyBy($scope.submittedWhiteCards, card =>{
+            return card.submittedBy; 
+        })
+    }
+
+
+
+
 })
 
 

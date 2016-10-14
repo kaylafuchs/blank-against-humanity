@@ -1,0 +1,16 @@
+<ul class="hand fade" ng-show="showCards">
+	<!-- <li class="game-card animate white" ng-repeat="(key,val) in playerHand" on-double-tap="onDoubleTap(key)">
+		<p class="card-text">{{val.text}}</p>
+		<p class="logo white">______ Against Humanity</p>
+	 </li>	 -->
+	<li ng-repeat="(key,value) in players" ng-if="key !== judge">
+		<li class="game-card animate outline grey" ng-if="!submittedPlayers[key]">
+				<p class="card-text">Waiting for players to submit</p>
+				<p class="logo transparent">______ Against Humanity</p>
+		</li>
+		<li class="game-card animate white" ng-if="submittedPlayers[key]">
+				<p class="card-text">{{submittedPlayers[key].text}}</p>
+				<p class="logo white">______ Against Humanity</p>
+		</li>	
+	</li>
+</ul>

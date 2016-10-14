@@ -44,16 +44,17 @@ app.factory('ActiveGameFactory', ($http, $rootScope, $localStorage) => {
                 .then(() => oldRef.parent.update(removeUpdate))
         }
 
-        ActiveGameFactory.submitWhiteCard = (playerId, cardId, gameId, teamId) => {
+        ActiveGameFactory.submitWhiteCard = (playerId, cardId, gameId, teamId, cardText) => {
           const gameRef = firebase.database().ref(`teams/${teamId}/games/${gameId}`);
           const cardToSubmit = gameRef.child(`players/${playerId}/hand/${cardId}`);
           const submitRef = gameRef.child('submittedWhiteCards');
           firebaseMoveSingleKeyValue(cardToSubmit, submitRef)
             .then(() => {
-              console.log(cardToSubmit, submitRef)
               submitRef.child(cardId).set({
-              submittedBy: playerId
-            })})
+                submittedBy: playerId,
+                text: cardText
+            })
+          })
         }
 
         return ActiveGameFactory; 
