@@ -13,23 +13,28 @@ app.config(($stateProvider) => {
 
 app.controller('GameCtrl', ($scope, GameFactory, $stateParams, $localStorage, ActiveGameFactory) => {
     // const gameId = $stateParams.gameId;
-    $scope.gameId = $stateParams.gameId //32;
-    $scope.playerId = $localStorage.user.id;
-    $scope.teamId = $localStorage.team.id //;
+    const gameId = $stateParams.gameId //32;
+    const playerId = $localStorage.user.id;
+    $scope.playerId = playerId;
+    const teamId = $localStorage.team.id //;
         // const teamId = $localStorage.team.id
-    const gameRef = firebase.database().ref(`teams/${teamId}/games/${$scope.gameId}/`);
+    const gameRef = firebase.database().ref(`teams/${teamId}/games/${gameId}/`);
+    console.log(gameRef.toString())
     $scope.round = {};
 
 
-
+    $scope.showCards = false;
 
     gameRef.on('value', gameSnapshot => {
+        // console.log(gameSnapshot.val())
         $scope.game = gameSnapshot.val();
         $scope.gameName = $scope.game.settings.name;
-        $scope.playerHand = $scope.game.players[playerId].hand;
-        console.log('phand is', JSON.stringify($scope.playerHand))
-            // $scope.playerHandCount = Object.keys($scope.playerHand).length;
+        // $scope.playerHand = $scope.game.players[playerId].hand ? $scope.game.players[playerId].hand : null
+        // console.log('phand is', JSON.stringify($scope.playerHand))
+        // $scope.playerHandCount = Object.keys($scope.playerHand).length;
+
         $scope.blackCard = $scope.game.currentBlackCard[1];
+        // console.log('black card', $scope.blackCard)
         $scope.blackCardText = $scope.blackCard.text
         $scope.judge = $scope.game.currentJudge;
         $scope.$evalAsync();
@@ -41,19 +46,25 @@ app.controller('GameCtrl', ($scope, GameFactory, $stateParams, $localStorage, Ac
 
     //ActiveGameFactory.refillMyHand($scope.gameId, playerId, teamId)
 
-
-    $scope.refillMyHand = ActiveGameFactory.refillMyHand
-        // $scope.onSwipeDown = (gameId) => {
-        //     if ($scope.playerHandCount < 7) {
-        //         ActiveGameFactory.refillMyHand($scope.gameId, playerId, teamId)
-        //     }
-        //     $scope.showCards = true;
-        //     GameFactory.joinGameById(gameId);
-        //     $scope.$evalAsync();
-        // }
+    // $scope.join = GameFactory.joinGameById
+    // $scope.joinAndGetHand = (gameId, playerId, teamId) => {
+    //         GameFactory.joinGameById(gameId)
+    //         ActiveGameFactory.refillMyHand(gameId, playerId, teamId)
+    //     }
+    $scope.joinThenGetCards = () => {
+        $scope.showCards = true;
+        GameFactory.joinGameById(gameId)
+            .then(() => ActiveGameFactory.refillMyHand(gameId, playerId, teamId))
+            .then(() => {
+                console.log($scope.game.players[playerId])
+                console.log('playerHand', $scope.playerHand)
+                $scope.$evalAsync()
+            })
+            .catch(err => console.log(err))
+    }
 
     $scope.onDoubleTap = (cardId) => {
-        ActiveGameFactory.submitWhiteCard(playerId, cardId, $scope.gameId, teamId)
+        ActiveGameFactory.submitWhiteCard(playerId, cardId, gameId, teamId)
     }
 
 })

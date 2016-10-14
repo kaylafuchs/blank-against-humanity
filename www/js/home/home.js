@@ -5,6 +5,7 @@ app.config(function($stateProvider, $urlRouterProvider) {
         controller: 'HomeCtrl',
         resolve: {
             games: function(GameFactory) {
+                console.log('getting games')
                 return GameFactory.getGamesByTeamId()
             }
         }
@@ -30,7 +31,7 @@ app.controller('HomeCtrl', function($scope, $state, $cordovaOauth, UserFactory, 
     //     $scope.gameName = $scope.game.settings.name;
     //     $scope.playerCount = Object.keys($scope.game.players).length;
     //     $scope.waitingForPlayers =  ($scope.game.settings.minPlayers || 4) - $scope.playerCount;
-         
+
     //      const myPopup = $ionicPopup.show({
     //         templateUrl: 'js/home/popup.html',
     //         title: 'Join ' + $scope.gameName,

@@ -3,7 +3,7 @@ app.factory('ActiveGameFactory', ($http, $rootScope, $localStorage) => {
     const ActiveGameFactory = {};
 
     const refiller = (cardsNeeded, pileRef, handRef) => {
-        pileRef.limitToFirst(cardsNeeded).once('value', cardsSnapshot => {
+        return pileRef.limitToFirst(cardsNeeded).once('value', cardsSnapshot => {
                 cardsSnapshot.forEach(card => {
                     let updateObj = {}
                     card.ref.transaction(cardData => {
@@ -27,7 +27,7 @@ app.factory('ActiveGameFactory', ($http, $rootScope, $localStorage) => {
                 cardsNeeded = 7 - handSnapshot.numChildren()
             })
             .then(() => {
-                refiller(cardsNeeded, pileRef, handRef)
+                return refiller(cardsNeeded, pileRef, handRef)
             })
     }
 

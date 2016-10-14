@@ -60,11 +60,7 @@ app.factory('GameFactory', ($http, $rootScope, $localStorage) => {
             playerRef.set({
                 name: playerName
             })
-            const gameRef = firebase.database().ref(`teams/${teamId}/games/${gameId}`)
-            gameRef.on('value', snapshot => {
-                $rootScope.$broadcast('changedGame', snapshot.val());
-            })
-            $http.post(`http://${currentIp}:1337/api/games/${gameId}/?playerId=${playerId}`)
+            return $http.post(`http://${currentIp}:1337/api/games/${gameId}/?playerId=${playerId}`)
         }
 
         GameFactory.getDecksByTeamId = (id) => {

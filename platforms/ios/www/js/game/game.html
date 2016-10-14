@@ -10,9 +10,9 @@
 				    <p class="card-text">Waiting for the judge to draw a black card.</p>
 				    <p class="logo transparent">______ Against Humanity</p>
 				</div>  -->
-                <div class="game-card white pile fade" on-swipe-down="refillMyHand(gameId, playerId, teamId">
-                    <p class="card-text" ng-if="!showCards">Swipe down to join game.</p>
-                    <p class="card-text" ng-if="playerHandCount<7">Swipe down to draw a new card.</p>
+                <div class="game-card white pile fade" on-swipe-down="joinThenGetCards()" ng-if="!showCards">
+                    <p class="card-text" ng-if="!showCards">Swipe down to join game and get cards.</p>
+                    <!-- <p class="card-text" ng-if="playerHandCount<7">Swipe down to draw a new card.</p> -->
                     <i class="icon ion-arrow-down-c large-arrow"></i>
                     <p class="logo white">______ Against Humanity</p>
                 </div>
