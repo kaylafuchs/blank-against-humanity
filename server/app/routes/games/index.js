@@ -116,7 +116,7 @@ router.post('/:id/decks', (req, res, next) => {
             return Promise.all(addingCardsToFb)
         })
         .then(() => {
-            stateManager(req.requestedGame.id, req.requestedGame.teamId)
+            stateManager(req.requestedGame.id, req.requestedGame.teamId, req.requestedGame.maxTurnTime)
             res.sendStatus(200)
         })
 
@@ -128,9 +128,9 @@ router.post('/', (req, res, next) => {
     return Game.create({
             name: req.body.name,
             teamId: req.body.teamId,
-            maxPlayers: req.body.gameConfig.maxPlayers,
-            minPlayers: req.body.gameConfig.minPlayers,
-            maxTurnTime: req.body.gameConfig.maxTurnTime
+            maxPlayers: req.body.settings.maxPlayers,
+            minPlayers: req.body.settings.minPlayers,
+            maxTurnTime: req.body.settings.maxTurnTime
 
         })
         .then(createdGame => {
