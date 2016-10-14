@@ -85,7 +85,7 @@ const stateManager = (gameId, teamId, roundTime) => {
                                 if (submittedWhiteCardsCount === playerCount) gameStateRef.set('judgement')
                             })
                             if (roundTime) {
-                                let currentRoundTime = roundTime
+                                let currentRoundTime = roundTime * 60
                                 const timer = setInterval(() => {
                                     timerRef.set(`${currentRoundTime}`)
                                     currentRoundTime--
