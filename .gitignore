@@ -5,3 +5,4 @@ npm-debug.log
 bower_components
 public/main.js
 typings
+www/public/main.js
