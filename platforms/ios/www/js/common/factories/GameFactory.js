@@ -93,6 +93,14 @@ app.factory('GameFactory', ($http, $rootScope, $localStorage) => {
                 .catch(err => console.log(err))
         };
 
+        GameFactory.getOpenGames = () => {
+            const teamId = $localstorage.team.id;
+            const userId = $localstorage.user.id
+            return $http.get(`http://${currentIp}:1337/api/games/?teamId=${teamId}&userId=${userId}&open=true`)
+                .then(res => res.data)
+                .catch(err => console.log(err))
+        }
+
         GameFactory.getGamesByUser = (userId) => {
             return $http.get(`http://${currentIp}:1337/api/games/?userId=${userId}`)
                 .then(res => res.data)

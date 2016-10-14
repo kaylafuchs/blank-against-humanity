@@ -13,22 +13,23 @@ var gameId;
 
 // get game instance for id, put on req object
 router.param('id', (req, res, next, id) => {
-        return Game.findById(id)
-            .then(foundGame => {
-                if (!foundGame) res.sendStatus(404);
-                else req.requestedGame = foundGame;
-                next();
-            })
-            .catch(next);
-    })
-    // send out game instance corresponding to id
+    return Game.findById(id)
+        .then(foundGame => {
+            if (!foundGame) res.sendStatus(404);
+            else req.requestedGame = foundGame;
+            next();
+        })
+        .catch(next);
+});
+// send out game instance corresponding to id
+
 router.get('/:id', (req, res, next) => {
     res.send(req.requestedGame);
 });
 
 // api/games?teamId=25
 // api/games?userId=2
-// api/games?teamId=31&open=true
+// api/games?teamId=31&userId=3&open=true
 // get a user or teams games, to display in a lobby
 router.get('/', (req, res, next) => {
     if (req.query.userId) {
@@ -58,11 +59,23 @@ router.get('/', (req, res, next) => {
 
     if (req.query.teamId && req.query.open) {
         return Game.findAll({
-                where: {
-                    teamId: req.query.teamId
-                }
+                include: [{
+                    model: User,
+                    through: {
+                        attributes: ['player_games'],
+                        where: {
+                            teamId: req.query.teamId,
+                            userId: {
+                                $ne: req.query.userId
+                            }
+                        }
+                    }
+                }]
             })
-            .then(foundGames => res.send(foundGames))
+            .then(foundGames => {
+                console.log('found games:', foundGames)
+                res.send(foundGames)
+            })
     } else {
         return Game.findAll()
             .then(foundGames => res.send(foundGames));
