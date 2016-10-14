@@ -6,23 +6,23 @@ app.config(($stateProvider) => {
         controller: 'GameCtrl',
         // resolve: {
         //     game : (GameFactory, $stateParams) => GameFactory.getGameByGameId($stateParams.gameId)
-        // }  
+        // }
     })
 })
 
-app.controller('GameCtrl', ($scope, GameFactory, $stateParams, $localStorage, ActiveGameFactory) => {   
+app.controller('GameCtrl', ($scope, GameFactory, $stateParams, $localStorage, ActiveGameFactory, $cordovaLocalNotification) => {
     // const gameId = $stateParams.gameId;
     $scope.gameId = 32;
     const playerId = $localStorage.user.id;
-    const teamId = 2; 
+    const teamId = 2;
     // const teamId = $localStorage.team.id
-    const gameRef = firebase.database().ref(`teams/${teamId}/games/${$scope.gameId}/`); 
+    const gameRef = firebase.database().ref(`teams/${teamId}/games/${$scope.gameId}/`);
 
     gameRef.on('value', gameSnapshot => {
         $scope.game = gameSnapshot.val();
         $scope.gameName = $scope.game.settings.name;
         $scope.playerHand = $scope.game.players[playerId].hand;
-        $scope.playerHandCount = Object.keys($scope.playerHand).length; 
+        $scope.playerHandCount = Object.keys($scope.playerHand).length;
         $scope.blackCard = $scope.game.currentBlackCard;
         $scope.blackCardText = $scope.blackCard[Object.keys($scope.blackCard)[0]]
         $scope.judge = $scope.game.currentJudge;
@@ -30,10 +30,16 @@ app.controller('GameCtrl', ($scope, GameFactory, $stateParams, $localStorage, Ac
         $scope.submittedWhiteCards= $scope.game.submittedWhiteCards
         $scope.$evalAsync();
     })
-
+    const stateRef = gameRef.child('state')
+    stateRef.on('value', stateSnapshot => {
+        $cordovaLocalNotification.schedule({
+            title: stateSnapshot.val(),
+            text: `Hey fool, it's time for ${stateSnapshot.val()}`
+        })
+    })
 
     ActiveGameFactory.refillMyHand($scope.gameId, playerId, teamId)
-    
+
     $scope.showCards = false;
 
 
@@ -44,7 +50,7 @@ app.controller('GameCtrl', ($scope, GameFactory, $stateParams, $localStorage, Ac
         $scope.showCards = true ;
         //GameFactory.joinGameById(gameId);
         $scope.$evalAsync();
-    }  
+    }
 
     $scope.onDoubleTap = (cardId, cardText) => {
         ActiveGameFactory.submitWhiteCard(playerId, cardId, $scope.gameId, teamId, cardText)
@@ -54,7 +60,7 @@ app.controller('GameCtrl', ($scope, GameFactory, $stateParams, $localStorage, Ac
 
     $scope.getSubmittedPlayers = () => {
         $scope.submittedPlayers =  _.keyBy($scope.submittedWhiteCards, card =>{
-            return card.submittedBy; 
+            return card.submittedBy;
         })
     }
 
@@ -66,7 +72,7 @@ app.controller('GameCtrl', ($scope, GameFactory, $stateParams, $localStorage, Ac
 
 // app.controller("ActiveGameCtrl", ($scope, GameFactory, ActiveGameFactory, game, $stateParams, $localStorage, $state) => {
 
-    
+
 //     $scope.onSwipeDown = () => {
 //         console.log('working');
 //         console.log($scope.showCards);
@@ -92,7 +98,7 @@ app.controller('GameCtrl', ($scope, GameFactory, $stateParams, $localStorage, Ac
 //         console.log($scope.game);
 //         if(game.state === 'submission'){
 //             $state.go('game.submission-game')
-//         } 
+//         }
 //     })
 // })
 
