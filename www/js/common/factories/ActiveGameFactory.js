@@ -95,16 +95,12 @@ app.factory('ActiveGameFactory', ($http, $rootScope, $localStorage) => {
             .then(() => {
               const setRoundStateToOver = gameRef.child('state').set('postround')
               const awardBlackCard = gameRef.child('currentBlackCard').transaction((currentBlackCard) => {
-                blackCardWon = currentBlackCard;     
+                blackCardWon = currentBlackCard;
                 return null
               })
               .then(() => {
                 console.log("####BLACK CARD WON", blackCardWon)
-                gameRef.child(`players/${winner}/blackCardsWon`).set(blackCardWon)
-
-                .catch(err => {
-                  console.log(err)
-                })
+                gameRef.child(`players/${winner}/blackCardsWon`).update(blackCardWon)
               })
               return Promise.all([setRoundStateToOver, awardBlackCard, gameRef.child('submittedWhiteCards').remove()])
             })
