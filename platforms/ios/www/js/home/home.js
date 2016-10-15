@@ -26,12 +26,6 @@ app.controller('HomeCtrl', function($scope, $state, $cordovaOauth, UserFactory, 
     }
 
     $scope.openGames = openGames
-    // GameFactory.getOpenGames().then(openGames => {
-            //     console.log('getting the games')
-            //     $scope.openGames = openGames;
-            //     $scope.$evalAsync();
-            // })
-
 
 
     // $scope.joinGame = GameFactory.joinGameById;

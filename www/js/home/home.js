@@ -5,7 +5,7 @@ app.config(function($stateProvider, $urlRouterProvider) {
         templateUrl: 'js/home/home.html',
         controller: 'HomeCtrl',
         resolve: {
-            games: (GameFactory) => GameFactory.getGamesByTeamId(),
+            games: (GameFactory) => GameFactory.getGamesByUserId(),
             openGames: (GameFactory) => {
                 console.log('getting the games')
                 return GameFactory.getOpenGames()

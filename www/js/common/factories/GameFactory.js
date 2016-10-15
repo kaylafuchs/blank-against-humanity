@@ -93,6 +93,13 @@ app.factory('GameFactory', ($http, $rootScope, $localStorage) => {
                 .catch(err => console.log(err))
         };
 
+        GameFactory.getGamesByUserId = (userId) => {
+
+            return $http.get(`http://${currentIp}:1337/api/games/?userId=${$localStorage.user.id}`)
+                .then(res => res.data)
+                .catch(err => console.log(err))
+        };
+
         GameFactory.getOpenGames = () => {
             const teamId = $localStorage.team.id;
             const userId = $localStorage.user.id
@@ -103,13 +110,8 @@ app.factory('GameFactory', ($http, $rootScope, $localStorage) => {
                     return res.data
                 })
                 .catch(err => console.log(err))
-        }
+        };
 
-        GameFactory.getGamesByUser = (userId) => {
-            return $http.get(`http://${currentIp}:1337/api/games/?userId=${userId}`)
-                .then(res => res.data)
-                .catch(err => console.log(err))
-        }
         return GameFactory;
     }
 
