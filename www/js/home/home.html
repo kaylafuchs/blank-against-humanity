@@ -18,14 +18,14 @@
                 </div>
             </div>
             <div class="games-list">
-                <span class="your-games">Your games</span>
+                <span class="title-text">Your games</span>
                 <div ng-repeat="(key, value) in games track by $index" ng-if="value.settings.name" class="game-listing">
                     <span>{{value.settings.name}}</span>
                     <a ui-sref="game.active-game({gameId: key})">
                         <button class="button button-outline button-small button-assertive">View game</button>
                     </a>
                 </div>
-                <span class="your-games open">Open games</span>
+                <span class="title-text open">Open games</span>
                 <div ng-repeat="(key, value) in games track by $index" ng-if="value.settings.name" class="game-listing">
                     <span>{{value.settings.name}}</span>
                     <button class="button button-outline button-small button-balanced" ui-sref="game({gameId: key})">Join game</button>

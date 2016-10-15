@@ -9818,6 +9818,9 @@ a.button {
 a {
   text-decoration: none; }
 
+input {
+  border: none; }
+
 .card-game {
   background: #f1f1f1;
   font-family: "Helvetica Neue", sans-serif;
@@ -10054,3 +10057,10 @@ a {
   border-radius: 5px !important;
   opacity: 1;
   text-align: center; }
+
+.large-text {
+  font-size: 16px;
+  text-align: center; }
+
+.med-text {
+  font-size: 14px; }

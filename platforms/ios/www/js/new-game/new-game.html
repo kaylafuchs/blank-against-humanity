@@ -1,44 +1,39 @@
-<ion-view title="Start a Game">
-    <ion-content>
-        <hr>
-        <form name="game-rules">
-            <div>
-                <span> Name your Game</span>
-                <input ng-model="gameConfig.name"> </input>
-            </div>
+<ion-view title="Start a Game" class="gray-bg">
+    <ion-content overflow-scroll="true">
+        <div class="games-container">
+            <form name="game-rules">
+                <div class="list">
+                <label>Set up your game</label>
+                        <label class="item item-input">
+                            <input class="large-text" ng-model="gameConfig.name" placeholder="Name your game">
+                        </label>
+                    <div ng-hide="true">
+                        <label class="item item-input">Select players</label>
+                        <button class="button button-small button-outline button-assertive">Add players</button>
+                    </div>
+                        <label class="item item-input large-text">
+                            <input class="large-text" ng-model="gameConfig.maxTurnTime" placeholder="Max minutes per turn">
+                        </label>
+                        <label class="item item-input large-text">
+                            <input class="large-text" ng-model="gameConfig.minPlayers" placeholder="Min number of players">
+                        </label>
+                        <label class="item item-input large-text">
+                            <input class="large-text" ng-model="gameConfig.maxPlayers" placeholder="Max number of players">
+                        </label>
+                        <!-- ng-show="decks.length > 1" -->
+                        <label>Choose your decks</label>
+                        <ion-list>
+                            <ion-checkbox ng-repeat="deck in decks" class="checkbox-assertive med-text" ng-model="gameConfig.decks[deck.id]"><a ui-sref="new-game.deck({deckId: {{deck.id}}})">{{deck.name}}</a></ion-checkbox>
+                        </ion-list>
+                        <!--  <button ng-click="goToDecks()"> Add Decks </button> -->
+                    </div>
+            </form>
             <div ng-hide="true">
-                <span>Select Players</span>
-                <button> Add Players </button>
+                <button>Invite entire channel</button>
+                <button>Invite specific people</button>
+                <hr>
             </div>
-            <div>
-                <span> Max time per Turn (minutes)</span>
-                <input ng-model="gameConfig.maxTurnTime" placeholder="60"></input>
-            </div>
-            <div>
-                <span> Min Number of Players</span>
-                <input ng-model="gameConfig.minPlayers" placeholder="4"></input>
-            </div>
-            <div>
-                <span> Max Number of Players</span>
-                <input ng-model="gameConfig.maxPlayers" placeholder="100"></input>
-            </div>
-            <div>
-                <!-- ng-show="decks.length > 1" -->
-                <span>Choose your Decks</span>
-                <ol>
-                    <li ng-repeat="deck in decks">
-                        <span> <a ui-sref="new-game.deck({deckId: {{deck.id}}})">{{deck.name}}</a> <input ng-model="gameConfig.decks[deck.id]" type="checkbox"></span>
-                    </li>
-                </ol>
-                <!--  <button ng-click="goToDecks()"> Add Decks </button> -->
-            </div>
-        </form>
-        <hr>
-        <div ng-hide="true">
-            <button>Invite Entire Channel</button>
-            <button>Invite Specific People</button>
-            <hr>
+            <button class="button button-block button-assertive" ng-click="startNewGame(gameConfig)">Start Game</button>
         </div>
-        <button ng-click="startNewGame(gameConfig)">Begin Game</button>
     </ion-content>
 </ion-view>
