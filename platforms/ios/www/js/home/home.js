@@ -1,16 +1,20 @@
 app.config(function($stateProvider, $urlRouterProvider) {
     $stateProvider.state('home', {
         url: '/',
+        cache: false,
         templateUrl: 'js/home/home.html',
         controller: 'HomeCtrl',
         resolve: {
             games: (GameFactory) => GameFactory.getGamesByTeamId(),
-            openGames: (GameFactory) => GameFactory.getOpenGames()
+            openGames: (GameFactory) => {
+                console.log('getting the games')
+                return GameFactory.getOpenGames()
+            }
         }
     })
 })
 
-app.controller('HomeCtrl', function($scope, $state, $cordovaOauth, UserFactory, GameFactory, $localStorage, $ionicPopup, openGames, games) {
+app.controller('HomeCtrl', function($scope, $state, $cordovaOauth, UserFactory, GameFactory, $localStorage, $ionicPopup, games, openGames) {
     $scope.startNewGame = GameFactory.startNewGame;
     $scope.storage = $localStorage;
     $scope.games = games;
@@ -22,7 +26,15 @@ app.controller('HomeCtrl', function($scope, $state, $cordovaOauth, UserFactory, 
     }
 
     $scope.openGames = openGames
-        // $scope.joinGame = GameFactory.joinGameById;
+    // GameFactory.getOpenGames().then(openGames => {
+            //     console.log('getting the games')
+            //     $scope.openGames = openGames;
+            //     $scope.$evalAsync();
+            // })
+
+
+
+    // $scope.joinGame = GameFactory.joinGameById;
 
     // $scope.showPopup = function(gameId) {
 
