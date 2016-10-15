@@ -84,6 +84,7 @@ app.factory('GameFactory', ($http, $rootScope, $localStorage) => {
         };
 
         GameFactory.getGamesByTeamId = (teamId) => {
+            console.log("###TEAM ID", teamId)
             teamId = teamId || $localStorage.team.id
             return $http.get(`http://${currentIp}:1337/api/games/?teamId=${teamId}`)
                 .then(res => res.data)
