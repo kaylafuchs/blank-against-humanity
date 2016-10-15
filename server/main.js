@@ -26,3 +26,4 @@ db.sync()
     .catch(function(err) {
         console.error(chalk.red(err.stack));
     });
+

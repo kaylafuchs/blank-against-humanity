@@ -19,6 +19,7 @@ app.controller('GameCtrl', ($scope, GameFactory, $stateParams, $localStorage, Ac
     const gameRef = firebase.database().ref(`teams/${teamId}/games/${$scope.gameId}/`);
 
     gameRef.on('value', gameSnapshot => {
+        // console.log(gameSnapshot.val())
         $scope.game = gameSnapshot.val();
         $scope.gameName = $scope.game.settings.name;
         if ($scope.game.players[playerId].hand){

@@ -26,7 +26,7 @@
                     </a>
                 </div>
                 <span class="title-text open">Open games</span>
-                <div ng-repeat="game in games track by $index" ng-if="game.name" class="game-listing">
+                <div ng-repeat="game in openGames track by $index" ng-if="game.name" class="game-listing">
                     <span>{{game.name}}</span>
                     <button class="button button-outline button-small button-assertive" ui-sref="game({gameId: game.id})">Join game</button>
                 </div>

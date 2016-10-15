@@ -1,25 +1,31 @@
 app.config(function($stateProvider, $urlRouterProvider) {
     $stateProvider.state('home', {
         url: '/',
+        cache: false,
         templateUrl: 'js/home/home.html',
         controller: 'HomeCtrl',
         resolve: {
-            games: function(GameFactory) {
-                return GameFactory.getGamesByTeamId()
+            games: (GameFactory) => GameFactory.getGamesByUserId(),
+            openGames: (GameFactory) => {
+                console.log('getting the games')
+                return GameFactory.getOpenGames()
             }
         }
     })
 })
 
-app.controller('HomeCtrl', function($scope, $state, $cordovaOauth, UserFactory, GameFactory, $localStorage, games, $ionicPopup) {
+app.controller('HomeCtrl', function($scope, $state, $cordovaOauth, UserFactory, GameFactory, $localStorage, $ionicPopup, games, openGames) {
     $scope.startNewGame = GameFactory.startNewGame;
     $scope.storage = $localStorage;
     $scope.games = games;
+    //$scope.openGames = openGames;
 
     console.log("games", JSON.stringify($scope.games))
     $scope.goToNewGame = () => {
         $state.go('new-game.main')
     }
+
+    $scope.openGames = openGames
 
 
     // $scope.joinGame = GameFactory.joinGameById;
@@ -30,7 +36,7 @@ app.controller('HomeCtrl', function($scope, $state, $cordovaOauth, UserFactory, 
     //     $scope.gameName = $scope.game.settings.name;
     //     $scope.playerCount = Object.keys($scope.game.players).length;
     //     $scope.waitingForPlayers =  ($scope.game.settings.minPlayers || 4) - $scope.playerCount;
-         
+
     //      const myPopup = $ionicPopup.show({
     //         templateUrl: 'js/home/popup.html',
     //         title: 'Join ' + $scope.gameName,
