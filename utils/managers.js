@@ -61,6 +61,7 @@ const stateManager = (gameId, teamId, roundTime, minPlayers) => {
     judgeManager(playersRef, judgeArr);
     return gameStateRef.set('pregame')
         .then(() => {
+            console.log('game state set to pregame')
             let playerCount = 0;
             gameStateRef.on('value', (stateSnapshot => {
                 switch (stateSnapshot.val()) {
@@ -84,7 +85,10 @@ const stateManager = (gameId, teamId, roundTime, minPlayers) => {
                             let submittedWhiteCardsCount = 0
                             submittedWhiteCardsRef.on('child_added', () => {
                                 submittedWhiteCardsCount++
-                                if (submittedWhiteCardsCount === playerCount) gameStateRef.set('judgement')
+                                if (submittedWhiteCardsCount === playerCount -1) {
+                                    submittedWhiteCardsCount = 0;
+                                    gameStateRef.set('judgement')
+                                }
                             })
                             if (roundTime) {
                                 let currentRoundTime = roundTime * 60
@@ -93,6 +97,7 @@ const stateManager = (gameId, teamId, roundTime, minPlayers) => {
                                     currentRoundTime--
                                     if (currentRoundTime === 0) {
                                         clearInterval(timer)
+                                        submittedWhiteCardsCount = 0;
                                         gameStateRef.set('judgement')
                                     }
                                 }, 1000)

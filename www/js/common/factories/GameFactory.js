@@ -7,8 +7,6 @@ app.factory('GameFactory', ($http, $rootScope, $localStorage) => {
             dan: "192.168.4.236"
         }
         const currentIp = ourIps.nikita
-
-
         // start a new game derp
         const GameFactory = {};
         GameFactory.startNewGame = (gameConfig) => {
@@ -49,7 +47,7 @@ app.factory('GameFactory', ($http, $rootScope, $localStorage) => {
                     'decks': decksArr
                 })
                 .then(() => gameId)
-        }
+        };
 
         GameFactory.joinGameById = (gameId) => {
             const teamId = $localStorage.team.id;
@@ -59,12 +57,8 @@ app.factory('GameFactory', ($http, $rootScope, $localStorage) => {
             playerRef.set({
                 name: playerName
             })
-            const gameRef = firebase.database().ref(`teams/${teamId}/games/${gameId}`)
-            gameRef.on('value', snapshot => {
-                $rootScope.$broadcast('changedGame', snapshot.val());
-            })
-            $http.post(`http://${currentIp}:1337/api/games/${gameId}?playerId=${playerId}`)
-        }
+            return $http.post(`http://${currentIp}:1337/api/games/${gameId}/?playerId=${playerId}`)
+        };
 
         GameFactory.getDecksByTeamId = (id) => {
             const teamId = (typeof id !== 'number') ? $localStorage.team.id : id; // id || localstorage doesn't work because 0 is falsey
@@ -73,22 +67,18 @@ app.factory('GameFactory', ($http, $rootScope, $localStorage) => {
 
         };
 
-
         GameFactory.getUsersByGameId = (gameId) => {
             return $http.get(`http://${currentIp}:1337/api/games/${gameId}/users`);
         };
 
-
-
         GameFactory.getGameByGameId = (gameId, teamId) => {
             teamId = teamId || $localStorage.team.id
             const gamesRef = firebase.database().ref(`teams/${teamId}/games/${gameId}`)
-            return gamesRef.once('value').then(snapshot => {
-                return snapshot.val();
-            })
+            return gamesRef.once('value').then(snapshot => snapshot.val())
         };
 
         GameFactory.getGamesByTeamId = (teamId) => {
+            console.log("###TEAM ID", teamId)
             teamId = teamId || $localStorage.team.id
             console.log('the team id is:', teamId)
             return $http.get(`http://${currentIp}:1337/api/games/?teamId=${teamId}`)
@@ -96,11 +86,20 @@ app.factory('GameFactory', ($http, $rootScope, $localStorage) => {
                 .catch(err => console.log(err))
         };
 
-        GameFactory.getGamesByUser = (userId) => {
-            return $http.get(`http://${currentIp}:1337/api/games/?userId=${userId}`)
+        GameFactory.getGamesByUserId = () => {
+            return $http.get(`http://${currentIp}:1337/api/games/?userId=${$localStorage.user.id}`)
                 .then(res => res.data)
-                .catch(err => console.log(err))
-        }
+                .catch(err => console.log(err));
+        };
+
+        GameFactory.getOpenGames = () => {
+            const teamId = $localStorage.team.id;
+            const userId = $localStorage.user.id;
+            return $http.get(`http://${currentIp}:1337/api/games/?teamId=${teamId}&userId=${userId}&open=true`)
+                .then(res => res.data)
+                .catch(err => console.log(err));
+        };
+
         return GameFactory;
     }
 

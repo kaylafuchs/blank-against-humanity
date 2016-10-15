@@ -9818,6 +9818,9 @@ a.button {
 a {
   text-decoration: none; }
 
+input {
+  border: none; }
+
 .card-game {
   background: #f1f1f1;
   font-family: "Helvetica Neue", sans-serif;
@@ -9925,6 +9928,10 @@ a {
   color: #000;
   background: transparent; }
 
+.grey {
+  color: #000;
+  background: #f1f1f1; }
+
 .played-card {
   border-color: #ef473a;
   background-color: #fdeceb; }
@@ -10025,10 +10032,11 @@ a {
   justify-content: center;
   width: 100%; }
 
-.your-games {
+.title-text {
   font-size: 20px;
   font-weight: bold;
   text-transform: uppercase;
+  margin-top: 5px;
   margin-bottom: 10px; }
 
 .open {
@@ -10050,3 +10058,16 @@ a {
   border-radius: 5px !important;
   opacity: 1;
   text-align: center; }
+
+.large-text {
+  font-size: 16px;
+  text-align: center; }
+
+.med-text {
+  font-size: 14px; }
+
+.decks {
+  margin-top: 15px; }
+
+.start-game-btn {
+  width: 76% !important; }
