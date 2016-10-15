@@ -32,6 +32,11 @@ a {
 	text-decoration: none;
 }
 
+
+input {
+	border: none;
+}
+
 .card-game
 {
 	background: #f1f1f1;
@@ -319,6 +324,11 @@ a {
 
 }
 
+
+.create-game-container {
+
+}
+
 .titles {
 	width: 100%;
 	//flex-grow: 1;
@@ -359,10 +369,11 @@ a {
 	width: 100%;
 }
 
-.your-games {
+.title-text {
 	font-size: 20px;
 	font-weight: bold;
 	text-transform: uppercase;
+	margin-top: 5px;
 	margin-bottom: 10px;
 }
 
@@ -391,6 +402,22 @@ a {
 	text-align: center;
 }
 
+.large-text {
+	font-size: 16px;
+	text-align: center;
+}
+
+.med-text {
+	font-size: 14px;
+}
+
+.decks {
+	margin-top: 15px;
+}
+
+.start-game-btn {
+	width: 76%!important;
+}
 
 // [ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {
 //   display: none !important;

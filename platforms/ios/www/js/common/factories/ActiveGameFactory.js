@@ -86,6 +86,8 @@ app.factory('ActiveGameFactory', ($http, $rootScope, $localStorage) => {
         ActiveGameFactory.pickWinningWhiteCard = (cardId, gameId, teamId) => {
           const gameRef = firebase.database().ref(`teams/${teamId}/games/${gameId}`);
           let winner = gameRef.child(`submittedWhiteCards/${cardId}/submittedBy`)
+          const winningCard = gameRef.child(`submittedWhiteCards/${cardId}`)
+          console.log('WINNING CARD', winningCard)
           let blackCardId = '';
           let blackCardWon = {}
           winner.once('value')
@@ -101,9 +103,15 @@ app.factory('ActiveGameFactory', ($http, $rootScope, $localStorage) => {
               .then(() => {
                 console.log("####BLACK CARD WON", blackCardWon)
                 gameRef.child(`players/${winner}/blackCardsWon`).update(blackCardWon)
-                gameRef.child(`winningCard`).set(winner)
+                return winningCard.once('value')
               })
-              return Promise.all([setRoundStateToOver, awardBlackCard, gameRef.child('submittedWhiteCards').remove()])
+              .then(winningCardSnapshot => {
+                    console.log('SNAPSHOT', winningCardSnapshot.val());
+                    winningCardSnapshot = winningCardSnapshot.val();
+                    return gameRef.child(`winningCard`).set(winningCardSnapshot)
+                  })
+              .then(() => gameRef.child('submittedWhiteCards').remove())
+              return Promise.all([setRoundStateToOver, awardBlackCard])
             })
         }
 
