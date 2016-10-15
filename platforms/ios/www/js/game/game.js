@@ -11,11 +11,11 @@ app.config(($stateProvider) => {
 })
 
 app.controller('GameCtrl', ($scope, GameFactory, $stateParams, $localStorage, ActiveGameFactory) => {
-    // const gameId = $stateParams.gameId;
-    $scope.gameId = 12;
+    const gameId = $stateParams.gameId;
+    //$scope.gameId = 12;
     const playerId = $localStorage.user.id;
-    const teamId = 2;
-    // const teamId = $localStorage.team.id
+    //const teamId = 2;
+    const teamId = $localStorage.team.id
     const gameRef = firebase.database().ref(`teams/${teamId}/games/${$scope.gameId}/`);
 
     gameRef.on('value', gameSnapshot => {

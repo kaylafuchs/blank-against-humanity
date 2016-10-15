@@ -10,7 +10,7 @@ const ourIps = {
 }
 
 
-const currentIp = ourIps.dan
+const currentIp = ourIps.kayla
 
 module.exports = function(db) {
     app.use(function(req, res, next) {
