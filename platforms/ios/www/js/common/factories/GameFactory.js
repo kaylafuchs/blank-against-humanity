@@ -6,7 +6,7 @@ app.factory('GameFactory', ($http, $rootScope, $localStorage) => {
             nithya: "192.168.1.48",
             dan: "192.168.4.236"
         }
-        const currentIp = ourIps.nithya
+        const currentIp = ourIps.kayla
 
 
         // start a new game derp
@@ -46,8 +46,9 @@ app.factory('GameFactory', ($http, $rootScope, $localStorage) => {
                 decksArr.push(deckId)
             }
             return $http.post(`http://${currentIp}:1337/api/games/${gameId}/decks`, {
-                'decks': decksArr
-            })
+                    'decks': decksArr
+                })
+                .then(() => gameId)
         }
 
         GameFactory.joinGameById = (gameId) => {
@@ -86,6 +87,7 @@ app.factory('GameFactory', ($http, $rootScope, $localStorage) => {
         GameFactory.getGamesByTeamId = (teamId) => {
             console.log("###TEAM ID", teamId)
             teamId = teamId || $localStorage.team.id
+            console.log('the team id is:', teamId)
             return $http.get(`http://${currentIp}:1337/api/games/?teamId=${teamId}`)
                 .then(res => res.data)
                 .catch(err => console.log(err))

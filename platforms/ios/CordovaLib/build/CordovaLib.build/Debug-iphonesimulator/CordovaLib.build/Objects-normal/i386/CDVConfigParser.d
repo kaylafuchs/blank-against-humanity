@@ -1,3 +1,3 @@
 dependencies: \
-  /Users/nithyamathews/Senior\ Phase/blank-against-humanity/platforms/ios/CordovaLib/Classes/Public/CDVConfigParser.m \
-  /Users/nithyamathews/Senior\ Phase/blank-against-humanity/platforms/ios/CordovaLib/Classes/Public/CDVConfigParser.h
+  /Users/kaylafuchs/Documents/Fullstack/blank-against-humanity/platforms/ios/CordovaLib/Classes/Public/CDVConfigParser.m \
+  /Users/kaylafuchs/Documents/Fullstack/blank-against-humanity/platforms/ios/CordovaLib/Classes/Public/CDVConfigParser.h
