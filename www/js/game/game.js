@@ -6,15 +6,15 @@ app.config(($stateProvider) => {
         controller: 'GameCtrl',
         // resolve: {
         //     game : (GameFactory, $stateParams) => GameFactory.getGameByGameId($stateParams.gameId)
-        // }  
+        // }
     })
 })
 
-app.controller('GameCtrl', ($scope, GameFactory, $stateParams, $localStorage, ActiveGameFactory) => {   
+app.controller('GameCtrl', ($scope, GameFactory, $stateParams, $localStorage, ActiveGameFactory) => {
     // const gameId = $stateParams.gameId;
     $scope.gameId = 12;
     const playerId = $localStorage.user.id;
-    const teamId = 2; 
+    const teamId = 2;
     // const teamId = $localStorage.team.id
     const gameRef = firebase.database().ref(`teams/${teamId}/games/${$scope.gameId}/`);
 
@@ -32,12 +32,11 @@ app.controller('GameCtrl', ($scope, GameFactory, $stateParams, $localStorage, Ac
         $scope.$evalAsync();
         if($scope.game.winningCard){
             $scope.winningCard = $scope.game.winningCard
-        } 
+        }
     })
-   
+
     $scope.showCards = false;
     $scope.submitted = false;
-
 
     $scope.onSwipeDown = (gameId) => {
         GameFactory.joinGameById(gameId)
@@ -47,15 +46,13 @@ app.controller('GameCtrl', ($scope, GameFactory, $stateParams, $localStorage, Ac
           console.log($scope.playerHand)
           $scope.$evalAsync();
         })
-    }  
+    }
 
     $scope.onDoubleTap = (cardId, cardText) => {
         ActiveGameFactory.submitWhiteCard(playerId, cardId, $scope.gameId, teamId, cardText)
         $scope.getSubmittedPlayers();
         $scope.submitted = true;
         $scope.$evalAsync();
-        console.log("submitted players", $scope.playersToSubmit)
-        console.log("submitted", $scope.submitted)
     }
 
     $scope.judgeDoubleTap = (cardId) => {
@@ -66,47 +63,11 @@ app.controller('GameCtrl', ($scope, GameFactory, $stateParams, $localStorage, Ac
     }
 
 
-    $scope.getSubmittedPlayers = () => {
-        $scope.playersToSubmit =  _.keyBy($scope.submittedWhiteCards, card => {
-            return card.submittedBy; 
-        })
-    }
-
+    // $scope.getSubmittedPlayers = () => {
+    //     $scope.playersToSubmit =  _.keyBy($scope.submittedWhiteCards, card => {
+    //         return card.submittedBy;
+    //     })
+    // }
 
 })
-
-
-// app.controller("ActiveGameCtrl", ($scope, GameFactory, ActiveGameFactory, game, $stateParams, $localStorage, $state) => {
-
-    
-//     $scope.onSwipeDown = () => {
-//         console.log('working');
-//         console.log($scope.showCards);
-//         $scope.showCards = true ;
-//         console.log($scope.showCards);
-//         $scope.$evalAsync();
-//     }
-
-//     $scope.onSwipeUp = () => {
-//         console.log("swiped up");
-//     }
-
-//     $scope.onDoubleTap = (key) => {
-//         console.log("double tapped")
-//         $scope.played = true;
-//         //call submit card function here.
-//     }
-
-//     ActiveGameFactory.refillMyHand($scope.gameId, $scope.playerId, $scope.teamId);
-
-//     $scope.$on('changedGame', (event,snapshot) =>{
-//         $scope.game = snapshot;
-//         console.log($scope.game);
-//         if(game.state === 'submission'){
-//             $state.go('game.submission-game')
-//         } 
-//     })
-// })
-
-
 
