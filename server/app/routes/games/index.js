@@ -116,7 +116,7 @@ router.post('/:id/decks', (req, res, next) => {
             return Promise.all(addingCardsToFb)
         })
         .then(() => {
-            stateManager(req.requestedGame.id, req.requestedGame.teamId, req.requestedGame.maxTurnTime)
+            stateManager(req.requestedGame.id, req.requestedGame.teamId, req.requestedGame.maxTurnTime, req.requestedGame.minPlayers)
             res.sendStatus(200)
         })
 

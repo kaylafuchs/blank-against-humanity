@@ -49,12 +49,13 @@ const judgePicker = (judgeArr, gameRef) => {
     judgeArr.push(currentJudge)
 }
 
-const stateManager = (gameId, teamId, roundTime) => {
+const stateManager = (gameId, teamId, roundTime, minPlayers) => {
     const gameRef = firebase.database().ref(`teams/${teamId}/games/${gameId}`);
     const gameStateRef = gameRef.child('state');
     const playersRef = gameRef.child('players');
     const timerRef = gameRef.child('timer')
     const submittedWhiteCardsRef = gameRef.child('submittedWhiteCards')
+    console.log(typeof minPlayers)
     console.log('My name is State Manager. Im here to manage states and chew gum, and im all out of gum')
     let judgeArr = [];
     judgeManager(playersRef, judgeArr);
@@ -68,9 +69,10 @@ const stateManager = (gameId, teamId, roundTime) => {
                             console.log('game state updated to pregame')
                             pickBlackCard(gameRef)
                             judgePicker(judgeArr, gameRef)
+                            console.log(judgeArr)
                             playersRef.on('child_added', () => {
                                 playerCount++
-                                if (playerCount === 4) {
+                                if (playerCount === minPlayers) {
                                     gameStateRef.set('submission')
                                 }
                             })
