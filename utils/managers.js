@@ -58,8 +58,8 @@ const stateManager = (gameId, teamId, roundTime) => {
     return gameStateRef.set('pregame')
         .then(() => {
             console.log('game state set to pregame')
+            let playerCount = 0;
             gameStateRef.on('value', (stateSnapshot => {
-                let playerCount = 0;
                 switch (stateSnapshot.val()) {
                     case 'pregame':
                         {
@@ -77,6 +77,8 @@ const stateManager = (gameId, teamId, roundTime) => {
                         {
                             let submittedWhiteCardsCount = 0
                             gameStateRef.parent.child('submittedWhiteCards').on('child_added', () => {
+                                console.log('white card submitted')
+                                console.log('playerCount', playerCount)
                                 submittedWhiteCardsCount++
                                 if (submittedWhiteCardsCount === playerCount -1) {
                                     submittedWhiteCardsCount = 0;
@@ -101,6 +103,7 @@ const stateManager = (gameId, teamId, roundTime) => {
             }))
         })
 }
+
 module.exports = {
     stateManager: stateManager
 }
