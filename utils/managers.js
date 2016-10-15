@@ -110,7 +110,7 @@ const stateManager = (gameId, teamId, roundTime) => {
                                 clearInterval(timer)
                                 gameStateRef.set('submission')
                             }
-                        })
+                        }, 1000)
                     }
                 }
             }))
