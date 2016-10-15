@@ -9,8 +9,6 @@ const firebase = require('firebase')
 const _ = require('lodash');
 module.exports = router;
 const stateManager = require('../../../../utils/managers').stateManager
-var gameId;
-
 
 // get game instance for id, put on req object
 router.param('id', (req, res, next, id) => {
@@ -33,9 +31,7 @@ router.get('/:id', (req, res, next) => {
 // api/games?teamId=31&userId=3&open=true
 // get a user or teams games, to display in a lobby
 router.get('/', (req, res, next) => {
-
     if (req.query.teamId && req.query.open) {
-        console.log('inside route thing')
         return Game.findAll({
                 include: [{
                     model: User,
@@ -61,93 +57,19 @@ router.get('/', (req, res, next) => {
 
             })
             .then(games => res.send(games))
-
-
-        //                 .then(users => users.map(user => console.log('id is:', user.id))))
-        // res.send(foundGames)
-
-
-        //get all games for a team
-        //get all games for team + userid
-        //get find the difference
-        // return Game.findAll({
-        //         where: {
-        //             teamId: req.query.teamId
-        //         }
-        //     })
-        //     .then(foundGames => {
-        //         //for every game, return array of its users
-        //         const gettingUsers = foundGames.map(game => game.getUsers().then(usersArr => )  )
-        //         return Promise.all(gettingUsers)
-        //     })
-        //     .then(userArrs => {
-        //         //for every array of users, check to make sure it doesn't contain req.query.userId. if it doesn't, return it.
-        //         console.log('userArrs..can i get gameId?', userArrs[0])
-        //     })
-
-
-        // const gettingTeamGames = Game.findAll({
-        //     where: {
-        //         teamId: req.query.teamId
-        //     }
-        // })
-
-        // const gettingUserGames = Game.findAll({
-        //     include: [{
-        //         model: User,
-        //         through: {
-        //             attributes: ['player_games'],
-        //             where: { userId: req.query.userId }
-        //         }
-        //     }]
-        // })
-
-
-        // return Promise.all([gettingTeamGames, gettingUserGames])
-        //     .then((arr) => {
-        //         const teamGames = arr[0];
-        //         const userGames = arr[1]; //game 1
-        //         console.log('teamgames', teamgames)
-        //             //console.log('user games', userGames)
-        //             //console.log('the difference is', _.difference(teamGames, userGames))
-        //         return _.difference(teamGames, userGames)
-        //     })
+            .catch(next);
 
     } else if (req.query.userId) {
-        console.log('userid query')
-            // return Game.findAll({
-            //         include: [{
-            //             model: User,
-            //             through: {
-            //                 attributes: ['player_games'],
-            //                 where: { userId: req.query.userId }
-            //             }
-            //         }]
-            //     })
-
         return Game.findAll({
                 include: [{
                     model: User,
                     where: { id: req.query.userId }
-                }],
-                // where: { userId: req.query.userId }
+                }]
             })
-            // return Game.findAll({
-            //     include: [{
-            //         model: User,
-            //         through: { attributes: 'player_games' }
-            //     }],
-            //     where: { userId: req.query.userId }
-            // })
-
-
-
-        .then(foundGames => res.send(foundGames))
+            .then(foundGames => res.send(foundGames))
             .catch(next);
-    }
-    // TODO: filter out the team's games that the user is already in
-    else if (req.query.teamId) {
-        console.log('teamid query')
+
+    } else if (req.query.teamId) {
         return Game.findAll({
                 where: {
                     teamId: req.query.teamId
@@ -155,10 +77,11 @@ router.get('/', (req, res, next) => {
             })
             .then(foundGames => res.send(foundGames))
             .catch(next);
+
     } else {
-        console.log('else query')
         return Game.findAll()
-            .then(foundGames => res.send(foundGames));
+            .then(foundGames => res.send(foundGames))
+            .catch(next);
     }
 
 });
@@ -214,10 +137,9 @@ router.post('/:id/decks', (req, res, next) => {
             res.sendStatus(200)
         })
 
-})
+});
 
 router.post('/', (req, res, next) => {
-
     var gameId;
     return Game.create({
             name: req.body.name,
@@ -228,22 +150,19 @@ router.post('/', (req, res, next) => {
 
         })
         .then(createdGame => {
-            const gameRef = firebase.database().ref(`teams/${req.body.teamId}/games/${createdGame.id}`)
-            gameId = createdGame.id;
-            return gameRef.set({
-                    teamId: req.body.teamId,
-                    settings: req.body.settings
-                })
-                .then(() => {
-                    return gameRef.child(`players/${req.body.creatorId}`).set({
-                        name: req.body.creatorName //should be player name
-                    })
-                })
-                .then(() => {
-                    res.send(gameId + '');
-                })
-
+            gameId = createdGame.id
+            return createdGame.addUsers(+req.body.creatorId);
         })
-        .catch(next)
+        .then(() => firebase.database().ref(`teams/${req.body.teamId}/games/${gameId}`).set({
+            teamId: req.body.teamId,
+            settings: req.body.settings
+        }))
+        .then(() => firebase.database().ref(`teams/${req.body.teamId}/games/${gameId}/players/${req.body.creatorId}`).set({
+            name: req.body.creatorName
+        }))
+        .then(() => {
+            res.send(gameId + '');
+        })
+        .catch(next);
 });
 

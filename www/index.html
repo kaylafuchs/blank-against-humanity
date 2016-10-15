@@ -2,13 +2,11 @@
 <html>
 
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
-  <title></title>
-
-  <link rel="manifest" href="manifest.json">
-
-  <!-- un-comment this code to enable service worker
+    <meta charset="utf-8">
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
+    <title></title>
+    <link rel="manifest" href="manifest.json">
+    <!-- un-comment this code to enable service worker
     <script>
       if ('serviceWorker' in navigator) {
         navigator.serviceWorker.register('service-worker.js')
@@ -16,74 +14,63 @@
           .catch(err => console.log('Error', err));
       }
     </script>-->
-
-
-  <!-- compiled css output -->
-  <link href="css/ionic.app.css" rel="stylesheet">
-
-
-  <script src="lib/ionic/js/ionic.bundle.js"></script>
-
-  <script src="lib/ng-cordova.min.js"></script>
-  <script src="lib/ng-cordova-oauth.min.js"></script>
-  <script src="lib/ngStorage.min.js"></script>
-  <script src="lib/ionic/js/angular/angular-animate.min.js"></script>
-  <!-- cordova script (this will be a 404 during development) -->
-  <script src="cordova.js"></script>
-
-
-  <!-- firebase -->
-  <!--<script src="https://www.gstatic.com/firebasejs/3.4.1/firebase.js"></script>-->
-
-  <script src="https://www.gstatic.com/firebasejs/3.4.0/firebase-app.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/3.4.0/firebase-database.js"></script>
-  <script>
-  const config = {
-                    apiKey: "AIzaSyCihSNkUl_O-xuzVrLZFz_mZJAGcwqJcdE",
-                    authDomain: "blankagainsthumanity-a3e7c.firebaseapp.com",
-                    databaseURL: "https://blankagainsthumanity-a3e7c.firebaseio.com",
-                    storageBucket: "blankagainsthumanity-a3e7c.appspot.com",
-                    messagingSenderId: "647415099169"
-                  };
-            firebase.initializeApp(config);
-</script>
-
-
-  <!-- your app's js -->
-  <script src="public/main.js"></script>
+    <!-- compiled css output -->
+    <link href="css/ionic.app.css" rel="stylesheet">
+    <script src="lib/ionic/js/ionic.bundle.js"></script>
+    <script src="lib/ng-cordova.min.js"></script>
+    <script src="lib/ng-cordova-oauth.min.js"></script>
+    <script src="lib/ngStorage.min.js"></script>
+    <script src="lib/ionic/js/angular/angular-animate.min.js"></script>
+    <!-- cordova script (this will be a 404 during development) -->
+    <script src="cordova.js"></script>
+    <!-- firebase -->
+    <!--<script src="https://www.gstatic.com/firebasejs/3.4.1/firebase.js"></script>-->
+    <script src="https://www.gstatic.com/firebasejs/3.4.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/3.4.0/firebase-database.js"></script>
+    <script>
+    const config = {
+        apiKey: "AIzaSyCihSNkUl_O-xuzVrLZFz_mZJAGcwqJcdE",
+        authDomain: "blankagainsthumanity-a3e7c.firebaseapp.com",
+        databaseURL: "https://blankagainsthumanity-a3e7c.firebaseio.com",
+        storageBucket: "blankagainsthumanity-a3e7c.appspot.com",
+        messagingSenderId: "647415099169"
+    };
+    firebase.initializeApp(config);
+    </script>
+    <!-- your app's js -->
+    <script src="public/main.js"></script>
 </head>
 
 <body ng-app="BlankAgainstHumanity">
-  <ion-side-menus enable-menu-with-back-views="true">
-    <ion-side-menu-content>
-      <ion-nav-bar class="bar-positive">
-        <ion-nav-buttons side="left">
-          <button menu-toggle="left" class="button button-icon icon ion-navicon"></button>
-        </ion-nav-buttons>
-        <!--                 <ion-title>___ Against Humanity</ion-title> -->
-      </ion-nav-bar>
-      <ion-nav-view animation="slide-left-right"></ion-nav-view>
-    </ion-side-menu-content>
-    <ion-side-menu side="left">
-      <header class="bar bar-header bar-stable">
-        <h1 class="title">Menu</h1>
-      </header>
-      <ion-content class="has-header">
-        <ion-list>
-          <ion-item menu-close ui-sref="home">
-            Games
-          </ion-item>
-          <ion-item menu-close ng-controller="LogoutCtrl" ng-click="logOut()">
-            Sign Out
-          </ion-item>
-          <ion-item menu-close ui-sref="game({gameId: 32})">
-            Card Animation Test
-          </ion-item>
-        </ion-list>
-      </ion-content>
-    </ion-side-menu>
-  </ion-side-menus>
-
+    <ion-side-menus enable-menu-with-back-views="true">
+        <ion-side-menu-content>
+            <ion-nav-bar class="bar-positive">
+                <ion-nav-buttons side="left">
+                    <button menu-toggle="left" class="button button-icon icon ion-navicon"></button>
+                </ion-nav-buttons>
+                <!--                 <ion-title>___ Against Humanity</ion-title> -->
+            </ion-nav-bar>
+            <ion-nav-view animation="slide-left-right"></ion-nav-view>
+        </ion-side-menu-content>
+        <ion-side-menu side="left">
+            <header class="bar bar-header bar-stable">
+                <h1 class="title">Menu</h1>
+            </header>
+            <ion-content class="has-header">
+                <ion-list>
+                    <ion-item menu-close ui-sref="home" ui-sref-opts="{reload: true}">
+                        Games
+                    </ion-item>
+                    <ion-item menu-close ng-controller="LogoutCtrl" ng-click="logOut()">
+                        Sign Out
+                    </ion-item>
+                    <ion-item menu-close ui-sref="game({gameId: 32})">
+                        Card Animation Test
+                    </ion-item>
+                </ion-list>
+            </ion-content>
+        </ion-side-menu>
+    </ion-side-menus>
 </body>
 
 </html>

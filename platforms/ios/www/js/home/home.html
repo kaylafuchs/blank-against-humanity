@@ -31,7 +31,12 @@
                         <button class="button button-outline button-small button-assertive">View game</button>
                     </a>
                 </div> -->
-                <span class="your-games open">Open games</span> {{openGames}}
+                <span class="your-games open">Open games</span>
+                <div ng-repeat="game in openGames" class="game-listing">{{game.name}}
+                    <a ui-sref="game({gameId: game.id})">
+                        <button class="button button-outline button-small button-assertive">View Game</button>
+                    </a>
+                </div>
                 <!-- <div ng-repeat="(key, value) in games track by $index" ng-if="value.settings.name" class="game-listing">
                     <span>{{value.settings.name}}</span>
                     <button class="button button-outline button-small button-balanced" ui-sref="game({gameId: key})">Join game</button>
