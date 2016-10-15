@@ -19,7 +19,7 @@ app.factory('GameFactory', ($http, $rootScope, $localStorage) => {
                     name: gameConfig.name || 'AWESOME Name',
                     teamId: teamId,
                     creatorId: creatorId,
-                    creatorName: $localStorage.user.name || 'dan', //might be unnecessary if we have the user id
+                    creatorName: $localStorage.user.name,
                     settings: gameConfig
                 })
                 .then(res => {
