@@ -94,10 +94,14 @@ app.factory('GameFactory', ($http, $rootScope, $localStorage) => {
         };
 
         GameFactory.getOpenGames = () => {
-            const teamId = $localstorage.team.id;
-            const userId = $localstorage.user.id
+            const teamId = $localStorage.team.id;
+            const userId = $localStorage.user.id
+            console.log('running getOpenGames')
             return $http.get(`http://${currentIp}:1337/api/games/?teamId=${teamId}&userId=${userId}&open=true`)
-                .then(res => res.data)
+                .then(res => {
+                    console.log('hitting getOpenGames')
+                    return res.data
+                })
                 .catch(err => console.log(err))
         }
 
