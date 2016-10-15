@@ -12,54 +12,65 @@ app.config(($stateProvider) => {
 
 app.controller('GameCtrl', ($scope, GameFactory, $stateParams, $localStorage, ActiveGameFactory) => {   
     // const gameId = $stateParams.gameId;
-    $scope.gameId = 32;
+    $scope.gameId = 57;
     const playerId = $localStorage.user.id;
     const teamId = 2; 
     // const teamId = $localStorage.team.id
-    const gameRef = firebase.database().ref(`teams/${teamId}/games/${$scope.gameId}/`); 
+    const gameRef = firebase.database().ref(`teams/${teamId}/games/${$scope.gameId}/`);
 
     gameRef.on('value', gameSnapshot => {
         $scope.game = gameSnapshot.val();
         $scope.gameName = $scope.game.settings.name;
-        $scope.playerHand = $scope.game.players[playerId].hand;
-        $scope.playerHandCount = Object.keys($scope.playerHand).length; 
-        $scope.blackCard = $scope.game.currentBlackCard;
-        $scope.blackCardText = $scope.blackCard[Object.keys($scope.blackCard)[0]]
+        if ($scope.game.players[playerId].hand){
+            $scope.playerHand = $scope.game.players[playerId].hand;
+            $scope.playerHandCount = Object.keys($scope.playerHand).length;
+        }
+        $scope.blackCard = $scope.game.currentBlackCard[1].text
+        console.log("blackCard", $scope.blackCard)
         $scope.judge = $scope.game.currentJudge;
         $scope.players = $scope.game.players;
-        $scope.submittedWhiteCards= $scope.game.submittedWhiteCards
+        console.log("players",$scope.players)
+        console.log("typeof players", typeof $scope.players)
+        $scope.submittedWhiteCards = $scope.game.submittedWhiteCards
         $scope.$evalAsync();
     })
-
-
-    ActiveGameFactory.refillMyHand($scope.gameId, playerId, teamId)
-    
+   
     $scope.showCards = false;
+    $scope.submitted = false;
 
 
     $scope.onSwipeDown = (gameId) => {
-        if($scope.playerHandCount<7){
-            ActiveGameFactory.refillMyHand($scope.gameId, playerId, teamId)
-        }
-        $scope.showCards = true ;
-        //GameFactory.joinGameById(gameId);
-        $scope.$evalAsync();
+        GameFactory.joinGameById(gameId)
+        .then(() => {
+          ActiveGameFactory.refillMyHand($scope.gameId, playerId, teamId)
+          $scope.showCards = true;
+          console.log($scope.playerHand)
+          $scope.$evalAsync();
+        })
     }  
 
     $scope.onDoubleTap = (cardId, cardText) => {
         ActiveGameFactory.submitWhiteCard(playerId, cardId, $scope.gameId, teamId, cardText)
+        $scope.getSubmittedPlayers();
+        $scope.submitted = true;
+        $scope.$evalAsync();
+        console.log("submitted players", $scope.playersToSubmit)
+        console.log("submitted", $scope.submitted)
     }
 
+    $scope.judgeDoubleTap = (cardId) => {
+        // if (playerId === judge) {
+            ActiveGameFactory.pickWinningWhiteCard(cardId, $scope.gameId, teamId)
+            console.log("judging")
+        // }
+    }
 
 
     $scope.getSubmittedPlayers = () => {
-        $scope.submittedPlayers =  _.keyBy($scope.submittedWhiteCards, card =>{
+        $scope.playersToSubmit =  _.keyBy($scope.submittedWhiteCards, card => {
             return card.submittedBy; 
         })
     }
-
-
-
 
 })
 

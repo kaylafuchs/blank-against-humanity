@@ -12,50 +12,50 @@ app.config(($stateProvider) => {
 
 app.controller('GameCtrl', ($scope, GameFactory, $stateParams, $localStorage, ActiveGameFactory) => {   
     // const gameId = $stateParams.gameId;
-    $scope.gameId = 32;
+    $scope.gameId = 59;
     const playerId = $localStorage.user.id;
     const teamId = 2; 
     // const teamId = $localStorage.team.id
-    const gameRef = firebase.database().ref(`teams/${teamId}/games/${$scope.gameId}/`); 
+    const gameRef = firebase.database().ref(`teams/${teamId}/games/${$scope.gameId}/`);
 
     gameRef.on('value', gameSnapshot => {
         $scope.game = gameSnapshot.val();
         $scope.gameName = $scope.game.settings.name;
-        $scope.playerHand = $scope.game.players[playerId].hand;
-        $scope.playerHandCount = Object.keys($scope.playerHand).length; 
-        $scope.blackCard = $scope.game.currentBlackCard;
-        $scope.blackCardText = $scope.blackCard[Object.keys($scope.blackCard)[0]]
+        if ($scope.game.players[playerId].hand){
+            $scope.playerHand = $scope.game.players[playerId].hand;
+            $scope.playerHandCount = Object.keys($scope.playerHand).length;
+        }
+        $scope.blackCard = $scope.game.currentBlackCard[1].text
+        console.log("blackCard", $scope.blackCard)
         $scope.judge = $scope.game.currentJudge;
         $scope.players = $scope.game.players;
-        $scope.submittedWhiteCards= $scope.game.submittedWhiteCards
-        console.log($scope.players);
+        $scope.submittedWhiteCards = $scope.game.submittedWhiteCards
         $scope.$evalAsync();
     })
-
-
-    ActiveGameFactory.refillMyHand($scope.gameId, playerId, teamId)
-    
+   
     $scope.showCards = false;
+    $scope.submitted = false;
 
 
     $scope.onSwipeDown = (gameId) => {
-        if($scope.playerHandCount<7){
-            ActiveGameFactory.refillMyHand($scope.gameId, playerId, teamId)
-        }
-        $scope.showCards = true ;
-        //GameFactory.joinGameById(gameId);
+        GameFactory.joinGameById(gameId)
+        .then(() => {
+          ActiveGameFactory.refillMyHand($scope.gameId, playerId, teamId)
+          $scope.showCards = true;
+        }) 
         $scope.$evalAsync();
     }  
 
     $scope.onDoubleTap = (cardId, cardText) => {
         ActiveGameFactory.submitWhiteCard(playerId, cardId, $scope.gameId, teamId, cardText)
-        console.log('TEST',  $scope.getSubmittedPlayers());
+        $scope.getSubmittedPlayers();
+        $scope.submitted = true;
     }
 
 
 
     $scope.getSubmittedPlayers = () => {
-       return  _.keyBy($scope.submittedWhiteCards, card =>{
+        $scope.submittedPlayers =  _.keyBy($scope.submittedWhiteCards, card =>{
             return card.submittedBy; 
         })
     }

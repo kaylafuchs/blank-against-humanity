@@ -9,7 +9,7 @@ const ourIps = {
     dan: "192.168.4.236"
 }
 
-const currentIp = ourIps.nithya
+const currentIp = ourIps.kayla
 module.exports = function(db) {
     app.use(function(req, res, next) {
         res.header('Access-Control-Allow-Origin', `http://${currentIp}:8100`);

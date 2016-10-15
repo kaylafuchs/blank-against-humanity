@@ -19,6 +19,7 @@ app.factory('ActiveGameFactory', ($http, $rootScope, $localStorage) => {
 
         ActiveGameFactory.refillMyHand = (gameId, playerId, teamId) => {
           // how many cards do I need?
+          console.log("refilling hand")
           let cardsNeeded = 0
           const gameRef = firebase.database().ref(`teams/${teamId}/games/${gameId}`)
           const handRef = gameRef.child(`players/${playerId}/hand`)
@@ -28,6 +29,7 @@ app.factory('ActiveGameFactory', ($http, $rootScope, $localStorage) => {
             })
             .then(() => {
               refiller(cardsNeeded, pileRef, handRef)
+              console.log("made it to refiller")
             })
         }
 

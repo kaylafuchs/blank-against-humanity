@@ -4,12 +4,12 @@
 		<p class="logo white">______ Against Humanity</p>
 	 </li>	 -->
 	<li ng-repeat="(key,value) in players track by $index" ng-if="key !== judge">
-		<li class="game-card animate outline grey" ng-if="!submittedWhiteCards[$index]">
+		<li class="game-card animate outline grey" ng-if="!submittedPlayers[key]">
 				<p class="card-text">Waiting for players to submit</p>
 				<p class="logo transparent">______ Against Humanity</p>
 		</li>
-		<li class="game-card animate white" ng-if="submittedWhiteCards[$index]">
-				<p class="card-text">{{val.text}}</p>
+		<li class="game-card animate white" ng-if="submittedPlayers[key]">
+				<p class="card-text">{{submittedPlayers[key].text}}</p>
 				<p class="logo white">______ Against Humanity</p>
 		</li>	
 	</li>
