@@ -12,7 +12,7 @@ app.config(($stateProvider) => {
 
 app.controller('GameCtrl', ($scope, GameFactory, $stateParams, $localStorage, ActiveGameFactory) => {   
     // const gameId = $stateParams.gameId;
-    $scope.gameId = 57;
+    $scope.gameId = 12;
     const playerId = $localStorage.user.id;
     const teamId = 2; 
     // const teamId = $localStorage.team.id
@@ -25,14 +25,14 @@ app.controller('GameCtrl', ($scope, GameFactory, $stateParams, $localStorage, Ac
             $scope.playerHand = $scope.game.players[playerId].hand;
             $scope.playerHandCount = Object.keys($scope.playerHand).length;
         }
-        $scope.blackCard = $scope.game.currentBlackCard[1].text
-        console.log("blackCard", $scope.blackCard)
+        $scope.blackCard = $scope.game.currentBlackCard.text
         $scope.judge = $scope.game.currentJudge;
         $scope.players = $scope.game.players;
-        console.log("players",$scope.players)
-        console.log("typeof players", typeof $scope.players)
         $scope.submittedWhiteCards = $scope.game.submittedWhiteCards
         $scope.$evalAsync();
+        if($scope.game.winningCard){
+            $scope.winningCard = $scope.game.winningCard
+        } 
     })
    
     $scope.showCards = false;
@@ -71,6 +71,7 @@ app.controller('GameCtrl', ($scope, GameFactory, $stateParams, $localStorage, Ac
             return card.submittedBy; 
         })
     }
+
 
 })
 
