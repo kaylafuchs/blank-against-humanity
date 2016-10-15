@@ -1,6 +1,6 @@
-<ul class="hand fade">
-    <li class="game-card animate white" ng-repeat="(key,val) in game.players[playerId].hand" on-double-tap="onDoubleTap(key)" ng-if="showCards">
-        <p class="card-text">{{val.text}}</p>
-        <p class="logo white">______ Against Humanity</p>
-    </li>
+<ul class="hand fade" ng-show="showCards">
+	<li class="game-card animate white" ng-repeat="(key,val) in playerHand" on-double-tap="onDoubleTap(key, val.text)">
+		<p class="card-text">{{val.text}}</p>
+		<p class="logo white">______ Against Humanity</p>
+	</li>
 </ul>

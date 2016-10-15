@@ -14,31 +14,41 @@
           .catch(err => console.log('Error', err));
       }
     </script>-->
-    <!-- compiled css output -->
-    <link href="css/ionic.app.css" rel="stylesheet">
-    <script src="lib/ionic/js/ionic.bundle.js"></script>
-    <script src="lib/ng-cordova.min.js"></script>
-    <script src="lib/ng-cordova-oauth.min.js"></script>
-    <script src="lib/ngStorage.min.js"></script>
-    <script src="lib/ionic/js/angular/angular-animate.min.js"></script>
-    <!-- cordova script (this will be a 404 during development) -->
-    <script src="cordova.js"></script>
-    <!-- firebase -->
-    <!--<script src="https://www.gstatic.com/firebasejs/3.4.1/firebase.js"></script>-->
-    <script src="https://www.gstatic.com/firebasejs/3.4.0/firebase-app.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/3.4.0/firebase-database.js"></script>
-    <script>
-    const config = {
-        apiKey: "AIzaSyCihSNkUl_O-xuzVrLZFz_mZJAGcwqJcdE",
-        authDomain: "blankagainsthumanity-a3e7c.firebaseapp.com",
-        databaseURL: "https://blankagainsthumanity-a3e7c.firebaseio.com",
-        storageBucket: "blankagainsthumanity-a3e7c.appspot.com",
-        messagingSenderId: "647415099169"
-    };
-    firebase.initializeApp(config);
-    </script>
-    <!-- your app's js -->
-    <script src="public/main.js"></script>
+
+  <!-- compiled css output -->
+  <link href="css/ionic.app.css" rel="stylesheet">
+
+
+  <script src="lib/ionic/js/ionic.bundle.js"></script>
+  <script src="lib/lodash.min.js"></script>
+
+  <script src="lib/ng-cordova.min.js"></script>
+  <script src="lib/ng-cordova-oauth.min.js"></script>
+  <script src="lib/ngStorage.min.js"></script>
+  <script src="lib/ionic/js/angular/angular-animate.min.js"></script>
+  <!-- cordova script (this will be a 404 during development) -->
+  <script src="cordova.js"></script>
+
+
+  <!-- firebase -->
+  <!--<script src="https://www.gstatic.com/firebasejs/3.4.1/firebase.js"></script>-->
+
+  <script src="https://www.gstatic.com/firebasejs/3.4.0/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/3.4.0/firebase-database.js"></script>
+  <script>
+  const config = {
+                    apiKey: "AIzaSyCihSNkUl_O-xuzVrLZFz_mZJAGcwqJcdE",
+                    authDomain: "blankagainsthumanity-a3e7c.firebaseapp.com",
+                    databaseURL: "https://blankagainsthumanity-a3e7c.firebaseio.com",
+                    storageBucket: "blankagainsthumanity-a3e7c.appspot.com",
+                    messagingSenderId: "647415099169"
+                  };
+            firebase.initializeApp(config);
+</script>
+
+
+  <!-- your app's js -->
+  <script src="public/main.js"></script>
 </head>
 
 <body ng-app="BlankAgainstHumanity">

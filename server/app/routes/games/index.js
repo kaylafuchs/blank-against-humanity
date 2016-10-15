@@ -147,7 +147,6 @@ router.post('/', (req, res, next) => {
             maxPlayers: req.body.settings.maxPlayers,
             minPlayers: req.body.settings.minPlayers,
             maxTurnTime: req.body.settings.maxTurnTime
-
         })
         .then(createdGame => {
             gameId = createdGame.id

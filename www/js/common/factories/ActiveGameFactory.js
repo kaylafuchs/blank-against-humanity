@@ -19,15 +19,17 @@ app.factory('ActiveGameFactory', ($http, $rootScope, $localStorage) => {
 
     ActiveGameFactory.refillMyHand = (gameId, playerId, teamId) => {
         // how many cards do I need?
+        console.log("refilling hand")
         let cardsNeeded = 0
         const gameRef = firebase.database().ref(`teams/${teamId}/games/${gameId}`)
         const handRef = gameRef.child(`players/${playerId}/hand`)
         const pileRef = gameRef.child('pile/whitecards')
-        return handRef.once('value', handSnapshot => {
+        handRef.once('value', handSnapshot => {
                 cardsNeeded = 7 - handSnapshot.numChildren()
             })
             .then(() => {
-                return refiller(cardsNeeded, pileRef, handRef)
+                refiller(cardsNeeded, pileRef, handRef)
+                console.log("made it to refiller")
             })
     }
 
@@ -44,21 +46,72 @@ app.factory('ActiveGameFactory', ($http, $rootScope, $localStorage) => {
             .then(() => oldRef.parent.update(removeUpdate))
     }
 
-    ActiveGameFactory.submitWhiteCard = (playerId, cardId, gameId, teamId) => {
+
+    ActiveGameFactory.submitWhiteCard = (playerId, cardId, gameId, teamId, cardText) => {
         const gameRef = firebase.database().ref(`teams/${teamId}/games/${gameId}`);
         const cardToSubmit = gameRef.child(`players/${playerId}/hand/${cardId}`);
         const submitRef = gameRef.child('submittedWhiteCards');
         firebaseMoveSingleKeyValue(cardToSubmit, submitRef)
             .then(() => {
-                console.log(cardToSubmit, submitRef)
                 submitRef.child(cardId).set({
-                    submittedBy: playerId
+                    submittedBy: playerId,
+                    text: cardText
                 })
             })
     }
 
-    return ActiveGameFactory;
+
+    //nikita's updated version
+    // ActiveGameFactory.submitWhiteCard = (playerId, cardId, gameId, teamId, cardText) => {
+    //   const gameRef = firebase.database().ref(`teams/${teamId}/games/${gameId}`);
+    //   const cardToSubmit = gameRef.child(`players/${playerId}/hand/${cardId}/text`);
+    //   const submitRef = gameRef.child('submittedWhiteCards');
+    //   let text = ''
+    //   return cardToSubmit.transaction(cardText => {
+    //       text = cardText
+    //       return null
+    //     })
+    //     .then(() => {
+    //       let updateObj = {};
+    //       updateObj[playerId].text = text;
+    //       updateObj[playerId].cardId = cardId
+    //       return submitRef.update(updateObj)
+    //     })
+    //     .then(() => console.log('submission success'))
+    //     .catch((err) => console.log(err))
+    // }
 
 
+
+    ActiveGameFactory.pickWinningWhiteCard = (cardId, gameId, teamId) => {
+        const gameRef = firebase.database().ref(`teams/${teamId}/games/${gameId}`);
+        let winner = gameRef.child(`submittedWhiteCards/${cardId}/submittedBy`)
+        const winningCard = gameRef.child(`submittedWhiteCards/${cardId}`)
+        console.log('WINNING CARD', winningCard)
+        let blackCardId = '';
+        let blackCardWon = {}
+        winner.once('value')
+            .then(winnerId => {
+                winner = winnerId.val();
+            })
+            .then(() => {
+                const setRoundStateToOver = gameRef.child('state').set('postround')
+                const awardBlackCard = gameRef.child('currentBlackCard').transaction((currentBlackCard) => {
+                        blackCardWon = currentBlackCard;
+                        return null
+                    })
+                    .then(() => {
+                        console.log("####BLACK CARD WON", blackCardWon)
+                        gameRef.child(`players/${winner}/blackCardsWon`).update(blackCardWon)
+                        return winningCard.once('value')
+                    })
+                    .then(winningCardSnapshot => {
+                        console.log('SNAPSHOT', winningCardSnapshot.val());
+                        winningCardSnapshot = winningCardSnapshot.val();
+                        return gameRef.child(`winningCard`).set(winningCardSnapshot)
+                    })
+                    .then(() => gameRef.child('submittedWhiteCards').remove())
+                return Promise.all([setRoundStateToOver, awardBlackCard])
+            })
+    }
 });
-

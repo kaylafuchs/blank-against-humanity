@@ -80,7 +80,10 @@ const stateManager = (gameId, teamId, roundTime) => {
                                 console.log('white card submitted')
                                 console.log('playerCount', playerCount)
                                 submittedWhiteCardsCount++
-                                if (submittedWhiteCardsCount === playerCount) gameStateRef.set('judgement')
+                                if (submittedWhiteCardsCount === playerCount -1) {
+                                    submittedWhiteCardsCount = 0;
+                                    gameStateRef.set('judgement')
+                                }
                             })
                             if (roundTime) {
                                 let currentRoundTime = roundTime
@@ -89,6 +92,7 @@ const stateManager = (gameId, teamId, roundTime) => {
                                     currentRoundTime--
                                     if (currentRoundTime === 0) {
                                         clearInterval(timer)
+                                        submittedWhiteCardsCount = 0;
                                         gameStateRef.set('judgement')
                                     }
                                 }, 1000)
