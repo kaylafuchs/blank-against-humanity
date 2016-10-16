@@ -12,7 +12,7 @@ app.factory('UserFactory', function($http, $localStorage) {
         setUser: function(info) {
             return $http({
                     method: 'POST',
-                    url: `https://blankagainsthumanity.herokuapp.comapi/users`,
+                    url: `https://blankagainsthumanity.herokuapp.com/api/users`,
                     headers: {
                         'Content-Type': 'application/json'
                     },

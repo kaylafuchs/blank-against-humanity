@@ -89,12 +89,17 @@ app.factory('GameFactory', ($http, $rootScope, $localStorage) => {
         };
 
         GameFactory.getGamesByUserId = () => {
-            return $http.get(`https://blankagainsthumanity.herokuapp.com/api/games/?userId=${$localStorage.user.id}`)
-                .then(res => res.data)
+            console.log('getGamesByUserId called')
+            return $http.jsonp(`https://blankagainsthumanity.herokuapp.com/api/games/?userId=${$localStorage.user.id}`)
+                .then(res => {
+                    console.log('resolved')
+                    return res.data
+                })
                 .catch(err => console.log(err));
         };
 
         GameFactory.getOpenGames = () => {
+            console.log('getGamesByUserId called')
             const teamId = $localStorage.team.id;
             const userId = $localStorage.user.id;
             return $http.get(`https://blankagainsthumanity.herokuapp.com/api/games/?teamId=${teamId}&userId=${userId}&open=true`)
