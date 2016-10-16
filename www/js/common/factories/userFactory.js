@@ -8,6 +8,7 @@ app.factory('UserFactory', function($http, $localStorage) {
 
     const currentIp = ourIps.dan
 
+
     return {
         setUser: function(info) {
             return $http({

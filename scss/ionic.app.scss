@@ -415,6 +415,13 @@ input {
 	margin-top: 15px;
 }
 
+.view-game {
+	$:hover {
+		background: $red;
+		color: $white;
+	}
+}
+
 // .start-game-btn {
 // 	width: 76%!important;
 // }
