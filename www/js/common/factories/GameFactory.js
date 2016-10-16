@@ -4,10 +4,11 @@ app.factory('GameFactory', ($http, $rootScope, $localStorage) => {
             nikita: "192.168.4.213",
             kayla: "192.168.4.225",
             nithya: "192.168.1.48",
-            dan: "192.168.4.236"
+            dan: "192.168.4.236",
+            nithya_home: "192.168.0.9"
         }
 
-        const currentIp = ourIps.kayla;
+        const currentIp = ourIps.nithya_home;
 
         // start a new game derp
         const GameFactory = {};
@@ -19,7 +20,7 @@ app.factory('GameFactory', ($http, $rootScope, $localStorage) => {
                     name: gameConfig.name || 'AWESOME Name',
                     teamId: teamId,
                     creatorId: creatorId,
-                    creatorName: $localStorage.user.name || 'dan', //might be unnecessary if we have the user id
+                    creatorName: $localStorage.user.name,
                     settings: gameConfig
                 })
                 .then(res => {

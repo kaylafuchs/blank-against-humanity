@@ -26,12 +26,12 @@ app.controller('GameCtrl', ($scope, GameFactory, $stateParams, $localStorage, Ac
             $scope.playerHand = $scope.game.players[playerId].hand;
             $scope.playerHandCount = Object.keys($scope.playerHand).length;
         }
-        $scope.blackCard = $scope.game.currentBlackCard[1].text
+        $scope.blackCard = $scope.game.currentBlackCard[1].text;
         $scope.judge = $scope.game.currentJudge;
         $scope.players = $scope.game.players;
         $scope.submittedWhiteCards = $scope.game.submittedWhiteCards
         $scope.$evalAsync();
-        if($scope.game.winningCard){
+        if ($scope.game.winningCard){
             $scope.winningCard = $scope.game.winningCard
         }
     })
