@@ -38,7 +38,7 @@ const firebaseMoveSingleKeyValue = (oldRef, newRef) => {
 }
 
 const judgeManager = (playersRef, judgeArr) => {
-    playersRef.on('child_added', newPlayerSnapshot => {
+    return playersRef.on('child_added', newPlayerSnapshot => {
         judgeArr.push(newPlayerSnapshot.key);
     })
 }
@@ -69,10 +69,13 @@ const stateManager = (gameId, teamId, roundTime, minPlayers) => {
                         {
                             console.log('game state updated to pregame')
                             pickBlackCard(gameRef)
-                            judgePicker(judgeArr, gameRef)
                             console.log(judgeArr)
+                            judgePicker(judgeArr, gameRef)
                             playersRef.on('child_added', () => {
                                 playerCount++
+                                if (playerCount === 2) {
+                                    judgePicker(judgeArr, gameRef)
+                                }
                                 if (playerCount === minPlayers) {
                                     gameStateRef.set('submission')
                                 }
@@ -85,7 +88,7 @@ const stateManager = (gameId, teamId, roundTime, minPlayers) => {
                             let submittedWhiteCardsCount = 0
                             submittedWhiteCardsRef.on('child_added', () => {
                                 submittedWhiteCardsCount++
-                                if (submittedWhiteCardsCount === playerCount -1) {
+                                if (submittedWhiteCardsCount === playerCount) {
                                     submittedWhiteCardsCount = 0;
                                     gameStateRef.set('judgement')
                                 }
@@ -107,6 +110,7 @@ const stateManager = (gameId, teamId, roundTime, minPlayers) => {
                     case 'postround':
                     {
                         console.log('game state updated to postround')
+                        console.log(judgeArr)
                         pickBlackCard(gameRef);
                         judgePicker(judgeArr, gameRef);
                         let postRoundTime = 60;

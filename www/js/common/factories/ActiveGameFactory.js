@@ -114,4 +114,5 @@ app.factory('ActiveGameFactory', ($http, $rootScope, $localStorage) => {
                 return Promise.all([setRoundStateToOver, awardBlackCard])
             })
     }
+    return ActiveGameFactory
 });
