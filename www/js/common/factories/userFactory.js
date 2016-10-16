@@ -6,12 +6,9 @@ app.factory('UserFactory', function($http, $localStorage) {
         dan: "192.168.4.236"
     }
 
-<<<<<<< HEAD
-    const currentIp = ourIps.nikita
-=======
-    const currentIp = ourIps.kayla
 
->>>>>>> master
+    const currentIp = ourIps.nikita
+
     return {
         setUser: function(info) {
             return $http({
