@@ -11,15 +11,17 @@ app.factory('GameFactory', ($http, $rootScope, $localStorage) => {
 
         // start a new game derp
         const GameFactory = {};
+
         GameFactory.startNewGame = (gameConfig) => {
             //can also get all the decks by team here to prepare
             const teamId = $localStorage.team.id || 2;
             const creatorId = $localStorage.user.id || 3;
+            const userName = $localStorage.user.name;
             return $http.post(`https://blankagainsthumanity.herokuapp.com/api/games`, {
                     name: gameConfig.name || 'AWESOME Name',
                     teamId: teamId,
                     creatorId: creatorId,
-                    creatorName: $localStorage.user.name || 'dan', //might be unnecessary if we have the user id
+                    creatorName: userName || 'dan', //might be unnecessary if we have the user id
                     settings: gameConfig
                 })
                 .then(res => {
