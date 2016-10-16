@@ -11,6 +11,7 @@ app.controller('LoginCtrl', function($scope, $state, UserFactory, $cordovaOauth,
     $scope.loginWithSlack = function() {
         return UserFactory.getSlackCreds()
             .then(creds => {
+                console.log("##GOT SLACK CREDS", creds)
                 return $cordovaOauth.slack(creds.clientID, creds.clientSecret, ['identity.basic', 'identity.team', 'identity.avatar'])
             })
             .then(info => UserFactory.setUser(info))

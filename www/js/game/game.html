@@ -2,13 +2,13 @@
 	<ion-content overflow-scroll="true">
 		<div class="card-game">
 			<div class="other-content">
-				<div class="game-card white pile fade" on-swipe-down="onSwipeDown(gameId)" ng-if="!game.joined">
+				<div class="game-card white pile fade" on-swipe-down="onSwipeDown(gameId)" ng-if="!joinedGames[gameId]">
 				    <p class="card-text">Swipe down to join game.</p>
 <!-- 				    <p class="card-text" ng-if="playerHandCount < 7 && !submitted">Swipe down to draw a new card.</p> -->
 				    <i class="icon ion-arrow-down-c large-arrow"></i>
 				    <p class="logo white">______ Against Humanity</p>
 				</div>
-				<div class="black-card-content" ng-if="game.joined">
+				<div class="black-card-content" ng-if="joinedGames[gameId]">
 					<div class="game-card black current-black-card">
 						<p class="card-text">{{blackCard}}</p>
 						<p class="logo black">______ Against Humanity</p>

@@ -7,7 +7,7 @@ const ourIps = {
     kayla: "192.168.4.225",
     nithya: "192.168.1.48",
     dan: "192.168.4.236",
-    nithya_home: "192.168.0.9"
+    nithya_home: "192.168.0.2"
 }
 
 const currentIp = ourIps.nithya_home
