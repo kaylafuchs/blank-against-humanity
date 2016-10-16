@@ -13,12 +13,12 @@ const ourIps = {
 const currentIp = ourIps.dan
 
 module.exports = function(db) {
-    app.use(function(req, res, next) {
-        res.header('Access-Control-Allow-Origin', `http://${currentIp}:8100`);
-        res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE');
-        res.header('Access-Control-Allow-Headers', 'Content-Type');
-        next();
-    })
+    // app.use(function(req, res, next) {
+    //     res.header('Access-Control-Allow-Origin', `http://${currentIp}:8100`);
+    //     res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE');
+    //     res.header('Access-Control-Allow-Headers', 'Content-Type');
+    //     next();
+    // })
 
     require('./configure')(app, db);
 
