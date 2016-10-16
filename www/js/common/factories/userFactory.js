@@ -3,10 +3,10 @@ app.factory('UserFactory', function($http, $localStorage) {
         nikita: "192.168.4.213",
         kayla: "192.168.4.225",
         nithya: "192.168.1.48",
-        dan: "192.168.4.236"
+        dan: "192.168.0.3"
     }
 
-    const currentIp = ourIps.kayla
+    const currentIp = ourIps.dan
 
     return {
         setUser: function(info) {
