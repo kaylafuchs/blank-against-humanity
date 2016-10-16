@@ -1,7 +1,7 @@
 <ion-view class="gray-bg">
     <ion-content overflow-scroll="true">
         <div class="games-container">
-            <form name="game-rules">
+            <form name="gameRules" ng-submit="startNewGame(gameConfig)">
                 <div class="list">
                 <div class="title-text">Set up your game</div>
                         <label class="item item-input">
@@ -29,13 +29,13 @@
                         </div>
                         <!--  <button ng-click="goToDecks()"> Add Decks </button> -->
                     </div>
-            </form>
             <div ng-hide="true">
                 <button>Invite entire channel</button>
                 <button>Invite specific people</button>
                 <hr>
             </div>
-            <button class="button button-block button-assertive start-game-btn" ng-click="startNewGame(gameConfig)">Start Game</button>
+            <button type="submit" value="Submit" class="button button-block button-assertive">Start Game</button>
+            </form>
         </div>
     </ion-content>
 </ion-view>

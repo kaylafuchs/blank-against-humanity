@@ -11,11 +11,11 @@ app.config(($stateProvider) => {
 })
 
 app.controller('GameCtrl', ($scope, GameFactory, $stateParams, $localStorage, ActiveGameFactory) => {
-    // const gameId = $stateParams.gameId;
-    $scope.gameId = 12;
+    $scope.gameId = $stateParams.gameId;
+    //$scope.gameId = 12;
     const playerId = $localStorage.user.id;
-    const teamId = 2;
-    // const teamId = $localStorage.team.id
+    //const teamId = 2;
+    const teamId = $localStorage.team.id
     const gameRef = firebase.database().ref(`teams/${teamId}/games/${$scope.gameId}/`);
 
     gameRef.on('value', gameSnapshot => {
@@ -26,7 +26,7 @@ app.controller('GameCtrl', ($scope, GameFactory, $stateParams, $localStorage, Ac
             $scope.playerHand = $scope.game.players[playerId].hand;
             $scope.playerHandCount = Object.keys($scope.playerHand).length;
         }
-        $scope.blackCard = $scope.game.currentBlackCard.text
+        $scope.blackCard = $scope.game.currentBlackCard[1].text
         $scope.judge = $scope.game.currentJudge;
         $scope.players = $scope.game.players;
         $scope.submittedWhiteCards = $scope.game.submittedWhiteCards
@@ -51,7 +51,7 @@ app.controller('GameCtrl', ($scope, GameFactory, $stateParams, $localStorage, Ac
 
     $scope.onDoubleTap = (cardId, cardText) => {
         ActiveGameFactory.submitWhiteCard(playerId, cardId, $scope.gameId, teamId, cardText)
-        $scope.getSubmittedPlayers();
+        //$scope.getSubmittedPlayers();
         $scope.submitted = true;
         $scope.$evalAsync();
     }
