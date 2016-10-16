@@ -46,13 +46,17 @@ app.controller('NewGameCtrl', ($scope, GameFactory, $state, teamDecks, standardD
         $state.go('new-game.add-decks', {}, { location: true, reload: true })
     }
 
+
+
     $scope.decks = standardDeck.concat(teamDecks);
 
     $scope.startNewGame = (gameConfig) => {
         return GameFactory.startNewGame(gameConfig)
             .then((id) => GameFactory.addPileToGame(id, $scope.gameConfig.decks))
             .then((id) => {
-                console.log('im here')
+                console.log('im here');
+                //console.log('###GAME RULES', $scope.gameRules)
+                //$scope.gameRules.$setPristine();
                 $state.go('game', { gameId: id })
             });
     }

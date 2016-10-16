@@ -9,6 +9,7 @@ const ourIps = {
     dan: "192.168.4.236"
 }
 
+
 const currentIp = ourIps.nikita
 module.exports = function(db) {
     app.use(function(req, res, next) {
