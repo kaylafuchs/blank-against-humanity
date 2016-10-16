@@ -7,13 +7,10 @@
         "files": {}
     },
     "installed_plugins": {
-        "cordova-plugin-console": {
-            "PACKAGE_NAME": "com.ionicframework.blankagainsthumanity351522"
-        },
         "cordova-plugin-device": {
             "PACKAGE_NAME": "com.ionicframework.blankagainsthumanity351522"
         },
-        "cordova-plugin-inappbrowser": {
+        "cordova-plugin-console": {
             "PACKAGE_NAME": "com.ionicframework.blankagainsthumanity351522"
         },
         "cordova-plugin-splashscreen": {
@@ -22,10 +19,10 @@
         "cordova-plugin-statusbar": {
             "PACKAGE_NAME": "com.ionicframework.blankagainsthumanity351522"
         },
-        "cordova-plugin-whitelist": {
+        "ionic-plugin-keyboard": {
             "PACKAGE_NAME": "com.ionicframework.blankagainsthumanity351522"
         },
-        "ionic-plugin-keyboard": {
+        "cordova-plugin-whitelist": {
             "PACKAGE_NAME": "com.ionicframework.blankagainsthumanity351522"
         }
     },

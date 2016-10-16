@@ -10,9 +10,9 @@ module.exports = {
     DATABASE_URI: process.env.DATABASE_URL,
     SESSION_SECRET: process.env.SESSION_SECRET,
     SLACK: {
-        consumerKey: process.env.SLACK_CONSUMER_KEY,
-        consumerSecret: process.env.SLACK_CONSUMER_SECRET,
-        callbackUrl: process.env.SLACK_CALLBACK
+       clientID: process.env.SLACK_CLIENT_ID,
+       clientSecret: process.env.SLACK_CLIENT_SECRET,
+       callbackUrl: process.env.SLACK_CALLBACK
     },
     LOGGING: true,
     NATIVE: true
