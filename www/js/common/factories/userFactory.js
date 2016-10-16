@@ -12,7 +12,7 @@ app.factory('UserFactory', function($http, $localStorage) {
         setUser: function(info) {
             return $http({
                     method: 'POST',
-                    url: `http://${currentIp}:1337/api/users`,
+                    url: `https://blankagainsthumanity.herokuapp.comapi/users`,
                     headers: {
                         'Content-Type': 'application/json'
                     },
@@ -23,7 +23,7 @@ app.factory('UserFactory', function($http, $localStorage) {
                 })
         },
         getSlackCreds: function() {
-            return $http.get(`http://${currentIp}:1337/api/slack`)
+            return $http.get(`https://blankagainsthumanity.herokuapp.com/api/slack`)
                 .then(res => {
                     return res.data
                 })
