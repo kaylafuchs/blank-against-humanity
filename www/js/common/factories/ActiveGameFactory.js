@@ -115,5 +115,6 @@ app.factory('ActiveGameFactory', ($http, $rootScope, $localStorage) => {
             })
     }
 
-    return ActiveGameFactory;
+    return ActiveGameFactory
+
 });
