@@ -40,8 +40,6 @@ app.config(($stateProvider, $urlRouterProvider) => {
 
 app.controller('NewGameCtrl', ($scope, GameFactory, $state, teamDecks, standardDeck) => {
     $scope.currentView = 'addDecks'
-    //$scope.gameConfig = {};
-    //$scope.gameConfig.decks = {};
     $scope.goToDecks = () => {
         $state.go('new-game.add-decks', {}, { location: true, reload: true })
     }
