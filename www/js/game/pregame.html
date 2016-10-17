@@ -1,8 +1,8 @@
 <ion-view title={{gameName}}>
 	<ion-content overflow-scroll="true">
 		<div class="card-game">
-		<div class="top-bar">
-		</div>
+		<status-bar></status-bar>
+		PREGAME
 			<div class="other-content">
 				<game-header></game-header>
 				<div class="game-card white pile fade" on-swipe-down="onSwipeDown(gameId)" ng-show="!players[playerId].hand">

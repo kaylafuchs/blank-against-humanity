@@ -9883,8 +9883,8 @@ input {
 
 .game-card {
   counter-increment: rotation;
-  height: 230px;
-  width: 170px;
+  height: 210px;
+  width: 155px;
   margin-left: -70px;
   margin-right: -70px;
   border-radius: 9px;
@@ -9960,6 +9960,10 @@ input {
   margin: 0 auto;
   border: 1px solid #FFF;
   pointer-events: none; }
+
+.home-card {
+  height: 230px;
+  width: 170px; }
 
 .home-left {
   margin-right: -130px;
@@ -10084,13 +10088,28 @@ input {
 
 .top-bar {
   width: 100%;
-  background: #fdeceb;
   display: flex;
   flex-direction: row;
-  margin-bottom: 10px;
-  border-bottom: 5px solid #000; }
+  justify-content: space-around;
+  padding: 5px 0;
+  background: #ef473a;
+  color: #FFF; }
 
-.game-header {
-  width: 100%;
-  background-color: black;
-  opacity: 0.5; }
+.bar-item {
+  font-size: 15px;
+  font-weight: bold;
+  padding: 4px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center; }
+
+.bar-label {
+  margin-bottom: 4px; }
+
+.bar-content {
+  font-size: 20px; }
+
+.timer {
+  letter-spacing: 1px; }
