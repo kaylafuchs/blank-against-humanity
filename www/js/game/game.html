@@ -20,7 +20,7 @@
 					</div>
 				</div>
 			</div>
-				<white-cards ng-if="!joinedGames[gameId].submitted && !isJudge"></white-cards>
+				<white-cards ng-show="!joinedGames[gameId].submitted && isJudge"></white-cards>
 				<submitted-cards ng-if="joinedGames[gameId].submitted || isJudge"></submitted-cards>
 		</div>
 	</ion-content>

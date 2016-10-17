@@ -9903,8 +9903,8 @@ input {
 
 .animate:hover {
   z-index: 1000;
-  transform: translateY(-2rem) rotate(0);
-  border: 3px solid #ef473a; }
+  transform: translateY(-30px) rotate(0);
+  border: 2px solid #ef473a; }
 
 .current-black-card {
   margin: 5px auto;
