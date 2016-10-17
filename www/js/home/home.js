@@ -18,8 +18,8 @@ app.controller('HomeCtrl', function($scope, $state, $cordovaOauth, UserFactory, 
     $scope.startNewGame = GameFactory.startNewGame;
     $scope.storage = $localStorage;
     $scope.games = games;
-    //$scope.openGames = openGames;
-
+    $scope.openGames = openGames;
+    console.log("open games", openGames)
     console.log("games", JSON.stringify($scope.games))
     $scope.goToNewGame = () => {
         $state.go('new-game.main')
@@ -41,7 +41,7 @@ app.controller('HomeCtrl', function($scope, $state, $cordovaOauth, UserFactory, 
     //         templateUrl: 'js/home/popup.html',
     //         title: 'Join ' + $scope.gameName,
     //         scope: $scope,
-    //         buttons: 
+    //         buttons:
     //         [
     //             {text: 'Go back'},
     //             {
