@@ -8,7 +8,7 @@ app.factory('GameFactory', ($http, $rootScope, $localStorage) => {
             nithya_home: "192.168.0.2"
         }
 
-        const currentIp = ourIps.nithya;
+        const currentIp = ourIps.kayla;
 
         // start a new game derp
         const GameFactory = {};

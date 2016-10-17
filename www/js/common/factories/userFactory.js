@@ -7,7 +7,7 @@ app.factory('UserFactory', function($http, $localStorage) {
         nithya_home: "192.168.0.2"
     }
 
-    const currentIp = ourIps.nithya
+    const currentIp = ourIps.kayla
 
     return {
         setUser: function(info) {

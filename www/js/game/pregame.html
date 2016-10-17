@@ -5,19 +5,19 @@
 		</div>
 			<div class="other-content">
 				<game-header></game-header>
-				<div class="game-card white pile fade" on-swipe-down="onSwipeDown(gameId)" ng-hide="players[playerId]">
+				<div class="game-card white pile fade" on-swipe-down="onSwipeDown(gameId)" ng-show="!players[playerId].hand">
 				    <p class="card-text">Swipe down to join game.</p>		    
 				    <i class="icon ion-arrow-down-c large-arrow"></i>
 				    <p class="logo white">______ Against Humanity</p>
 				</div>
-				<div class="black-card-content fade" ng-if="players[playerId]">
+				<div class="black-card-content fade" ng-if="players[playerId].hand">
 					<div class="game-card black current-black-card">
 						<p class="card-text">{{blackCard}}</p>
 						<p class="logo black">______ Against Humanity</p>
 					</div>
 				</div>
 			</div>
-				<white-cards ng-if="players[playerId]"></white-cards>
+				<white-cards ng-if="players[playerId].hand"></white-cards>
 		</div>
 	</ion-content>
 </ion-view>

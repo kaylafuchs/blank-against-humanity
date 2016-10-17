@@ -35,27 +35,23 @@ app.config(($stateProvider, $urlRouterProvider) => {
 app.controller('GameCtrl', ($scope, $state, GameFactory, $stateParams, $localStorage, ActiveGameFactory) => {
     console.log('###STATEPARAMS', $stateParams)
     $scope.gameId = $stateParams.gameId;
-    //$scope.gameId = 93;
     console.log("###GAME ID", $scope.gameId)
     $scope.joinedGames = $localStorage.user.games;
     $scope.playerId = $localStorage.user.id;
     const teamId = $localStorage.team.id
     const gameRef = firebase.database().ref(`teams/${teamId}/games/${$scope.gameId}/`);
+    var previousState
 
-    //$state.go('game.pregame', {gameId: $scope.gameId})
 
     function stateRedirect(state){
-        //if ($location !== state)
         console.log("### GOT TO REDIRECT", state)
         $state.go('game.' + state, {gameId: $scope.gameId})
     }
 
-    // if (!$scope.game) {
-    //     stateRedirect('pregame')
-    // }
-
     gameRef.on('value', gameSnapshot => {
+        
         $scope.game = gameSnapshot.val();
+        console.log('###SNAPSHOT VAL', gameSnapshot.val())
         $scope.gameName = $scope.game.settings.name;
         if ($scope.game.players[$scope.playerId].hand){
             $scope.playerHand = $scope.game.players[$scope.playerId].hand;
@@ -67,64 +63,34 @@ app.controller('GameCtrl', ($scope, $state, GameFactory, $stateParams, $localSto
         $scope.judge = $scope.players[$scope.game.currentJudge];
         $scope.submittedWhiteCards = $scope.game.submittedWhiteCards;
         console.log("###GAME STATE", $scope.game.state)
-        //stateRedirect($scope.game.state);
         $scope.$evalAsync();
         if ($scope.game.winningCard){
             $scope.winningCard = $scope.game.winningCard
         }
+        if (previousState !== $scope.game.state){
+           stateRedirect($scope.game.state);
+        } 
+        previousState = $scope.game.state;
     })
 
     $scope.onSwipeDown = (gameId) => {
         return GameFactory.joinGameById(gameId)
             .then(() => {
-                  if($scope.playerId === $scope.game.currentJudge){
-                    $state.go('game.submission', {gameId: gameId})
-                  }else{
+                  if ($scope.playerId === $scope.game.currentJudge){
+                    console.log('####I AM THE JUDGE')
+                    $state.go('game.judgement', {gameId: gameId})
+                  } else {
                     ActiveGameFactory.refillMyHand($scope.gameId, $scope.playerId, teamId)
-                    //$scope.playerView = true; 
                   }
-                  $scope.$evalAsync();    
+                  $scope.$evalAsync();
             })
     }
 
     $scope.onDoubleTap = (cardId, cardText) => {
-        ActiveGameFactory.submitWhiteCard($scope.playerId, cardId, $scope.gameId, teamId, cardText)
-        $scope.judgeView = true;
+        ActiveGameFactory.submitWhiteCard($scope.playerId, cardId, $scope.gameId, teamId, cardText);
+        //stateRedirect('game.judgement', {gameId: $scope.gameId});
+        //$scope.judgeView = true;
         $scope.$evalAsync();
     }
-
-
-    // console.log($scope.game.state)
-
-    // if($scope.game.state==="pregame"){
-    //     $scope.onSwipeDown = (gameId) => {
-    //         return GameFactory.joinGameById(gameId)
-    //             .then(() => {
-    //                   if(playerId === $scope.game.currentJudge){
-    //                     $scope.judgeView = true;
-    //                   }else{
-    //                     ActiveGameFactory.refillMyHand($scope.gameId, playerId, teamId)
-    //                     $scope.playerView = true; 
-    //                   }
-    //                   $scope.$evalAsync();    
-    //             })
-    //     }
-    // }
-
-    // if($scope.game.state==="submission"){
-    //     if(playerId === $scope.game.currentJudge){
-    //         $scope.judgeDoubleTap = (cardId) => {
-    //             ActiveGameFactory.pickWinningWhiteCard(cardId, $scope.gameId, teamId)
-    //         }
-    //     }else{
-    //         $scope.onDoubleTap = (cardId, cardText) => {
-    //             ActiveGameFactory.submitWhiteCard(playerId, cardId, $scope.gameId, teamId, cardText)
-    //             $scope.judgeView = true;
-    //             $scope.$evalAsync();
-    //         }
-    //     }
-    // }
-
- 
 })
 
