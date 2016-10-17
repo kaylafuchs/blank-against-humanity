@@ -4,10 +4,8 @@ app.factory('GameFactory', ($http, $rootScope, $localStorage) => {
             nikita: "192.168.4.213",
             kayla: "192.168.4.225",
             nithya: "192.168.1.48",
-            dan: "192.168.0.3"
         }
 
-        const currentIp = ourIps.dan;
 
         // start a new game derp
         const GameFactory = {};
@@ -23,6 +21,10 @@ app.factory('GameFactory', ($http, $rootScope, $localStorage) => {
                     creatorId: creatorId,
                     creatorName: userName,
                     settings: gameConfig
+                }, {
+                    headers: {
+                        'Content-Type': 'application/json'
+                    }
                 })
                 .then(res => {
                     const gameId = res.data
@@ -92,7 +94,8 @@ app.factory('GameFactory', ($http, $rootScope, $localStorage) => {
 
         GameFactory.getGamesByUserId = () => {
             console.log('getGamesByUserId called')
-            return $http.get(`https://blankagainsthumanity.herokuapp.com/api/games/?userId=${$localStorage.user.id}`)
+            const userId = $localStorage.user.id
+            return $http.get(`https://blankagainsthumanity.herokuapp.com/api/games/?userId=${userId}`)
                 .then(res => {
                     console.log('resolved')
                     return res.data
