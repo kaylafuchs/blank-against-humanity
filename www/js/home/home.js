@@ -18,42 +18,13 @@ app.controller('HomeCtrl', function($scope, $state, $cordovaOauth, UserFactory, 
     $scope.startNewGame = GameFactory.startNewGame;
     $scope.storage = $localStorage;
     $scope.games = games;
-    //$scope.openGames = openGames;
-
-    console.log("games", JSON.stringify($scope.games))
+    $scope.openGames = openGames;
+    console.log("###OPEN GAMES", $scope.openGames)
+    console.log("###GAMES", $scope.games)
     $scope.goToNewGame = () => {
         $state.go('new-game.main')
     }
 
-    $scope.openGames = openGames
-
-
-    // $scope.joinGame = GameFactory.joinGameById;
-
-    // $scope.showPopup = function(gameId) {
-
-    //     $scope.game = $scope.games[gameId];
-    //     $scope.gameName = $scope.game.settings.name;
-    //     $scope.playerCount = Object.keys($scope.game.players).length;
-    //     $scope.waitingForPlayers =  ($scope.game.settings.minPlayers || 4) - $scope.playerCount;
-
-    //      const myPopup = $ionicPopup.show({
-    //         templateUrl: 'js/home/popup.html',
-    //         title: 'Join ' + $scope.gameName,
-    //         scope: $scope,
-    //         buttons: 
-    //         [
-    //             {text: 'Go back'},
-    //             {
-    //                 text: 'Join game',
-    //                 type: 'button-balanced',
-    //                 onTap: e => {
-    //                     $scope.joinGame(gameId);
-    //                     $state.go('game.active-game', { gameId: gameId })
-    //                 }
-    //             }
-    //         ]
-    //     })
-    // }
+    $scope.openGames = openGames;
 })
 

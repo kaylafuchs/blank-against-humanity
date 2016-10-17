@@ -40,8 +40,6 @@ app.config(($stateProvider, $urlRouterProvider) => {
 
 app.controller('NewGameCtrl', ($scope, GameFactory, $state, teamDecks, standardDeck) => {
     $scope.currentView = 'addDecks'
-    $scope.gameConfig = {};
-    $scope.gameConfig.decks = {};
     $scope.goToDecks = () => {
         $state.go('new-game.add-decks', {}, { location: true, reload: true })
     }
@@ -52,12 +50,12 @@ app.controller('NewGameCtrl', ($scope, GameFactory, $state, teamDecks, standardD
 
     $scope.startNewGame = (gameConfig) => {
         return GameFactory.startNewGame(gameConfig)
-            .then((id) => GameFactory.addPileToGame(id, $scope.gameConfig.decks))
+            .then((id) => GameFactory.addPileToGame(id, gameConfig.decks))
             .then((id) => {
                 console.log('im here');
                 //console.log('###GAME RULES', $scope.gameRules)
                 //$scope.gameRules.$setPristine();
-                $state.go('game', { gameId: id })
+                $state.go('game.pregame', { gameId: id })
             });
     }
     $scope.addDecksToGame = GameFactory.addDecks;

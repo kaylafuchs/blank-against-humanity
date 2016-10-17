@@ -4,10 +4,8 @@ app.factory('GameFactory', ($http, $rootScope, $localStorage) => {
             nikita: "192.168.4.213",
             kayla: "192.168.4.225",
             nithya: "192.168.1.48",
-            dan: "192.168.0.3"
         }
 
-        const currentIp = ourIps.dan;
 
         // start a new game derp
         const GameFactory = {};
@@ -18,11 +16,15 @@ app.factory('GameFactory', ($http, $rootScope, $localStorage) => {
             const creatorId = $localStorage.user.id || 3;
             const userName = $localStorage.user.name;
             return $http.post(`https://blankagainsthumanity.herokuapp.com/api/games`, {
-                    name: gameConfig.name || 'AWESOME Name',
+                    name: gameConfig.name,
                     teamId: teamId,
                     creatorId: creatorId,
-                    creatorName: userName || 'dan', //might be unnecessary if we have the user id
+                    creatorName: userName,
                     settings: gameConfig
+                }, {
+                    headers: {
+                        'Content-Type': 'application/json'
+                    }
                 })
                 .then(res => {
                     const gameId = res.data
@@ -91,8 +93,9 @@ app.factory('GameFactory', ($http, $rootScope, $localStorage) => {
         };
 
         GameFactory.getGamesByUserId = () => {
-            console.log('getGamesByUserId called')
-            return $http.jsonp(`https://blankagainsthumanity.herokuapp.com/api/games/?userId=${$localStorage.user.id}`)
+            console.log('getGamesByUserionicId called')
+            const userId = $localStorage.user.id
+            return $http.get(`https://blankagainsthumanity.herokuapp.com/api/games/?userId=${userId}`)
                 .then(res => {
                     console.log('resolved')
                     return res.data

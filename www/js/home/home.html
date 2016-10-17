@@ -2,17 +2,17 @@
     <ion-content overflow-scroll="true">
         <div class="games-container">
             <div class="cards">
-                <div class="game-card white home-right">
+                <div class="game-card home-card white home-right">
                     <p class="card-text">{{storage.team.name}} Against Humanity</p>
                     <p class="logo white">______ Against Humanity</p>
                 </div>
-                <div class="game-card white center">
+                <div class="game-card home-card white center">
                     <p class="card-text">{{storage.team.name}} Against Humanity</p>
                     <a ui-sref="new-game.main">
                         <button class="button icon-right ion-chevron-right button-assertive start-game">Start new game</button>
                     </a>
                 </div>
-                <div class="game-card white home-left">
+                <div class="game-card home-card white home-left">
                     <p class="card-text">{{storage.team.name}} Against Humanity</p>
                     <p class="logo white">______ Against Humanity</p>
                 </div>
@@ -21,14 +21,14 @@
                 <span class="title-text">Your games</span>
                 <div ng-repeat="game in games track by $index" ng-if="game.name" class="game-listing">
                     <span>{{game.name}}</span>
-                    <a ui-sref="game({gameId: game.id})">
-                        <button class="button button-outline button-small button-assertive">View game</button>
+                    <a ui-sref="game.pregame({gameId: game.id})">
+                        <button class="button button-outline button-small button-assertive view-game">View game</button>
                     </a>
                 </div>
                 <span class="title-text open">Open games</span>
                 <div ng-repeat="game in openGames track by $index" ng-if="game.name" class="game-listing">
                     <span>{{game.name}}</span>
-                    <button class="button button-outline button-small button-assertive" ui-sref="game({gameId: game.id})">Join game</button>
+                    <button class="button button-outline button-small button-assertive" ui-sref="game.pregame({gameId: game.id})">Join game</button>
                 </div>
             </div>
         </div>
