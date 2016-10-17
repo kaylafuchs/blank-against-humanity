@@ -7,14 +7,14 @@ const ourIps = {
     kayla: "192.168.4.225",
     nithya: "192.168.1.48",
     dan: "192.168.4.236",
-    nithya_home: "192.168.0.9"
+    nithya_home: "192.168.0.5"
 }
 
 const currentIp = ourIps.nithya_home
 
 module.exports = function(db) {
     app.use(function(req, res, next) {
-        res.header('Access-Control-Allow-Origin', `http://${currentIp}:8100`);
+        res.header('Access-Control-Allow-Origin', `http://${currentIp}:8102`);
         res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE');
         res.header('Access-Control-Allow-Headers', 'Content-Type');
         next();
