@@ -111,6 +111,7 @@ app.controller('GameCtrl', ($scope, $state, GameFactory, $stateParams, $localSto
            //stateRedirect('game.judgement', {gameId: $scope.gameId});
            //$scope.judgeView = true;
            $scope.$evalAsync();
+           //alert('Your card has been submitted.')
        } else {
         alert('You can\'t submit yet, doofus')
        }

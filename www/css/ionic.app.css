@@ -9865,6 +9865,9 @@ input {
   justify-content: space-around;
   align-items: center; }
 
+.centered {
+  justify-content: center; }
+
 .black-card-content {
   display: flex;
   justify-content: center;
