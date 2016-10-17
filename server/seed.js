@@ -37,21 +37,20 @@ const seedTeams = () => {
 
 const seedDecks = () => {
     const decks = [{
-        name: 'default',
+        name: 'Cards Against Humanity',
         teamId: 1
     }, {
-        name: 'fullstack 1607',
+        name: 'Execs',
         teamId: 2
     }, {
-        name: 'fullstack 1608',
+        name: 'Dev Team',
         teamId: 2
     }, {
-        name: 'fullstack 1609',
-        teamId: 2
-    }, {
-        name: 'fullstack 1610',
+        name: 'Watercooler Friends',
         teamId: 2
     }]
+
+
 
     const creatingDecks = decks.map(deck => Deck.create(deck))
     return Promise.all(creatingDecks)
@@ -95,3 +94,4 @@ db.sync({
         console.error(err);
         process.exit(1);
     });
+

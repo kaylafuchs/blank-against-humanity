@@ -10072,6 +10072,14 @@ input {
   background: #ef473a;
   color: #FFF; }
 
+<<<<<<< HEAD
+.winning-card {
+  margin: 5px auto;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  padding-bottom: 35px; }
+=======
 .judge-text {
   font-size: 15px;
   margin-bottom: 5px; }
@@ -10089,3 +10097,4 @@ input {
   flex-direction: row;
   margin-bottom: 10px;
   border-bottom: 5px solid #000; }
+>>>>>>> master
