@@ -31,6 +31,34 @@ router.get('/:id', (req, res, next) => {
 // api/games?teamId=31&userId=3&open=true
 // get a user or teams games, to display in a lobby
 router.get('/', (req, res, next) => {
+    // if (req.query.teamId && req.query.open) {
+    //     return Game.findAll({
+    //             include: [{
+    //                 model: User,
+    //                 where: {
+    //                     id: req.query.userId
+    //                 }
+    //             }]
+    //         }).then((foundGames) => {
+    //             return Game.findAll({
+    //                 include: [{
+    //                     model: Team,
+    //                     where: {
+    //                         id: req.query.teamId,
+    //                     }
+    //                 }],
+    //                 where: {
+    //                     id: {
+    //                         $notIn: foundGames.map(game => game.id)
+    //                     }
+    //                 }
+    //             })
+
+
+    //         })
+    //         .then(games => res.send(games))
+    //         .catch(next);
+    //find all games for a user, and then find games for the team where the id is not in usersgames
     if (req.query.teamId && req.query.open) {
         return Game.findAll({
                 include: [{
@@ -40,6 +68,9 @@ router.get('/', (req, res, next) => {
                     }
                 }]
             }).then((foundGames) => {
+                console.log('foundgames', foundGames)
+
+
                 return Game.findAll({
                     include: [{
                         model: Team,
@@ -49,9 +80,11 @@ router.get('/', (req, res, next) => {
                     }],
                     where: {
                         id: {
-                            $notIn: foundGames.map(game => game.id)
+                            $notIn: [9999999].concat(foundGames.map(game => game.id)) //not in empty array returns nothing
                         }
                     }
+
+
                 })
 
 

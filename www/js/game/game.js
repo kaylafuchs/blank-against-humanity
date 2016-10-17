@@ -15,14 +15,14 @@ app.controller('GameCtrl', ($scope, GameFactory, $stateParams, $localStorage, Ac
     //$scope.gameId = 12;
     const playerId = $localStorage.user.id;
     //const teamId = 2;
-    const teamId = $localStorage.team.id
+    const teamId = $localStorage.team.id;
     const gameRef = firebase.database().ref(`teams/${teamId}/games/${$scope.gameId}/`);
 
     gameRef.on('value', gameSnapshot => {
         // console.log(gameSnapshot.val())
         $scope.game = gameSnapshot.val();
         $scope.gameName = $scope.game.settings.name;
-        if ($scope.game.players[playerId].hand){
+        if ($scope.game.players[playerId].hand) {
             $scope.playerHand = $scope.game.players[playerId].hand;
             $scope.playerHandCount = Object.keys($scope.playerHand).length;
             $scope.game.joined = true;
@@ -32,9 +32,20 @@ app.controller('GameCtrl', ($scope, GameFactory, $stateParams, $localStorage, Ac
         $scope.players = $scope.game.players;
         $scope.submittedWhiteCards = $scope.game.submittedWhiteCards;
         $scope.$evalAsync();
-        if ($scope.game.winningCard){
-            $scope.winningCard = $scope.game.winningCard
+
+
+        if ($scope.game.state === 'postround') {
+            console.log('the game has entered postround')
+            if ($scope.game.winningCard) {
+                $scope.winningCard = $scope.game.winningCard
+                $scope.winnerId = $scope.winningCard.submittedBy;
+                $scope.winnerName = $scope.game.players[$scope.winnerId].name
+
+
+                console.log('the scope is2:', $scope)
+            }
         }
+
     })
 
     //$scope.showCards = false;
@@ -42,30 +53,30 @@ app.controller('GameCtrl', ($scope, GameFactory, $stateParams, $localStorage, Ac
 
     $scope.onSwipeDown = (gameId) => {
         GameFactory.joinGameById(gameId)
-        .then(() => {
-          ActiveGameFactory.refillMyHand($scope.gameId, playerId, teamId)
-          //$scope.showCards = true;
-          $scope.game.joined = true;
-          console.log("JOINED?", $scope.game.joined)
-          console.log('SUBMITTED?', $scope.submitted)
-          console.log('HAND', $scope.playerHand)
-          $scope.$evalAsync();
-          console.log('HAND AFTER EVAL', $scope.playerHand)
-        })
+            .then(() => {
+                ActiveGameFactory.refillMyHand($scope.gameId, playerId, teamId)
+                    //$scope.showCards = true;
+                $scope.game.joined = true;
+                console.log("JOINED?", $scope.game.joined)
+                console.log('SUBMITTED?', $scope.submitted)
+                console.log('HAND', $scope.playerHand)
+                $scope.$evalAsync();
+                console.log('HAND AFTER EVAL', $scope.playerHand)
+            })
     }
 
     $scope.onDoubleTap = (cardId, cardText) => {
         ActiveGameFactory.submitWhiteCard(playerId, cardId, $scope.gameId, teamId, cardText)
-        //$scope.getSubmittedPlayers();
+            //$scope.getSubmittedPlayers();
         $scope.submitted = true;
         $scope.$evalAsync();
     }
 
     $scope.judgeDoubleTap = (cardId) => {
         // if (playerId === judge) {
-            ActiveGameFactory.pickWinningWhiteCard(cardId, $scope.gameId, teamId)
-            console.log("judging")
-        // }
+        ActiveGameFactory.pickWinningWhiteCard(cardId, $scope.gameId, teamId)
+        console.log("judging")
+            // }
     }
 
 

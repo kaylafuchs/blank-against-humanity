@@ -10068,3 +10068,14 @@ input {
 
 .decks {
   margin-top: 15px; }
+
+.view-game:hover {
+  background: #ef473a;
+  color: #FFF; }
+
+.winning-card {
+  margin: 5px auto;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  padding-bottom: 35px; }

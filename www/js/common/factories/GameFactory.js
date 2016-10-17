@@ -5,10 +5,10 @@ app.factory('GameFactory', ($http, $rootScope, $localStorage) => {
             kayla: "192.168.4.225",
             nithya: "192.168.1.48",
             dan: "192.168.4.236",
-            nithya_home: "192.168.0.9"
+            nithya_home: "192.168.0.3"
         }
 
-        const currentIp = ourIps.nithya_home;
+        const currentIp = ourIps.dan;
 
         // start a new game derp
         const GameFactory = {};
@@ -16,11 +16,12 @@ app.factory('GameFactory', ($http, $rootScope, $localStorage) => {
             //can also get all the decks by team here to prepare
             const teamId = $localStorage.team.id || 2;
             const creatorId = $localStorage.user.id || 3;
+            const creatorName = $localStorage.user.name;
             return $http.post(`http://${currentIp}:1337/api/games`, {
                     name: gameConfig.name || 'AWESOME Name',
                     teamId: teamId,
                     creatorId: creatorId,
-                    creatorName: $localStorage.user.name,
+                    creatorName: creatorName,
                     settings: gameConfig
                 })
                 .then(res => {
