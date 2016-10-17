@@ -9,7 +9,7 @@ app.config(($stateProvider) => {
 
 app.controller('GameCtrl', ($scope, GameFactory, $stateParams, $localStorage, ActiveGameFactory) => {
     $scope.gameId = $stateParams.gameId;
-    $scope.joinedGames = $localStorage.user.games
+    $scope.joinedGames = $localStorage.user.games;
     const playerId = $localStorage.user.id;
     const teamId = $localStorage.team.id
     const gameRef = firebase.database().ref(`teams/${teamId}/games/${$scope.gameId}/`);
@@ -22,8 +22,14 @@ app.controller('GameCtrl', ($scope, GameFactory, $stateParams, $localStorage, Ac
             $scope.playerHandCount = Object.keys($scope.playerHand).length;
             $scope.blackCard = $scope.game.currentBlackCard[Object.keys($scope.game.currentBlackCard)[0]].text;
         }
-        $scope.judge = $scope.game.currentJudge;
+
+        if ($scope.game.currentJudge == playerId){
+          $localStorage.user.games[$scope.gameId].judge = true;
+          $scope.isJudge = $localStorage.user.games[$scope.gameId].judge
+        }
+        console.log("###AM I  JUDGE?", $scope.isJudge)
         $scope.players = $scope.game.players;
+        $scope.judge = $scope.players[$scope.game.currentJudge];
         $scope.submittedWhiteCards = $scope.game.submittedWhiteCards;
         $scope.$evalAsync();
         if ($scope.game.winningCard){
@@ -35,7 +41,7 @@ app.controller('GameCtrl', ($scope, GameFactory, $stateParams, $localStorage, Ac
         GameFactory.joinGameById(gameId)
         .then(() => {
           ActiveGameFactory.refillMyHand($scope.gameId, playerId, teamId)
-          $localStorage.user.games[gameId] = true;
+          $localStorage.user.games[gameId] = {joined: true};
           console.log("###LOCALSTORAGE USER JOINED", $localStorage.user.games[gameId])
           $scope.$evalAsync();        
         })
@@ -43,6 +49,8 @@ app.controller('GameCtrl', ($scope, GameFactory, $stateParams, $localStorage, Ac
 
     $scope.onDoubleTap = (cardId, cardText) => {
         ActiveGameFactory.submitWhiteCard(playerId, cardId, $scope.gameId, teamId, cardText)
+        $localStorage.user.games[$scope.gameId].submitted = true;
+        console.log("SUBMITTED?", $scope.joinedGames[$scope.gameId].submitted)
         $scope.submitted = true;
         $scope.$evalAsync();
     }

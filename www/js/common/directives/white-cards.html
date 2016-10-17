@@ -1,6 +1,9 @@
-<ul class="hand fade">
-	<li class="game-card animate white" ng-repeat="(key,val) in playerHand" on-double-tap="onDoubleTap(key, val.text)">
-		<p class="card-text">{{val.text}}</p>
-		<p class="logo white">______ Against Humanity</p>
-	</li>
-</ul>
+<div class="cards-container">
+	<span class="title-text">Your cards</span>
+	<ul class="hand slow-fade">
+		<li class="game-card animate white slow-fade" ng-repeat="(key,val) in playerHand" on-double-tap="onDoubleTap(key, val.text)">
+			<p class="card-text">{{val.text}}</p>
+			<p class="logo transparent">______ Against Humanity</p>
+		</li>
+	</ul>
+</div>
