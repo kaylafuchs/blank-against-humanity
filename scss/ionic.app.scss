@@ -87,7 +87,7 @@ input {
 /* now the element will fade out before it is removed from the DOM */
 
 .fade.ng-leave {
-    <<<<<<< HEAD transition: 0.1s linear all;
+    transition: 0.1s linear all;
     opacity: 1;
 }
 
