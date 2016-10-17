@@ -55,7 +55,7 @@ app.controller('NewGameCtrl', ($scope, GameFactory, $state, teamDecks, standardD
                 console.log('im here');
                 //console.log('###GAME RULES', $scope.gameRules)
                 //$scope.gameRules.$setPristine();
-                $state.go('game', { gameId: id })
+                $state.go('game.pregame', { gameId: id })
             });
     }
     $scope.addDecksToGame = GameFactory.addDecks;
