@@ -49,7 +49,7 @@ router.get('/', (req, res, next) => {
                     }],
                     where: {
                         id: {
-                            $notIn: foundGames.map(game => game.id)
+                            $notIn: [99999999].concat(foundGames.map(game => game.id))
                         }
                     }
                 })
