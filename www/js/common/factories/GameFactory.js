@@ -46,7 +46,7 @@ app.factory('GameFactory', ($http, $rootScope, $localStorage) => {
             console.log("adding pile to game")
             const decksArr = [];
             for (var deckId in decks) {
-                decksArr.push(deckId)
+                if (decks[deckId]) decksArr.push(deckId);
             }
             return $http.post(`http://${currentIp}:1337/api/games/${gameId}/decks`, {
                     'decks': decksArr
