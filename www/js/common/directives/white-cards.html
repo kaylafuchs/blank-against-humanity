@@ -7,18 +7,20 @@
 	</ul>
 </div>
 
-<div ng-if="game.state ==='judgement' && game.currentJudge === playerId">
+<div class="cards-container" ng-if="game.state ==='judgement' && game.currentJudge === playerId">
+	<span class="title-text">PICK A CARD</span>
 	<ul class="hand fade">
-		<li class="game-card animate white" ng-repeat="(key,val) in game.submittedWhiteCards" on-double-tap="pickWinningWhiteCard(key, gameId, teamId)">
-			<p class="card-text">{{val.text}}</p>
+		<li class="game-card animate white" ng-repeat="card in submittedWhiteCards" on-double-tap="pickWinningWhiteCard(key, gameId, teamId)">
+			<p class="card-text">{{card.text}}</p>
 			<p class="logo white">______ Against Humanity</p>
 		</li>
 	</ul>
 </div>
 
-<div ng-if="game.state ==='judgement' && game.currentJudge !== playerId">
+<div class="cards-container" ng-if="game.state ==='judgement' && game.currentJudge !== playerId">
+	<span class="title-text">SUBMITTED CARDS</span>
 	<ul class="hand fade">
-		<li class="game-card animate white" ng-repeat="card in cards">
+		<li class="game-card animate white" ng-repeat="card in submittedWhiteCards">
 			<p class="card-text">{{card.text}}</p>
 			<p class="logo white">______ Against Humanity</p>
 		</li>
