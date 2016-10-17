@@ -2,6 +2,7 @@
 	<ion-content overflow-scroll="true">
 		<div class="card-game">
 			<div class="other-content">
+				<game-header></game-header>
 				<div class="game-card white pile fade" on-swipe-down="onSwipeDown(gameId)" ng-if="!game.joined">
 				    <p class="card-text">Swipe down to join game.</p>
 <!-- 				    <p class="card-text" ng-if="playerHandCount < 7 && !submitted">Swipe down to draw a new card.</p> -->
