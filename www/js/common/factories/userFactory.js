@@ -3,7 +3,6 @@ app.factory('UserFactory', function($http, $localStorage) {
         nikita: "192.168.4.213",
         kayla: "192.168.4.225",
         nithya: "192.168.1.48",
-        dan: "192.168.0.3"
     }
 
     const currentIp = ourIps.dan
@@ -11,6 +10,7 @@ app.factory('UserFactory', function($http, $localStorage) {
 
     return {
         setUser: function(info) {
+            console.log("###GOT TO SET USER")
             return $http({
                     method: 'POST',
                     url: `https://blankagainsthumanity.herokuapp.com/api/users`,
@@ -36,6 +36,7 @@ app.factory('UserFactory', function($http, $localStorage) {
         setLocalStorage: function(user, team) {
             $localStorage.user = user;
             $localStorage.team = team;
+            $localStorage.user.games = {};
         },
 
         logOut: function() {
