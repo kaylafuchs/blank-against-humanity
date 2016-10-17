@@ -6,11 +6,6 @@ app.factory('GameFactory', ($http, $rootScope, $localStorage) => {
             nithya: "192.168.1.48",
         }
 
-<<<<<<< HEAD
-        const currentIp = ourIps.dan;
-=======
-        const currentIp = ourIps.kayla;
->>>>>>> origin/front-end-game
 
         // start a new game derp
         const GameFactory = {};
@@ -19,21 +14,12 @@ app.factory('GameFactory', ($http, $rootScope, $localStorage) => {
             //can also get all the decks by team here to prepare
             const teamId = $localStorage.team.id || 2;
             const creatorId = $localStorage.user.id || 3;
-<<<<<<< HEAD
             const userName = $localStorage.user.name;
             return $http.post(`https://blankagainsthumanity.herokuapp.com/api/games`, {
                     name: gameConfig.name,
                     teamId: teamId,
                     creatorId: creatorId,
                     creatorName: userName,
-=======
-            const creatorName =$localStorage.user.name;
-            return $http.post(`http://${currentIp}:1337/api/games`, {
-                    name: gameConfig.name || 'AWESOME Name',
-                    teamId: teamId,
-                    creatorId: creatorId,
-                    creatorName: creatorName,
->>>>>>> origin/front-end-game
                     settings: gameConfig
                 })
                 .then(res => {
