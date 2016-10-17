@@ -37,19 +37,16 @@ const seedTeams = () => {
 
 const seedDecks = () => {
     const decks = [{
-        name: 'default',
+        name: 'Cards Against Humanity',
         teamId: 1
     }, {
-        name: 'fullstack 1607',
+        name: 'Execs',
         teamId: 2
     }, {
-        name: 'fullstack 1608',
+        name: 'Dev Team',
         teamId: 2
     }, {
-        name: 'fullstack 1609',
-        teamId: 2
-    }, {
-        name: 'fullstack 1610',
+        name: 'Watercooler Friends',
         teamId: 2
     }]
 
@@ -82,11 +79,55 @@ const seedWhiteCards = () => {
 };
 
 
+const seedWhiteCardsSFW = () => {
+    const cards = [{
+        text: 'Bootcamp Grads',
+        type: 'white',
+        deckId: 3
+    }, {
+        text: 'Being late to standup',
+        type: 'white',
+        deckId: 3
+    }, {
+        text: 'Inverting Binary Search Trees',
+        type: 'white',
+        deckId: 3
+    }, {
+        text: 'Watercooler Friends',
+        type: 'white',
+        deckId: 3
+    }, {
+        text: 'Head bartender at willy’ s pub',
+        type: 'white',
+        deckId: 3
+    }, {
+        text: 'Execs',
+        type: 'white',
+        deckId: 3
+    }, {
+        text: 'jQuery',
+        type: 'white',
+        deckId: 3
+    }, {
+        text: 'Being a Scrumlord',
+        type: 'white',
+        deckId: 3
+    }, {
+        text: 'What makes a javascript developer sad?',
+        type: 'black',
+        deckId: 3
+    }]
+
+    const creatingCards = cards.map(card => Card.create(card))
+    return Promise.all(creatingCards)
+
+}
+
 db.sync({
         force: true
     })
     .then(() => Promise.all([seedUsers(), seedTeams(), seedDecks()]))
-    .then(() => Promise.all([seedBlackCards(), seedWhiteCards()]))
+    .then(() => Promise.all([seedBlackCards(), seedWhiteCards(), seedWhiteCardsSFW()]))
     .then(() => {
         console.log(chalk.green('Seed successful!'));
         process.exit(0);
@@ -95,3 +136,4 @@ db.sync({
         console.error(err);
         process.exit(1);
     });
+

@@ -47,7 +47,7 @@ app.factory('GameFactory', ($http, $rootScope, $localStorage) => {
             console.log("adding pile to game")
             const decksArr = [];
             for (var deckId in decks) {
-                decksArr.push(deckId)
+                if (decks[deckId]) decksArr.push(deckId)
             }
             return $http.post(`https://blankagainsthumanity.herokuapp.com/api/games/${gameId}/decks`, {
                     'decks': decksArr
@@ -93,7 +93,7 @@ app.factory('GameFactory', ($http, $rootScope, $localStorage) => {
         };
 
         GameFactory.getGamesByUserId = () => {
-            console.log('getGamesByUserId called')
+            console.log('getGamesByUserionicId called')
             const userId = $localStorage.user.id
             return $http.get(`https://blankagainsthumanity.herokuapp.com/api/games/?userId=${userId}`)
                 .then(res => {
