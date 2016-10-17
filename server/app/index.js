@@ -9,8 +9,6 @@ const ourIps = {
 }
 
 
-const currentIp = ourIps.dan
-
 
 module.exports = function(db) {
     app.use(function(req, res, next) {

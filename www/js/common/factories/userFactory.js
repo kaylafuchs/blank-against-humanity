@@ -5,8 +5,12 @@ app.factory('UserFactory', function($http, $localStorage) {
         nithya: "192.168.1.48",
     }
 
+<<<<<<< HEAD
     const currentIp = ourIps.dan
 
+=======
+    const currentIp = ourIps.kayla
+>>>>>>> origin/front-end-game
 
     return {
         setUser: function(info) {
