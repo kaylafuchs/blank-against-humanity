@@ -21,6 +21,10 @@ app.factory('GameFactory', ($http, $rootScope, $localStorage) => {
                     creatorId: creatorId,
                     creatorName: userName,
                     settings: gameConfig
+                }, {
+                    headers: {
+                        'Content-Type': 'application/json'
+                    }
                 })
                 .then(res => {
                     const gameId = res.data
