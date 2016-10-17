@@ -48,6 +48,16 @@ app.controller('GameCtrl', ($scope, $state, GameFactory, $stateParams, $localSto
         $state.go('game.' + state, {gameId: $scope.gameId})
     }
 
+    function formatTimer(timer){
+        const addZeros = function(num){
+            return num < 10 ? "0" + num : num;
+        }
+        const h = Math.floor(timer / 3600);
+        const m = Math.floor((timer / 3600) % 1 * 60);
+        const s = Math.floor((timer / 60) % 1 * 60)
+        return h > 0 ? addZeros(h) + ':' + addZeros(m) + ':' + addZeros(s) : addZeros(m) + ':' + addZeros(s);
+    }
+
     gameRef.on('value', gameSnapshot => {
         
         $scope.game = gameSnapshot.val();
@@ -70,6 +80,9 @@ app.controller('GameCtrl', ($scope, $state, GameFactory, $stateParams, $localSto
         if (previousState !== $scope.game.state){
            stateRedirect($scope.game.state);
         } 
+        if ($scope.game.timer){
+            $scope.timer = formatTimer($scope.game.timer)
+        }
         previousState = $scope.game.state;
     })
 
@@ -87,10 +100,14 @@ app.controller('GameCtrl', ($scope, $state, GameFactory, $stateParams, $localSto
     }
 
     $scope.onDoubleTap = (cardId, cardText) => {
-        ActiveGameFactory.submitWhiteCard($scope.playerId, cardId, $scope.gameId, teamId, cardText);
-        //stateRedirect('game.judgement', {gameId: $scope.gameId});
-        //$scope.judgeView = true;
-        $scope.$evalAsync();
+        if ($scope.game.state === 'submission') {
+           ActiveGameFactory.submitWhiteCard($scope.playerId, cardId, $scope.gameId, teamId, cardText);
+           //stateRedirect('game.judgement', {gameId: $scope.gameId});
+           //$scope.judgeView = true;
+           $scope.$evalAsync();
+       } else {
+        alert('You can\'t submit yet, doofus')
+       }
     }
 })
 
