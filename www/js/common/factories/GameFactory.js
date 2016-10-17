@@ -18,10 +18,10 @@ app.factory('GameFactory', ($http, $rootScope, $localStorage) => {
             const creatorId = $localStorage.user.id || 3;
             const userName = $localStorage.user.name;
             return $http.post(`https://blankagainsthumanity.herokuapp.com/api/games`, {
-                    name: gameConfig.name || 'AWESOME Name',
+                    name: gameConfig.name,
                     teamId: teamId,
                     creatorId: creatorId,
-                    creatorName: userName || 'dan', //might be unnecessary if we have the user id
+                    creatorName: userName,
                     settings: gameConfig
                 })
                 .then(res => {

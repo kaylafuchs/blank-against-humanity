@@ -14,13 +14,17 @@ app.controller('GameCtrl', ($scope, GameFactory, $stateParams, $localStorage, Ac
     $scope.gameId = $stateParams.gameId;
     //$scope.gameId = 12;
     const playerId = $localStorage.user.id;
+    $scope.playerId = playerId + ''
     //const teamId = 2;
     const teamId = $localStorage.team.id
+    $scope.teamId = teamId
     const gameRef = firebase.database().ref(`teams/${teamId}/games/${$scope.gameId}/`);
 
     gameRef.on('value', gameSnapshot => {
         // console.log(gameSnapshot.val())
+        let game = gameSnapshot.val()
         $scope.game = gameSnapshot.val();
+        console.log($scope.game.currentJudge === $scope.playerId)
         $scope.gameName = $scope.game.settings.name;
         if ($scope.game.players[playerId].hand){
             $scope.playerHand = $scope.game.players[playerId].hand;
@@ -30,11 +34,12 @@ app.controller('GameCtrl', ($scope, GameFactory, $stateParams, $localStorage, Ac
         }
         $scope.judge = $scope.game.currentJudge;
         $scope.players = $scope.game.players;
-        $scope.submittedWhiteCards = $scope.game.submittedWhiteCards;
-        $scope.$evalAsync();
+        $scope.submittedWhiteCards = Array.prototype.slice.call(game.submittedWhiteCards, 1);
+        console.log($scope.submittedWhiteCards)
         if ($scope.game.winningCard){
             $scope.winningCard = $scope.game.winningCard
         }
+         $scope.$evalAsync();
     })
 
     //$scope.showCards = false;
@@ -61,13 +66,13 @@ app.controller('GameCtrl', ($scope, GameFactory, $stateParams, $localStorage, Ac
         $scope.$evalAsync();
     }
 
-    $scope.judgeDoubleTap = (cardId) => {
-        // if (playerId === judge) {
-            ActiveGameFactory.pickWinningWhiteCard(cardId, $scope.gameId, teamId)
-            console.log("judging")
-        // }
-    }
-
+    // $scope.judgeDoubleTap = (cardId) => {
+    //     // if (playerId === judge) {
+    //         ActiveGameFactory.pickWinningWhiteCard(cardId, $scope.gameId, teamId)
+    //         console.log("judging")
+    //     // }
+    // }
+    $scope.pickWinningWhiteCard = ActiveGameFactory.pickWinningWhiteCard
 
     // $scope.getSubmittedPlayers = () => {
     //     $scope.playersToSubmit =  _.keyBy($scope.submittedWhiteCards, card => {
