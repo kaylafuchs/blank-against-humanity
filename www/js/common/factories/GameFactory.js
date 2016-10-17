@@ -6,6 +6,7 @@ app.factory('GameFactory', ($http, $rootScope, $localStorage) => {
             nithya: "192.168.1.48",
             dan: "192.168.4.236",
             nithya_home: "192.168.0.3"
+
         }
 
         const currentIp = ourIps.dan;

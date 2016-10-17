@@ -69,6 +69,10 @@ input {
     opacity: 0;
 }
 
+// .slow-fade.ng-enter {
+//   transition: 1s ease all;
+//   opacity: 0;
+// }
 
 /* The finishing CSS styles for the enter animation */
 
@@ -76,11 +80,14 @@ input {
     opacity: 1;
 }
 
+// .slow-fade.ng-enter.ng-enter-active {
+//   opacity: 1;
+// }
 
 /* now the element will fade out before it is removed from the DOM */
 
 .fade.ng-leave {
-    transition: 0.1s linear all;
+    <<<<<<< HEAD transition: 0.1s linear all;
     opacity: 1;
 }
 
@@ -95,26 +102,38 @@ input {
     opacity: 1;
 }
 
+transition: 0.1s linear all;
+opacity: 1;
+
+}
+.fade.ng-leave.ng-leave-active {
+    opacity: 0;
+}
+// .slow-fade.ng-leave {
+//   transition: 1.5s ease all;
+//   opacity: 1;
+// }
+// .slow-fade.ng-leave.ng-leave-active {
+//   opacity: 0;
+// }
 .other-content {
     width: 90%;
-    margin: 20px auto;
+    margin: 0 auto 5px auto;
     flex-grow: 1;
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: space-around;
     align-items: center;
 }
-
 .black-card-content {
     display: flex;
     //flex-grow: 1;
     justify-content: center;
     align-items: center;
     flex-direction: column;
-    padding-bottom: 35px;
+    //padding-bottom: 35px;
     //align-self: flex-end;
 }
-
 .hand {
     counter-reset: rotation;
     display: flex;
@@ -128,7 +147,6 @@ input {
     padding-bottom: 20px;
     align-self: flex-end;
 }
-
 .game-card {
     counter-increment: rotation;
     height: 230px;
@@ -147,21 +165,27 @@ input {
         margin: 10px;
         flex-grow: 1;
     }
+    
     .logo {
         font-size: 0.5rem;
         margin: 0.5rem;
         align-self: flex-start;
     }
 }
-
 .animate {
     &:hover {
         z-index: 1000;
         //margin: 0 0.1rem;
-        transform: translateY(-2rem) rotate(0);
+        transform: translateY(-30px) rotate(0);
+        border: 2px solid $red;
+        //box-shadow: 0px 0px 5px $red;
     }
+    
+    // &:active {
+    // 	border: 3px solid $red;
+    // 	background: $pink;
+    // }
 }
-
 .current-black-card {
     margin: 5px auto;
     //align-self: flex-end;
@@ -172,41 +196,33 @@ input {
         transform: none;
     }
 }
-
 .white {
     color: $black;
     background: $white;
 }
-
 .black {
     color: $white;
     background: $black;
 }
-
 .transparent {
     color: $black;
     background: transparent;
 }
-
 .grey {
     color: $black;
     background: $grey;
 }
-
 .played-card {
     border-color: $red;
     background-color: $pink;
 }
-
 .outline {
     border: dashed 1px $black;
 }
-
 .slack-btn {
     width: 250px;
     margin-top: 10px;
 }
-
 .black-bg {
     // width:100vw;
     // height: 100vh;
@@ -214,11 +230,12 @@ input {
     padding: 0 20px;
     // color: $white;
 }
-
 .gray-bg {
-    background-color: #f1f1f1;
+    background: #f1f1f1;
 }
-
+.pink-bg {
+    background-color: $pink;
+}
 .login-container {
     display: flex;
     flex-direction: column;
@@ -226,7 +243,6 @@ input {
     align-items: center;
     padding-top: 70px;
 }
-
 .login-card {
     margin: 0 auto;
     // height: 17rem;
@@ -239,18 +255,15 @@ input {
     // flex-direction: column;
     pointer-events: none;
 }
-
 .home-left {
     margin-right: -130px;
     transform: rotate(8deg) translateY(-15px);
 }
-
 .home-right {
     margin-left: -130px;
     // margin-right: -10rem;
     transform: rotate(-8deg) translateY(10px);
 }
-
 .left {
     //margin-left: -1rem;
     margin-right: -15rem;
@@ -260,12 +273,10 @@ input {
     // 	z-index: 999;
     // }
 }
-
 .center {
     // margin-left: -0.1
     z-index: 2000;
 }
-
 .right {
     margin-left: -15rem;
     // margin-right: -10rem;
@@ -276,14 +287,12 @@ input {
     // 	z-index: 999;
     // }
 }
-
 .cards {
     display: flex;
     margin: 1.75rem auto;
     flex-direction: row;
     justify-content: center;
 }
-
 .login {
     color: $white;
     text-align: center;
@@ -291,11 +300,9 @@ input {
     // 	font-size: 100px;
     // }
 }
-
 .login-titles {
     flex-grow: 1;
 }
-
 .games-container {
     padding: 10px 26px;
     text-align: center;
@@ -305,9 +312,7 @@ input {
     align-items: center;
     // background: #f1f1f1;
 }
-
 .create-game-container {}
-
 .titles {
     width: 100%;
     //flex-grow: 1;
@@ -322,20 +327,17 @@ input {
     justify-content: center;
     //background-color: #b9edfb;
 }
-
 .user-info {
     display: flex;
     flex-direction: row;
     justify-content: center;
     margin-bottom: 20px;
 }
-
 .user-team {
     text-transform: uppercase;
     font-size: 20px;
     line-height: 30px;
 }
-
 .games-list {
     //border: 1px solid $white;
     color: $black;
@@ -347,7 +349,6 @@ input {
     // background-color: #b9edfb;
     width: 100%;
 }
-
 .title-text {
     font-size: 20px;
     font-weight: bold;
@@ -355,11 +356,9 @@ input {
     margin-top: 5px;
     margin-bottom: 10px;
 }
-
 .open {
     margin-top: 30px;
 }
-
 .game-listing {
     //border: 1px solid $black;
     border-radius: 4px;
@@ -370,45 +369,49 @@ input {
     justify-content: space-between;
     align-items: center;
 }
-
 .start-game {
     margin: 5px;
 }
-
 .popup {
     border-radius: 5px!important;
     opacity: 1;
     text-align: center;
 }
-
 .large-text {
     font-size: 16px;
     text-align: center;
 }
-
 .med-text {
     font-size: 14px;
 }
-
 .decks {
     margin-top: 15px;
 }
-
 .view-game {
     &:hover {
         background: $red;
         color: $white;
     }
 }
-
-.winning-card {
-    margin: 5px auto;
-    display: flex;
-    align-items: center;
-    flex-direction: column;
-    padding-bottom: 35px;
+.judge-text {
+    font-size: 15px;
+    margin-bottom: 5px;
 }
-
+.cards-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.top-bar {
+    width: 100%;
+    background: $pink;
+    //flex-grow: 1;
+    display: flex;
+    flex-direction: row;
+    margin-bottom: 10px;
+    border-bottom: 5px solid $black;
+}
 // .start-game-btn {
 // 	width: 76%!important;
 // }
