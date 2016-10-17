@@ -4,13 +4,14 @@ app.factory('UserFactory', function($http, $localStorage) {
         kayla: "192.168.4.225",
         nithya: "192.168.1.48",
         dan: "192.168.4.236",
-        nithya_home: "192.168.0.9"
+        nithya_home: "192.168.0.2"
     }
 
     const currentIp = ourIps.nithya_home
 
     return {
         setUser: function(info) {
+            console.log("###GOT TO SET USER")
             return $http({
                     method: 'POST',
                     url: `http://${currentIp}:1337/api/users`,
@@ -36,6 +37,7 @@ app.factory('UserFactory', function($http, $localStorage) {
         setLocalStorage: function(user, team) {
             $localStorage.user = user;
             $localStorage.team = team;
+            $localStorage.user.games = {};
         },
 
         logOut: function() {
