@@ -10068,3 +10068,7 @@ input {
 
 .decks {
   margin-top: 15px; }
+
+.view-game:hover {
+  background: #ef473a;
+  color: #FFF; }

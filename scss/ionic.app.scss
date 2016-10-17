@@ -416,7 +416,7 @@ input {
 }
 
 .view-game {
-	$:hover {
+	&:hover {
 		background: $red;
 		color: $white;
 	}

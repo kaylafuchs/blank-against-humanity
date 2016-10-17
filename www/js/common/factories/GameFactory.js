@@ -92,7 +92,7 @@ app.factory('GameFactory', ($http, $rootScope, $localStorage) => {
 
         GameFactory.getGamesByUserId = () => {
             console.log('getGamesByUserId called')
-            return $http.jsonp(`https://blankagainsthumanity.herokuapp.com/api/games/?userId=${$localStorage.user.id}`)
+            return $http.get(`https://blankagainsthumanity.herokuapp.com/api/games/?userId=${$localStorage.user.id}`)
                 .then(res => {
                     console.log('resolved')
                     return res.data
