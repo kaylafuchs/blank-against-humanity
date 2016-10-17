@@ -10089,3 +10089,8 @@ input {
   flex-direction: row;
   margin-bottom: 10px;
   border-bottom: 5px solid #000; }
+
+.game-header {
+  width: 100%;
+  background-color: black;
+  opacity: 0.5; }

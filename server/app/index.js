@@ -10,7 +10,7 @@ const ourIps = {
     nithya_home: "192.168.0.2"
 }
 
-const currentIp = ourIps.nithya_home
+const currentIp = ourIps.nithya
 
 module.exports = function(db) {
     app.use(function(req, res, next) {
