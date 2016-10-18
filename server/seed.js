@@ -117,7 +117,52 @@ const seedWhiteCardsSFW = () => {
     }, {
         text: 'What makes a javascript developer sad?',
         type: 'black',
-        deckId: 3
+        deckId: 3,
+        pick: 1
+    }]
+
+    const creatingCards = cards.map(card => Card.create(card))
+    return Promise.all(creatingCards)
+}
+
+const seedOtherCardsSFW = () => {
+    const cards = [{
+        text: 'Blank Against Humanity',
+        type: 'white',
+        deckId: 4
+    }, {
+        text: 'Preteens.',
+        type: 'white',
+        deckId: 4
+    }, {
+        text: 'Former President George W. Bush',
+        type: 'white',
+        deckId: 4
+    }, {
+        text: 'Stranger danger',
+        type: 'white',
+        deckId: 4
+    }, {
+        text: 'Nickelback',
+        type: 'white',
+        deckId: 4
+    }, {
+        text: 'The Chinese gymnastics team.',
+        type: 'white',
+        deckId: 4
+    }, {
+        text: 'Figgy pudding.',
+        type: 'white',
+        deckId: 4
+    }, {
+        text: 'The Tempur-Pedic &reg; Swedish Sleep System &trade.',
+        type: 'white',
+        deckId: 4
+    }, {
+        text: 'Who should I hire?',
+        type: 'black',
+        deckId: 4,
+        pick: 1
     }]
 
     const creatingCards = cards.map(card => Card.create(card))
@@ -129,7 +174,7 @@ db.sync({
         force: true
     })
     .then(() => Promise.all([seedUsers(), seedTeams(), seedDecks()]))
-    .then(() => Promise.all([seedBlackCards(), seedWhiteCards(), seedWhiteCardsSFW()]))
+    .then(() => Promise.all([seedBlackCards(), seedWhiteCards(), seedWhiteCardsSFW(), seedOtherCardsSFW()]))
     .then(() => {
         console.log(chalk.green('Seed successful!'));
         process.exit(0);
