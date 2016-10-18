@@ -38,8 +38,8 @@ router.get('/', (req, res, next) => {
         })
         .then(foundGames => res.send(foundGames))
         .catch(next);
-});
 
+});
 
 // api/games/2/
 // api/games/32?playerId=42
@@ -76,8 +76,8 @@ router.post('/:id/decks', (req, res, next) => {
             return Promise.all(addingCardsToFb)
         })
         .then(() => {
-            stateManager(req.requestedGame.id, req.requestedGame.teamId, req.requestedGame.maxTurnTime, req.requestedGame.minPlayers)
-            res.sendStatus(200)
+            stateManager(req.requestedGame.id, req.requestedGame.teamId, req.requestedGame.maxTurnTime, req.requestedGame.minPlayers);
+            res.sendStatus(200);
         })
 
 });

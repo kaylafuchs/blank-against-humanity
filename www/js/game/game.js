@@ -82,8 +82,18 @@ app.controller('GameCtrl', ($scope, $state, GameFactory, $stateParams, $localSto
         $scope.players = $scope.game.players;
         $scope.judge = $scope.players[$scope.game.currentJudge];
         $scope.$evalAsync();
-        if ($scope.game.winningCard){
-            $scope.winningCard = $scope.game.winningCard
+
+
+        if ($scope.game.state === 'postround') {
+            console.log('the game has entered postround')
+            if ($scope.game.winningCard) {
+                $scope.winningCard = $scope.game.winningCard
+                $scope.winnerId = $scope.winningCard.submittedBy;
+                $scope.winnerName = $scope.game.players[$scope.winnerId].name
+
+
+                console.log('the scope is2:', $scope)
+            }
         }
         if (previousState !== $scope.game.state){
            stateRedirect($scope.game.state);

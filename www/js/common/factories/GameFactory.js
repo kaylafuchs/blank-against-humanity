@@ -6,7 +6,6 @@ app.factory('GameFactory', ($http, $rootScope, $localStorage) => {
             nithya: "192.168.1.48",
         }
 
-
         // start a new game derp
         const GameFactory = {};
 

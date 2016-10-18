@@ -50,6 +50,8 @@ const seedDecks = () => {
         teamId: 2
     }]
 
+
+
     const creatingDecks = decks.map(deck => Deck.create(deck))
     return Promise.all(creatingDecks)
 };

@@ -5,8 +5,6 @@ app.factory('UserFactory', function($http, $localStorage) {
         nithya: "192.168.1.48",
     }
 
-
-
     return {
         setUser: function(info) {
             console.log("###GOT TO SET USER")
