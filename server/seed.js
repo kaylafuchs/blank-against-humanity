@@ -81,11 +81,201 @@ const seedWhiteCards = () => {
 };
 
 
+const seedWhiteCardsSFW = () => {
+    const cards = [{
+        text: 'Bootcamp Grads',
+        type: 'white',
+        deckId: 3
+    }, {
+        text: 'Being late to standup',
+        type: 'white',
+        deckId: 3
+    }, {
+        text: 'Inverting Binary Search Trees',
+        type: 'white',
+        deckId: 3
+    }, {
+        text: 'Watercooler Friends',
+        type: 'white',
+        deckId: 3
+    }, {
+        text: 'Head bartender at willy’ s pub',
+        type: 'white',
+        deckId: 3
+    }, {
+        text: 'Execs',
+        type: 'white',
+        deckId: 3
+    }, {
+        text: 'jQuery',
+        type: 'white',
+        deckId: 3
+    }, {
+        text: 'Being a Scrumlord',
+        type: 'white',
+        deckId: 3
+    }, {
+        text: 'What makes a javascript developer sad?',
+        type: 'black',
+        deckId: 3,
+        pick: 1
+    }, {
+        text: 'React',
+        type: 'white',
+        deckId: 3
+    }, {
+        text: 'Webpack',
+        type: 'white',
+        deckId: 3
+    }, {
+        text: 'Internal Server Error',
+        type: 'white',
+        deckId: 3
+    }, {
+        text: 'Computer Science',
+        type: 'white',
+        deckId: 3
+    }, {
+        text: 'DROP TABLES',
+        type: 'white',
+        deckId: 3
+    }, {
+        text: 'A never ending promise chain',
+        type: 'white',
+        deckId: 3
+    }, {
+        text: 'Callback hell',
+        type: 'white',
+        deckId: 3
+    }, {
+        text: 'Cross Browser Compatibility',
+        type: 'white',
+        deckId: 3
+    }, {
+        text: 'Sanitizing your inputs',
+        type: 'white',
+        deckId: 3
+    }, {
+        text: 'Internal Server Error',
+        type: 'white',
+        deckId: 3
+    }, {
+        text: 'Computer Science',
+        type: 'white',
+        deckId: 3
+    }, {
+        text: 'DROP TABLES',
+        type: 'white',
+        deckId: 3
+    }, {
+        text: 'A never ending promise chain',
+        type: 'white',
+        deckId: 3
+    }, {
+        text: 'Callback hell',
+        type: 'white',
+        deckId: 3
+    }, {
+        text: 'Cross Browser Compatibility',
+        type: 'white',
+        deckId: 3
+    }, {
+        text: 'Sanitizing your inputs',
+        type: 'white',
+        deckId: 3
+    },{
+        text: 'Sanitizing your inputs',
+        type: 'white',
+        deckId: 3
+    }, {
+        text: 'Internal Server Error',
+        type: 'white',
+        deckId: 3
+    }, {
+        text: 'Computer Science',
+        type: 'white',
+        deckId: 3
+    }, {
+        text: 'DROP TABLES',
+        type: 'white',
+        deckId: 3
+    }, {
+        text: 'A never ending promise chain',
+        type: 'white',
+        deckId: 3
+    }, {
+        text: 'Callback hell',
+        type: 'white',
+        deckId: 3
+    }, {
+        text: 'Cross Browser Compatibility',
+        type: 'white',
+        deckId: 3
+    }, {
+        text: 'Sanitizing your inputs',
+        type: 'white',
+        deckId: 3
+    }, {
+        text: '404: ______ not found.',
+        type: 'black',
+        deckId: 3,
+        pick: 1
+    }]
+
+    const creatingCards = cards.map(card => Card.create(card))
+    return Promise.all(creatingCards)
+}
+
+const seedOtherCardsSFW = () => {
+    const cards = [{
+        text: 'Blank Against Humanity',
+        type: 'white',
+        deckId: 4
+    }, {
+        text: 'Preteens.',
+        type: 'white',
+        deckId: 4
+    }, {
+        text: 'Former President George W. Bush',
+        type: 'white',
+        deckId: 4
+    }, {
+        text: 'Stranger danger',
+        type: 'white',
+        deckId: 4
+    }, {
+        text: 'Nickelback',
+        type: 'white',
+        deckId: 4
+    }, {
+        text: 'The Chinese gymnastics team.',
+        type: 'white',
+        deckId: 4
+    }, {
+        text: 'Figgy pudding.',
+        type: 'white',
+        deckId: 4
+    }, {
+        text: 'The Tempur-Pedic &reg; Swedish Sleep System &trade.',
+        type: 'white',
+        deckId: 4
+    }, {
+        text: 'Who should I hire?',
+        type: 'black',
+        deckId: 4,
+        pick: 1
+    }]
+
+    const creatingCards = cards.map(card => Card.create(card))
+    return Promise.all(creatingCards)
+
+}
+
 db.sync({
         force: true
     })
     .then(() => Promise.all([seedUsers(), seedTeams(), seedDecks()]))
-    .then(() => Promise.all([seedBlackCards(), seedWhiteCards()]))
+    .then(() => Promise.all([seedBlackCards(), seedWhiteCards(), seedWhiteCardsSFW(), seedOtherCardsSFW()]))
     .then(() => {
         console.log(chalk.green('Seed successful!'));
         process.exit(0);
@@ -94,4 +284,3 @@ db.sync({
         console.error(err);
         process.exit(1);
     });
-

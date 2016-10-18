@@ -2,7 +2,7 @@
 var router = require('express').Router(); // eslint-disable-line new-cap
 module.exports = router;
 var _ = require('lodash');
-var creds = require('../../../env/development.js')
+var creds = require('../../../env/production.js')
 
 
 router.get('/', function(req, res, next){
