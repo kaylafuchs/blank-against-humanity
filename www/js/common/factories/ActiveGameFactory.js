@@ -47,39 +47,37 @@ app.factory('ActiveGameFactory', ($http, $rootScope, $localStorage) => {
     }
 
 
-    ActiveGameFactory.submitWhiteCard = (playerId, cardId, gameId, teamId, cardText) => {
-        const gameRef = firebase.database().ref(`teams/${teamId}/games/${gameId}`);
-        const cardToSubmit = gameRef.child(`players/${playerId}/hand/${cardId}`);
-        const submitRef = gameRef.child('submittedWhiteCards');
-        firebaseMoveSingleKeyValue(cardToSubmit, submitRef)
-            .then(() => {
-                submitRef.child(cardId).set({
-                    submittedBy: playerId,
-                    text: cardText
-                })
-            })
-    }
-
-
-    //nikita's updated version
     // ActiveGameFactory.submitWhiteCard = (playerId, cardId, gameId, teamId, cardText) => {
-    //   const gameRef = firebase.database().ref(`teams/${teamId}/games/${gameId}`);
-    //   const cardToSubmit = gameRef.child(`players/${playerId}/hand/${cardId}/text`);
-    //   const submitRef = gameRef.child('submittedWhiteCards');
-    //   let text = ''
-    //   return cardToSubmit.transaction(cardText => {
-    //       text = cardText
-    //       return null
-    //     })
-    //     .then(() => {
-    //       let updateObj = {};
-    //       updateObj[playerId].text = text;
-    //       updateObj[playerId].cardId = cardId
-    //       return submitRef.update(updateObj)
-    //     })
-    //     .then(() => console.log('submission success'))
-    //     .catch((err) => console.log(err))
+    //     const gameRef = firebase.database().ref(`teams/${teamId}/games/${gameId}`);
+    //     const cardToSubmit = gameRef.child(`players/${playerId}/hand/${cardId}`);
+    //     const submitRef = gameRef.child('submittedWhiteCards');
+    //     firebaseMoveSingleKeyValue(cardToSubmit, submitRef)
+    //         .then(() => {
+    //             submitRef.child(cardId).set({
+    //                 submittedBy: playerId,
+    //                 text: cardText
+    //             })
+    //         })
     // }
+
+    ActiveGameFactory.submitWhiteCard = (playerId, cardId, gameId, teamId) => {
+      const gameRef = firebase.database().ref(`teams/${teamId}/games/${gameId}`);
+      const cardToSubmit = gameRef.child(`players/${playerId}/hand/${cardId}/text`);
+      const submitRef = gameRef.child('submittedWhiteCards');
+      let text = ''
+      return cardToSubmit.transaction(cardText => {
+          text = cardText
+          return null
+        })
+        .then(() => {
+          let updateObj = {};
+          updateObj[playerId].text = text;
+          updateObj[playerId].cardId = cardId
+          return submitRef.update(updateObj)
+        })
+        .then(() => console.log('submission success'))
+        .catch((err) => console.log(err))
+    }
 
 
 

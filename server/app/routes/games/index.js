@@ -31,59 +31,13 @@ router.get('/:id', (req, res, next) => {
 // api/games?teamId=31&userId=3&open=true
 // get a user or teams games, to display in a lobby
 router.get('/', (req, res, next) => {
-    if (req.query.teamId && req.query.open) {
-        return Game.findAll({
-                include: [{
-                    model: User,
-                    where: {
-                        id: req.query.userId
-                    }
-                }]
-            }).then((foundGames) => {
-                return Game.findAll({
-                    include: [{
-                        model: Team,
-                        where: {
-                            id: req.query.teamId,
-                        }
-                    }],
-                    where: {
-                        id: {
-                            $notIn: [99999999].concat(foundGames.map(game => game.id))
-                        }
-                    }
-                })
-
-
-            })
-            .then(games => res.send(games))
-            .catch(next);
-
-    } else if (req.query.userId) {
-        return Game.findAll({
-                include: [{
-                    model: User,
-                    where: { id: req.query.userId }
-                }]
-            })
-            .then(foundGames => res.send(foundGames))
-            .catch(next);
-
-    } else if (req.query.teamId) {
-        return Game.findAll({
-                where: {
-                    teamId: req.query.teamId
-                }
-            })
-            .then(foundGames => res.send(foundGames))
-            .catch(next);
-
-    } else {
-        return Game.findAll()
-            .then(foundGames => res.send(foundGames))
-            .catch(next);
-    }
-
+    return Game.findAll({
+            where: {
+                teamId: req.query.teamId
+            }
+        })
+        .then(foundGames => res.send(foundGames))
+        .catch(next);
 });
 
 
@@ -164,4 +118,3 @@ router.post('/', (req, res, next) => {
         })
         .catch(next);
 });
-

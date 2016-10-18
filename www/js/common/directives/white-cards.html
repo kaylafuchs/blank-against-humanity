@@ -1,7 +1,7 @@
 
 <div ng-if="game.state === 'pregame'">
 	<ul class="hand fade">
-		<li class="game-card animate white" ng-repeat="(key,val) in playerHand" on-double-tap="onDoubleTap(key, val.text)">
+		<li class="game-card animate white" ng-repeat="(key,val) in playerHand"">
 			<p class="card-text">{{val.text}}</p>
 			<p class="logo white">______ Against Humanity</p>
 		</li>
