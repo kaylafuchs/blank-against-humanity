@@ -8,8 +8,6 @@ const ourIps = {
     nithya: "192.168.1.48",
 }
 
-
-
 module.exports = function(db) {
     app.use(function(req, res, next) {
         res.header('Access-Control-Allow-Origin', '*');

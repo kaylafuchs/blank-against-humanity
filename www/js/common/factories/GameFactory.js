@@ -6,7 +6,6 @@ app.factory('GameFactory', ($http, $rootScope, $localStorage) => {
             nithya: "192.168.1.48",
         }
 
-
         // start a new game derp
         const GameFactory = {};
 
@@ -60,58 +59,23 @@ app.factory('GameFactory', ($http, $rootScope, $localStorage) => {
             const playerId = $localStorage.user.id;
             const playerName = $localStorage.user.name;
             const playerRef = firebase.database().ref(`teams/${teamId}/games/${gameId}/players/${playerId}`)
-            playerRef.set({
+            return playerRef.set({
                 name: playerName
-            })
-            return $http.post(`https://blankagainsthumanity.herokuapp.com/api/games/${gameId}/?playerId=${playerId}`)
+            }).then(() => $http.post(`https://blankagainsthumanity.herokuapp.com/api/games/${gameId}/?playerId=${playerId}`))
+            .catch(err => console.log(err))
         };
-
         GameFactory.getDecksByTeamId = (id) => {
             const teamId = (typeof id !== 'number') ? $localStorage.team.id : id; // id || localstorage doesn't work because 0 is falsey
             return $http.get(`https://blankagainsthumanity.herokuapp.com/api/decks?team=${teamId}`)
                 .then(res => res.data)
 
         };
-
-        GameFactory.getUsersByGameId = (gameId) => {
-            return $http.get(`https://blankagainsthumanity.herokuapp.com/api/games/${gameId}/users`);
-        };
-
-        GameFactory.getGameByGameId = (gameId, teamId) => {
-            teamId = teamId || $localStorage.team.id
-            const gamesRef = firebase.database().ref(`teams/${teamId}/games/${gameId}`)
-            return gamesRef.once('value').then(snapshot => snapshot.val())
-        };
-
-        GameFactory.getGamesByTeamId = (teamId) => {
-            console.log("###TEAM ID", teamId)
-            teamId = teamId || $localStorage.team.id
-            console.log('the team id is:', teamId)
+        GameFactory.getGamesByTeamId = () => {
+            const teamId = $localStorage.team.id
             return $http.get(`https://blankagainsthumanity.herokuapp.com/api/games/?teamId=${teamId}`)
                 .then(res => res.data)
                 .catch(err => console.log(err))
         };
-
-        GameFactory.getGamesByUserId = () => {
-            console.log('getGamesByUserionicId called')
-            const userId = $localStorage.user.id
-            return $http.get(`https://blankagainsthumanity.herokuapp.com/api/games/?userId=${userId}`)
-                .then(res => {
-                    console.log('resolved')
-                    return res.data
-                })
-                .catch(err => console.log(err));
-        };
-
-        GameFactory.getOpenGames = () => {
-            console.log('getGamesByUserId called')
-            const teamId = $localStorage.team.id;
-            const userId = $localStorage.user.id;
-            return $http.get(`https://blankagainsthumanity.herokuapp.com/api/games/?teamId=${teamId}&userId=${userId}&open=true`)
-                .then(res => res.data)
-                .catch(err => console.log(err));
-        };
-
         return GameFactory;
     }
 

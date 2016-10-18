@@ -1,16 +1,16 @@
 
 <div ng-if="game.state === 'pregame'">
 	<ul class="hand fade">
-		<li class="game-card animate white" ng-repeat="(key,val) in playerHand" on-double-tap="onDoubleTap(key, val.text)">
-			<p class="card-text">{{val.text}}</p>
-			<p class="logo white">______ Against Humanity</p>
+		<li class="game-card animate white" ng-repeat="(key,val) in playerHand" ng-hide = "!val.text">
+				<p class="card-text">{{val.text}}</p>
+				<p class="logo white">______ Against Humanity</p>
 		</li>
 	</ul>
 </div>
 
 <div ng-if="game.state === 'submission'">
 	<ul class="hand fade">
-		<li class="game-card animate white" ng-repeat="(key,val) in playerHand" on-double-tap="onDoubleTap(key, val.text)">
+		<li class="game-card animate white" ng-repeat="(key,val) in playerHand" on-swipe-up="submitWhiteCard(key)">
 			<p class="card-text">{{val.text}}</p>
 			<p class="logo white">______ Against Humanity</p>
 		</li>
@@ -20,8 +20,8 @@
 <div class="cards-container" ng-if="game.state ==='judgement' && game.currentJudge === playerId">
 	<span class="title-text">PICK A CARD</span>
 	<ul class="hand fade">
-		<li class="game-card animate white" ng-repeat="card in submittedWhiteCards" on-double-tap="pickWinningWhiteCard(key, gameId, teamId)">
-			<p class="card-text">{{card.text}}</p>
+		<li class="game-card animate white" ng-repeat="(key,val) in submittedWhiteCards" on-swipe-up="pickWinningWhiteCard(key, gameId, teamId)">
+			<p class="card-text">{{val.text}}</p>
 			<p class="logo white">______ Against Humanity</p>
 		</li>
 	</ul>
@@ -30,8 +30,17 @@
 <div class="cards-container" ng-if="game.state ==='judgement' && game.currentJudge !== playerId">
 	<span class="title-text">SUBMITTED CARDS</span>
 	<ul class="hand fade">
-		<li class="game-card animate white" ng-repeat="card in submittedWhiteCards">
-			<p class="card-text">{{card.text}}</p>
+		<li class="game-card animate white" ng-repeat="(key,val) in submittedWhiteCards">
+			<p class="card-text">{{val.text}}</p>
+			<p class="logo white">______ Against Humanity</p>
+		</li>
+	</ul>
+</div>
+
+<div class="cards-container" ng-if="game.state ==='postround' && !needRefill">
+	<ul class="hand fade">
+		<li class="game-card animate white" ng-repeat="(key,val) in playerHand">
+			<p class="card-text">{{val.text}}</p>
 			<p class="logo white">______ Against Humanity</p>
 		</li>
 	</ul>

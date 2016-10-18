@@ -1,14 +1,21 @@
 <ion-view title={{gameName}}>
 	<ion-content overflow-scroll="true">
 		<div class="card-game">
-		<status-bar></status-bar>
-<!-- 		POSTGAME -->
+			<status-bar></status-bar>
+			<!-- 		POSTGAME -->
 			<div class="other-content">
-			<div class="game-card animate white">
-					<p class="card-text">WINNING WHITE CARD{{value.text}}</p>
+				<span class="title-text">{{judge.name}} picked</span>
+				<div class="game-card animate white">
+					<p class="card-text">{{game.winningCard.text}}</p>
 					<p class="logo white">______ Against Humanity</p>
+				</div>
+				<div class="game-card white pile fade" on-swipe-down="refillMyHand(gameId,playerId,teamId)" ng-if="needRefill || !haveHand">
+					<p class="card-text">Swipe down to grab some cards!</p>
+					<i class="icon ion-arrow-down-c large-arrow"></i>
+					<p class="logo white">______ Against Humanity</p>
+				</div>
 			</div>
-			</div>
+			<white-cards></white-cards>
 		</div>
 	</ion-content>
 </ion-view>
