@@ -156,6 +156,66 @@ const seedWhiteCardsSFW = () => {
         type: 'white',
         deckId: 3
     }, {
+        text: 'Internal Server Error',
+        type: 'white',
+        deckId: 3
+    }, {
+        text: 'Computer Science',
+        type: 'white',
+        deckId: 3
+    }, {
+        text: 'DROP TABLES',
+        type: 'white',
+        deckId: 3
+    }, {
+        text: 'A never ending promise chain',
+        type: 'white',
+        deckId: 3
+    }, {
+        text: 'Callback hell',
+        type: 'white',
+        deckId: 3
+    }, {
+        text: 'Cross Browser Compatibility',
+        type: 'white',
+        deckId: 3
+    }, {
+        text: 'Sanitizing your inputs',
+        type: 'white',
+        deckId: 3
+    },{
+        text: 'Sanitizing your inputs',
+        type: 'white',
+        deckId: 3
+    }, {
+        text: 'Internal Server Error',
+        type: 'white',
+        deckId: 3
+    }, {
+        text: 'Computer Science',
+        type: 'white',
+        deckId: 3
+    }, {
+        text: 'DROP TABLES',
+        type: 'white',
+        deckId: 3
+    }, {
+        text: 'A never ending promise chain',
+        type: 'white',
+        deckId: 3
+    }, {
+        text: 'Callback hell',
+        type: 'white',
+        deckId: 3
+    }, {
+        text: 'Cross Browser Compatibility',
+        type: 'white',
+        deckId: 3
+    }, {
+        text: 'Sanitizing your inputs',
+        type: 'white',
+        deckId: 3
+    }, {
         text: '404: ______ not found.',
         type: 'black',
         deckId: 3,
