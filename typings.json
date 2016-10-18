@@ -1,4 +1,7 @@
 {
   "name": "blankagainsthumanity",
-  "dependencies": {}
+  "dependencies": {},
+  "globalDependencies": {
+    "angular": "registry:dt/angular#1.5.0+20161016133926"
+  }
 }

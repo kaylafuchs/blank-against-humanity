@@ -31,61 +31,15 @@ router.get('/:id', (req, res, next) => {
 // api/games?teamId=31&userId=3&open=true
 // get a user or teams games, to display in a lobby
 router.get('/', (req, res, next) => {
-    if (req.query.teamId && req.query.open) {
-        return Game.findAll({
-                include: [{
-                    model: User,
-                    where: {
-                        id: req.query.userId
-                    }
-                }]
-            }).then((foundGames) => {
-                return Game.findAll({
-                    include: [{
-                        model: Team,
-                        where: {
-                            id: req.query.teamId,
-                        }
-                    }],
-                    where: {
-                        id: {
-                            $notIn: foundGames.map(game => game.id)
-                        }
-                    }
-                })
-
-
-            })
-            .then(games => res.send(games))
-            .catch(next);
-
-    } else if (req.query.userId) {
-        return Game.findAll({
-                include: [{
-                    model: User,
-                    where: { id: req.query.userId }
-                }]
-            })
-            .then(foundGames => res.send(foundGames))
-            .catch(next);
-
-    } else if (req.query.teamId) {
-        return Game.findAll({
-                where: {
-                    teamId: req.query.teamId
-                }
-            })
-            .then(foundGames => res.send(foundGames))
-            .catch(next);
-
-    } else {
-        return Game.findAll()
-            .then(foundGames => res.send(foundGames))
-            .catch(next);
-    }
+    return Game.findAll({
+            where: {
+                teamId: req.query.teamId
+            }
+        })
+        .then(foundGames => res.send(foundGames))
+        .catch(next);
 
 });
-
 
 // api/games/2/
 // api/games/32?playerId=42
@@ -100,6 +54,7 @@ router.post('/:id', (req, res, next) => {
         }
     })
     // put all the cards for selected decks in the games firebase object
+
 router.post('/:id/decks', (req, res, next) => {
 
     const gettingCards = req.body.decks.map(deckId => Card.findAll({
@@ -111,33 +66,26 @@ router.post('/:id/decks', (req, res, next) => {
     return Promise.all(gettingCards)
         .then((cardsArr) => {
             const flatcards = _.flattenDeep(cardsArr)
-
-            var blackCardRef;
-            var whiteCardRef;
             const addingCardsToFb = flatcards.map(card => {
-                // TODO: get rid of if else, just interpolate card type in firebase route
-                if (card.type === 'white') {
-                    whiteCardRef = firebase.database().ref(`teams/${req.requestedGame.teamId}/games/${req.requestedGame.id}/pile/whitecards/${card.id}`)
-                    return whiteCardRef.set({
-                        'text': card.text
-                    })
-                } else {
-                    blackCardRef = firebase.database().ref(`teams/${req.requestedGame.teamId}/games/${req.requestedGame.id}/pile/blackcards/${card.id}`)
-                    return blackCardRef.set({
-                        'text': card.text
-                            // 'pick': card.pick
-                    })
-
-                }
+                let cardRef = firebase.database().ref(`teams/${req.requestedGame.teamId}/games/${req.requestedGame.id}/pile/${card.type}cards/${card.id}`)
+                return cardRef.set({
+                    'text': card.text,
+                    'pick': card.pick
+                })
             })
+
             return Promise.all(addingCardsToFb)
         })
         .then(() => {
-            stateManager(req.requestedGame.id, req.requestedGame.teamId, req.requestedGame.maxTurnTime, req.requestedGame.minPlayers)
-            res.sendStatus(200)
+            stateManager(req.requestedGame.id, req.requestedGame.teamId, req.requestedGame.maxTurnTime, req.requestedGame.minPlayers);
+            res.sendStatus(200);
         })
 
 });
+
+
+
+
 
 router.post('/', (req, res, next) => {
     var gameId;
@@ -164,4 +112,3 @@ router.post('/', (req, res, next) => {
         })
         .catch(next);
 });
-

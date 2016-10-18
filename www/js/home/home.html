@@ -18,17 +18,10 @@
                 </div>
             </div>
             <div class="games-list">
-                <span class="title-text">Your games</span>
+                <span class="title-text">{{storage.team.name}}'s games</span>
                 <div ng-repeat="game in games track by $index" ng-if="game.name" class="game-listing">
                     <span>{{game.name}}</span>
-                    <a ui-sref="game.pregame({gameId: game.id})">
-                        <button class="button button-outline button-small button-assertive view-game">View game</button>
-                    </a>
-                </div>
-                <span class="title-text open">Open games</span>
-                <div ng-repeat="game in openGames track by $index" ng-if="game.name" class="game-listing">
-                    <span>{{game.name}}</span>
-                    <button class="button button-outline button-small button-assertive" ui-sref="game.pregame({gameId: game.id})">Join game</button>
+                    <button class="button button-outline button-small button-assertive view-game" on-tap="goToGame(game.id)">Play Game</button>
                 </div>
             </div>
         </div>
