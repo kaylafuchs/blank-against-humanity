@@ -27,10 +27,6 @@ app.factory('GameFactory', ($http, $rootScope, $localStorage) => {
                 })
                 .then(res => {
                     const gameId = res.data
-                    const gameRef = firebase.database().ref(`/teams/${teamId}/games/${gameId}`)
-                    gameRef.on('value', snapshot => {
-                        $rootScope.$broadcast('changedGame', snapshot.val())
-                    });
                     return gameId;
                 })
         };
@@ -50,6 +46,10 @@ app.factory('GameFactory', ($http, $rootScope, $localStorage) => {
             }
             return $http.post(`https://blankagainsthumanity.herokuapp.com/api/games/${gameId}/decks`, {
                     'decks': decksArr
+                }, {
+                    headers: {
+                        'Content-Type': 'application/json'
+                    }
                 })
                 .then(() => gameId)
         };
