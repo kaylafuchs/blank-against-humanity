@@ -119,6 +119,47 @@ const seedWhiteCardsSFW = () => {
         type: 'black',
         deckId: 3,
         pick: 1
+    }, {
+        text: 'React',
+        type: 'white',
+        deckId: 3
+    }, {
+        text: 'Webpack',
+        type: 'white',
+        deckId: 3
+    }, {
+        text: 'Internal Server Error',
+        type: 'white',
+        deckId: 3
+    }, {
+        text: 'Computer Science',
+        type: 'white',
+        deckId: 3
+    }, {
+        text: 'DROP TABLES',
+        type: 'white',
+        deckId: 3
+    }, {
+        text: 'A never ending promise chain',
+        type: 'white',
+        deckId: 3
+    }, {
+        text: 'Callback hell',
+        type: 'white',
+        deckId: 3
+    }, {
+        text: 'Cross Browser Compatibility',
+        type: 'white',
+        deckId: 3
+    }, {
+        text: 'Sanitizing your inputs',
+        type: 'white',
+        deckId: 3
+    }, {
+        text: '404: ______ not found.',
+        type: 'black',
+        deckId: 3,
+        pick: 1
     }]
 
     const creatingCards = cards.map(card => Card.create(card))
@@ -183,4 +224,3 @@ db.sync({
         console.error(err);
         process.exit(1);
     });
-
