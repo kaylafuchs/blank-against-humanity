@@ -65,25 +65,14 @@ router.post('/:id/decks', (req, res, next) => {
     return Promise.all(gettingCards)
         .then((cardsArr) => {
             const flatcards = _.flattenDeep(cardsArr)
-
-            var blackCardRef;
-            var whiteCardRef;
             const addingCardsToFb = flatcards.map(card => {
-                // TODO: get rid of if else, just interpolate card type in firebase route
-                if (card.type === 'white') {
-                    whiteCardRef = firebase.database().ref(`teams/${req.requestedGame.teamId}/games/${req.requestedGame.id}/pile/whitecards/${card.id}`)
-                    return whiteCardRef.set({
-                        'text': card.text
-                    })
-                } else {
-                    blackCardRef = firebase.database().ref(`teams/${req.requestedGame.teamId}/games/${req.requestedGame.id}/pile/blackcards/${card.id}`)
-                    return blackCardRef.set({
-                        'text': card.text
-                            // 'pick': card.pick
-                    })
-
-                }
+                let cardRef = firebase.database().ref(`teams/${req.requestedGame.teamId}/games/${req.requestedGame.id}/pile/${card.type}cards/${card.id}`)
+                return cardRef.set({
+                    'text': card.text,
+                    'pick': card.pick
+                })
             })
+
             return Promise.all(addingCardsToFb)
         })
         .then(() => {

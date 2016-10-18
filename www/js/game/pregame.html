@@ -5,19 +5,19 @@
 <!-- 		PREGAME -->
 			<div class="other-content" ng-class="{centered: !players[playerId].hand}">
 				<game-header></game-header>
-				<div class="game-card white pile fade" on-swipe-down="onSwipeDown(gameId)" ng-if="needRefill">
+				<div class="game-card white pile fade" on-swipe-down="refillMyHand(gameId,playerId,teamId)" ng-if="needRefill || !haveHand">
 				    <p class="card-text">Swipe down to grab some cards!</p>
 				    <i class="icon ion-arrow-down-c large-arrow"></i>
 				    <p class="logo white">______ Against Humanity</p>
 				</div>
 				<div class="black-card-content fade" ng-if="players[playerId].hand">
 					<div class="game-card black current-black-card">
-						<p class="card-text">{{blackCard}}</p>
+						<p class="card-text">{{blackCard.text}}</p>
 						<p class="logo black">______ Against Humanity</p>
 					</div>
 				</div>
 			</div>
-				<white-cards ng-if="players[playerId].hand"></white-cards>
+				<white-cards></white-cards>
 		</div>
 	</ion-content>
 </ion-view>

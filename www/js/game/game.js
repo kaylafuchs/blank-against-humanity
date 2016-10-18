@@ -23,8 +23,8 @@ app.config(($stateProvider) => {
         templateUrl: 'js/game/judgement.html',
         controller: 'GameCtrl'
     })
-    .state('game.postgame', {
-        url: '/game/:gameId/postgame',
+    .state('game.postround', {
+        url: '/game/:gameId/postround',
         templateUrl: 'js/game/postgame.html',
         controller: 'GameCtrl'
     })
@@ -37,7 +37,6 @@ app.controller('GameCtrl', ($scope, $state, GameFactory, $stateParams, $localSto
     $scope.gameId = gameId
     const playerId = $localStorage.user.id;
     $scope.playerId = playerId + ''
-    $scope.playerId = $localStorage.user.id;
     const teamId = $localStorage.team.id
     $scope.teamId = teamId
     const gameRef = firebase.database().ref(`teams/${teamId}/games/${$scope.gameId}/`);
@@ -58,25 +57,27 @@ app.controller('GameCtrl', ($scope, $state, GameFactory, $stateParams, $localSto
         const s = Math.floor((timer / 60) % 1 * 60)
         return h > 0 ? addZeros(h) + ':' + addZeros(m) + ':' + addZeros(s) : addZeros(m) + ':' + addZeros(s);
     }
-
+    const handRef = gameRef.child(`players/${playerId}/hand`)
+    handRef.on('value', handSnapshot => {
+        const hand = handSnapshot.val()
+        if (hand) {
+            $scope.playerHand = hand
+            $scope.haveHand = true;
+            $scope.needRefill = _.size($scope.playerHand) < 7;
+            $scope.$evalAsync();
+        } else {
+            $scope.haveHand = false
+        }
+    })
+    const blackCardRef = gameRef.child('currentBlackCard')
+    blackCardRef.on('value', blackCardSnapshot => {
+        $scope.blackCard = blackCardSnapshot.val()
+    })
     gameRef.on('value', gameSnapshot => {
         let game = gameSnapshot.val()
-        blackCard = game.currentBlackCard[Object.keys($scope.game.currentBlackCard)[0]]
-        console.log(blackCard)
-        $scope.game = gameSnapshot.val();
+        $scope.game = game;
         $scope.gameName = $scope.game.settings.name;
-        if ($scope.game.players[$scope.playerId].hand){
-            $scope.playerHand = $scope.game.players[$scope.playerId].hand;
-            $scope.playerHandCount = Object.keys($scope.playerHand).length;
-
-        }
-        $scope.blackCard = blackCard;
         $scope.players = $scope.game.players;
-        $scope.needRefill = Object.keys(game.players[playerId].hand).length < 7;
-        console.log($scope.needRefill)
-        if (game.submittedWhiteCards) {
-            $scope.submittedWhiteCards = Array.prototype.slice.call(game.submittedWhiteCards, 1);
-        }
         $scope.judge = $scope.players[$scope.game.currentJudge];
         $scope.$evalAsync();
         if ($scope.game.winningCard){
@@ -90,13 +91,25 @@ app.controller('GameCtrl', ($scope, $state, GameFactory, $stateParams, $localSto
         }
         previousState = $scope.game.state;
     })
-
+    let quantityWCSubmitted = 0
+    const stateRef = gameRef.child('state')
+    stateRef.on('value', stateSnap => {
+        const state = stateSnap.val()
+        if (state === 'submission') quantityWCSubmitted = 0;
+        if (state === 'judgement') {
+            gameRef.child('submittedWhiteCards')
+                .once('value')
+                .then(submittedWCsSnap => {
+                    $scope.submittedWhiteCards = submittedWCsSnap.val()
+                })
+        }
+    })
+    $scope.refillMyHand = ActiveGameFactory.refillMyHand
     $scope.pickWinningWhiteCard = ActiveGameFactory.pickWinningWhiteCard
     $scope.submitWhiteCard = (cardId) => {
-        let quantitySubmitted = 0
-        if (quantitySubmitted < blackCard.pick) {
+        if (quantityWCSubmitted < blackCard.pick) {
             ActiveGameFactory.submitWhiteCard(playerId, cardId, gameId, teamId)
-            quantitySubmitted++
+            quantityWCSubmitted++
         }
     }
     // $scope.onDoubleTap = (cardId, cardText) => {
