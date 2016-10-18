@@ -10,9 +10,9 @@
 				    <i class="icon ion-arrow-down-c large-arrow"></i>
 				    <p class="logo white">______ Against Humanity</p>
 				</div>
-				<div class="black-card-content fade" ng-if="players[playerId].hand">
+				<div class="black-card-content fade" ng-if="!needRefill || haveHand">
 					<div class="game-card black current-black-card">
-						<p class="card-text">{{blackCard.text}}</p>
+						<p class="card-text">{{blackCard}}</p>
 						<p class="logo black">______ Against Humanity</p>
 					</div>
 				</div>

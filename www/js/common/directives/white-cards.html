@@ -39,7 +39,7 @@
 
 <div class="cards-container" ng-if="game.state ==='postround' && !needRefill">
 	<ul class="hand fade">
-		<li class="game-card animate white" ng-repeat="(key,val) in submittedWhiteCards">
+		<li class="game-card animate white" ng-repeat="(key,val) in playerHand">
 			<p class="card-text">{{val.text}}</p>
 			<p class="logo white">______ Against Humanity</p>
 		</li>

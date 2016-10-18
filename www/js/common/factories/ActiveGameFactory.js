@@ -61,6 +61,7 @@ app.factory('ActiveGameFactory', ($http, $rootScope, $localStorage) => {
     // }
 
     ActiveGameFactory.submitWhiteCard = (playerId, cardId, gameId, teamId) => {
+        console.log('test')
         const gameRef = firebase.database().ref(`teams/${teamId}/games/${gameId}`);
         const cardToSubmit = gameRef.child(`players/${playerId}/hand/${cardId}/text`);
         const submitRef = gameRef.child('submittedWhiteCards');
@@ -70,7 +71,6 @@ app.factory('ActiveGameFactory', ($http, $rootScope, $localStorage) => {
                 return null
             })
             .then(() => {
-
                 let updateObj = {};
                 updateObj[playerId] = {
                     text: text,
@@ -112,6 +112,7 @@ app.factory('ActiveGameFactory', ($http, $rootScope, $localStorage) => {
                     return gameRef.child(`winningCard`).set(winningCardSnapshot)
                 })
                 .then(() => gameRef.child('submittedWhiteCards').remove())
+                .then(() => gameRef.child('currentBlackCard').remove())
                 .then(() => gameRef.child('state').set('postround'))
                 .catch((err) => console.log(err))
         }

@@ -71,7 +71,9 @@ app.controller('GameCtrl', ($scope, $state, GameFactory, $stateParams, $localSto
     })
     const blackCardRef = gameRef.child('currentBlackCard')
     blackCardRef.on('value', blackCardSnapshot => {
-        $scope.blackCard = blackCardSnapshot.val()
+        blackCard = _.entries(blackCardSnapshot.val())
+        console.log(blackCard)
+        $scope.blackCard = blackCard[0][1].text
     })
     gameRef.on('value', gameSnapshot => {
         let game = gameSnapshot.val()
@@ -107,7 +109,8 @@ app.controller('GameCtrl', ($scope, $state, GameFactory, $stateParams, $localSto
     $scope.refillMyHand = ActiveGameFactory.refillMyHand
     $scope.pickWinningWhiteCard = ActiveGameFactory.pickWinningWhiteCard
     $scope.submitWhiteCard = (cardId) => {
-        if (quantityWCSubmitted < blackCard.pick) {
+        console.log('asd;lkfjasdf', typeof blackCard[0][1].pick)
+        if (quantityWCSubmitted < blackCard[0][1].pick) {
             ActiveGameFactory.submitWhiteCard(playerId, cardId, gameId, teamId)
             quantityWCSubmitted++
         }
