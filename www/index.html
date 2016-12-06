@@ -2,21 +2,11 @@
 <html>
 
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
-    <title></title>
-    <link rel="manifest" href="manifest.json">
-    <meta http-equiv="Content-Security-Policy" content="default-src * 'self' gap://ready wss:; style-src 'self' 'unsafe-inline'; script-src * 'unsafe-inline'">
-    <!-- un-comment this code to enable service worker
-    <script>
-      if ('serviceWorker' in navigator) {
-        navigator.serviceWorker.register('service-worker.js')
-          .then(() => console.log('service worker installed'))
-          .catch(err => console.log('Error', err));
-      }
-    </script>-->
-
-  <!-- compiled css output -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
+  <title></title>
+  <link rel="manifest" href="manifest.json">
+  <meta http-equiv="Content-Security-Policy" content="default-src * 'self' gap://ready wss:; style-src 'self' 'unsafe-inline'; script-src * 'unsafe-inline'">
   <link href="css/ionic.app.css" rel="stylesheet">
 
 
@@ -27,13 +17,7 @@
   <script src="lib/ng-cordova-oauth.min.js"></script>
   <script src="lib/ngStorage.min.js"></script>
   <script src="lib/ionic/js/angular/angular-animate.min.js"></script>
-  <!-- cordova script (this will be a 404 during development) -->
   <script src="cordova.js"></script>
-
-
-  <!-- firebase -->
-  <!--<script src="https://www.gstatic.com/firebasejs/3.4.1/firebase.js"></script>-->
-
   <script src="https://www.gstatic.com/firebasejs/3.4.0/firebase-app.js"></script>
   <script src="https://www.gstatic.com/firebasejs/3.4.0/firebase-database.js"></script>
   <script>
@@ -45,10 +29,9 @@
                     messagingSenderId: "647415099169"
                   };
             firebase.initializeApp(config);
-</script>
+  </script>
 
 
-  <!-- your app's js -->
   <script src="public/main.js"></script>
 </head>
 
@@ -59,7 +42,6 @@
                 <ion-nav-buttons side="left">
                     <button menu-toggle="left" class="button button-icon icon ion-navicon"></button>
                 </ion-nav-buttons>
-                <!--                 <ion-title>___ Against Humanity</ion-title> -->
             </ion-nav-bar>
             <ion-nav-view animation="slide-left-right"></ion-nav-view>
         </ion-side-menu-content>
@@ -74,9 +56,6 @@
                     </ion-item>
                     <ion-item menu-close ng-controller="LogoutCtrl" ng-click="logOut()">
                         Sign Out
-                    </ion-item>
-                    <ion-item menu-close ui-sref="game({gameId: 32})">
-                        Card Animation Test
                     </ion-item>
                 </ion-list>
             </ion-content>

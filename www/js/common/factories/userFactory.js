@@ -1,4 +1,6 @@
 app.factory('UserFactory', function($http, $localStorage) {
+
+    // for testing
     const ourIps = {
         nikita: "192.168.4.213",
         kayla: "192.168.4.225",
@@ -7,7 +9,6 @@ app.factory('UserFactory', function($http, $localStorage) {
 
     return {
         setUser: function(info) {
-            console.log("###GOT TO SET USER")
             return $http({
                     method: 'POST',
                     url: `https://blankagainsthumanity.herokuapp.com/api/users`,
