@@ -34,18 +34,13 @@ input {
 
 .card-game {
     background: #f1f1f1;
-    //background: $white;
     font-family: "Helvetica Neue", sans-serif;
     font-weight: 500;
     height: 100%;
     width: 100%;
-    //position: relative;
     line-height: 18px;
     display: flex;
     flex-direction: column;
-    // background-image: url('http://www.fr.rockpanel.be/files/RP%20Files/Images/Products/Rockpanel%20Woods/Large/Rockpanel_Woods_Beech2.jpg');
-    // background-size: cover;
-    //margin: 0 0.5rem 3rem 0.5rem;
 }
 
 .large-arrow {
@@ -58,33 +53,14 @@ input {
     flex-grow: 0;
 }
 
-// .fade {
-// 	transition: 3s ease;
-// }
-
-/* The starting CSS styles for the enter animation */
-
 .fade.ng-enter {
     transition: 0.75s linear all;
     opacity: 0;
 }
 
-// .slow-fade.ng-enter {
-//   transition: 1s ease all;
-//   opacity: 0;
-// }
-
-/* The finishing CSS styles for the enter animation */
-
 .fade.ng-enter.ng-enter-active {
     opacity: 1;
 }
-
-// .slow-fade.ng-enter.ng-enter-active {
-//   opacity: 1;
-// }
-
-/* now the element will fade out before it is removed from the DOM */
 
 .fade.ng-leave {
     transition: 0.1s linear all;
@@ -95,8 +71,6 @@ input {
     opacity: 0;
 }
 
-
-/* The finishing CSS styles for the enter animation */
 
 .fade.ng-leave.ng-enter-active {
     opacity: 1;
@@ -109,13 +83,7 @@ opacity: 1;
 .fade.ng-leave.ng-leave-active {
     opacity: 0;
 }
-// .slow-fade.ng-leave {
-//   transition: 1.5s ease all;
-//   opacity: 1;
-// }
-// .slow-fade.ng-leave.ng-leave-active {
-//   opacity: 0;
-// }
+
 .other-content {
     width: 90%;
     margin: 0 auto 5px auto;
@@ -132,22 +100,17 @@ opacity: 1;
 
 .black-card-content {
     display: flex;
-    //flex-grow: 1;
     justify-content: center;
     align-items: center;
     flex-direction: column;
-    //padding-bottom: 35px;
-    //align-self: flex-end;
 }
+
 .hand {
     counter-reset: rotation;
     display: flex;
-    //flex-grow: 1;
     align-items: flex-end;
     width: 50%;
     justify-content: space-around;
-    // position: absolute;
-    // bottom: 1rem;
     margin: 0 auto;
     padding-bottom: 20px;
     align-self: flex-end;
@@ -156,7 +119,6 @@ opacity: 1;
     counter-increment: rotation;
     height: 230px;
     width: 170px;
-    //min-width: 192px;
     margin-left: -70px;
     margin-right: -70px;
     border-radius: 9px;
@@ -165,7 +127,7 @@ opacity: 1;
     border: 1px solid $black;
     display: flex;
     flex-direction: column;
-    //box-shadow: -1px 1px 4px -1px rgba(0,0,0,0.75);
+
     .card-text {
         margin: 10px;
         flex-grow: 1;
@@ -183,12 +145,9 @@ opacity: 1;
 {
 	counter-reset: rotation;
 	display: flex;
-	//flex-grow: 1;
 	align-items: flex-end;
 	width: 50%;
 	justify-content: space-around;
-	// position: absolute;
-	// bottom: 1rem;
 	margin: 0 auto;
 	padding-bottom: 20px;
 	align-self: flex-end;
@@ -200,7 +159,6 @@ opacity: 1;
 	counter-increment: rotation;
 	height: 210px;
 	width: 155px;
-	//min-width: 192px;
 	margin-left: -70px;
 	margin-right: -70px;
 	border-radius: 9px;
@@ -209,7 +167,6 @@ opacity: 1;
 	border: 1px solid $black;
 	display: flex;
 	flex-direction: column;
-	//box-shadow: -1px 1px 4px -1px rgba(0,0,0,0.75);
 
 	.card-text {
 		margin: 10px;
@@ -227,25 +184,13 @@ opacity: 1;
 	&:hover
 	{
 		z-index: 1000;
-		//margin: 0 0.1rem;
 		transform: translateY(-30px) rotate(0);
 		border: 2px solid $red;
-		//background: $pink;
-		//box-shadow: 0px 0px 5px $red;
 	}
-
-	// &:active {
-	// 	border: 3px solid $red;
-	// 	background: $pink;
-	// }
-
-
 }
+
 .current-black-card {
     margin: 5px auto;
-    //align-self: flex-end;
-    // height: 18rem;
-    // width: 12.73rem;
     box-shadow: -1px 2px 7px -1px rgba(0, 0, 0, 0.75);
     &:hover {
         transform: none;
@@ -279,11 +224,8 @@ opacity: 1;
     margin-top: 10px;
 }
 .black-bg {
-    // width:100vw;
-    // height: 100vh;
     background-color: $positive;
     padding: 0 20px;
-    // color: $white;
 }
 .gray-bg {
     background: #f1f1f1;
@@ -300,14 +242,7 @@ opacity: 1;
 }
 .login-card {
     margin: 0 auto;
-    // height: 17rem;
-    // width: 12.021rem;
-    // background-color: $black;
-    // color: $white;
-    // border-radius: 9px;
     border: 1px solid $white;
-    // display: flex;
-    // flex-direction: column;
     pointer-events: none;
 }
 
@@ -322,32 +257,23 @@ opacity: 1;
 }
 .home-right {
     margin-left: -130px;
-    // margin-right: -10rem;
     transform: rotate(-8deg) translateY(10px);
 }
+
 .left {
-    //margin-left: -1rem;
     margin-right: -15rem;
     transform: rotate(-5deg) translateY(1rem);
-    // &:hover {
-    // 	transform: rotate(-5deg) translateY(1rem);
-    // 	z-index: 999;
-    // }
 }
+
 .center {
-    // margin-left: -0.1
     z-index: 2000;
 }
+
 .right {
     margin-left: -15rem;
-    // margin-right: -10rem;
     transform: rotate(5deg);
-    //z-index: 999;
-    // &:hover {
-    // 	transform: rotate(5deg);
-    // 	z-index: 999;
-    // }
 }
+
 .cards {
     display: flex;
     margin: 1.75rem auto;
@@ -357,9 +283,7 @@ opacity: 1;
 .login {
     color: $white;
     text-align: center;
-    // .game-title {
-    // 	font-size: 100px;
-    // }
+
 }
 .login-titles {
     flex-grow: 1;
@@ -371,22 +295,17 @@ opacity: 1;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    // background: #f1f1f1;
 }
-.create-game-container {}
+
 .titles {
     width: 100%;
-    //flex-grow: 1;
     padding: 10px 10px 5px 10px;
     margin: 20px 0;
-    //border: 1px solid $black;
     border-radius: 6px;
     color: $black;
     font-size: 15px;
-    //font-weight: bold;
     display: flex;
     justify-content: center;
-    //background-color: #b9edfb;
 }
 .user-info {
     display: flex;
@@ -400,14 +319,12 @@ opacity: 1;
     line-height: 30px;
 }
 .games-list {
-    //border: 1px solid $white;
     color: $black;
     border-radius: 8px;
     padding: 0.5rem;
     display: flex;
     flex-direction: column;
     justify-content: center;
-    // background-color: #b9edfb;
     width: 100%;
 }
 .title-text {
@@ -421,7 +338,6 @@ opacity: 1;
     margin-top: 30px;
 }
 .game-listing {
-    //border: 1px solid $black;
     border-radius: 4px;
     padding: 4px 15px;
     margin: 4px 10px;
@@ -466,33 +382,23 @@ opacity: 1;
 }
 .top-bar {
 	width: 100%;
-	//background: $pink;
-	//flex-grow: 1;
 	display: flex;
 	flex-direction: row;
 	justify-content: space-around;
-	//margin-bottom: 10px;
-	//border-bottom: 5px solid $red;
-	//border-top: 2px solid $white;
 	padding: 5px 0;
-	//border-bottom: 5px solid $black;
-	//background: $black;
 	background: $red;
 	color: $white;
-	//padding: 3px 20px;
 }
 
 .bar-item {
 	font-size: 15px;
 	font-weight: bold;
-	//height: 20px;
 	padding: 4px;
 	text-align: center;
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
 	align-items: center;
-	//border: 2px solid $black;
 }
 
 .bar-label {
@@ -506,9 +412,4 @@ opacity: 1;
 .timer {
 	letter-spacing: 1px;
 }
-// .start-game-btn {
-// 	width: 76%!important;
-// }
-// [ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {
-//   display: none !important;
-// }
+
